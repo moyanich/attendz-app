@@ -3,8 +3,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 
-use App\Http\Controllers\{
-    AdminController,
+use App\Http\Controllers\Admin\{
+    //AdminController,
     UserController,
 };
  
@@ -30,3 +30,5 @@ Route::get('/dashboard', function () {
 
 require __DIR__.'/auth.php';
 
+
+Route::resource('/admin/users', UserController::class);
