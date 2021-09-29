@@ -17,8 +17,11 @@ class DatabaseSeeder extends Seeder
 
        $this->call([
             CalendarSeeder::class,
+            RoleSeeder::class,
+            RoleUserSeeder::class,
             CreateAdminUserSeeder::class,
             CreateTestUserSeeder::class,
+            
             /* PermissionTableSeeder::class,
             CreateAdminUserSeeder::class,
             EmployeeSeeder::class,

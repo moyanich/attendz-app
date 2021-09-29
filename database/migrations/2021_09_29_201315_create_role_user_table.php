@@ -29,6 +29,12 @@ class CreateRoleUserTable extends Migration
      */
     public function down()
     {
+
+        /* Schema::table('role_user', function (Blueprint $table) {
+            $table->dropForeign('role_user_role_id_foreign');
+            $table->dropForeign('role_user_user_id_foreign');
+        }); */ //remove foreign keys if a seperate migration is created
+
         Schema::dropIfExists('role_user');
     }
 }

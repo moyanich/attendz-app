@@ -20,4 +20,17 @@ class Role extends Model
     public $timestamps = true;
 
     protected $fillable = ['name'];
+
+    /**
+     * The roles that belong to the Role
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function users()
+    {
+        return $this->belongsToMany(Role::class, 'role_user', 'user_id', 'role_id');
+
+        // return $this->belongsToMany('App\Models\Users');
+    }
+  
 }
