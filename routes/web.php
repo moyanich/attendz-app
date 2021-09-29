@@ -30,26 +30,3 @@ Route::get('/dashboard', function () {
 
 require __DIR__.'/auth.php';
 
-
-Route::group(['prefix' => 'admin' , 'middleware' => ['auth']], function() {
-    Route::get('dashboard', [AdminController::class. 'index'])->name('admin.dashboard');
-    Route::get('profile', [AdminController::class. 'iprofile'])->name('admin.profile');
-    Route::get('settings', [AdminController::class. 'iprofile'])->name('admin.settings');
-});
-
-
-Route::group(['prefix' => 'user' , 'middleware' => ['auth']], function() {
-    Route::get('dashboard', [UserController::class. 'index'])->name('user.dashboard');
-    Route::get('profile', [UserController::class. 'iprofile'])->name('user.profile');
-    Route::get('settings', [UserController::class. 'iprofile'])->name('user.settings');
-});
-
-
-
-Route::prefix('admin')->group(function () {
-    
-
-
-});
-
-
