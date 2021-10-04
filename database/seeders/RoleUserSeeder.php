@@ -22,7 +22,8 @@ class RoleUserSeeder extends Seeder
         // Attach a role to each user
         User::all()->each(function ($user) use ($roles) {
             $user->roles()->attach(
-                $roles->random(1)->pluck('id') //return 1, 2, 3, 4....
+                $roles->random(2)->pluck('id') //return 1, 2, 3, 4....
+                // Changing Random attaches more roles to each User
             );
         });
 
