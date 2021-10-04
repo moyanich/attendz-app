@@ -22,7 +22,7 @@ class Role extends Model
     protected $fillable = ['name'];
 
     /**
-     * The roles that belong to the Role
+     * The users that belong to the Role
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
