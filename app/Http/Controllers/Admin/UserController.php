@@ -13,13 +13,14 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         //
         //dd('idex method of user');
-        $users = User::all();
+        $users = User::orderBy('id', 'DESC')->paginate(15);
 
-        return view('admin.users.index', compact('users'));
+        return view('admin.users.index', compact('users'))
+            ->with('i', ($request->input('page', 1) - 1) * 5);
     }
 
     /**
