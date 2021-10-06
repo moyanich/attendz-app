@@ -1,14 +1,12 @@
 <?php
+
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-
-
 use App\Http\Controllers\Admin\{
-    //AdminController,
     UserController,
+    //AdminController,
 };
  
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -32,10 +30,8 @@ require __DIR__.'/auth.php';
 
 /**
  * Admin Routes
- * 
- * Notes:
- *  Prefix 'admin' allows us to namespace the routes
- *  Name prefixes all the route name with 'admin.' It creates for example 'admin.users.store' 
+ * Notes: Prefix 'admin' allows us to namespace the routes. 
+ * Name prefixes all the route name with 'admin.' It creates for example 'admin.users.store' 
  */
 Route::prefix('admin')->name('admin.')->group(function () {
     Route::resource('/users', UserController::class);
