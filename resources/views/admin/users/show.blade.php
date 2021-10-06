@@ -25,7 +25,7 @@
     <div class="container-fluid py-4">
         <div class="card">
             <div class="card-header pb-0 px-3">
-                <h6 class="mb-0">User Information</h6>
+                <h6 class="font-bold mb-0">User Information</h6>
             </div>
             <div class="card-body pt-4 p-3">
                 <h6 class="font-bold text-sm mb-2">
@@ -35,15 +35,15 @@
                 <h6 class="font-bold text-sm mb-2">
                     {{ __('Email: ') . '' . $user->email }}
                 </h6>
-                <p class="text-red-700 leading-tight">
+                <h6 class="font-bold text-red-700">
                     {{ __('Roles:') }}
 
-                    {{--  @if(!empty($user->getRoleNames()))
-                        @foreach($user->getRoleNames() as $v)
-                            <span class="inline-block rounded-min text-gray-600 bg-blue-200 px-2 py-1 text-xs font-bold mr-1">{{ $v }}</span>
+                    @if(!empty($user->roles))
+                        @foreach($user->roles as $user_has_roles)
+                            <span class="inline-block rounded text-white bg-blue-400 px-2 py-1 text-xs font-bold mr-1">{{ $user_has_roles->name }}</span>
                         @endforeach
-                    @endif--}}
-                </p>
+                    @endif
+                </h6>
 
             </div>
         </div>

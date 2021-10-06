@@ -105,14 +105,11 @@ class UserController extends Controller
         
         $input = $request->all();
         $user = User::find($id);
-
         $user->update($input);
         $user->roles()->sync($request->input('roles'));
 
         return redirect()->route('admin.users.index')
             ->with('success', 'User updated successfully');
-
-
     }
 
     /**
