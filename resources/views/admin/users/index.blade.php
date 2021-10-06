@@ -3,14 +3,14 @@
         <div class="w-full mb-6 pt-3">
             <div class="flex flex-row items-center justify-between mb-4">
                 <div class="flex flex-col">
+                    <div class="breadcrumb">
+                        <x-breadcrumbs></x-breadcrumbs> 
+                    </div>
                     <div class="text-xs uppercase font-light text-gray-500">
                         {{ __('Management') }}
                     </div>
                     <div class="text-xl font-bold">
                         {{ __('Users') }}
-                    </div>
-                    <div class="breadcrumb">
-                      {{--   <x-breadcrumb></x-breadcrumb> --}} 
                     </div>
                 </div>
                 <div class="flex-shrink-0 space-x-2">
@@ -139,21 +139,22 @@
                                 @endif --}}
                             </td>
                             <td class="flex flex-wrap items-center p-4">
-                                <a href="{{ route('admin.users.edit', $user->id) }}" class="flex items-center px-4 py-0.5 text-sm text-emerald-400 hover:text-emerald-100 bg-emerald-100 hover:bg-emerald-400 rounded-none border border-emerald-400 outline-none focus:outline-none mr-3 mb-1 ease-linear transition-all duration-150" type="button">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
-                                    </svg>
-                                    <span>{{ __('Edit') }}</span>
-                                </a>
 
-                                <a href="{{ route('admin.users.show', $user->id) }}" class="flex items-center px-4 py-0.5 text-sm text-blue-400 hover:text-blue-100 bg-blue-100 hover:bg-blue-400 rounded-none border border-blue-400 outline-none focus:outline-none mr-3 mb-1 ease-linear transition-all duration-150" type="button">
+                                <a href="{{ route('admin.users.show', $user->id) }}" class="flex items-center px-4 py-0.5 text-sm text-white bg-emerald-600 rounded-none border border-emerald-600 outline-none hover:text-emerald-100 hover:bg-emerald-500 focus:outline-none mr-3 mb-1 ease-linear transition-all duration-150" type="button">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16l2.879-2.879m0 0a3 3 0 104.243-4.242 3 3 0 00-4.243 4.242zM21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                                     </svg> 
                                     {{ __('View') }}
                                 </a>
 
-                                <button class="flex items-center px-4 py-0.5 text-sm text-red-400 hover:text-red-100 bg-red-100 hover:bg-red-400 rounded-none border border-red-400 outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button" onclick="toggleModal('user-delete-{{ $user->id }}')">
+                                <a href="{{ route('admin.users.edit', $user->id) }}" class="flex items-center px-4 py-0.5 text-sm text-white bg-blue-600 rounded-none border border-blue-600 outline-none hover:text-blue-100 hover:bg-blue-400 focus:outline-none mr-3 mb-1 ease-linear transition-all duration-150" type="button">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                                    </svg>
+                                    <span>{{ __('Edit') }}</span>
+                                </a>
+
+                                <button class="flex items-center px-4 py-0.5 text-sm text-white bg-red-600 rounded-none border border-red-600 outline-none hover:text-red-100 hover:bg-red-400 focus:outline-none mr-3 mb-1 ease-linear transition-all duration-150" type="button" onclick="toggleModal('user-delete-{{ $user->id }}')">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
                                     </svg> 

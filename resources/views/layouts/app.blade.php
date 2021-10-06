@@ -16,14 +16,14 @@
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}" defer></script>
     </head>
-    <body>
-        <div x-data="{ sidebarOpen: false }" class="flex h-screen bg-gray-200 font-roboto">
+    <body class="bg-gray-100">
+        <div x-data="{ sidebarOpen: false }" class="flex h-screen font-roboto">
             @include('partials.sidebar')
             
             <div class="flex-1 flex flex-col overflow-hidden">
                 @include('partials.header')
 
-                <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-200">
+                <main class="flex-1 overflow-x-hidden overflow-y-auto">
                     <div class="container mx-auto px-6 py-8">
                         <header>
                             <div class="w-full mb-6">
