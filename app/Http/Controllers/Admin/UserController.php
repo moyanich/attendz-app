@@ -110,6 +110,9 @@ class UserController extends Controller
 
         return redirect()->route('admin.users.index')
             ->with('success', 'User updated successfully');
+
+        return redirect('/employees/'. $employment->employee_id . '/employment')
+            ->with('success', 'User updated successfully');
     }
 
     /**
