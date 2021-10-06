@@ -1,6 +1,6 @@
 @if(count($errors) > 0)
     @foreach ($errors->all() as $error)
-        <div class="flex mt-8">
+        <div class="flex w-full mt-8 mb-4">
             <div class="inline-flex max-w-sm w-full bg-white shadow-md rounded-lg overflow-hidden relative mb-2 mr-3">
                 <div class="flex justify-center items-center w-12 bg-yellow-500">
                     <svg class="h-6 w-6 fill-current text-white" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
@@ -34,7 +34,7 @@
 
 @if(session('success'))
 
-    <div class="flex mt-8">
+    <div class="flex w-full mt-8 mb-4">
         <div class="flex max-w-sm w-full bg-white shadow-md rounded-lg overflow-hidden relative mb-2 mr-3">
             <div class="flex justify-center items-center w-12 bg-green-500">
                 <svg class="h-6 w-6 fill-current text-white" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
@@ -68,7 +68,7 @@
 
 @if(session('error'))
 
-    <div class="flex mt-8">
+    <div class="flex w-full mt-8 mb-4">
         <div class="flex max-w-sm w-full bg-white shadow-md rounded-lg overflow-hidden relative mb-2 mr-3">
             <div class="flex justify-center items-center w-12 bg-red-500">
                 <svg class="h-6 w-6 fill-current text-white" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">

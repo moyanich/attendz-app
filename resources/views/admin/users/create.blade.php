@@ -93,7 +93,7 @@
 
                     <div class="flex flex-wrap">
                         <div class="relative w-full md:w-6/12 mb-3 px-4">
-                            {{ Form::label('roles', 'Role', ['class' => 'block uppercase text-blueGray-600 text-xs font-bold mb-2']) }}
+                            {{ Form::label('roles', 'Roles', ['class' => 'block uppercase text-blueGray-600 text-xs font-bold mb-2']) }}
 
                             @foreach($roles as $role)
                                 {!! Form::checkbox('roles[]', $role->id, false, array('class' => 'name ')) !!}
@@ -104,10 +104,6 @@
                             @error('roles[]')
                                 <p class="text-xs text-red-600">{{ $message }}</p>
                             @enderror
-                        </div>
-
-                        <div class="relative w-full md:w-6/12 mb-3 px-4">
-                            
                         </div>
                     </div>
 

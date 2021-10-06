@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Hash;
 
 class User extends Authenticatable
 {
@@ -41,6 +42,21 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * Mutator: Hash Password
+     * 
+     * A mutator transforms an Eloquent attribute value when it is set. To define a mutator
+     * define a set{Attribute}Attribute method on your model where {Attribute} is the "studly"
+     * cased name of the column you wish to access.
+     * 
+     * @param  string  $password
+     * @return void
+     */
+    public function setPasswordAttribute($password) 
+    {
+        $this->attributes['password'] = Hash::make($password);
+    }
 
     /**
      * The roles that belong to the User

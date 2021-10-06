@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Models\Role;
 use Illuminate\Http\Request;
-use Hash;
+
 
 class UserController extends Controller
 {
@@ -41,7 +41,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        /* $this->validate($request, [
+        $this->validate($request, [
             'name' => 'required',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|same:confirm-password',
@@ -49,14 +49,16 @@ class UserController extends Controller
         ]);
         
         $input = $request->all();
-        $input['password'] = Hash::make($input['password']);
         $user = User::create($input);
-        $user->assignRole($request->input('roles'));
+        $user->roles()->sync($request->input('roles'));
+
+       /* ALSO WORKS
+        $user = User::create($request->except(['_token', 'roles']));
+        $user->roles()->sync($request->roles); 
+        */
 
         return redirect()->route('admin.users.index')
-            ->with('success', 'User created successfully'); */
-
-            dd($request);
+            ->with('success', 'User created successfully'); 
     }
 
     /**
@@ -79,10 +81,9 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        $user = User::find($id);
-        $roles = Role::pluck('name', 'name')->all();
-       // $userRole = $user->roles->pluck('name', 'name')->all();
-
+        $user = User::findOrFail($id);
+        $roles = Role::all();
+        //$role_user = 
         return view('admin.users.edit', compact('user', 'roles'));
     }
 
@@ -95,7 +96,23 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required',
+            'email' => 'required|email|unique:users,email,'.$id,
+            'password' => 'same:confirm-password',
+            'roles' => 'required'
+        ]);
+        
+        $input = $request->all();
+        $user = User::find($id);
+
+        $user->update($input);
+        $user->roles()->sync($request->input('roles'));
+
+        return redirect()->route('admin.users.index')
+            ->with('success', 'User updated successfully');
+
+
     }
 
     /**

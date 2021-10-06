@@ -12,7 +12,7 @@
                         {{ __('Edit') }}
                     </div>
                     <div class="text-xl font-bold">
-                        {{ __('User: ') . ' ' . '' }}
+                        {{ __('User: ') . $user->name }}
                     </div>
                     
                 </div>
@@ -33,7 +33,7 @@
         <div class="-my-2 py-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
             <div class="bg-white py-8 px-4 shadow-md overflow-x-auto whitespace-no-wrap align-middle inline-block min-w-full overflow-hidden border border-gray-200">
 
-                {!! Form::model($user, ['method' => 'PATCH','route' => ['admin.users.update', $user->id]]) !!}
+                {!! Form::model($user, ['method' => 'PATCH', 'route' => ['admin.users.update', $user->id]]) !!}
 
                     <div class="flex flex-wrap">
                         <div class="relative w-full md:w-6/12 mb-3 px-4">
@@ -57,6 +57,7 @@
                         </div>
                     </div>
 
+                    {{--  Removed to prevent users from edit user password
                     <div class="flex flex-wrap">
                         <div class="relative w-full md:w-6/12 mb-3 px-4">
                             {{ Form::label('password', 'Password', ['class' => 'block uppercase text-blueGray-600 text-xs font-bold mb-2']) }}
@@ -78,13 +79,18 @@
                             @enderror
                         </div>
                     </div>
+                    --}}
 
                     <div class="flex flex-wrap">
                         <div class="relative w-full md:w-6/12 mb-3 px-4">
-                            {{ Form::label('roles','Role',['class'=>'blockuppercasetext-blueGray-600text-xsfont-boldmb-2']) }}
+                            {{ Form::label('roles', 'Roles', ['class' => 'block uppercase text-blueGray-600 text-xs font-bold mb-2']) }}
 
-                            {!! Form::select('roles[]', $roles, $roles, array('class' => 'border-0 px-3 py-3 placeholder-blueGray-400 text-gray-600 bg-gray-100 rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-15', 'multiple')) !!}
-
+                            @foreach($roles as $role)
+                                {!! Form::checkbox('roles[]', $role->id, in_array($role->id, $user->roles->pluck('id')->toArray()) ? true : false, array('class' => 'name ')) !!}
+                                {{ $role->name }}
+                                <br/>
+                            @endforeach
+                            
                             @error('roles[]')
                                 <p class="text-xs text-red-600">{{ $message }}</p>
                             @enderror
