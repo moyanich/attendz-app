@@ -6,20 +6,18 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Models\Role;
 use Illuminate\Http\Request;
+use Hash;
 
 class UserController extends Controller
 {
     /**
-     * Display a listing of the users.
+     * Display a listing of Users.
      *
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
     {
-        //
-        //dd('idex method of user');
         $users = User::orderBy('id', 'DESC')->paginate(10);
-
         return view('admin.users.index', compact('users'))
             ->with('i', ($request->input('page', 1) - 1) * 5);
     }
@@ -31,7 +29,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        $roles = Role::pluck('name', 'name')->all();
+        $roles = Role::all();
         return view('admin.users.create', compact('roles'));
     }
 
@@ -43,7 +41,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
+        /* $this->validate($request, [
             'name' => 'required',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|same:confirm-password',
@@ -56,11 +54,13 @@ class UserController extends Controller
         $user->assignRole($request->input('roles'));
 
         return redirect()->route('admin.users.index')
-            ->with('success', 'User created successfully');
+            ->with('success', 'User created successfully'); */
+
+            dd($request);
     }
 
     /**
-     * Display the specified resource.
+     * Display the User.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -72,7 +72,7 @@ class UserController extends Controller
     }
 
     /**
-     * Show the form for editing the user.
+     * Show the form for editing the User.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -99,7 +99,7 @@ class UserController extends Controller
     }
 
     /**
-     * Remove the user from storage.
+     * Remove the User from storage.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -107,7 +107,6 @@ class UserController extends Controller
     public function destroy($id)
     {
         User::find($id)->delete();
-
         return redirect()->route('admin.users.index')
             ->with('success', 'User deleted successfully');
     }

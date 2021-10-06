@@ -95,7 +95,11 @@
                         <div class="relative w-full md:w-6/12 mb-3 px-4">
                             {{ Form::label('roles', 'Role', ['class' => 'block uppercase text-blueGray-600 text-xs font-bold mb-2']) }}
 
-                            {!! Form::select('roles[]', $roles, [], array('class' => 'border-0 px-3 py-3 placeholder-blueGray-400 text-gray-600 bg-gray-100 rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-15', 'multiple')) !!}
+                            @foreach($roles as $role)
+                                {!! Form::checkbox('roles[]', $role->id, false, array('class' => 'name ')) !!}
+                                {{ $role->name }}
+                                <br/>
+                            @endforeach
 
                             @error('roles[]')
                                 <p class="text-xs text-red-600">{{ $message }}</p>
