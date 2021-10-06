@@ -30,9 +30,13 @@ Route::get('/dashboard', function () {
 
 require __DIR__.'/auth.php';
 
-// Admin Routes
-// Prefix 'admin' allows us to namespace the routes
-// Name prefixes all the route name with 'admin.' 
+/**
+ * Admin Routes
+ * 
+ * Notes:
+ *  Prefix 'admin' allows us to namespace the routes
+ *  Name prefixes all the route name with 'admin.' It creates for example 'admin.users.store' 
+ */
 Route::prefix('admin')->name('admin.')->group(function () {
     Route::resource('/users', UserController::class);
 });
