@@ -10,7 +10,7 @@
                         {{ __('Management') }}
                     </div>
                     <div class="text-xl font-bold">
-                        {{ __('User') }}
+                        {{ __('User Profile') }}
                     </div>
                 </div>
             </div>

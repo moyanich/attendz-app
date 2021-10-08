@@ -12,7 +12,7 @@
                         {{ __('Edit') }}
                     </div>
                     <div class="text-xl font-bold">
-                        {{ __('User: ') . $user->name }}
+                        {{ __('User Profile: ') . $user->name }}
                     </div>
                     
                 </div>
