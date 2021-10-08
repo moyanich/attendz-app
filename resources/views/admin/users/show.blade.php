@@ -27,11 +27,11 @@
             <div class="flex flex-wrap">
                 <div class="w-full px-4 py-10">
                     <h6 class="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase">User Information</h6>
-                    <p class="block uppercase text-blueGray-600 text-xs font-bold mb-2"> 
-                        {{ __('Name: ') . '' . $user->name }} 
+                    <p class="block text-blueGray-600 text-xs mb-2"> 
+                        <span class="font-bold uppercase">{{ __('Name: ') }}</span>{{ $user->name }} 
                     </p>
-                    <p class="block uppercase text-blueGray-600 text-xs font-bold mb-2"> 
-                        {{ __('Email: ') . '' . $user->email }}
+                    <p class="block text-blueGray-600 text-xs mb-2"> 
+                        <span class="font-bold uppercase">{{ __('Email: ') }}</span>{{ $user->email }} 
                     </p>
                     <div class="font-bold text-red-700">
                         <p class="block uppercase text-blueGray-600 text-xs font-bold mb-2"> 
