@@ -1,4 +1,4 @@
-<nav class="text-black font-xs font-bold mt-1" aria-label="Breadcrumb">
+<nav class="text-black text-xs mt-1" aria-label="Breadcrumb">
     <ol class="list-none p-0 inline-flex">
         <li class="flex items-center">
             <a href="/dashboard">Home</a>

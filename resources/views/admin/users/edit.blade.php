@@ -20,19 +20,16 @@
         </div>
     </x-slot>
 
-    {{-- Separator --}}
-    <div class="mt-8"></div>
-    {{-- End Separator --}}
-
     {{-- Messages --}}
     <x-messages />
     {{-- End Messages --}}
 
     {{-- Content --}}
-    <div class="flex flex-col mt-8">
-        <div class="-my-2 py-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
-            <div class="bg-white py-8 px-4 shadow-md overflow-x-auto whitespace-no-wrap align-middle inline-block min-w-full overflow-hidden border border-gray-200">
-
+    <div class="flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg">
+        <div class="px-6">
+           <div class="flex flex-wrap">
+              <div class="w-full px-4 py-10">
+                 
                 {!! Form::model($user, ['method' => 'PATCH', 'route' => ['admin.users.update', $user->id]]) !!}
 
                     <div class="flex flex-wrap">
@@ -99,14 +96,16 @@
 
                     <div class="w-full flex justify-end">
                         <div class="px-4 py-5">
-                            {{ Form::submit('Save', ['class' => 'px-10 py-2 uppercase text-sm bg-blue-600 text-white active:bg-blue-500 font-extrabold shadow hover:shadow-md hover:bg-blue-500 outline-none focus:outline-none focus:border-gray-900 cursor-pointer transition ease-in-out duration-150']) }}
+                            {{ Form::submit('Save', ['class' => 'cursor-pointer bg-lightBlue-500 active:bg-lightBlue-600 uppercase text-white font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1 ease-linear transition-all duration-150']) }}
                         </div>
                     </div>
 
                 {!! Form::close() !!}
-              
-            </div>
+            
+              </div>
+           </div>
         </div>
     </div>
     {{-- End Content --}}
+
 </x-app-layout>

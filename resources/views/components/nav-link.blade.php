@@ -8,8 +8,8 @@ $classes = ($active ?? false)
 */
 
 $classes = ($active ?? false)
-    ? 'flex items-center mt-4 py-2 px-6 bg-gray-700 bg-opacity-25 text-gray-100'
-    : 'flex items-center mt-4 py-2 px-6 bg-gray-700 bg-opacity-25 text-gray-100';
+    ? 'flex items-center text-xs uppercase py-2 px-6 mt-4 font-bold block text-lightBlue-500 hover:text-lightBlue-600 cursor-pointer'
+    : 'flex items-center text-xs uppercase py-2 px-6 mt-4 font-bold block text-blueGray-700 hover:text-blueGray-500 cursor-pointer';
 
 
 @endphp

@@ -14,7 +14,7 @@ module.exports = {
         },
         extend: {
             fontFamily: {
-                sans: ['Open Sans', ...defaultTheme.fontFamily.sans],
+                sans: ['ui-sans-serif', ...defaultTheme.fontFamily.sans],
             },
         },
         fontSize: {
