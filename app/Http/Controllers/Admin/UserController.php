@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Models\Role;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Gate;
 
 class UserController extends Controller
 {
@@ -18,6 +18,10 @@ class UserController extends Controller
     public function index(Request $request)
     {
         $users = User::orderBy('id', 'DESC')->paginate(10);
+
+        if(Gate::denies('logged-in')) {
+            dd('no access');
+        }
         return view('admin.users.index', compact('users'))
             ->with('i', ($request->input('page', 1) - 1) * 5);
     }
