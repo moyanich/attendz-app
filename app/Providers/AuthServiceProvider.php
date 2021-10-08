@@ -25,16 +25,16 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        Gate::define('logged-in', function($user) {
+        Gate::define('logged-in', function ($user) {
             return $user;
         });
 
-        Gate::define('is-admin', function($user) {
+        Gate::define('is-admin', function ($user) {
             return $user->hasAnyRole('admin');
         });
 
         // example of hasanyroles with array
-        Gate::define('is-a-user', function($user) {
+        Gate::define('is-a-user', function ($user) {
             return $user->hasAnyRoles(['admin', 'employee', 'manager', 'supervisor', 'security']);
         });
 

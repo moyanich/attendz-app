@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\User;
 use App\Models\Role;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 
@@ -66,13 +66,12 @@ class UserController extends Controller
         $user = User::create($input);
         $user->roles()->sync($request->input('roles'));
 
+        return redirect()->route('admin.users.index')->with('success', 'User created successfully');
+
        /* ALSO WORKS
         $user = User::create($request->except(['_token', 'roles']));
         $user->roles()->sync($request->roles); 
         */
-
-        return redirect()->route('admin.users.index')
-            ->with('success', 'User created successfully'); 
     }
 
     /**
@@ -122,11 +121,10 @@ class UserController extends Controller
         $user->update($input);
         $user->roles()->sync($request->input('roles'));
 
-        return redirect()->route('admin.users.index')
-            ->with('success', 'User updated successfully');
+        return redirect()->route('admin.users.index')->with('success', 'User updated successfully');
 
-        return redirect('/employees/'. $employment->employee_id . '/employment')
-            ->with('success', 'User updated successfully');
+       /* return redirect('/employees/'. $employment->employee_id . '/employment')
+            ->with('success', 'User updated successfully'); */
     }
 
     /**

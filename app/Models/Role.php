@@ -24,6 +24,11 @@ class Role extends Model
      */
     public $timestamps = true;
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var string[]
+     */
     protected $fillable = ['name'];
 
     /**

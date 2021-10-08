@@ -2,12 +2,12 @@
 
 namespace App\Models;
 
+use Hash;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
-use Hash;
 
 class User extends Authenticatable
 {
@@ -75,7 +75,7 @@ class User extends Authenticatable
      * @param $string $role
      * @return bool
      */
-    public function hasAnyRole(string $role) 
+    public function hasAnyRole(string $role)
     {
         return null !== $this->roles()->where('name', $role)->first();
     }
