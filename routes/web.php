@@ -33,6 +33,6 @@ require __DIR__.'/auth.php';
  * Notes: Prefix 'admin' allows us to namespace the routes. 
  * Name prefixes all the route name with 'admin.' It creates for example 'admin.users.store' 
  */
-Route::prefix('admin')->middleware('auth')->name('admin.')->group(function () {
+Route::prefix('admin')->middleware(['auth', 'auth.isAdmin'])->name('admin.')->group(function () {
     Route::resource('/users', UserController::class);
 });

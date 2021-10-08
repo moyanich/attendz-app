@@ -19,7 +19,9 @@ class UserController extends Controller
     {
         $users = User::orderBy('id', 'DESC')->paginate(10);
 
-        /* if(Gate::denies('logged-in')) {
+        /* 
+        * NOTE: example of Gate::denies
+        if(Gate::denies('logged-in')) {
             dd('no access');
         } */
         return view('admin.users.index', compact('users'))
@@ -35,11 +37,14 @@ class UserController extends Controller
     {
         $roles = Role::all();
         
+        /* 
+        * NOTE: example of Gate::allows
         if(Gate::allows('is-admin')) {
             return view('admin.users.create', compact('roles'));
         }
-        dd('no access agranted');
-        
+        */
+       
+        return view('admin.users.create', compact('roles'));
     }
 
     /**
