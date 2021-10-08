@@ -34,7 +34,12 @@ class UserController extends Controller
     public function create()
     {
         $roles = Role::all();
-        return view('admin.users.create', compact('roles'));
+        
+        if(Gate::allows('is-admin')) {
+            return view('admin.users.create', compact('roles'));
+        }
+        dd('no access agranted');
+        
     }
 
     /**
