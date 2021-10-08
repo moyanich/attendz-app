@@ -17,7 +17,7 @@ class Role extends Model
     /**
      * Primary Key
      */
-    public $primaryKey = 'id';
+    protected $primaryKey = 'id';
  
     /**
      * Timestamps
