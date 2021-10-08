@@ -19,9 +19,9 @@ class UserController extends Controller
     {
         $users = User::orderBy('id', 'DESC')->paginate(10);
 
-        if(Gate::denies('logged-in')) {
+        /* if(Gate::denies('logged-in')) {
             dd('no access');
-        }
+        } */
         return view('admin.users.index', compact('users'))
             ->with('i', ($request->input('page', 1) - 1) * 5);
     }
