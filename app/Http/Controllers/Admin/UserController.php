@@ -62,8 +62,8 @@ class UserController extends Controller
             'roles' => 'required',
         ]);
         
-        $input = $request->all();
-        $user = User::create($input);
+        $newUser = $request->all();
+        $user = User::create($newUser);
         $user->roles()->sync($request->input('roles'));
 
         return redirect()->route('admin.users.index')->with('success', 'User created successfully');
