@@ -62,7 +62,8 @@ class UserController extends Controller
             'roles' => 'required',
         ]);
         
-        $newUser = $request->all();
+        //$newUser = $request->all();
+        $newUser = $request->except(['_token', 'roles']);
         $user = User::create($newUser);
         $user->roles()->sync($request->input('roles'));
 

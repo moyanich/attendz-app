@@ -21,8 +21,11 @@ class LoginPageTest extends TestCase
         $response = $this->post('/login' , [
             'name' => $user->name,
             'email' => $user->email,
-            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi'
+            'password' => 'password',
         ]);
+
+       // dd($response); 
+
 
         $this->assertAuthenticated();
 
@@ -35,16 +38,17 @@ class LoginPageTest extends TestCase
      *
      * @return void
      */
-    public function admin_user_can_login_using_the_login_form()
+    public function test_user_cannot_access_admin_page()
     {
         $user = USER::factory()->create();
 
         $response = $this->post('/login' , [
             'name' => $user->name,
             'email' => $user->email,
-            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi'
+            'password' => 'password',
         ]);
 
+       // dd($response); 
 
         $this->get('/admin/user');
 
