@@ -6,6 +6,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 use App\Models\User;
+use App\Models\Roles;
 
 class LoginPageTest extends TestCase
 {
@@ -26,12 +27,10 @@ class LoginPageTest extends TestCase
 
        // dd($response); 
 
-
         $this->assertAuthenticated();
 
-        $response->assertRedirect('/');
+        $response->assertRedirect('/dashboard');
     }
-
 
     /**
      * A basic feature test example.
@@ -48,12 +47,38 @@ class LoginPageTest extends TestCase
             'password' => 'password',
         ]);
 
-       // dd($response); 
-
-        $this->get('/admin/user');
+        $this->get('/admin/users');
 
         $this->assertAuthenticated();
 
-        $response->assertRedirect('/');
+        $response->assertRedirect('/dashboard');
     }
+
+
+    /**
+     * A basic feature test example.
+     * //TODO : TEST FAILED
+     *
+     * @return void
+     */
+  public function test_user_can_access_admin_page()
+    {
+        $user = USER::factory()->create();
+
+        $user->roles()->attach(1);
+
+        $this->post('/login' , [
+            'name' => $user->name,
+            'email' => $user->email,
+            'password' => 'password',
+        ]);
+
+        $response = $this->get('/admin/users');
+
+        $response->assertSeeText('User');
+
+       // $response->assertRedirect('/dashboard');
+    } 
+
+    
 }
