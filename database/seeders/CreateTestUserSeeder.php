@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use App\Models\Role;
 use App\Models\User;
 use Hash;
 
@@ -22,6 +23,13 @@ class CreateTestUserSeeder extends Seeder
             //'password' => Hash::make('password'),
             'password' => 'password',
         ]);
+
+
+        // testing
+        $role = Role::where('name', '=', 'Employee')
+        ->get();
+
+        $user->roles()->sync($role);
 
     
        // $role = Role::create(['name' => 'Admin']);
