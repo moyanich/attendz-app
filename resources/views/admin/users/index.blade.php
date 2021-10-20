@@ -128,16 +128,21 @@
                 <tbody class="bg-white divide-y divide-gray-200">
                     @foreach ($users as $key => $user)
                         <tr>
-                            <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                            <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4">
                                 {{ $loop->iteration }}
                             </td>
-                            <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                            <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4">
                                 {{ $user->name }}
                             </td>
-                            <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                            <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4">
                                 {{ $user->email }}
                             </td>
                             <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+
+                                @foreach ($roles as $role) 
+                                    <label class="badge badge-success">{{ $role->name }}</label>
+                               @endforeach
+
                                {{--  
                                  @if(!empty($user->getRoleNames()))
                                     @foreach($user->getRoleNames() as $roleName)

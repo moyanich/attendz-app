@@ -21,13 +21,19 @@ class UserController extends Controller
     {
         $users = User::orderBy('id', 'DESC')->paginate(10);
 
+        //$roles = User::find(1)->roles;
+        $roles = Role::all();
+
+        //$roles = User::whereBelongsTo($users)->get();
+
         /* 
         * NOTE: example of Gate::denies
         if(Gate::denies('logged-in')) {
             dd('no access');
         } */
         return view('admin.users.index', compact('users'))
-            ->with('i', ($request->input('page', 1) - 1) * 5);
+            ->with('i', ($request->input('page', 1) - 1) * 5)
+            ->with('roles', $roles);
     }
 
     /**
