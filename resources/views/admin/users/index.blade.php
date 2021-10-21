@@ -3,14 +3,14 @@
         <div class="w-full mb-6 pt-3">
             <div class="flex flex-row items-center justify-between mb-4">
                 <div class="flex flex-col">
-                    <div class="breadcrumb">
-                        <x-breadcrumbs></x-breadcrumbs> 
-                    </div>
                     <div class="text-xs uppercase font-light text-gray-500">
                         {{ __('Management') }}
                     </div>
                     <div class="text-xl font-bold">
                         {{ __('Users') }}
+                    </div>
+                    <div class="breadcrumb">
+                        <x-breadcrumbs></x-breadcrumbs> 
                     </div>
                 </div>
                 <div class="flex-shrink-0 space-x-2">
@@ -145,7 +145,7 @@
                                         <span class="inline-block rounded text-white bg-blue-400 px-2 py-1 text-xs font-bold mr-1">{{ $user_has_roles->name }}</span>
                                     @endforeach
                                 @endif
-                                
+
                             </td>
                             <td class="flex flex-wrap items-center p-4">
 
@@ -182,8 +182,6 @@
     </div>
     {{-- End Content --}}
 </x-app-layout>
-
-
 
 
 

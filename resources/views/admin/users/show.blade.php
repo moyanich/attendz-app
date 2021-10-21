@@ -3,14 +3,14 @@
         <div class="w-full pt-3">
             <div class="flex flex-row items-center justify-between">
                 <div class="flex flex-col">
-                    <div class="breadcrumb">
-                        <x-breadcrumbs></x-breadcrumbs> 
-                    </div>
                     <div class="text-xs uppercase font-light text-gray-500">
                         {{ __('Management') }}
                     </div>
                     <div class="text-xl font-bold">
                         {{ __('User Profile') }}
+                    </div>
+                    <div class="breadcrumb">
+                        <x-breadcrumbs></x-breadcrumbs> 
                     </div>
                 </div>
             </div>
