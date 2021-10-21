@@ -13,11 +13,16 @@
                 </svg>
             </span>
 
-            <input class="form-input w-32 sm:w-64 rounded-md pl-10 pr-4 focus:border-indigo-600" type="text" placeholder="Search">
+            <input class="form-input text-sm w-32 sm:w-64 rounded-md pl-10 pr-4 bg-gray-100 border-0 focus:border-indigo-600 " type="text" placeholder="Search">
         </div>
     </div>
-    
+
+
     <div class="flex items-center">
+        <div class="relative block overflow-hidden">
+            {{ __('Welcome: ') . '' . Auth::user()->name }}
+        </div>
+
         <div x-data="{ notificationOpen: false }" class="relative">
             <button @click="notificationOpen = ! notificationOpen" class="flex mx-4 text-gray-600 focus:outline-none">
                 <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -68,23 +73,25 @@
                     {{ __('Profile ') }}
                 </x-navbar-link>
 
-                <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-600 hover:text-white">Profile 
-                    {{ Auth::user()->name }}</a>
-                <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-600 hover:text-white">Products</a>
-                <a href="/login" class="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-600 hover:text-white">Logout</a>
-
+                <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-600 hover:text-white">
+                    {{ __('My Profile ') }}
+                </a>
+                <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-600 hover:text-white">
+                    {{ __('Products ') . '' . Auth::user()->name }}
+                </a>
+                
                 <!-- Authentication -->
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
-
-                    <x-responsive-nav-link :href="route('logout')"
+                    {{--  <x-responsive-nav-link :href="route('logout')"
                        onclick="event.preventDefault();
                        this.closest('form').submit();">
                         {{ __('Log Out') }}
-                    </x-responsive-nav-link>
+                    </x-responsive-nav-link>--}}
+                    <a href="{{ route('logout') }}" onclick="event.preventDefault(); this.closest('form').submit();" class="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-600 hover:text-white">
+                        {{ __('Logout') }}
+                    </a>
                 </form>
-
-
             </div>
         </div>
     </div>
