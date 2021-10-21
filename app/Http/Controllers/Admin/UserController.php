@@ -9,7 +9,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Password;
 
-
 class UserController extends Controller
 {
     /**
@@ -21,19 +20,15 @@ class UserController extends Controller
     {
         $users = User::orderBy('id', 'DESC')->paginate(10);
 
-        //$roles = User::find(1)->roles;
-        $roles = Role::all();
-
-        //$roles = User::whereBelongsTo($users)->get();
-
         /* 
-        * NOTE: example of Gate::denies
-        if(Gate::denies('logged-in')) {
-            dd('no access');
-        } */
+            NOTE: example of Gate::denies
+            if(Gate::denies('logged-in')) {
+                dd('no access');
+            } 
+        */
         return view('admin.users.index', compact('users'))
             ->with('i', ($request->input('page', 1) - 1) * 5)
-            ->with('roles', $roles);
+            ;
     }
 
     /**
@@ -46,10 +41,10 @@ class UserController extends Controller
         $roles = Role::all();
         
         /* 
-        * NOTE: example of Gate::allows
-        if(Gate::allows('is-admin')) {
-            return view('admin.users.create', compact('roles'));
-        }
+            NOTE: example of Gate::allows
+            if(Gate::allows('is-admin')) {
+                return view('admin.users.create', compact('roles'));
+            }
         */
        
         return view('admin.users.create', compact('roles'));
@@ -79,9 +74,10 @@ class UserController extends Controller
 
         return redirect()->route('admin.users.index')->with('success', 'User created successfully');
 
-       /* ALSO WORKS
-        $user = User::create($request->except(['_token', 'roles']));
-        $user->roles()->sync($request->roles); 
+       /* 
+            ALSO WORKS
+            $user = User::create($request->except(['_token', 'roles']));
+            $user->roles()->sync($request->roles); 
         */
     }
 
