@@ -38,3 +38,6 @@ Route::prefix('admin')->middleware(['auth', 'auth.isAdmin', 'auth.isSuperAdmin']
     Route::resource('/users', UserController::class);
     Route::resource('/roles', RoleController::class);
 });
+
+
+// auth.isSecurity
