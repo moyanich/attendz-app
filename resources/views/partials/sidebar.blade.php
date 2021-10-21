@@ -22,7 +22,7 @@
         </x-nav-link>
 
         @can('logged-in')
-            @can('is-admin')
+            @can('is-admin', 'is-superuser')
                 <x-nav-link :href="route('admin.users.index')" :active="request()->routeIs('admin.users.index')">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
@@ -30,12 +30,14 @@
                     <span class="mx-3">{{ __('Manage Users') }}</span>
                 </x-nav-link>
 
-                <x-nav-link :href="route('admin.roles.index')" :active="request()->routeIs('admin.roles.index')">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                    </svg>
-                    <span class="mx-3">{{ __('Manage Roles') }}</span>
-                </x-nav-link>
+                {{--  @can('is-superuser') --}}
+                    <x-nav-link :href="route('admin.roles.index')" :active="request()->routeIs('admin.roles.index')">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                        </svg>
+                        <span class="mx-3">{{ __('Manage Roles') }}</span>
+                    </x-nav-link>
+                {{-- @endcan --}}
             @endcan
         @endcan
        

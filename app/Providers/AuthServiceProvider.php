@@ -33,8 +33,8 @@ class AuthServiceProvider extends ServiceProvider
             return $user->hasAnyRole('admin');
         });
 
-        Gate::define('is-superadmin', function ($user) {
-            return $user->hasAnyRole('super user');
+        Gate::define('is-superuser', function ($user) {
+            return $user->hasAnyRoles(['admin', 'superuser']);
         });
 
         Gate::define('is-security', function ($user) {
@@ -44,7 +44,7 @@ class AuthServiceProvider extends ServiceProvider
 
         // example of hasanyroles with array
         Gate::define('is-a-user', function ($user) {
-            return $user->hasAnyRoles(['admin', 'employee', 'manager', 'supervisor', 'security', 'super user']);
+            return $user->hasAnyRoles(['admin', 'employee', 'manager', 'supervisor', 'security', 'superuser']);
         });
 
         //

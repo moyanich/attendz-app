@@ -17,10 +17,10 @@ class AccessSuperUser
      */
     public function handle(Request $request, Closure $next)
     {
-        if (Gate::allows('is-superadmin')) {
+        if (Gate::allows('is-superuser')) {
             return $next($request);
         }
 
-        return redirect('/');
+        return redirect('/dashboard');
     }
 }
