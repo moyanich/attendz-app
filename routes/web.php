@@ -1,15 +1,14 @@
 <?php
 
-use App\Http\Controllers\Admin\UserController;
+//use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\{
+    UserController,
+    RoleController,
+    //AdminController,
+};
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-/*
-use App\Http\Controllers\Admin\{
-    UserController,
-    //AdminController,
-}; */
- 
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -37,4 +36,5 @@ require __DIR__.'/auth.php';
  */
 Route::prefix('admin')->middleware(['auth', 'auth.isAdmin'])->name('admin.')->group(function () {
     Route::resource('/users', UserController::class);
+    Route::resource('/roles', RoleController::class);
 });
