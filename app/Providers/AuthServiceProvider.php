@@ -34,7 +34,7 @@ class AuthServiceProvider extends ServiceProvider
         });
 
         Gate::define('is-superuser', function ($user) {
-            return $user->hasAnyRoles(['admin', 'superuser']);
+            return $user->hasAnyRole('superuser');
         });
 
         Gate::define('is-security', function ($user) {
