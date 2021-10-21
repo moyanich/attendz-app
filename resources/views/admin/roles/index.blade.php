@@ -13,14 +13,14 @@
                         <x-breadcrumbs></x-breadcrumbs> 
                     </div>
                 </div>
-                <div class="flex-shrink-0 space-x-2">
+                {{--  <div class="flex-shrink-0 space-x-2">
                     <a href="{{ route('admin.roles.create') }}" class="flex items-center bg-lightBlue-500 text-white active:bg-lightBlue-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
                         {{ __('Add New Role') }}
                     </a>
-                </div>
+                </div>--}}
             </div>
         </div>
     </x-slot>
@@ -52,9 +52,9 @@
                         <th scope="col" class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
                             {{ __('Name') }}
                         </th>
-                        <th scope="col" class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                        {{-- <th scope="col" class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
                             {{ __('Actions') }}
-                        </th>
+                        </th> --}}
                     </tr>
                 </thead>
                 <tbody class="bg-white divide-y divide-gray-200">
@@ -67,7 +67,7 @@
                                 {{ $role->name }}
                             </td>
                             
-                            <td class="flex flex-wrap items-center p-4">
+                            {{-- <td class="flex flex-wrap items-center p-4">
 
                                 <a href="{{ route('admin.roles.edit', $role->id) }}" class="flex items-center bg-teal-500 text-white active:bg-teal-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -82,7 +82,7 @@
                                     </svg> 
                                     {{ __('Delete') }}
                                 </button>
-                            </td>
+                            </td> --}}
                         </tr>
                     @endforeach
                 </tbody>
@@ -98,7 +98,7 @@
 
 
 
-{{-- Delete Modal --}}
+{{-- Delete Modal 
 @foreach($roles as $key => $role)
   
 <div class="hidden overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none justify-center items-center" aria-labelledby="modal-title" role="dialog" aria-modal="true" id="role-delete-{{ $role->id }}">
@@ -146,7 +146,7 @@
 </div>
 
 @endforeach
-
+--}}
 
 
 </x-app-layout>
