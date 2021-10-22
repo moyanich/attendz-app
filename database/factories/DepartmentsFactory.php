@@ -22,7 +22,13 @@ class DepartmentsFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'name'  => $this->faker->unique()->randomElement([
+                'Accounts',
+                'Manufacturing',
+                'Administration',
+                'Information Technology'
+            ]),
+            'description' => $this->faker->text($maxNbChars = 200),
         ];
     }
 }

@@ -15,9 +15,16 @@ class CreateDepartmentsTable extends Migration
     {
         Schema::create('departments', function (Blueprint $table) {
             $table->id();
-
-            
+            $table->string('name', 50);
+            $table->longText('description');
+            $table->unsignedBigInteger('manager_id')->nullable();  
+            $table->unsignedBigInteger('supervisor_id')->nullable();
             $table->timestamps();
+            $table->engine = 'InnoDB';
+            //$table->foreign('manager_id')->references('empID')->on('employees');
+            //$table->foreign('supervisor_id')->references('empID')->on('employees');
+            $table->index('manager_id');
+            $table->index('supervisor_id');
         });
     }
 

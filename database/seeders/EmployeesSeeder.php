@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 
-class DepartmentsSeeder extends Seeder
+class EmployeesSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -13,6 +13,6 @@ class DepartmentsSeeder extends Seeder
      */
     public function run()
     {
-        \App\Models\Departments::factory(4)->create();
+        //
     }
 }

@@ -22,13 +22,14 @@ class DatabaseSeeder extends Seeder
             CreateAdminUserSeeder::class,
             CreateTestUserSeeder::class,
             CreateManagerUserSeeder::class,
+            DepartmentsSeeder::class,
             
             /* PermissionTableSeeder::class,
             CreateAdminUserSeeder::class,
             EmployeeSeeder::class,
             GenderSeeder::class,
             ParishSeeder::class,
-            DepartmentsSeeder::class,
+           
             RetirementSeeder::class,
             StatusCodeSeeder::class,
             JobsSeeder::class,
