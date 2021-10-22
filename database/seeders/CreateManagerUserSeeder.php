@@ -7,7 +7,7 @@ use App\Models\Role;
 use App\Models\User;
 use Hash;
 
-class CreateSuperUserSeeder extends Seeder
+class CreateManagerUserSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -18,8 +18,8 @@ class CreateSuperUserSeeder extends Seeder
     {
         //
         $user = User::create([
-            'name' => 'SuperAdmin',
-            'email' => 'supertest@admin.com',
+            'name' => 'ManagerAdmin',
+            'email' => 'managertest@admin.com',
             //'password' => Hash::make('password'),
             'password' => 'password',
         ]);
@@ -27,7 +27,7 @@ class CreateSuperUserSeeder extends Seeder
         //$user->roles()->sync([1, 2, 3]); // works
 
         // testing
-        $role = Role::where('name', '=', 'Superuser')
+        $role = Role::where('name', '=', 'Manager')
         ->get();
 
         $user->roles()->sync($role);

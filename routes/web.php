@@ -34,30 +34,27 @@ require __DIR__.'/auth.php';
  * Admin Routes
  * 
  */
-Route::prefix('admin')->middleware(['auth', 'auth.isAdmin', 'auth.isSuperUser'])->name('admin.')->group(function () {
+Route::prefix('admin')->middleware(['auth', 'auth.isAdmin'])->name('admin.')->group(function () {
 
-   // Route::group(['middleware' => ['auth.isSuperUser']], function () {
-        Route::resource('/users', UserController::class);
-        Route::resource('/departments', DepartmentsController::class);
-        Route::resource('/roles', RoleController::class);
+    Route::resource('/users', UserController::class);
+    Route::resource('/departments', DepartmentsController::class);
+    Route::resource('/roles', RoleController::class);
 
-   // });
    
-   /* Route::group(['middleware' => ['auth.isSuperUser']], function () {
-
+   /* 
         Route::resource('/roles', RoleController::class)
         ->missing(
             function (Request $request) {
                 return Redirect::route('RoleController');
             }
         );
-  }); */
+  */
 
-        
- 
     
 });
 
 
 
-// auth.isSecurity
+
+
+// auth.isSecurity 'auth.isSuperUser'

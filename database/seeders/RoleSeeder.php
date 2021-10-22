@@ -23,11 +23,7 @@ class RoleSeeder extends Seeder
         ]);
 
         DB::table('roles')->insert([
-            'name' => 'Superuser'
-        ]);
-
-        DB::table('roles')->insert([
-            'name' => 'Employee'
+            'name' => 'Manager'
         ]);
 
         DB::table('roles')->insert([
@@ -35,7 +31,7 @@ class RoleSeeder extends Seeder
         ]);
 
         DB::table('roles')->insert([
-            'name' => 'Manager'
+            'name' => 'Employee'
         ]);
 
         DB::table('roles')->insert([
