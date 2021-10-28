@@ -50,7 +50,8 @@ class DepartmentsController extends Controller
      */
     public function create()
     {
-        //
+        $departments = Departments::all();
+        return view('admin.departments.create', compact('departments'));
     }
 
     /**
