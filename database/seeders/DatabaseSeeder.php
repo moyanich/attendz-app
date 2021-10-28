@@ -23,7 +23,7 @@ class DatabaseSeeder extends Seeder
             CreateTestUserSeeder::class,
             CreateManagerUserSeeder::class,
             DepartmentsSeeder::class,
-            
+            EmployeesSeeder::class,
             /* PermissionTableSeeder::class,
             CreateAdminUserSeeder::class,
             EmployeeSeeder::class,
