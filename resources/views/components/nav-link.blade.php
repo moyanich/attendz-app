@@ -9,7 +9,7 @@ $classes = ($active ?? false)
 
 $classes = ($active ?? false)
     ? 'flex items-center text-xs uppercase py-2 px-6 mt-4 font-bold block text-lightBlue-500 hover:text-lightBlue-600 cursor-pointer'
-    : 'flex items-center text-xs uppercase py-2 px-6 mt-4 font-bold block text-blueGray-700 hover:text-blueGray-500 cursor-pointer';
+    : 'flex items-center text-xs uppercase py-2 px-6 mt-4 font-bold block text-white hover:text-blueGray-500 cursor-pointer';
 
 
 @endphp
