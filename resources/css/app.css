@@ -20,10 +20,24 @@
   background: #718096;
 }
 
+.select2-container--default .select2-selection--single {
+  border: 0 !important;
+  border-radius: 0.25rem;
+  padding: 0.75rem 0.75rem;
+  font-size: .875rem !important;
+  height: 40px !important;
+  background-color: rgba(244, 244, 245, var(--tw-bg-opacity)) !important;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+  line-height: 1 !important;
+}
+
 
 
 /* Card */
 
+/*
 .card {
   position: relative;
   display: flex;
@@ -360,3 +374,4 @@
   margin-top: 24px;
   margin-bottom: 24px;
 }
+*/
