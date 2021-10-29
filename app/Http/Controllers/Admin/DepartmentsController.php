@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Departments;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class DepartmentsController extends Controller
@@ -50,8 +51,8 @@ class DepartmentsController extends Controller
      */
     public function create()
     {
-        $departments = Departments::all();
-        return view('admin.departments.create', compact('departments'));
+        $users = User::all()->pluck('name', 'id')->toArray();
+        return view('admin.departments.create', compact('users'));
     }
 
     /**

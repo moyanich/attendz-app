@@ -13,21 +13,31 @@ class CreateDepartmentsTable extends Migration
      */
     public function up()
     {
+
+        Schema::table('users', function (Blueprint $table) {
+            $table->integer('department_id')->nullable()->default(null);
+        });
+
         Schema::create('departments', function (Blueprint $table) {
-            $table->id();
-            $table->string('name', 50);
+            $table->increments('id');
+            $table->string('name');
+            //$table->integer('user_id'); 
+            $table->integer('manager_id')->nullable()->default(null); 
+            $table->integer('supervisor_id')->nullable()->default(null);
             $table->longText('description');
-            $table->unsignedBigInteger('emp_id')->nullable();  
-            $table->unsignedBigInteger('manager_id')->nullable();  
-            $table->unsignedBigInteger('supervisor_id')->nullable();
             $table->timestamps();
+            $table->softDeletes();
             $table->engine = 'InnoDB';
-            //$table->foreign('emp_id')->references('empID')->on('employees');
-            //$table->foreign('manager_id')->references('empID')->on('employees');
-            //$table->foreign('supervisor_id')->references('empID')->on('employees');
+            /*
+             $table->unsignedBigInteger('emp_id')->nullable()->default(null);  
+            $table->unsignedBigInteger('manager_id')->nullable()->default(null); 
+            $table->unsignedBigInteger('supervisor_id')->nullable()->default(null);
+            $table->foreign('emp_id')->references('empID')->on('employees');
+           $table->foreign('manager_id')->references('empID')->on('employees');
+           $table->foreign('supervisor_id')->references('empID')->on('employees');
             $table->index('emp_id');
             $table->index('manager_id');
-            $table->index('supervisor_id');
+            $table->index('supervisor_id');  */
         });
     }
 
@@ -38,6 +48,10 @@ class CreateDepartmentsTable extends Migration
      */
     public function down()
     {
+        Schema::table('users', function ($table) {
+            $table->dropColumn('department_id');
+        });
+
         Schema::dropIfExists('departments');
     }
 }

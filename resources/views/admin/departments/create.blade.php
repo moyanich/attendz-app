@@ -50,7 +50,27 @@
                         <div class="relative w-full mb-3">
                             {{ Form::label('manager', 'Manager', ['class' => 'block text-sm font-bold capitalize text-blueGray-600 mb-2']) }}
 
-                           
+                        
+                            {!! Form::select('manager', $users, null, ['class' => 'form-select block w-full mt-1 border-0 px-3 py-3 placeholder-blueGray-400 text-gray-600 bg-gray-100 rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150', 'placeholder' => 'Select employee..']) !!}
+
+                           {{--  <div class="col-md-6">
+                                <select class="js-data-ajax" data-endpoint="departments" data-placeholder="{{ trans('general.select_department') }}" name="{{ $fieldname }}" style="width: 100%" id="department_select" aria-label="{{ $fieldname }}">
+                                    @if ($department_id = old($fieldname, (isset($item)) ? $item->{$fieldname} : ''))
+                                        <option value="{{ $department_id }}" selected="selected" role="option" aria-selected="true"  role="option">
+                                            {{ (\App\Models\Department::find($department_id)) ? \App\Models\Department::find($department_id)->name : '' }}
+                                        </option>
+                                    @else
+                                        <option value=""  role="option">{{ trans('general.select_department') }}</option>
+                                    @endif
+                                </select>
+                            </div> --}}
+
+                            <select class="js-example-basic-single" name="state">
+                                <option value="AL">Alabama</option>
+                                  ...
+                                <option value="WY">Wyoming</option>
+                              </select>
+
 
                             @error('manager')
                                 <p class="text-xs text-red-600">{{ $message }}</p>
@@ -81,13 +101,13 @@
                 <div class="flex flex-wrap">
                     <div class="w-full px-4">
                         <div class="relative w-full mb-3">
-                            {{ Form::label('description', 'Description', ['class' => 'block text-sm font-bold capitalize text-blueGray-600 mb-2']) }}
+                            {{--  {{ Form::label('description', 'Description', ['class' => 'block text-sm font-bold capitalize text-blueGray-600 mb-2']) }}
 
                             {{ Form::textarea('description', '', ['class' => 'border-0 px-3 py-3 placeholder-blueGray-400 text-gray-600 bg-gray-100 rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150', 'rows' => '4']) }}
 
                             @error('description')
                                 <p class="text-xs text-red-600">{{ $message }}</p>
-                            @enderror
+                            @enderror --}}
                         </div>
                     </div>
                 </div>

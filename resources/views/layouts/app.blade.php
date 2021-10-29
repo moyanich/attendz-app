@@ -15,6 +15,10 @@
 
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}" defer></script>
+
+        <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
+
     </head>
     <body class="bg-gray-100">
         <div x-data="{ sidebarOpen: false }" class="flex h-screen font-roboto">
@@ -61,6 +65,12 @@
             }
         </script>
         {{-- End Modal Scripts --}}
+
+
+        @push('scripts')
+            <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+        @endpush
+
 
 
     </body>

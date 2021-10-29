@@ -27,8 +27,7 @@ class UserController extends Controller
             } 
         */
         return view('admin.users.index', compact('users'))
-            ->with('i', ($request->input('page', 1) - 1) * 5)
-            ;
+            ->with('i', ($request->input('page', 1) - 1) * 5);
     }
 
     /**
