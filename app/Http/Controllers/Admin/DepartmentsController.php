@@ -16,7 +16,12 @@ class DepartmentsController extends Controller
      */
     public function index(Request $request)
     {
-        $departments = Departments::orderBy('id', 'DESC')->paginate(10);
+       $departments = Departments::orderBy('id', 'DESC')->paginate(10);
+
+       //$departments = Departments::orderBy('id', 'DESC');
+        //$supervisor = $departments->user->name;
+       // $supervisor = User::where('id', $departments->supervisor_id)->get();
+        //$users = User::orderBy('name')->pluck('name', 'id')->toArray();
 
         /* 
             NOTE: example of Gate::denies
@@ -25,7 +30,7 @@ class DepartmentsController extends Controller
             } 
 
 
-            //$departments = Departments::orderBy('id', 'asc')->paginate(15);
+        //$departments = Departments::orderBy('id', 'asc')->paginate(15);
         $departmentsCount = Departments::count();
 
         $departments = Departments::select('departments.*', 
