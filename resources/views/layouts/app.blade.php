@@ -70,12 +70,11 @@
         </script>
         {{-- End Modal Scripts --}}
 
-
-
+        {{-- Select2 Script --}}
         <script>
             jQuery(document).ready(function() {
                 $('.js-department-select').select2({
-                    minimumResultsForSearch: 20 // at least 20 results must be displayed
+                    //minimumResultsForSearch: 20 // at least 20 results must be displayed
                 });
             });
         </script>

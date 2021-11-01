@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 class DepartmentsController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display a listing of the departments.
      *
      * @return \Illuminate\Http\Response
      */
@@ -45,29 +45,38 @@ class DepartmentsController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Show the form for creating a new department.
      *
      * @return \Illuminate\Http\Response
      */
     public function create()
     {
-        $users = User::all()->pluck('name', 'id')->toArray();
+        $users = User::orderBy('name')->pluck('name', 'id')->toArray();
         return view('admin.departments.create', compact('users'));
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created department.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, 
+            [
+                'name'  => 'required|unique:departments'
+            ]
+        );
+
+        $newDepartment = $request->all();
+        $department = Departments::create($newDepartment);
+        
+        return redirect()->route('admin.departments.index')->with('success', 'New Department - ' . $department->name . ' created successfully');
     }
 
     /**
-     * Display the specified resource.
+     * Display the specified department.
      *
      * @param  \App\Models\Departments  $departments
      * @return \Illuminate\Http\Response
@@ -78,7 +87,7 @@ class DepartmentsController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Show the form for editing the specified department.
      *
      * @param  \App\Models\Departments  $departments
      * @return \Illuminate\Http\Response
@@ -89,7 +98,7 @@ class DepartmentsController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the specified department.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Departments  $departments
@@ -101,7 +110,7 @@ class DepartmentsController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified department from storage.
      *
      * @param  \App\Models\Departments  $departments
      * @return \Illuminate\Http\Response

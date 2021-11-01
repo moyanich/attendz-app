@@ -57,17 +57,26 @@
                 <div class="bg-gray-800 shadow dark-mode:bg-gray-800">
 
                     <x-dropdown-link :href="route('admin.departments.index')" :active="request()->routeIs('admin.departments.index')">
-                        {{ __('Departments') }}
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M4 4a2 2 0 012-2h8a2 2 0 012 2v12a1 1 0 110 2h-3a1 1 0 01-1-1v-2a1 1 0 00-1-1H9a1 1 0 00-1 1v2a1 1 0 01-1 1H4a1 1 0 110-2V4zm3 1h2v2H7V5zm2 4H7v2h2V9zm2-4h2v2h-2V5zm2 4h-2v2h2V9z" clip-rule="evenodd" />
+                        </svg>
+                        <span class="mx-2">{{ __('Departments') }}</span>
                     </x-dropdown-link>
 
                     <span class="block border-b border-gray-500"></span>
 
                     <x-dropdown-link :href="route('admin.users.index')" :active="request()->routeIs('admin.users.index')">
-                        {{ __('Users') }}
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
+                        </svg>
+                        <span class="mx-2">{{ __('Users') }}</span>
                     </x-dropdown-link>
 
                     <x-dropdown-link :href="route('admin.roles.index')" :active="request()->routeIs('admin.roles.index')">
-                        {{ __('Roles') }}
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                            <path d="M10 2a5 5 0 00-5 5v2a2 2 0 00-2 2v5a2 2 0 002 2h10a2 2 0 002-2v-5a2 2 0 00-2-2H7V7a3 3 0 015.905-.75 1 1 0 001.937-.5A5.002 5.002 0 0010 2z" />
+                        </svg>
+                        <span class="mx-2">{{ __('Roles') }}</span>
                     </x-dropdown-link>
                   
                     

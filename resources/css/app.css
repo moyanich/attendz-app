@@ -20,6 +20,10 @@
   background: #718096;
 }
 
+/*
+* Select
+*/
+
 .select2-container--default .select2-selection--single {
   border: 0 !important;
   border-radius: 0.25rem;
@@ -33,11 +37,15 @@
   line-height: 1 !important;
 }
 
+.select2-results__option--selectable {
+  font-size: .875rem !important;
+}
 
 
-/* Card */
 
 /*
+Card
+
 .card {
   position: relative;
   display: flex;
