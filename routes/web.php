@@ -37,7 +37,7 @@ require __DIR__.'/auth.php';
 Route::prefix('admin')->middleware(['auth', 'auth.isAdmin'])->name('admin.')->group(function () {
 
     Route::resource('/users', UserController::class);
-    Route::resource('/departments', DepartmentsController::class);
+    Route::resource('/departments', DepartmentsController::class)->except(['edit']); 
     Route::resource('/roles', RoleController::class);
 
    

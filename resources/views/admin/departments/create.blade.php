@@ -24,7 +24,6 @@
     {{-- End Messages --}}
 
     {{-- Content --}}
-
     <div class="relative flex flex-col min-w-0 break-words bg-white w-full md:w-8/12 mx-auto px-6 py-10 mb-6 shadow-lg rounded">
         <div class="block w-full overflow-x-auto px-6">
 
@@ -49,9 +48,6 @@
                     <div class="w-full lg:w-6/12 px-4">
                         <div class="relative w-full mb-3">
                             {{ Form::label('manager', 'Manager', ['class' => 'block text-sm font-bold capitalize text-blueGray-600 mb-2']) }}
-
-                        {{-- 
-                            {!! Form::select('manager', $users, null, ['class' => 'form-select block w-full mt-1 border-0 px-3 py-3 placeholder-blueGray-400 text-gray-600 bg-gray-100 rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150', 'placeholder' => 'Select employee..']) !!}  --}}
 
                             {!! Form::select('manager', $users, null, ['class' => 'js-department-select form-select block w-full mt-1 border-0 px-3 py-3 placeholder-blueGray-400 text-gray-600 bg-gray-100 rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150', 'placeholder' => 'Select employee..']) !!}
 
@@ -105,9 +101,7 @@
 
         </div>
     </div>
-    
     {{-- End Content --}}
-
 
 </x-app-layout>
 

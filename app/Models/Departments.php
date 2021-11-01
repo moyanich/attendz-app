@@ -10,6 +10,15 @@ class Departments extends Model
 {
     use HasFactory;
 
+    // Table Name
+    protected $table = 'departments';
+
+    // Primary Key
+    public $primaryKey = 'id';
+
+    // Timestamps
+    public $timestamps = true;
+
     protected $casts = [
         'manager_id'    => 'integer',
         'supervisor_id' => 'integer',

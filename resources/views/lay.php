@@ -270,13 +270,17 @@
 
 
     {{--  <div class="col-md-6">
-                                <select class="js-data-ajax" data-endpoint="departments" data-placeholder="{{ trans('general.select_department') }}" name="{{ $fieldname }}" style="width: 100%" id="department_select" aria-label="{{ $fieldname }}">
-                                    @if ($department_id = old($fieldname, (isset($item)) ? $item->{$fieldname} : ''))
-                                        <option value="{{ $department_id }}" selected="selected" role="option" aria-selected="true"  role="option">
-                                            {{ (\App\Models\Department::find($department_id)) ? \App\Models\Department::find($department_id)->name : '' }}
-                                        </option>
-                                    @else
-                                        <option value=""  role="option">{{ trans('general.select_department') }}</option>
-                                    @endif
-                                </select>
-                            </div> --}}
+        <select class="js-data-ajax" data-endpoint="departments" data-placeholder="{{ trans('general.select_department') }}" name="{{ $fieldname }}" style="width: 100%" id="department_select" aria-label="{{ $fieldname }}">
+            @if ($department_id = old($fieldname, (isset($item)) ? $item->{$fieldname} : ''))
+                <option value="{{ $department_id }}" selected="selected" role="option" aria-selected="true"  role="option">
+                    {{ (\App\Models\Department::find($department_id)) ? \App\Models\Department::find($department_id)->name : '' }}
+                </option>
+            @else
+                <option value=""  role="option">{{ trans('general.select_department') }}</option>
+            @endif
+        </select>
+    </div> --}}
+
+
+
+    //return view('admin.departments.show', compact('departments', 'users'));

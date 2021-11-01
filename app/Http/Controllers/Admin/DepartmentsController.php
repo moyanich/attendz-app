@@ -69,32 +69,27 @@ class DepartmentsController extends Controller
             ]
         );
 
-        $newDepartment = $request->all();
-        $department = Departments::create($newDepartment);
+        $department = new Departments;
+        $department->name = $request->input('name');
+        $department->description = $request->input('description');
+        $department->manager_id  = $request->input('manager');
+        $department->supervisor_id = $request->input('supervisor');
+        $department->save();
         
         return redirect()->route('admin.departments.index')->with('success', 'New Department - ' . $department->name . ' created successfully');
     }
 
+    // TODO: Look up Route Model Binding
     /**
-     * Display the specified department.
+     * Handle the Department "show/edit" event.
      *
      * @param  \App\Models\Departments  $departments
      * @return \Illuminate\Http\Response
      */
-    public function show(Departments $departments)
+    public function show(Departments $department)    
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified department.
-     *
-     * @param  \App\Models\Departments  $departments
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Departments $departments)
-    {
-        //
+        $users = User::orderBy('name')->pluck('name', 'id')->toArray();
+        return view('admin.departments.show', ['department' => $department, 'users' => $users]);        
     }
 
     /**
@@ -104,9 +99,21 @@ class DepartmentsController extends Controller
      * @param  \App\Models\Departments  $departments
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Departments $departments)
+    public function update(Request $request, Departments $department)
     {
-        //
+        $this->validate($request, 
+            [
+                'name'  => 'required'
+            ]
+        );
+
+        $department->name = $request->input('name');
+        $department->description = $request->input('description');
+        $department->manager_id  = $request->input('manager');
+        $department->supervisor_id = $request->input('supervisor');
+        $department->save();
+
+        return redirect()->back()->with('success', "Department record for " . $department->name . " updated sucessfully!");
     }
 
     /**
@@ -115,8 +122,10 @@ class DepartmentsController extends Controller
      * @param  \App\Models\Departments  $departments
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Departments $departments)
+    public function destroy(Departments $department)
     {
-        //
+        $department->delete();
+        return redirect()->route('admin.departments.index')
+            ->with('success', 'Department record deleted successfully!');
     }
 }
