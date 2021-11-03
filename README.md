@@ -84,7 +84,30 @@ function App() {
 }
 ```
 
+# pdpProject
 
+
+*click the image above to see the demo*
+
+This project is part of my personal development plan at Agile Actors. My aim is to use technologies and practices that I am not familiar with in order to build an e-commerce site and futher develop my professional skills.
+
+One of the major aims of this project is to set up the toolchain from the scratch, in order to familiarise myself with the whole process of creating an application, rather than writing code on top of a pre-configured development environment.
+
+## Stack
+
+-   Laravel 8
+-   Laravel Breeze
+
+
+## Points of interest
+
+-   Project 
+## How to deploy locally
+
+-   Clone this repository
+-   Install the dependencies by running `yarn`
+-   In two separate terminal instances run `yarn startServer` to start the mock back end server and `yarn dev` to start the front end client.
+-   The front end should be deployed at `http://localhost:8000/` and the back end at `http://localhost:4000/` (check the terminals to make sure these are the ports)
 
 
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
