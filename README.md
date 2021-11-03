@@ -97,7 +97,7 @@ One of the major aims of this project is to set up the toolchain from the scratc
 
 -   Laravel 8
 -   Laravel Breeze
-
+-   Tailwind CSS
 
 ## Points of interest
 

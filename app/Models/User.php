@@ -91,6 +91,8 @@ class User extends Authenticatable
         return null !== $this->roles()->whereIn('name', $role)->first();
     }
 
+   
+
     /**
      * Establishes the user -> department relationship
      *
@@ -98,34 +100,11 @@ class User extends Authenticatable
      * @since [v4.0]
      * @return \Illuminate\Database\Eloquent\Relations\Relation
      */
-    public function department()
+   /* public function department()
     {
         return $this->belongsTo('\App\Models\Departments', 'department_id');
-    }
+    } */
 
-    /**
-     * Establishes the user -> manager relationship
-     *
-     * @author A. Gianotto <snipe@snipe.net>
-     * @since [v4.0]
-     * @return \Illuminate\Database\Eloquent\Relations\Relation
-     */
-    public function manager()
-    {
-        return $this->belongsTo('\App\Models\User', 'manager_id')->withTrashed();
-    }
-
-    /**
-     * Establishes the user -> manager relationship
-     *
-     * @author A. Gianotto <snipe@snipe.net>
-     * @since [v4.0]
-     * @return \Illuminate\Database\Eloquent\Relations\Relation
-     */
-    public function supervisor()
-    {
-        return $this->belongsTo('\App\Models\User', 'supervisor_id')->withTrashed();
-    }
-
+   
 
 }

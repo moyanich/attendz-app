@@ -18,6 +18,12 @@ class DepartmentsController extends Controller
     {
        $departments = Departments::orderBy('id', 'DESC')->paginate(10);
 
+       
+
+       //$user = User::find(1)->department;
+
+       //dd($departments);
+
        //$departments = Departments::orderBy('id', 'DESC');
         //$supervisor = $departments->user->name;
        // $supervisor = User::where('id', $departments->supervisor_id)->get();
@@ -43,6 +49,9 @@ class DepartmentsController extends Controller
             ->with('title', $title)
             ->with('departments', $departments);
         */
+
+       // $supervisor = Departments::with('manager')->get();
+
         return view('admin.departments.index', compact('departments'))
             ->with('i', ($request->input('page', 1) - 1) * 5)
             ;
@@ -74,12 +83,15 @@ class DepartmentsController extends Controller
             ]
         );
 
-        $department = new Departments;
-        $department->name = $request->input('name');
-        $department->description = $request->input('description');
-        $department->manager_id  = $request->input('manager');
-        $department->supervisor_id = $request->input('supervisor');
-        $department->save();
+       // $department = new Departments;
+       // $department->name = $request->input('name');
+       // $department->description = $request->input('description');
+        //$department->manager_id  = $request->input('manager');
+       // $department->supervisor_id = $request->input('supervisor');
+        //$department->save();
+        $newDepartment = $request->all();
+        $department = Departments::create($newDepartment);
+        $department->manager()->sync($request->input('manager'));
         
         return redirect()->route('admin.departments.index')->with('success', 'New Department - ' . $department->name . ' created successfully');
     }

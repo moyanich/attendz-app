@@ -14,21 +14,28 @@ class CreateDepartmentsTable extends Migration
     public function up()
     {
 
-        Schema::table('users', function (Blueprint $table) {
+       /* Schema::table('users', function (Blueprint $table) {
             $table->integer('department_id')->nullable()->default(null);
-        });
+        }); */
 
         Schema::create('departments', function (Blueprint $table) {
-            $table->increments('id');
+            $table->id();
             $table->string('name');
-            //$table->integer('user_id'); 
-            $table->integer('manager_id')->nullable()->default(null); 
-            $table->integer('supervisor_id')->nullable()->default(null);
             $table->longText('description');
+            $table->integer('user_id')->nullable()->default(null); 
+            //$table->integer('manager_id')->nullable(); 
+            $table->integer('supervisor_id')->nullable()->default(null);
+
+            $table->foreignId('manager_id')->constrained('users');
+
+            //$table->foreign('manager_id')->references('id')->on('users');
             $table->timestamps();
             $table->softDeletes();
             $table->engine = 'InnoDB';
             /*
+             //$table->integer('user_id'); 
+           // $table->integer('manager_id')->nullable()->default(null); 
+            //$table->integer('supervisor_id')->nullable()->default(null);
              $table->unsignedBigInteger('emp_id')->nullable()->default(null);  
             $table->unsignedBigInteger('manager_id')->nullable()->default(null); 
             $table->unsignedBigInteger('supervisor_id')->nullable()->default(null);
@@ -48,9 +55,9 @@ class CreateDepartmentsTable extends Migration
      */
     public function down()
     {
-        Schema::table('users', function ($table) {
+       /* Schema::table('users', function ($table) {
             $table->dropColumn('department_id');
-        });
+        }); */
 
         Schema::dropIfExists('departments');
     }
