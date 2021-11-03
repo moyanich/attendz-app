@@ -25,8 +25,8 @@ class CreateDepartmentsTable extends Migration
             $table->integer('user_id')->nullable()->default(null); 
             //$table->integer('manager_id')->nullable(); 
             $table->integer('supervisor_id')->nullable()->default(null);
-
-            $table->foreignId('manager_id')->constrained('users');
+            $table->unsignedBigInteger('manager_id')->nullable()->default(null); 
+            $table->foreign('manager_id')->references('id')->on('users');
 
             //$table->foreign('manager_id')->references('id')->on('users');
             $table->timestamps();
