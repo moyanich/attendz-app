@@ -70,7 +70,13 @@
                                 {{-- $department->manager_id --}}
                             </td>
                             <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                                {{ $department->user->name }}
+                                {{-- $department->user->name --}}
+
+                                {{-- $department->manager --}}
+                            {{ $department->manager->name }}
+
+                            
+                                {{-- $department->manager->name --}}
                                 {{-- $user->name --}}
                                 {{-- $department->supervisor_id --}}
 

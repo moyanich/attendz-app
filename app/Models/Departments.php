@@ -53,12 +53,15 @@ class Departments extends Model
     }
 
 
-    public function manager()
+   /* public function manager() WORKS!!
     {
         return $this->hasOne(User::class, 'id', 'manager_id');
+    } */
+
+    public function manager()
+    {
+        return $this->belongsTo(User::class, 'id');
     }
-
-
 
     /**
      * The users that belong to the Role

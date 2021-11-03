@@ -91,6 +91,12 @@ class User extends Authenticatable
         return null !== $this->roles()->whereIn('name', $role)->first();
     }
 
+    public function department()
+    {
+        return $this->belongsTo(Departments::class, 'manager_id');
+    } 
+
+
    
 
     /**
