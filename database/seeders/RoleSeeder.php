@@ -38,5 +38,9 @@ class RoleSeeder extends Seeder
             'name' => 'Security'
         ]);
 
+        DB::table('roles')->insert([
+            'name' => 'HR'
+        ]);
+
     }
 }

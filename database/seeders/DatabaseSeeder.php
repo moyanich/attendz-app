@@ -22,6 +22,7 @@ class DatabaseSeeder extends Seeder
             CreateAdminUserSeeder::class,
             CreateTestUserSeeder::class,
             CreateManagerUserSeeder::class,
+            CreateHrUserSeeder::class,
             DepartmentsSeeder::class,
            // EmployeesSeeder::class,
             /* PermissionTableSeeder::class,

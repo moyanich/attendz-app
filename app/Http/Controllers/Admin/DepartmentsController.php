@@ -28,8 +28,7 @@ class DepartmentsController extends Controller
                 ->orderBy('id', 'DESC')->paginate(15);
       
         return view('admin.departments.index', compact('departments'))
-            ->with('i', ($request->input('page', 1) - 1) * 5)
-            ;
+            ->with('i', ($request->input('page', 1) - 1) * 5);
     }
 
     /**
