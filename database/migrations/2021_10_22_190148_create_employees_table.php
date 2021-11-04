@@ -14,27 +14,27 @@ class CreateEmployeesTable extends Migration
     public function up()
     {
         Schema::create('employees', function (Blueprint $table) {
-            $table->unsignedBigInteger('empID');
-            $table->string('first_name', 50);
-            $table->string('middle_name', 50)->nullable();
-            $table->string('last_name', 50);
+            $table->increments('id');
+            $table->string('name');
             $table->string('email_address', 50)->nullable();
-            $table->char('phone_number1', 25)->nullable();
-            $table->char('phone_number2', 25)->nullable();
-            $table->date('dob');
+            $table->string('phone_number')->nullable();
+            $table->string('emergency_number')->nullable();
+            $table->date('date_of_birth');
             $table->date('retirement_date')->nullable();
-            $table->date('hire_date')->nullable();
+            $table->date('hire_date');
             $table->char('nis', 9)->nullable()->unique();
             $table->char('trn', 9)->nullable()->unique();
             $table->integer('gender_id')->nullable();
-            $table->longText('address')->nullable();
+            $table->longText('current_address')->nullable();
+            $table->longText('permanent_address')->nullable();
             $table->mediumText('city')->nullable();
             $table->integer('parish_id')->unsigned()->nullable();
             $table->longText('notes')->nullable();
             $table->integer('status_code_id')->unsigned()->nullable();
             $table->timestamps();
-            $table->primary('empID');
+           // $table->primary('empID');
             $table->index('parish_id');
+            $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
             $table->engine = 'InnoDB';
         });
     }
