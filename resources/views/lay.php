@@ -284,3 +284,130 @@
 
 
     //return view('admin.departments.show', compact('departments', 'users'));
+
+
+
+
+
+    /**
+     * 
+     * Get the user associated with the department.
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'manager_id');
+    }
+
+
+   /* public function manager() WORKS!!
+    {
+        return $this->hasOne(User::class, 'id', 'manager_id');
+    } */
+
+
+    /**
+     * The users that belong to the Role
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    /*public function manager()
+    {
+        return $this->belongsTo(Departments::class, 'department_manager', 'user_id', 'department_id');
+
+        // return $this->belongsToMany('App\Models\Users');
+    } */
+
+    /**
+     * Establishes the department -> users relationship
+     *
+     * @author A. Gianotto <snipe@snipe.net>
+     * @since [v4.0]
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     */
+  /*  public function users()
+    {
+        return $this->hasMany('\App\Models\User', 'department_id');
+    } */
+
+
+     /**
+     * Establishes the department -> manager relationship
+     *
+     * @author A. Gianotto <snipe@snipe.net>
+     * @since [v4.0]
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     */
+  /*  public function manager()
+    {
+        return $this->belongsTo('\App\Models\User', 'manager_id');
+    } */
+
+
+    /**
+     * Establishes the department -> manager relationship
+     *
+     * @author A. Gianotto <snipe@snipe.net>
+     * @since [v4.0]
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     */
+   /* public function supervisor()
+    {
+        return $this->belongsTo('\App\Models\User', 'supervisor_id');
+    } */
+
+
+
+    public function departments()
+    {
+        //return $this->belongsTo(Departments::class, 'manager_id');
+        return $this->hasOne(Departments::class, 'manager_id');
+        // note: we can also inlcude Mobile model like: 'App\Departments'
+    } 
+
+
+   
+
+    /**
+     * Establishes the user -> department relationship
+     *
+     * @author A. Gianotto <snipe@snipe.net>
+     * @since [v4.0]
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     */
+   /* public function department()
+    {
+        return $this->belongsTo('\App\Models\Departments', 'department_id');
+    } */
+
+
+
+     
+    //dd($departments);
+
+//$departments = Departments::orderBy('id', 'DESC');
+ //$supervisor = $departments->user->name;
+// $supervisor = User::where('id', $departments->supervisor_id)->get();
+ //$users = User::orderBy('name')->pluck('name', 'id')->toArray();
+
+ /* 
+     NOTE: example of Gate::denies
+     if(Gate::denies('logged-in')) {
+         dd('no access');
+     } 
+
+
+ //$departments = Departments::orderBy('id', 'asc')->paginate(15);
+ $departmentsCount = Departments::count();
+
+ $departments = Departments::select('departments.*', 
+ DB::raw('CONCAT(employees.first_name, " " , employees.last_name) as managerName'), DB::raw('CONCAT(e.first_name, " " , e.last_name) as supervisorName'))
+     ->leftJoin('users', 'departments.manager_id', '=', 'users.id')
+     ->leftJoin('employees as e', 'departments.supervisor_id', '=', 'e.empID')
+     ->orderBy('id', 'asc')->paginate(15);
+
+ return view('departments.index')
+     ->with('title', $title)
+     ->with('departments', $departments);
+ */
+
+// $supervisor = Departments::with('manager')->get();

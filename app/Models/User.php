@@ -91,26 +91,7 @@ class User extends Authenticatable
         return null !== $this->roles()->whereIn('name', $role)->first();
     }
 
-    public function department()
-    {
-        return $this->belongsTo(Departments::class, 'manager_id');
-    } 
-
-
    
-
-    /**
-     * Establishes the user -> department relationship
-     *
-     * @author A. Gianotto <snipe@snipe.net>
-     * @since [v4.0]
-     * @return \Illuminate\Database\Eloquent\Relations\Relation
-     */
-   /* public function department()
-    {
-        return $this->belongsTo('\App\Models\Departments', 'department_id');
-    } */
-
    
 
 }

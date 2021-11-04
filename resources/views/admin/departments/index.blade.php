@@ -67,34 +67,10 @@
                                 {{ $department->name }}
                             </td>
                             <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4">
-                                {{-- $department->manager_id --}}
+                                {{ $department->managerName }}
                             </td>
                             <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                                {{-- $department->user->name --}}
-
-                                {{-- $department->manager --}}
-                            {{ $department->manager->name }}
-
-                            
-                                {{-- $department->manager->name --}}
-                                {{-- $user->name --}}
-                                {{-- $department->supervisor_id --}}
-
-                               
-                                 {{-- $supervisor->manager->name() --}}
-                                   
-                                {{-- @if(!empty($user->roles))
-                                 @foreach($user->roles as $user_has_roles)
-                                     <span class="inline-block rounded text-white bg-blue-400 px-2 py-1 text-xs font-bold mr-1">{{ $user_has_roles->name }}</span>
-                                 @endforeach
-                             @endif --}}
-
-                             @php //dd($department->user);
-                              @endphp
-
-                          
-
-                                {{-- $department->user->name --}}
+                                here
                             </td>
                             <td class="flex flex-wrap items-center p-4">
                                 <a href="{{ route('admin.departments.show', $department->id) }}" class="flex items-center bg-teal-500 text-white active:bg-teal-600 font-bold uppercase text-xs px-2 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button">
