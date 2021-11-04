@@ -29,7 +29,6 @@
 
             <!-- CREATE DEPARTMENT -->
             {!! Form::open(['action' => 'App\Http\Controllers\Admin\DepartmentsController@store', 'method' => 'POST']) !!}
-            
                 <div class="flex flex-wrap">
                     <div class="w-full px-4">
                         <div class="relative w-full mb-3">

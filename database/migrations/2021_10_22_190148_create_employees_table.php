@@ -14,8 +14,11 @@ class CreateEmployeesTable extends Migration
     public function up()
     {
         Schema::create('employees', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('name');
+            $table->id();
+            $table->string('employee_num');
+            $table->string('first_name');
+            $table->string('middle_name');
+            $table->string('last_name');
             $table->string('email_address', 50)->nullable();
             $table->string('phone_number')->nullable();
             $table->string('emergency_number')->nullable();
@@ -30,11 +33,11 @@ class CreateEmployeesTable extends Migration
             $table->mediumText('city')->nullable();
             $table->integer('parish_id')->unsigned()->nullable();
             $table->longText('notes')->nullable();
-            $table->integer('status_code_id')->unsigned()->nullable();
+            $table->tinyInteger('status_id');
+            //$table->integer('status_id')->unsigned()->nullable();
             $table->timestamps();
-           // $table->primary('empID');
             $table->index('parish_id');
-            $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
+           // $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
             $table->engine = 'InnoDB';
         });
     }

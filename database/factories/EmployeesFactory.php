@@ -22,21 +22,21 @@ class EmployeesFactory extends Factory
     public function definition()
     {
         return [
-            'empID'             => $this->faker->numberBetween($min = 1000, $max = 9000),
+            'id'                => $this->faker->numberBetween($min = 1000, $max = 9000),
             'first_name'        => $this->faker->firstName($gender = 'male'|'female'),
             'middle_name'       => $this->faker->lastName(),
             'last_name'         => $this->faker->lastName(),
             'email_address'     => $this->faker->email(),
-            'phone_number1'     => $this->faker->tollFreePhoneNumber(),
-            'phone_number2'     => $this->faker->tollFreePhoneNumber(),
-            'dob'               => $this->faker->date($format = 'Y-m-d', $max = 'now') ,
+            'phone_number'      => $this->faker->tollFreePhoneNumber(),
+            'emergency_number'  => $this->faker->tollFreePhoneNumber(),
+            'date_of_birth'     => $this->faker->date($format = 'Y-m-d', $max = 'now') ,
             'hire_date'         => $this->faker->date($format = 'Y-m-d', $max = 'now'),
             'gender_id'         => $this->faker->numberBetween($min = 1, $max = 2),
-            'address'           => $this->faker->secondaryAddress,
+            'current_address'   => $this->faker->secondaryAddress,
             'city'              => $this->faker->state,
             'parish_id'         => $this->faker->numberBetween($min = 1, $max = 14),
             'notes'             => $this->faker->text($maxNbChars = 200),
-            'status_code_id'    => $this->faker->numberBetween($min = 1, $max = 8)
+            'status_id'         => $this->faker->numberBetween($min = 1, $max = 8)
         ];
     }
 }

@@ -9,27 +9,25 @@ use App\Models\Employees;
 class EmployeesController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display a listing of the employees.
      *
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
     {
-
         $employees = Employees::orderBy('id', 'DESC')->paginate(10);
-
         return view('admin.employees.index', compact('employees'))
             ->with('i', ($request->input('page', 1) - 1) * 5);
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Show the form for creating a new employee.
      *
      * @return \Illuminate\Http\Response
      */
     public function create()
     {
-        //
+        return view('admin.employees.create');
     }
 
     /**

@@ -8,8 +8,8 @@ $classes = ($active ?? false)
 */
 
 $classes = ($active ?? false)
-    ? 'flex items-center text-xs uppercase py-2 px-6 mt-4 font-bold block text-lightBlue-500 hover:text-lightBlue-600 cursor-pointer'
-    : 'flex items-center text-xs uppercase py-2 px-6 mt-4 font-bold block text-white hover:text-blueGray-500 cursor-pointer';
+    ? 'flex block px-4 py-2 mt-2 text-sm capitalize text-lightBlue-600 bg-transparent dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 hover:text-lightBlue-600 focus:text-lightBlue-600 focus:bg-gray-200 focus:outline-none focus:shadow-outline'
+    : 'flex block px-4 py-2 mt-2 text-sm capitalize text-white bg-transparent dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 hover:text-lightBlue-600 focus:text-lightBlue-600 focus:bg-gray-200 focus:outline-none focus:shadow-outline';
 
 
 @endphp
