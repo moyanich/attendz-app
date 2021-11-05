@@ -45,7 +45,7 @@
             @endcan
         @endcan
             
-        {{-- Admin User Menu --}}
+        {{-- Admin User Menu
         @can('logged-in')
             @can('is-admin')
                 <x-nav-link :href="route('admin.users.index')" :active="request()->routeIs('admin.users.index')">
@@ -54,29 +54,27 @@
                     </svg>
                     <span class="mx-3">{{ __('Employees') }}</span>
                 </x-nav-link>
-
-                {{--  @can('is-superuser') --}}
-                    <x-nav-link :href="route('admin.roles.index')" :active="request()->routeIs('admin.roles.index')">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                        </svg>
-                        <span class="mx-3">{{ __('Manage Roles') }}</span>
-                    </x-nav-link>
-                {{-- @endcan --}}
+               
+                <x-nav-link :href="route('admin.roles.index')" :active="request()->routeIs('admin.roles.index')">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                    </svg>
+                    <span class="mx-3">{{ __('Manage Roles') }}</span>
+                </x-nav-link>
             @endcan
-        @endcan
+        @endcan --}}
 
         {{-- Admin Settings Menu --}}
         @can('logged-in')
             @can('is-admin')
                 <div @click.away="open = false" class="relative" x-data="{ open: false }">
-                    <button @click="open = !open" class="flex items-center text-sm capitalize text-white py-2 px-6 mt-4 block hover:text-lightBlue-600 cursor-pointer">
+                    <button @click="open = !open" class="flex items-center text-sm capitalize text-white px-4 py-2 mt-4 block hover:text-lightBlue-600 cursor-pointer">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                         </svg> 
                         <span class="mx-3">{{ __('Settings') }}</span>
-                        <svg fill="currentColor" viewBox="0 0 20 20" :class="{'rotate-180': open, 'rotate-0': !open}" class="inline w-4 h-4 mt-1 ml-1 transition-transform duration-200 transform md:-mt-1">
+                        <svg fill="currentColor" viewBox="0 0 20 20" :class="{'rotate-180': open, 'rotate-0': !open}" class="inline w-4 h-4 mt-0.5 ml-1 transition-transform duration-200 transform md:-mt-0.5">
                             <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path>
                         </svg>
                     </button>
