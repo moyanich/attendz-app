@@ -28,8 +28,7 @@ class DepartmentsFactory extends Factory
                 'Administration',
                 'Information Technology'
             ]),
-            'description' => $this->faker->text($maxNbChars = 200),
-            'user_id' => '2'
+            'description' => $this->faker->text($maxNbChars = 200)
         ];
     }
 }

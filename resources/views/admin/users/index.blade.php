@@ -115,6 +115,9 @@
                             {{ __('Name') }}
                         </th>
                         <th scope="col" class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                            {{ __('Username') }}
+                        </th>
+                        <th scope="col" class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
                             {{ __('Email') }}
                         </th>
                         <th scope="col" class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
@@ -132,7 +135,10 @@
                                 {{ $loop->iteration }}
                             </td>
                             <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4">
-                                {{ $user->name }}
+                                {{ $user->firstname . ' ' . $user->lastname }}
+                            </td>
+                            <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4">
+                                {{ $user->username }}
                             </td>
                             <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4">
                                 {{ $user->email }}

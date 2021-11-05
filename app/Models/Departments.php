@@ -19,13 +19,6 @@ class Departments extends Model
     // Timestamps
     public $timestamps = true;
 
-   /* protected $casts = [
-        'manager_id'    => 'integer',
-        'supervisor_id' => 'integer',
-        'emp_id'        => 'integer',
-    ];
-*/
-
     protected $rules = [
         'name'          => 'required|max:255',
         'supervisor_id' => 'numeric|nullable',

@@ -22,13 +22,10 @@ class CreateDepartmentsTable extends Migration
             $table->id();
             $table->string('name');
             $table->longText('description');
-            $table->integer('user_id')->nullable()->default(null); 
-            //$table->integer('manager_id')->nullable(); 
-            $table->integer('supervisor_id')->nullable()->default(null);
+            $table->unsignedBigInteger('supervisor_id')->nullable()->default(null);
             $table->unsignedBigInteger('manager_id')->nullable()->default(null); 
             $table->foreign('manager_id')->references('id')->on('users');
-
-            //$table->foreign('manager_id')->references('id')->on('users');
+            $table->foreign('supervisor_id')->references('id')->on('users');
             $table->timestamps();
             $table->softDeletes();
             $table->engine = 'InnoDB';

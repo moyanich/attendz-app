@@ -94,7 +94,24 @@ class User extends Authenticatable
         return null !== $this->roles()->whereIn('name', $role)->first();
     }
 
-   
+    /**
+     * Accessor: got the solution by defining an accessor in Contact model
+     * 
+     */
+    public function getFullNameAttribute()
+    {
+        return $this->firstname.' '.$this->lastname;  
+    }
+
+
+
+     /**
+     * Get the phone associated with the user.
+     */
+    public function department()
+    {
+        return $this->hasOne(Departments::class);
+    }
    
 
 }

@@ -20,12 +20,12 @@ class DepartmentsController extends Controller
        //$departments = Departments::orderBy('id', 'DESC')->paginate(10);
 
        // TODO: Find the eloquent way
-       $departments = Departments::select('departments.*', 
-            DB::raw('users.name as managerName'), 
-            DB::raw('userSup.name as supervisorName'))
+        $departments = Departments::select('departments.*', 
+            DB::raw('CONCAT(users.firstname, " " , users.lastname) as managerName'), 
+            DB::raw('CONCAT(userSup.firstname, " " , userSup.lastname) as supervisorName'))
                 ->leftJoin('users', 'departments.manager_id', '=', 'users.id')
                 ->leftJoin('users as userSup', 'departments.supervisor_id', '=', 'userSup.id')
-                ->orderBy('id', 'DESC')->paginate(15);
+                ->orderBy('id', 'asc')->paginate(15);
       
         return view('admin.departments.index', compact('departments'))
             ->with('i', ($request->input('page', 1) - 1) * 5);
@@ -38,7 +38,7 @@ class DepartmentsController extends Controller
      */
     public function create()
     {
-        $users = User::orderBy('name')->pluck('name', 'id')->toArray();
+        $users = User::orderBy('firstname')->get()->pluck('full_name', 'id')->toArray();
         return view('admin.departments.create', compact('users'));
     }
 
@@ -56,15 +56,12 @@ class DepartmentsController extends Controller
             ]
         );
 
-       // $department = new Departments;
-       // $department->name = $request->input('name');
-       // $department->description = $request->input('description');
-        //$department->manager_id  = $request->input('manager');
-       // $department->supervisor_id = $request->input('supervisor');
-        //$department->save();
-        $newDepartment = $request->all();
-        $department = Departments::create($newDepartment);
-        $department->manager()->sync($request->input('manager'));
+        $department = new Departments;
+        $department->name = $request->input('name');
+        $department->description = $request->input('description');
+        $department->manager_id  = $request->input('manager');
+        $department->supervisor_id = $request->input('supervisor');
+        $department->save();
         
         return redirect()->route('admin.departments.index')->with('success', 'New Department - ' . $department->name . ' created successfully');
     }
@@ -78,7 +75,7 @@ class DepartmentsController extends Controller
      */
     public function show(Departments $department)    
     {
-        $users = User::orderBy('name')->pluck('name', 'id')->toArray();
+        $users = User::orderBy('firstname')->get()->pluck('full_name', 'id')->toArray();
         return view('admin.departments.show', ['department' => $department, 'users' => $users]);        
     }
 
@@ -116,6 +113,6 @@ class DepartmentsController extends Controller
     {
         $department->delete();
         return redirect()->route('admin.departments.index')
-            ->with('success', 'Department record deleted successfully!');
+            ->with('success', 'Department record for ' . $department->name . ' deleted successfully!');
     }
 }

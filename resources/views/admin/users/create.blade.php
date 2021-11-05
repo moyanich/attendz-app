@@ -33,11 +33,35 @@
 
                             <div class="w-full lg:w-6/12 px-4">
                                 <div class="relative w-full mb-3">
-                                    {{ Form::label('name', 'Name', ['class' => 'block uppercase text-blueGray-600 text-xs font-bold mb-2']) }}
+                                    {{ Form::label('firstname', 'First Name', ['class' => 'block uppercase text-blueGray-600 text-xs font-bold mb-2']) }}
 
-                                    {!! Form::text('name', null, array('placeholder' => 'Name','class' => 'border-0 px-3 py-3 placeholder-blueGray-400 text-gray-600 bg-gray-100 rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150')) !!}
+                                    {!! Form::text('firstname', null, array('placeholder' => 'First Name','class' => 'border-0 px-3 py-3 placeholder-blueGray-400 text-gray-600 bg-gray-100 rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150')) !!}
 
-                                    @error('name')
+                                    @error('firstname')
+                                        <p class="text-xs text-red-600">{{ $message }}</p>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="w-full lg:w-6/12 px-4">
+                                <div class="relative w-full mb-3">
+                                    {{ Form::label('lastname', 'Last Name', ['class' => 'block uppercase text-blueGray-600 text-xs font-bold mb-2']) }}
+
+                                    {!! Form::text('lastname', null, array('placeholder' => 'Last Name','class' => 'border-0 px-3 py-3 placeholder-blueGray-400 text-gray-600 bg-gray-100 rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150')) !!}
+
+                                    @error('lastname')
+                                        <p class="text-xs text-red-600">{{ $message }}</p>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="w-full lg:w-6/12 px-4">
+                                <div class="relative w-full mb-3">
+                                    {{ Form::label('username', 'Username', ['class' => 'block uppercase text-blueGray-600 text-xs font-bold mb-2']) }}
+
+                                    {!! Form::text('username', null, array('placeholder' => 'Username','class' => 'border-0 px-3 py-3 placeholder-blueGray-400 text-gray-600 bg-gray-100 rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150')) !!}
+
+                                    @error('username')
                                         <p class="text-xs text-red-600">{{ $message }}</p>
                                     @enderror
                                 </div>
