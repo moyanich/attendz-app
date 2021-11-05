@@ -24,11 +24,11 @@ class Employees extends Model
      * @var string[]
      */
     protected $fillable = [
-        'id',
+        'emp_no',
         'first_name',
         'middle_name',
         'last_name',
-        'email_address',
+        'email',
         //'phone_number1',
         //'phone_number2',
         //'dob',

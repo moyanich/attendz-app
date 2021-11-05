@@ -22,11 +22,11 @@ class EmployeesFactory extends Factory
     public function definition()
     {
         return [
-            'emp_no'                => $this->faker->numberBetween($min = 1000, $max = 9000),
-            'first_name'        => $this->faker->firstName($gender = 'male'|'female'),
-            'middle_name'       => $this->faker->lastName(),
-            'last_name'         => $this->faker->lastName(),
-            'email_address'     => $this->faker->email(),
+            'emp_no'            => $this->faker->numberBetween($min = 1000, $max = 9000),
+            'firstname'         => $this->faker->firstName($gender = 'male'|'female'),
+            'middlename'        => $this->faker->lastName(),
+            'lastname'          => $this->faker->lastName(),
+            'email'             => $this->faker->email(),
             'phone_number'      => $this->faker->tollFreePhoneNumber(),
             'emergency_number'  => $this->faker->tollFreePhoneNumber(),
             'date_of_birth'     => $this->faker->date($format = 'Y-m-d', $max = 'now') ,

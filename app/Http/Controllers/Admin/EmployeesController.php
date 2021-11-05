@@ -5,6 +5,10 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Employees;
+use App\Models\Role;
+use App\Models\User;
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Password;
 
 class EmployeesController extends Controller
 {
@@ -27,11 +31,12 @@ class EmployeesController extends Controller
      */
     public function create()
     {
-        return view('admin.employees.create');
+        $roles = Role::all();
+        return view('admin.employees.create', compact('roles'));
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created employee in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -39,6 +44,34 @@ class EmployeesController extends Controller
     public function store(Request $request)
     {
         //emp_no
+
+        $this->validate($request, [
+            'emp_no' => 'required|unique:employees',
+            'firstname' => 'required',
+            'lastname' => 'required',
+            'username' => 'required|unique:users,username',
+            'email' => 'email|unique:users,email',
+            'password' => 'required|same:confirm-password',
+            'roles' => 'required',
+        ]);
+
+
+        $employee = new Employees;
+        $employee->emp_no = $request->input('emp_no');
+        $employee->firstname = $request->input('firstname');
+        $employee->lastname = $request->input('lastname');
+        $employee->email = $request->input('email');
+        $employee->save();
+    
+
+        $newUser = $request->except(['_token', 'roles']);
+        $user = User::create($newUser);
+        $user->roles()->sync($request->input('roles'));
+
+        Password::sendResetLink($request->only(['email']));
+
+        return redirect()->route('admin.employees.index')->with('success', 'New employee created successfully');
+
     }
 
     /**

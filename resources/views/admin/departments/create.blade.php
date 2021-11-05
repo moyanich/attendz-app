@@ -27,8 +27,8 @@
     <div class="relative flex flex-col min-w-0 break-words bg-white w-full md:w-8/12 mx-auto px-6 py-10 mb-6 shadow-lg rounded">
         <div class="block w-full overflow-x-auto px-6">
 
-            <!-- CREATE DEPARTMENT -->
             {!! Form::open(['action' => 'App\Http\Controllers\Admin\DepartmentsController@store', 'method' => 'POST']) !!}
+
                 <div class="flex flex-wrap">
                     <div class="w-full px-4">
                         <div class="relative w-full mb-3">
@@ -96,28 +96,11 @@
 
                     </div>
                 </div>
+
             {!! Form::close() !!}
 
         </div>
     </div>
     {{-- End Content --}}
-
 </x-app-layout>
 
-
-{{-- 
-    
-    
-     <div class="grid grid-cols-3 place-content-center py-4">
-
-                    {{ Form::label('name', 'Department Name', ['class' => 'block capitalize text-sm font-semibold text-blueGray-600 mb-2']) }}
-                   
-               
-                        {{ Form::text('name', '', ['class' => 'col-span-2 border-0 px-3 py-3 placeholder-blueGray-400 text-gray-600 bg-gray-100 rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150']) }}
-                 
-                    @error('name')
-                        <p class="text-xs text-red-600">{{ $message }}</p>
-                    @enderror
-                </div>
-                
-                --}}

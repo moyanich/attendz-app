@@ -30,7 +30,6 @@
                     {!! Form::open(array('route' => 'admin.users.store', 'method'=>'POST')) !!}
 
                         <div class="flex flex-wrap">
-
                             <div class="w-full lg:w-6/12 px-4">
                                 <div class="relative w-full mb-3">
                                     {{ Form::label('firstname', 'First Name', ['class' => 'block uppercase text-blueGray-600 text-xs font-bold mb-2']) }}
@@ -54,6 +53,7 @@
                                     @enderror
                                 </div>
                             </div>
+                        
 
                             <div class="w-full lg:w-6/12 px-4">
                                 <div class="relative w-full mb-3">
