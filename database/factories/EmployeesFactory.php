@@ -22,7 +22,7 @@ class EmployeesFactory extends Factory
     public function definition()
     {
         return [
-            'id'                => $this->faker->numberBetween($min = 1000, $max = 9000),
+            'emp_no'                => $this->faker->numberBetween($min = 1000, $max = 9000),
             'first_name'        => $this->faker->firstName($gender = 'male'|'female'),
             'middle_name'       => $this->faker->lastName(),
             'last_name'         => $this->faker->lastName(),

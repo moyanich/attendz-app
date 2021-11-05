@@ -28,6 +28,7 @@ class PasswordResetLinkController extends Controller
      */
     public function store(Request $request)
     {
+        /*
         $request->validate([
             'email' => ['required', 'email'],
         ]);
@@ -43,5 +44,24 @@ class PasswordResetLinkController extends Controller
             ? back()->with('status', __($status))
             : back()->withInput($request->only('email'))
                     ->withErrors(['email' => __($status)]);
+        */
+
+        $loginField = filter_var(
+            $request->input('login'), FILTER_VALIDATE_EMAIL) 
+                ? 'email' 
+                : 'username';
+            $request->merge([$loginField => $request->input('login')]);
+            $request->validate([
+                'email' => 'required_without:username|email|exists:users,email',
+                'username' => 'required_without:email|string|exists:users,username'
+            ]);
+            $status = Password::sendResetLink(
+                $request->only($loginField)
+            );
+
+            return $status == Password::RESET_LINK_SENT
+                ? back()->with('status', __($status))
+                : back()->withInput($request->only($loginField))
+                        ->withErrors([$loginField => __($status)]);
     }
 }

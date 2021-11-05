@@ -38,7 +38,7 @@ class EmployeesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //emp_no
     }
 
     /**

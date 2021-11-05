@@ -22,41 +22,42 @@
     {{-- End Messages --}}
 
     {{-- Content --}}
-    <div class="relative flex flex-col min-w-0 break-words bg-white w-full mx-auto px-6 py-10 mb-6 shadow-lg rounded">
+    <div class="relative flex flex-col min-w-0 break-words bg-white w-full md:w-8/12 mx-auto px-6 py-10 mb-6 shadow-lg rounded">
         <div class="block w-full overflow-x-auto px-6">
-
             
-
             <div class="flex flex-wrap">
-                <div class="w-full lg:w-2/12 px-4">
+                <div class="w-full px-4">
                     <div class="relative w-full mb-3">
-                        {{ Form::label('empID', 'Employee ID', ['class' => 'block uppercase text-blueGray-600 text-xs font-bold mb-2']) }}
+                        {{ Form::label('emp_no', 'Employee ID', ['class' => 'block uppercase text-blueGray-600 text-xs font-bold mb-2']) }}
 
-                        {{ Form::text('empID', '', ['class' => 'uppercase border-0 px-3 py-3 placeholder-blueGray-400 text-gray-600 bg-gray-100 rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150', 'placeholder' => 'Employee ID']) }}
+                        {{ Form::text('emp_no', '', ['class' => 'border-0 px-3 py-3 placeholder-blueGray-400 text-gray-600 bg-gray-100 rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150', 'placeholder' => '']) }}
 
-                        @error('empID')
+                        @error('emp_no')
                             <p class="text-xs text-red-600">{{$message}}</p>
                         @enderror
                     </div>
                 </div>
-                <div class="w-full lg:w-3/12 px-4">
-                    <div class="relative w-full mb-3">
-                        {{Form::label('first_name', 'First Name', ['class' => 'block uppercase text-blueGray-600 text-xs font-bold mb-2'])}}
+            </div>
+
+            <div class="flex flex-wrap">
+                <div class="w-full px-4">
+                    <div class="flex flex-wrap w-full mb-3">
+                        {{ Form::label('first_name', 'First Name', ['class' => 'block uppercase text-blueGray-600 text-xs font-bold mb-2']) }}
+
                         {{Form::text('first_name', '', ['class' => 'border-0 px-3 py-3 placeholder-blueGray-400 text-gray-600 bg-gray-100 rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150', 'placeholder' => 'First Name'])}}
 
                         @error('first_name')
                             <p class="text-xs text-red-600">{{$message}}</p>
                         @enderror
-
                     </div>
                 </div>
-                <div class="w-full lg:w-3/12 px-4">
+                <div class="w-full px-4">
                     <div class="relative w-full mb-3">
                         {{Form::label('middle_name', 'Middle Name', ['class' => 'block uppercase text-blueGray-600 text-xs font-bold mb-2'])}}
                         {{Form::text('middle_name', '', ['class' => 'border-0 px-3 py-3 placeholder-blueGray-400 text-gray-600 bg-gray-100 rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150', 'placeholder' => 'Middle Name'])}}
                     </div>
                 </div>
-                <div class="w-full lg:w-4/12 px-4">
+                <div class="w-full px-4">
                     <div class="relative w-full mb-3">
                         {{Form::label('last_name', 'Last Name', ['class' => 'block uppercase text-blueGray-600 text-xs font-bold mb-2'])}}
                         {{Form::text('last_name', '', ['class' => 'border-0 px-3 py-3 placeholder-blueGray-400 text-gray-600 bg-gray-100 rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150', 'placeholder' => 'Last Name'])}}
