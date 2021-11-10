@@ -63,14 +63,16 @@ class EmployeesController extends Controller
         $employee->email = $request->input('email');
         $employee->save();
     
-        /*$user = new User;
+        /*
+        $user = new User;
         $user->emp_no = $request->input('emp_no');
         $user->firstname = $request->input('firstname');
         $user->lastname = $request->input('lastname');
         $user->username = $request->input('username');
         $user->password = $request->input('password');
         $user->email = $request->input('email');
-        $user->save(); */
+        $user->save(); 
+        */
        
         $newUser = $request->except(['_token', 'roles']);
         $user = User::create($newUser);
@@ -78,7 +80,12 @@ class EmployeesController extends Controller
 
         Password::sendResetLink($request->only(['email']));
 
-        return redirect()->route('admin.employees.index')->with('success', 'New employee created successfully. The employee was sent a login information');
+       // $employee->emp_no
+
+       
+        //<a href="'. url('/admin/employees/') . $employee->emp_no . '">
+        return redirect()->route('admin.employees.index')->with('success', "New employee created successfully. <a href='{ url('/admin/employees') }'>Click here</a>. The employee was sent a login information to resend the activation email.");
+        
 
     }
 
