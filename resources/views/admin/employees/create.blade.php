@@ -27,11 +27,14 @@
             {!! Form::open(['action' => 'App\Http\Controllers\Admin\EmployeesController@store', 'method' => 'POST']) !!}
 
                 <div class="flex flex-wrap">
+                    <div class="w-full px-4 text-blueGray-400 text-sm mb-6 font-bold uppercase">
+                        {{ __('Employee Information') }}
+                    </div>
                     <div class="w-full px-4">
                         <div class="relative w-full mb-3">
                             {{ Form::label('emp_no', 'Employee ID', ['class' => 'block uppercase text-blueGray-600 text-xs font-bold mb-2']) }}
 
-                            {{ Form::text('emp_no', '', ['class' => 'border-0 px-3 py-3 placeholder-blueGray-400 text-gray-600 bg-gray-100 rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150', 'placeholder' => '']) }}
+                            {{ Form::number('emp_no', '', ['class' => 'border-0 px-3 py-3 placeholder-blueGray-400 text-gray-600 bg-gray-100 rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150', 'placeholder' => '']) }}
 
                             @error('emp_no')
                                 <p class="text-xs text-red-600">{{$message}}</p>
@@ -68,6 +71,9 @@
                 <hr class="my-8 border-b-1 border-blueGray-300">
                 
                 <div class="flex flex-wrap">
+                    <div class="w-full px-4 text-blueGray-400 text-sm mb-6 font-bold uppercase">
+                        {{ __('User Login Information') }}
+                    </div>
                     <div class="w-full lg:w-6/12 px-4">
                         <div class="relative w-full mb-3">
                             {{ Form::label('username', 'Username', ['class' => 'block uppercase text-blueGray-600 text-xs font-bold mb-2']) }}
@@ -121,17 +127,21 @@
 
                 <div class="w-full lg:w-6/12 px-4">
                     <div class="relative w-full mb-3">
-                        {{ Form::label('roles', 'Roles', ['class' => 'block uppercase text-blueGray-600 text-xs font-bold mb-2']) }}
+                        {!! Form::hidden('role', $role->id, array('class' => 'name', 'default')) !!}
+                        
+                      {{--    {{ Form::label('role', 'Role', ['class' => 'block uppercase text-blueGray-600 text-xs font-bold mb-2']) }} --}}
 
-                        @foreach($roles as $role)
-                            {!! Form::checkbox('roles[]', $role->id, false, array('class' => 'name ')) !!}
-                            {{ $role->name }}
-                            <br/>
-                        @endforeach
+                       
 
-                        @error('roles[]')
+{{--  
+                        {{ Form::label('role', 'Role', ['class' => 'block uppercase text-blueGray-600 text-xs font-bold mb-2']) }}
+
+                        {!! Form::checkbox('role', $role->id, true, array('class' => 'name', 'default')) !!}
+                        {{ $role->name }}
+
+                        @error('role]')
                             <p class="text-xs text-red-600">{{ $message }}</p>
-                        @enderror
+                        @enderror --}}
                     </div>
                 </div>
         

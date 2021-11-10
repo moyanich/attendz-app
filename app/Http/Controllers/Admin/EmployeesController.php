@@ -19,7 +19,7 @@ class EmployeesController extends Controller
      */
     public function index(Request $request)
     {
-        $employees = Employees::orderBy('id', 'DESC')->paginate(10);
+        $employees = Employees::orderBy('emp_no', 'DESC')->paginate(10);
         return view('admin.employees.index', compact('employees'))
             ->with('i', ($request->input('page', 1) - 1) * 5);
     }
@@ -31,8 +31,8 @@ class EmployeesController extends Controller
      */
     public function create()
     {
-        $roles = Role::all();
-        return view('admin.employees.create', compact('roles'));
+        $role = Role::where('name', 'like', '%Employee%')->first();
+        return view('admin.employees.create')->with('role', $role);
     }
 
     /**
@@ -52,7 +52,7 @@ class EmployeesController extends Controller
             'username' => 'required|unique:users,username',
             'email' => 'email|unique:users,email',
             'password' => 'required|same:confirm-password',
-            'roles' => 'required',
+            'role'  => 'required',
         ]);
 
 
@@ -63,14 +63,22 @@ class EmployeesController extends Controller
         $employee->email = $request->input('email');
         $employee->save();
     
-
+        /*$user = new User;
+        $user->emp_no = $request->input('emp_no');
+        $user->firstname = $request->input('firstname');
+        $user->lastname = $request->input('lastname');
+        $user->username = $request->input('username');
+        $user->password = $request->input('password');
+        $user->email = $request->input('email');
+        $user->save(); */
+       
         $newUser = $request->except(['_token', 'roles']);
         $user = User::create($newUser);
-        $user->roles()->sync($request->input('roles'));
+        $user->roles()->sync($request->input('role'));
 
         Password::sendResetLink($request->only(['email']));
 
-        return redirect()->route('admin.employees.index')->with('success', 'New employee created successfully');
+        return redirect()->route('admin.employees.index')->with('success', 'New employee created successfully. The employee was sent a login information');
 
     }
 

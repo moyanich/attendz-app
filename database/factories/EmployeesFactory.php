@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Employees;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use App\Models\User;
 
 class EmployeesFactory extends Factory
 {
@@ -21,6 +22,8 @@ class EmployeesFactory extends Factory
      */
     public function definition()
     {
+        $users = User::all()->pluck('id')->toArray();
+
         return [
             'emp_no'            => $this->faker->numberBetween($min = 1000, $max = 9000),
             'firstname'         => $this->faker->firstName($gender = 'male'|'female'),
@@ -36,7 +39,7 @@ class EmployeesFactory extends Factory
             'city'              => $this->faker->state,
             'parish_id'         => $this->faker->numberBetween($min = 1, $max = 14),
             'notes'             => $this->faker->text($maxNbChars = 200),
-            'status_id'         => $this->faker->numberBetween($min = 1, $max = 8)
+            'status_id'         => $this->faker->numberBetween($min = 1, $max = 8),
         ];
     }
 }
