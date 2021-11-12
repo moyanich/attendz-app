@@ -1,3 +1,4 @@
+@section('title', 'Users')
 <x-app-layout>
     <x-slot name="header">
         <div class="w-full mb-6 pt-3">

@@ -1,1 +1,1 @@
-here
+@section('title', 'Edit Employee')

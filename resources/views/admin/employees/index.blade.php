@@ -1,3 +1,4 @@
+@section('title', 'Employees')
 <x-app-layout>
     <x-slot name="header">
         <div class="w-full mb-6 pt-3">
@@ -48,19 +49,19 @@
                     <tr>
 
                         <th scope="col" class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
-                            {{ __('Employee Number') }}
+                            {{ __('Emp. No.') }}
                         </th>
                         <th scope="col" class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
-                            {{ __('First Name') }}
+                            {{ __('Employee Name') }}
                         </th>
                         <th scope="col" class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
-                            {{ __('Last Name') }}
-                        </th>
-                        <th scope="col" class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
-                            {{ __('Job Title') }}
+                            {{ __('Contact') }}
                         </th>
                         <th scope="col" class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
                             {{ __('Department') }}
+                        </th>
+                        <th scope="col" class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                            {{ __('Status') }}
                         </th>
                         <th scope="col" class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
                             {{ __('Actions') }}
@@ -74,15 +75,48 @@
                                 {{ $employee->id }}
                             </td>
                             <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4">
-                                {{ $employee->firstname }}
+                                <div class="flex items-center">
+                                    <div class="flex-shrink-0 h-10 w-10">
+                                        <img class="h-10 w-10 rounded-full" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60" alt="">
+                                    </div>
+                                    <div class="ml-4">
+                                        <div class="text-sm font-medium text-gray-900">
+                                            {{ $employee->firstname . ' ' . $employee->lastname }}
+                                        </div>
+                                        <div class="flex text-sm text-gray-500">
+                                            position
+                                            {{-- $employee->current_address.','.$employee->city --}}
+                                        </div>
+                                    </div>
+                                </div>
                             </td>
                             <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4">
-                                {{ $employee->lastname }}
+                                <div class="flex items-center">
+                                    <div class="ml-4">
+                                        <div class="flex text-sm text-gray-500">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" viewBox="0 0 20 20" fill="currentColor">
+                                                <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
+                                                <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
+                                            </svg>
+                                            <a href="mailto:{{ $employee->email }}" class="text-blue-500">{{ $employee->email }}</a>
+                                            {{-- $employee->current_address.','.$employee->city --}}
+                                        </div>
+                                        <div class="flex text-sm text-gray-500">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" viewBox="0 0 20 20" fill="currentColor">
+                                                <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
+                                            </svg>
+                                            <span>{{ $employee->phone_number }}</span>
+                                        </div>
+                                    </div>
+                                </div>
                             </td>
+
                             <td class=border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4">
                                 
                             </td>
                             <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4">
+
+                               
                                
                             </td>
                             <td class="flex flex-wrap items-center p-4">
