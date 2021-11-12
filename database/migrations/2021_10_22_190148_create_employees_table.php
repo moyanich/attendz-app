@@ -14,7 +14,7 @@ class CreateEmployeesTable extends Migration
     public function up()
     {
         Schema::create('employees', function (Blueprint $table) {
-            $table->unsignedBigInteger('emp_no');
+            $table->unsignedBigInteger('id');
             $table->string('firstname');
             $table->string('middlename')->nullable();
             $table->string('lastname');
@@ -33,7 +33,7 @@ class CreateEmployeesTable extends Migration
             $table->integer('parish_id')->unsigned()->nullable();
             $table->longText('notes')->nullable();
             $table->tinyInteger('status_id')->nullable();
-            $table->primary('emp_no');
+            $table->primary('id');
             //$table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
             //$table->integer('status_id')->unsigned()->nullable();
             $table->timestamps();

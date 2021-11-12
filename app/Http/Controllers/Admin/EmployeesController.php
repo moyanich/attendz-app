@@ -19,7 +19,7 @@ class EmployeesController extends Controller
      */
     public function index(Request $request)
     {
-        $employees = Employees::orderBy('emp_no', 'DESC')->paginate(10);
+        $employees = Employees::orderBy('id', 'DESC')->paginate(10);
         return view('admin.employees.index', compact('employees'))
             ->with('i', ($request->input('page', 1) - 1) * 5);
     }
@@ -43,10 +43,8 @@ class EmployeesController extends Controller
      */
     public function store(Request $request)
     {
-        //emp_no
-
         $this->validate($request, [
-            'emp_no' => 'required|unique:employees',
+            'id' => 'required|unique:employees',
             'firstname' => 'required',
             'lastname' => 'required',
             'username' => 'required|unique:users,username',
@@ -57,7 +55,7 @@ class EmployeesController extends Controller
 
 
         $employee = new Employees;
-        $employee->emp_no = $request->input('emp_no');
+        $employee->id = $request->input('id');
         $employee->firstname = $request->input('firstname');
         $employee->lastname = $request->input('lastname');
         $employee->email = $request->input('email');
@@ -65,7 +63,7 @@ class EmployeesController extends Controller
     
         /*
         $user = new User;
-        $user->emp_no = $request->input('emp_no');
+        $user->id = $request->input('id');
         $user->firstname = $request->input('firstname');
         $user->lastname = $request->input('lastname');
         $user->username = $request->input('username');
@@ -80,13 +78,8 @@ class EmployeesController extends Controller
 
         Password::sendResetLink($request->only(['email']));
 
-       // $employee->emp_no
-
-       
-        //<a href="'. url('/admin/employees/') . $employee->emp_no . '">
-        return redirect()->route('admin.employees.index')->with('success', "New employee created successfully. <a href='{ url('/admin/employees') }'>Click here</a>. The employee was sent a login information to resend the activation email.");
-        
-
+        // Redirect to employee profile
+        return redirect()->route('admin.employees.show', $request->input('id'))->with('success', "New employee created successfully..go ahead and complete the profile. Activation email sent!");
     }
 
     /**
@@ -97,7 +90,14 @@ class EmployeesController extends Controller
      */
     public function show($id)
     {
-        //
+        $employee = Employees::findOrFail($id);
+
+        return view('admin.employees.show')
+            ->with('employee', $employee);
+           // ->with('genders', $genders)
+           // ->with('parishes', $parishes)
+           // ->with('employments', $employments)
+           // ->with('recentEmployment', $recentEmployment); 
     }
 
     /**

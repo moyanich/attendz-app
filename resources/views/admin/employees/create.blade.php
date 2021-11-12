@@ -32,11 +32,11 @@
                     </div>
                     <div class="w-full px-4">
                         <div class="relative w-full mb-3">
-                            {{ Form::label('emp_no', 'Employee ID', ['class' => 'block uppercase text-blueGray-600 text-xs font-bold mb-2']) }}
+                            {{ Form::label('id', 'Employee ID', ['class' => 'block uppercase text-blueGray-600 text-xs font-bold mb-2']) }}
 
-                            {{ Form::number('emp_no', '', ['class' => 'border-0 px-3 py-3 placeholder-blueGray-400 text-gray-600 bg-gray-100 rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150', 'placeholder' => '']) }}
+                            {{ Form::number('id', '', ['class' => 'border-0 px-3 py-3 placeholder-blueGray-400 text-gray-600 bg-gray-100 rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150', 'placeholder' => '']) }}
 
-                            @error('emp_no')
+                            @error('id')
                                 <p class="text-xs text-red-600">{{$message}}</p>
                             @enderror
                         </div>

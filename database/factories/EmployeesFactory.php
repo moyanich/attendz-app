@@ -25,7 +25,7 @@ class EmployeesFactory extends Factory
         $users = User::all()->pluck('id')->toArray();
 
         return [
-            'emp_no'            => $this->faker->numberBetween($min = 1000, $max = 9000),
+            'id'                => $this->faker->numberBetween($min = 1000, $max = 9000),
             'firstname'         => $this->faker->firstName($gender = 'male'|'female'),
             'middlename'        => $this->faker->lastName(),
             'lastname'          => $this->faker->lastName(),
