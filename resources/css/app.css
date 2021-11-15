@@ -20,10 +20,30 @@
   background: #718096;
 }
 
+
+
+
+@layer base {
+  h1 {
+    @apply text-2xl;
+  }
+  h2 {
+    @apply text-xl;
+  }
+}
+
+
+
+/*
+* Tables
+*/
+.td {
+  @apply text-sm;
+}
+
 /*
 * Select
 */
-
 .select2-container--default .select2-selection--single {
   border: 0 !important;
   border-radius: 0.25rem;
@@ -41,8 +61,34 @@
   font-size: .875rem !important;
 }
 
+/*
+* DataTables
+*/
+.dataTables_length,
+.dataTables_filter {
+  padding: 1rem;
+  font-size: .875rem;
+}
+
+.dataTables_wrapper select {
+  background-size: 1em;
+  background-position-x: 20px;
+}
 
 
+/*
+* Profile Page
+*/
+.emp-profile a {
+  @apply text-blue-400 hover:text-blue-700;
+}
+
+.personal-info .info-heading {
+  @apply bg-gray-100;
+}
+.personal-info > div {
+  @apply border-b-0 border-r-0 border border-gray-200 p-4;
+}
 /*
 Card
 

@@ -23,7 +23,7 @@ class EmployeesController extends Controller
         //$employees = Employees::orderBy('id', 'DESC')->paginate(10);
         //$employees = Employees::all()->get();
 
-        $employees =Employees::latest()->get();
+        $employees =Employees::get();
 
         if(request()->ajax()) {
             
@@ -55,7 +55,6 @@ class EmployeesController extends Controller
                 ->addIndexColumn()
                 ->make(true);
         }
-
        
         return view('admin.employees.index')->with('employees', $employees); 
         //return view('admin.employees.index', compact('employees'));
@@ -129,9 +128,6 @@ class EmployeesController extends Controller
     public function show($id)
     {
         $employee = Employees::findOrFail($id);
-
-       
-
 
         return view('admin.employees.show')
             ->with('employee', $employee);

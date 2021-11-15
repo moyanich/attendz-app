@@ -25,30 +25,52 @@ class Employees extends Model
      */
     protected $fillable = [
         'emp_no',
-        'first_name',
-        'middle_name',
-        'last_name',
+        'firstname',
+        'middlename',
+        'lastname',
         'email',
-        //'phone_number1',
-        //'phone_number2',
-        //'dob',
+        'phone_number',
+        'emergency_number',
+        'date_of_birth',
         'retirement_date',
         'hire_date',
-        'location_id',
-        'tax_info_id',
+        'nis',
+        'trn',
         'gender_id',
-        'address', 
+        'current_address',
+        'permanent_address',
         'city',
         'parish_id',
         'notes',
         'status_id'
-        
     ];
+
+  
 
     protected $dates = [
         'retirement_date', 
         'dob'
     ];
+
+    /**
+     * Get the employee's full name.
+     *
+     * @return string
+     */
+    public function getFullNameAttribute()
+    {
+        return "{$this->firstname} {$this->lastname}";
+    }
+
+    /**
+     * Get the employee's full name.
+     *
+     * @return string
+     */
+    public function getCompleteNameAttribute()
+    {
+        return "{$this->firstname} {$this->middlename} {$this->lastname}";
+    }
     
  
 }
