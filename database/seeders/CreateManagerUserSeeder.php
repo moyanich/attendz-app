@@ -19,6 +19,7 @@ class CreateManagerUserSeeder extends Seeder
         //
         $user = User::create([
             //'name' => 'ManagerAdmin',
+            'employee_id' => '40101',
             'firstname' => 'Manager',
             'lastname' => 'User',
             'username' => 'manager',

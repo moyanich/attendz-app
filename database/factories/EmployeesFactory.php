@@ -3,8 +3,9 @@
 namespace Database\Factories;
 
 use App\Models\Employees;
+use App\Models\Genders;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use App\Models\User;
+//use App\Models\User;
 
 class EmployeesFactory extends Factory
 {
@@ -22,7 +23,7 @@ class EmployeesFactory extends Factory
      */
     public function definition()
     {
-        $users = User::all()->pluck('id')->toArray();
+        //$users = User::all()->pluck('id')->toArray();
 
         return [
             'id'                => $this->faker->numberBetween($min = 1000, $max = 9000),
@@ -34,7 +35,8 @@ class EmployeesFactory extends Factory
             'emergency_number'  => $this->faker->tollFreePhoneNumber(),
             'date_of_birth'     => $this->faker->date($format = 'Y-m-d', $max = 'now') ,
             'hire_date'         => $this->faker->date($format = 'Y-m-d', $max = 'now'),
-            'gender_id'         => $this->faker->numberBetween($min = 1, $max = 2),
+            //'gender_id'         => $this->faker->numberBetween($min = 1, $max = 2),
+            'gender_id'         => Genders::all()->random(), // Get the data from the the Genders Table
             'current_address'   => $this->faker->secondaryAddress,
             'city'              => $this->faker->state,
             'parish_id'         => $this->faker->numberBetween($min = 1, $max = 14),

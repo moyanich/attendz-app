@@ -45,8 +45,6 @@ class Employees extends Model
         'status_id'
     ];
 
-  
-
     protected $dates = [
         'retirement_date', 
         'dob'

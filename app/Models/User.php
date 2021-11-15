@@ -20,6 +20,7 @@ class User extends Authenticatable
      */
     protected $fillable = [
         //'name',
+        'employee_id',
         'firstname',
         'lastname',
         'username',
@@ -101,6 +102,16 @@ class User extends Authenticatable
     public function getFullNameAttribute()
     {
         return $this->firstname.' '.$this->lastname;  
+    }
+
+
+
+    /**
+     * Get the comments for the blog post.
+     */
+    public function employees()
+    {
+        return $this->hasOne(Employees::class);
     }
 
 

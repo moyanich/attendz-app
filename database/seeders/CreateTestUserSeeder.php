@@ -18,6 +18,7 @@ class CreateTestUserSeeder extends Seeder
     {
         //
         $user = User::create([
+            'employee_id' => '40004',
             'firstname' => 'Employee',
             'lastname' => 'User',
            // 'name' => 'Employee User',

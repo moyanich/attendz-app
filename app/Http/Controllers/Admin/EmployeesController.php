@@ -23,7 +23,7 @@ class EmployeesController extends Controller
         //$employees = Employees::orderBy('id', 'DESC')->paginate(10);
         //$employees = Employees::all()->get();
 
-        $employees =Employees::get();
+        $employees = Employees::get();
 
         if(request()->ajax()) {
             

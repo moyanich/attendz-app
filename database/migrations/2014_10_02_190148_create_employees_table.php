@@ -26,7 +26,8 @@ class CreateEmployeesTable extends Migration
             $table->date('hire_date')->nullable();
             $table->char('nis', 9)->nullable()->unique();
             $table->char('trn', 9)->nullable()->unique();
-            $table->integer('gender_id')->nullable();
+            $table->unsignedBigInteger('gender_id')->nullable();
+            $table->foreign('gender_id')->references('id')->on('genders')->onDelete('set null');
             $table->longText('current_address')->nullable();
             $table->longText('permanent_address')->nullable();
             $table->mediumText('city')->nullable();
@@ -34,13 +35,24 @@ class CreateEmployeesTable extends Migration
             $table->longText('notes')->nullable();
             $table->tinyInteger('status_id')->nullable();
             $table->primary('id');
-            //$table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
-            //$table->integer('status_id')->unsigned()->nullable();
             $table->timestamps();
             $table->index('parish_id');
-           // $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
             $table->engine = 'InnoDB';
+            
+            //$table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
+            //$table->integer('status_id')->unsigned()->nullable();
+            
+           
+           // $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
+            
+           
         });
+
+       /* Schema::table('employees', function (Blueprint $table) {
+            $table->foreign('gender_id')->references('id')->on('genders');
+        }); */
+
+        
     }
 
     /**

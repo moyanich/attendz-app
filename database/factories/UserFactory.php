@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\User;
+use App\Models\Employees;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
@@ -22,8 +23,27 @@ class UserFactory extends Factory
      */
     public function definition()
     {
+
+        //$collection = Employees::select('id')->get()->toArray();
+
+        //dd($collection);
+
+        $employees = Employees::all();
+        dd($employees);
+    
+       /* foreach ($employees as $employee) {
+            Attendance::create([
+                'employee_id' => $employee->id,
+                'date' => Carbon::today(), 
+                'atten_count' => .... ,
+            ]);
+        } */
+
+
         return [
            // 'name' => $this->faker->name(),
+            'employee_id' => $collection->random(), 
+
             'firstname' => $this->faker->firstName($gender = null|'male'|'female'),
             'lastname' => $this->faker->lastName(),
             'username' => $this->faker->userName(),
@@ -33,6 +53,7 @@ class UserFactory extends Factory
 
             'password' => 'password',
             'remember_token' => Str::random(10),
+           
         ];
     }
 

@@ -6,7 +6,7 @@ use Illuminate\Database\Seeder;
 use App\Models\Role;
 use App\Models\User;
 use Hash;
-
+use Faker\Factory as Faker;
 
 class CreateAdminUserSeeder extends Seeder
 {
@@ -18,8 +18,11 @@ class CreateAdminUserSeeder extends Seeder
     public function run()
     {
         //
+        $this->faker = Faker::create();
+
         $user = User::create([
             //'name' => 'Admin',
+            'employee_id' => $this->faker->randomDigit(),
             'firstname' => 'Admin',
             'lastname' => 'User',
             'username' => 'admin',
@@ -35,6 +38,9 @@ class CreateAdminUserSeeder extends Seeder
         ->get();
 
         $user->roles()->sync($role);
+
+
+        $role = Role::create(['name' => 'Admin']);
 
         //dd($role);
      

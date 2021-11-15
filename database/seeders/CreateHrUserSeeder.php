@@ -18,6 +18,7 @@ class CreateHrUserSeeder extends Seeder
     {
         $user = User::create([
             //'name' => 'HR User',
+            'employee_id' => '14202',
             'firstname' => 'HR',
             'lastname' => 'User',
             'username' => 'hr',
