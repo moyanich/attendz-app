@@ -88,11 +88,22 @@
                         </button>
                     </div>
                     <div class="border border-black -mt-px">
+
+                        {{-- TAB 1 --}}
                         <div class="p-4 space-y-2" x-show="active === 0"
                         x-transition:enter="transition ease-out duration-300"
                         x-transition:enter-start="opacity-0 transform scale-90"
                         x-transition:enter-end="opacity-100 transform scale-100">
-                            
+
+                            <div class="w-full flex justify-end">
+                               {{--  
+                                  <a class="flex items-center px-4 py-2 font-bold uppercase text-xs bg-lightBlue-500 hover:bg-lightBlue-300 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" style="color:#fff" href="{{ route('admin.employees.edit', $employee->id) }}" type="button">Edit</a> --}}
+
+                                <button class="flex items-center text-white px-4 py-2 font-bold uppercase text-xs bg-lightBlue-500 hover:bg-lightBlue-300 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button" onclick="toggleModal('contact-modal')">
+                                    {{ __('Edit') }}
+                                </button>
+                            </div>
+
                             <div class="grid grid-cols-6 personal-info">
                                 <div class="info-heading">
                                     {{ __('Date of Birth') }}
@@ -100,27 +111,45 @@
                                 <div class="info-text">
                                     {{ $employee->date_of_birth }}
                                 </div>
+
                                 <div class="info-heading">
                                     {{ __('Gender') }}
                                 </div>
                                 <div class="info-text">
-                                    {{ $employee->gender_id }}
+                                    {{ $employee->name }}
                                 </div>
+
                                 <div class="info-heading">
                                     {{ __('Hire Date') }}
                                 </div>
                                 <div class="info-text">
                                     {{ $employee->hire_date }}
                                 </div>
+
                                 <div class="info-heading">
-                                    {{ __('Marital Status') }}
+                                    {{ __('Retirement Date') }}
                                 </div>
                                 <div class="info-text">
-                                    {{ $employee->date_of_birth }}
+                                    {{ $employee->retirement_date }}
+                                </div>
+
+                                <div class="info-heading">
+                                    {{ __('NIS') }}
+                                </div>
+                                <div class="info-text">
+                                    {{ $employee->nis }}
+                                </div>
+
+                                <div class="info-heading">
+                                    {{ __('TRN') }}
+                                </div>
+                                <div class="info-text">
+                                    {{ $employee->trn }}
                                 </div>
                             </div>
-
                         </div>
+
+                        {{-- TAB 2 --}}
                         <div class="p-4 space-y-2" x-show="active === 1"
                         x-transition:enter="transition ease-out duration-300"
                         x-transition:enter-start="opacity-0 transform scale-90"
@@ -128,6 +157,8 @@
                             <h2 class="text-2xl">Panel 2 Using x-show.transition</h2>
                             <p>Panel 2 content</p>
                         </div>
+
+                        {{-- TAB 3 --}}
                         <div class="p-4 space-y-2" x-show="active === 2"
                             x-transition:enter="transition ease-out duration-300"
                             x-transition:enter-start="opacity-0 transform scale-90"
@@ -149,3 +180,150 @@
 
 
        
+
+
+{{-- Edit Contact  Modal --}}
+<div class="hidden overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none justify-center items-center" id="contact-modal">
+    <div class="relative w-auto my-6 mx-auto max-w-3xl">
+        <!--content-->
+        <div class="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+            <!--header-->
+            <div class="flex items-start justify-between p-5 border-b border-solid border-blueGray-200 rounded-t">
+                <h3 class="text-3xl font-semibold">
+                    Modal Title
+                </h3>
+                <button class="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none" onclick="toggleModal('contact-modal')">
+                <span class="bg-transparent text-black opacity-5 h-6 w-6 text-2xl block outline-none focus:outline-none">
+                    ×
+                </span>
+                </button>
+            </div>
+            <!--body-->
+            <div class="relative p-6 flex-auto">
+                
+               {{--  FORM --}}
+                {!! Form::open(['action' => ['App\Http\Controllers\Admin\EmployeesController@update', $employee->id], 'method' => 'POST']) !!}
+
+                    <div class="flex-auto py-10 pt-0">
+                    
+                        <div class="flex flex-wrap">
+                            <div class="w-full lg:w-4/12 px-4">
+                                <div class="relative w-full mb-3">
+                                    {{ Form::label('firstname', 'First Name', ['class' => 'block uppercase text-blueGray-600 text-xs font-bold mb-2']) }}
+                                    
+                                    {{ Form::text('firstname', $employee->firstname, ['class' => 'border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-gray-100 rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150']) }}
+                
+                                    @error('firstname')
+                                        <p class="text-xs text-red-600">{{ $message }}</p>
+                                    @enderror
+                                </div>
+                            </div>
+                
+                            <div class="w-full lg:w-4/12 px-4">
+                                <div class="relative w-full mb-3">
+                                    {{ Form::label('middlename', 'Middle Name', ['class' => 'block uppercase text-blueGray-600 text-xs font-bold mb-2']) }}
+                
+                                    {{ Form::text('middle_name', $employee->middlename, ['class' => 'border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-gray-100 rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150']) }}
+                                </div>
+                            </div>
+                
+                            <div class="w-full lg:w-4/12 px-4">
+                                <div class="relative w-full mb-3">
+                                    
+                                    {{ Form::label('lastname', 'Last Name', ['class' => 'block uppercase text-blueGray-600 text-xs font-bold mb-2']) }}
+        
+                                    {{ Form::text('lastname', $employee->lastname, ['class' => 'border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-gray-100 rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150']) }}
+        
+                                    @error('lastname')
+                                        <p class="text-xs text-red-600">{{$message}}</p>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="flex flex-wrap">
+                            
+                            <div class="w-full lg:w-4/12 px-4">
+                                <div class="relative w-full mb-3">
+                                    {{ Form::label('dob', 'Date of Birth', ['class' => 'block uppercase text-blueGray-600 text-xs font-bold mb-2']) }}
+        
+                                    {{ Form::date('dob', $employee->date_of_birth, ['class' => 'border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-gray-100 rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150']) }}
+        
+                                    @error('dob')
+                                        <p class="text-xs text-red-600">{{$message}}</p>
+                                    @enderror
+                                </div>
+                            </div>
+        
+                            <div class="w-full lg:w-4/12 px-4">
+                                <div class="relative w-full mb-3">
+                                    {{ Form::label('hire_date', 'Hire Date', ['class' => 'block uppercase text-blueGray-600 text-xs font-bold mb-2']) }}
+        
+                                    {{ Form::date('hire_date', $employee->hire_date, ['class' => 'border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-gray-100 rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150']) }}
+        
+                                    @error('hire_date')
+                                        <p class="text-xs text-red-600">{{$message}}</p>
+                                    @enderror
+                                </div>
+                            </div>
+        
+                            <div class="w-full lg:w-4/12 px-4">
+                                <div class="relative w-full mb-3">
+                                    {{ Form::label('nis', 'NIS', ['class' => 'block uppercase text-blueGray-600 text-xs font-bold mb-2']) }}
+        
+                                    {{ Form::text('nis', $employee->nis, ['class' => 'border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-gray-100 rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150']) }}
+        
+                                    @error('nis')
+                                        <p class="text-xs text-red-600">{{$message}}</p>
+                                    @enderror
+                                </div>
+                            </div>
+        
+                            <div class="w-full lg:w-4/12 px-4">
+                                <div class="relative w-full mb-3">
+                                    {{ Form::label('trn', 'TRN', ['class' => 'block uppercase text-blueGray-600 text-xs font-bold mb-2']) }}
+        
+                                    {{ Form::text('trn', $employee->trn, ['class' => 'border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-gray-100 rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150']) }}
+        
+                                    @error('trn')
+                                        <p class="text-xs text-red-600">{{$message}}</p>
+                                    @enderror
+                                </div>
+                            </div>
+        
+                            <div class="w-full lg:w-4/12 px-4">
+                                <div class="relative w-full mb-3">
+                                    {{ Form::label('retirement_date', 'Retirement Date', ['class' => 'block uppercase text-blueGray-600 text-xs font-bold mb-2']) }}
+        
+                                    {{ Form::date('retirement_date', $employee->retirement_date, ['class' => 'border-0 px-3 py-3 font-semibold text-white bg-amber-500 rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150', 'disabled']) }}
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+
+                    <!--footer-->
+                    <div class="flex items-center justify-end p-6 border-t border-solid border-blueGray-200 rounded-b">
+
+                        <button type="button" class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 mr-1 mb-1 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm" onclick="toggleModal('contact-modal')">
+                            {{ __('Cancel') }}
+                        </button>
+
+
+                        {{ Form::submit('Update', ['class' => 'mt-3 w-full inline-flex justify-center rounded-md border border-blue-600 shadow-sm px-4 py-2 bg-blue-600 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 mr-1 mb-1 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm cursor-pointer']) }}
+
+                    </div>
+
+                {{Form::hidden('_method', 'PUT') }}
+                {!! Form::close() !!}
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="hidden opacity-25 fixed inset-0 z-40 bg-black" id="contact-modal-backdrop"></div>
+
+
+
+
+

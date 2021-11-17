@@ -61,7 +61,7 @@ Route::prefix('admin')->middleware(['auth', 'auth.isAdmin'])->name('admin.')->gr
  * 
  */
 Route::prefix('hr')->middleware(['auth', 'can:hr-access'])->name('hr.')->group(function () {
-    //Route::resource('/employees', EmployeesController::class);
+    Route::resource('/employees', EmployeesController::class);
 
    /* 
         Route::resource('/roles', RoleController::class)

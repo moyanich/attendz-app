@@ -34,18 +34,220 @@
     {{-- End Messages --}}
 
      {{-- Content --}}
-    <div class="relative flex flex-col min-w-0 break-words bg-white w-full md:w-8/12 mx-auto px-6 py-10 mb-6 shadow-lg rounded">
-        <div class="flex justify-end mb-3">
-            <button class="flex items-center bg-red-500 text-white active:bg-red-600 font-bold uppercase text-xs px-2 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button" onclick="toggleModal('department-modal')">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                </svg>
-            </button>
-        </div>
-        
-        <div class="block w-full overflow-x-auto px-6">
+    <div class="emp-profile relative flex flex-col min-w-0 break-words bg-white w-full mx-auto px-6 py-10 mb-6 shadow-lg rounded">
+       
+        {!! Form::open(['action' => ['App\Http\Controllers\Admin\EmployeesController@update', $employee->id], 'method' => 'POST']) !!}
+            <div class="flex-auto lg:px-10 py-10 pt-0">
+                <h6 class="text-blueGray-400 text-sm mt-8 mb-6 font-bold uppercase">{{ __('Employee Information') }}</h6>
+            
+                {{-- PROFILE INFORMATION --}}
+                <div class="flex flex-wrap">
+                    <div class="w-full lg:w-4/12 px-4">
+                        <div class="relative w-full mb-3">
+                            {{ Form::label('first_name', 'First Name', ['class' => 'block uppercase text-blueGray-600 text-xs font-bold mb-2']) }}
+                            
+                            {{ Form::text('first_name', $employee->firstname, ['class' => 'border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-gray-100 rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150']) }}
 
-        </div>
+                            @error('firstname')
+                                <p class="text-xs text-red-600">{{ $message }}</p>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="w-full lg:w-4/12 px-4">
+                        <div class="relative w-full mb-3">
+                            {{Form::label('middlename', 'Middle Name', ['class' => 'block uppercase text-blueGray-600 text-xs font-bold mb-2'])}}
+
+                            {{Form::text('middle_name', $employee->middlename, ['class' => 'border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-gray-100 rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150'])}}
+                        </div>
+                    </div>
+
+                    <div class="w-full lg:w-4/12 px-4">
+                        <div class="relative w-full mb-3">
+                            {{Form::label('last_name', 'Last Name', ['class' => 'block uppercase text-blueGray-600 text-xs font-bold mb-2'])}}
+
+                            {{Form::text('last_name', $employee->lastname, ['class' => 'border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-gray-100 rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150'])}}
+
+                            @error('lastname')
+                                <p class="text-xs text-red-600">{{$message}}</p>
+                            @enderror
+                        </div>
+                    </div>
+                </div>
+                                            
+                <div class="flex flex-wrap">
+                    <div class="w-full lg:w-4/12 px-4">
+                        <div class="relative w-full mb-3">
+                        
+                        </div>
+                    </div>
+
+                    <div class="w-full lg:w-4/12 px-4">
+                        <div class="relative w-full mb-3">
+                            {{ Form::label('dob', 'Date of Birth', ['class' => 'block uppercase text-blueGray-600 text-xs font-bold mb-2']) }}
+
+                            {{ Form::date('dob', $employee->date_of_birth, ['class' => 'border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-gray-100 rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150']) }}
+
+                            @error('date_of_birth')
+                                <p class="text-xs text-red-600">{{$message}}</p>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="w-full lg:w-4/12 px-4">
+                        <div class="relative w-full mb-3">
+                            {{ Form::label('hire_date', 'Hire Date', ['class' => 'block uppercase text-blueGray-600 text-xs font-bold mb-2']) }}
+
+                            {{ Form::date('hire_date', $employee->hire_date, ['class' => 'border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-gray-100 rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150']) }}
+
+                            @error('hire_date')
+                                <p class="text-xs text-red-600">{{$message}}</p>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="w-full lg:w-4/12 px-4">
+                        <div class="relative w-full mb-3">
+                            {{ Form::label('nis', 'NIS', ['class' => 'block uppercase text-blueGray-600 text-xs font-bold mb-2']) }}
+
+                            {{ Form::text('nis', $employee->nis, ['class' => 'border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-gray-100 rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150']) }}
+
+                            @error('nis')
+                                <p class="text-xs text-red-600">{{$message}}</p>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="w-full lg:w-4/12 px-4">
+                        <div class="relative w-full mb-3">
+                            {{ Form::label('trn', 'TRN', ['class' => 'block uppercase text-blueGray-600 text-xs font-bold mb-2']) }}
+
+                            {{ Form::text('trn', $employee->trn, ['class' => 'border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-gray-100 rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150']) }}
+
+                            @error('trn')
+                                <p class="text-xs text-red-600">{{$message}}</p>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="w-full lg:w-4/12 px-4">
+                        <div class="relative w-full mb-3">
+                            {{ Form::label('retirement_date', 'Retirement Date', ['class' => 'block uppercase text-blueGray-600 text-xs font-bold mb-2']) }}
+
+                            {{ Form::date('retirement_date', $employee->retirement_date, ['class' => 'border-0 px-3 py-3 font-semibold text-white bg-amber-500 rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150', 'disabled']) }}
+                        </div>
+                    </div>
+
+                </div>
+                
+                <hr class="my-8 border-b-1 border-blueGray-300">
+            
+                {{-- CONTACT INFORMATION --}}
+                <h6 class="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase">
+                    {{ __('Contact Information') }}
+                </h6>
+
+                <div class="flex flex-wrap">
+                    <div class="w-full px-4">
+                        <div class="relative w-full mb-3">
+                            {{ Form::label('email', 'Email Address', ['class' => 'block uppercase text-blueGray-600 text-xs font-bold mb-2']) }}
+
+                            {{ Form::text('email_address', $employee->email, ['class' => 'border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-gray-100 rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150']) }}
+
+                            @error('email')
+                                <p class="text-xs text-red-600">{{ $message }}</p>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="w-full lg:w-6/12 px-4">
+                        <div class="relative w-full mb-3">
+                        {{-- TODO: FORMAT PHONE NUMBER  --}}
+
+                            {{ Form::label('phone_number1', 'Phone Number', ['class' => 'block uppercase text-blueGray-600 text-xs font-bold mb-2']) }}
+
+                            {{ Form::text('phone_number1', $employee->phone_number, ['class' => 'border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-gray-100 rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150']) }}
+
+                            @error('phone_number')
+                                <p class="text-xs text-red-600">{{ $message }}</p>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="w-full lg:w-6/12 px-4">
+                        <div class="relative w-full mb-3">
+
+                        {{-- TODO: FORMAT PHONE NUMBER  --}}
+
+                            {{ Form::label('phone_number', 'Phone Number', ['class' => 'block uppercase text-blueGray-600 text-xs font-bold mb-2']) }}
+
+                            {{ Form::text('phone_number', $employee->emergency_number, ['class' => 'border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-gray-100 rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150']) }}
+
+                            @error('emergency_number')
+                                <p class="text-xs text-red-600">{{ $message }}</p>
+                            @enderror
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex flex-wrap">
+                    <div class="w-full lg:w-12/12 px-4">
+                        <div class="relative w-full mb-3">
+                            {{ Form::label('text', 'Address', ['class' => 'block uppercase text-blueGray-600 text-xs font-bold mb-2']) }}
+
+                            {{ Form::textarea('address', $employee->address, ['class' => 'border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-gray-100 rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150', 'rows' => '4']) }}
+
+                            @error('address')
+                                <p class="text-xs text-red-600">{{ $message }}</p>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="w-full lg:w-6/12 px-4">
+                        <div class="relative w-full mb-3">
+                            {{ Form::label('City', 'City', ['class' => 'block uppercase text-blueGray-600 text-xs font-bold mb-2']) }}
+
+                            {{ Form::text('city', $employee->city, ['class' => 'border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-gray-100 rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150']) }}
+
+                            @error('city')
+                                <p class="text-xs text-red-600">{{ $message }}</p>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="w-full lg:w-6/12 px-4">
+                        <div class="relative w-full mb-3">
+
+
+                        </div>
+                    </div>
+                </div>
+
+                <hr class="mt-6 border-b-1 border-blueGray-300">
+
+                <h6 class="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase">
+                    {{ __('Notes') }}
+                </h6>
+                <div class="flex flex-wrap">
+                    <div class="w-full lg:w-12/12 px-4">
+                        <div class="relative w-full mb-3">
+                            {{ Form::label('notes', 'Comments', ['class' => 'block uppercase text-blueGray-600 text-xs font-bold mb-2']) }}
+
+                            {{ Form::textarea('notes', $employee->notes, ['class' => 'border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-gray-100 rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150', 'rows' => '4']) }}
+
+                            @error('notes')
+                                <p class="text-xs text-red-600">{{ $message }}</p>
+                            @enderror
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="w-full flex justify-end p-5">
+                {{Form::submit('Update Profile', ['class' => 'cursor-pointer bg-green-600 text-white hover:bg-green-500 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150'])}}
+            </div>
+
+        {{Form::hidden('_method', 'PUT') }}
+        {!! Form::close() !!}
+
     </div>
     {{-- End Content --}}
 

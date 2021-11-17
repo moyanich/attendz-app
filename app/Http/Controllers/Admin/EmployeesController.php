@@ -9,6 +9,7 @@ use App\Models\Role;
 use App\Models\User;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Password;
+use Illuminate\Validation\Rule;
 use DataTables;
 
 class EmployeesController extends Controller
@@ -145,7 +146,10 @@ class EmployeesController extends Controller
      */
     public function edit($id)
     {
-        //
+        $employee = Employees::findOrFail($id);
+
+        return view('admin.employees.edit')
+            ->with('employee', $employee);
     }
 
     /**
@@ -157,7 +161,48 @@ class EmployeesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        
+        $this->validate($request, 
+            [
+                'first_name' => 'required',
+                'last_name' => 'required',
+                'dob' => 'required',
+                'nis' => ['nullable', Rule::unique('App\Models\Employees')->ignore($id, 'id' ), 'max:9'],
+                'trn' => ['nullable', Rule::unique('App\Models\Employees')->ignore($id, 'id' ),  'min:9', 'max:9'],
+            ]
+        );
+
+        // Update Employee
+        
+        //TODO: format input string length FOR NIS AND TRN 9 CHARACTERS
+       
+        $employee = Employees::findOrFail($id);
+        $employee->firstname = $request->input('firstname');
+        $employee->middlename = $request->input('middlename');
+        $employee->lastname = $request->input('lastname');
+        $employee->date_of_birth = $request->input('dob');
+        $employee->gender_id = $request->input('gender');
+        $employee->hire_date = $request->input('hire_date');
+        $employee->trn = $request->input('trn');
+        $employee->nis = $request->input('nis');
+        /* $employee->email_address = $request->input('email_address');
+        $employee->phone_number1 = $request->input('phone_number1');
+        $employee->phone_number2 = $request->input('phone_number2');
+        $employee->address = $request->input('address');
+        $employee->city = $request->input('city');
+        $employee->parish_id = $request->input('parish_id');    
+        $employee->notes = $request->input('notes'); */
+        
+            // Calculate Retirement based on Gender and DOB
+           // $year = Retirement::select('years')->where('gender_id', '=', $employee->gender_id)->get()->first();
+           // $newDate = Carbon::parse($employee->dob)->addYears($year->years)->format('Y-m-d');
+
+       // $employee->retirement_date = $newDate;
+    
+        $employee->save();
+
+        return redirect()->back()->with('success', 'Employee profile updated sucessfully!!');
+        
     }
 
     /**
