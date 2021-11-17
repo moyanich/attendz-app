@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use App\Models\Role;
 use App\Models\User;
+use App\Models\Employees;
 use Hash;
 use Faker\Factory as Faker;
 
@@ -20,7 +21,7 @@ class CreateAdminUserSeeder extends Seeder
         //
         $this->faker = Faker::create();
 
-        $user = User::create([
+        $user = Employees::create([
             //'name' => 'Admin',
             'employee_id' => $this->faker->randomDigit(),
             'firstname' => 'Admin',

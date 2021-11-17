@@ -24,28 +24,11 @@ class UserFactory extends Factory
     public function definition()
     {
 
-        //$collection = Employees::select('id')->get()->toArray();
-
-        //dd($collection);
-
-        $employees = Employees::all();
-        dd($employees);
-    
-       /* foreach ($employees as $employee) {
-            Attendance::create([
-                'employee_id' => $employee->id,
-                'date' => Carbon::today(), 
-                'atten_count' => .... ,
-            ]);
-        } */
-
-
         return [
            // 'name' => $this->faker->name(),
-            'employee_id' => $collection->random(), 
-
-            'firstname' => $this->faker->firstName($gender = null|'male'|'female'),
-            'lastname' => $this->faker->lastName(),
+            'employee_id' => Employees::all()->pluck('id')->random(), 
+            'firstname' => Employees::all()->pluck('firstname')->random(), 
+            'lastname' => Employees::all()->pluck('lastname')->random(), 
             'username' => $this->faker->userName(),
             'email' => $this->faker->unique()->safeEmail(),
             'email_verified_at' => now(),
@@ -53,7 +36,6 @@ class UserFactory extends Factory
 
             'password' => 'password',
             'remember_token' => Str::random(10),
-           
         ];
     }
 

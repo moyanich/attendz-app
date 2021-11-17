@@ -20,10 +20,31 @@ class EmployeesSeeder extends Seeder
         $this->faker = Faker::create();
         
         DB::table('employees')->insert([
-            'id' => $this->faker->randomDigit(),
+            'id' => '101',
             'firstname' => 'Admin',
             'lastname' => 'User',
             'email' => 'test@admin.com',
+        ]);
+
+        DB::table('employees')->insert([
+            'id' => '102',
+            'firstname' => 'HR',
+            'lastname' => 'User',
+            'email' => 'hr@admin.com',
+        ]);
+
+        DB::table('employees')->insert([
+            'id' => '103',
+            'firstname' => 'Manager',
+            'lastname' => 'User',
+            'email' => 'managertest@admin.com',
+        ]);
+
+        DB::table('employees')->insert([
+            'id' => '104',
+            'firstname' => 'Employee',
+            'lastname' => 'User',
+            'email' => 'employee@admin.com',
         ]);
     }
 }

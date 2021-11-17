@@ -28,8 +28,6 @@ class CreateUsersTable extends Migration
             $table->timestamps();
             $table->foreign('employee_id')->references('id')->on('employees')->onDelete('cascade');
         });
-
-       
     }
 
     /**

@@ -17,19 +17,19 @@ class DatabaseSeeder extends Seeder
 
        $this->call([
             CalendarSeeder::class,
-            RoleSeeder::class,
-            RoleUserSeeder::class,
-          //  CreateAdminUserSeeder::class,
-            //CreateTestUserSeeder::class,
-           // CreateManagerUserSeeder::class,
-           // CreateHrUserSeeder::class,
             GendersSeeder::class,
             DepartmentsSeeder::class,
             EmployeesSeeder::class,
             UserSeeder::class,
+            RoleSeeder::class,
+            RoleUserSeeder::class,
             
-           // 
-            /* PermissionTableSeeder::class,
+          /* 
+            //CreateAdminUserSeeder::class,
+            //CreateTestUserSeeder::class,
+           // CreateManagerUserSeeder::class,
+           // CreateHrUserSeeder::class,
+            PermissionTableSeeder::class,
             CreateAdminUserSeeder::class,
             EmployeeSeeder::class,
             

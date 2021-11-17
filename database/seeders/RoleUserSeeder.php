@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use App\Models\Role;
 use App\Models\User;
-
+use Illuminate\Support\Facades\DB;
 
 class RoleUserSeeder extends Seeder
 {
@@ -22,10 +22,16 @@ class RoleUserSeeder extends Seeder
         // Attach a role to each user
         User::all()->each(function ($user) use ($roles) {
             $user->roles()->attach(
-                $roles->random(2)->pluck('id') //return 1, 2, 3, 4....
+                $roles->random(1)->pluck('id') //return 1, 2, 3, 4....
                 // Changing Random attaches more roles to each User
             );
         });
+
+
+        DB::table('role_user')->where('user_id', 11)->update(['role_id' => 1]);
+        DB::table('role_user')->where('user_id', 12)->update(['role_id' => 6]);
+        DB::table('role_user')->where('user_id', 13)->update(['role_id' => 2]);
+        DB::table('role_user')->where('user_id', 14)->update(['role_id' => 4]);
 
     }
 }
