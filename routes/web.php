@@ -47,6 +47,10 @@ Route::prefix('admin')->middleware(['auth', 'auth.isAdmin'])->name('admin.')->gr
     Route::resource('/roles', RoleController::class);
     Route::resource('/employees', EmployeesController::class)->except(['edit']);
 
+    Route::put('/employees/{employee}/contact', [EmployeesController::class, 'update_contact'])->name('employees.update_contact');
+
+    
+
    /* 
         Route::resource('/roles', RoleController::class)
         ->missing(

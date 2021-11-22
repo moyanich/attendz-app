@@ -14,7 +14,7 @@ class ParishesFactory extends Factory
     public function definition()
     {
         return [
-            'parish_name' => $this->faker->unique()->randomElement([
+            'name' => $this->faker->unique()->randomElement([
                 'Kingston',
                 'St. Andrew',
                 'Portland',

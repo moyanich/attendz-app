@@ -83,10 +83,11 @@
   @apply text-blue-400 hover:text-blue-700;
 }
 
-.personal-info .info-heading {
+.profile-info .info-heading {
   @apply bg-gray-100;
+  @apply font-medium;
 }
-.personal-info > div {
+.profile-info > div {
   @apply border-b-0 border-r-0 border border-gray-200 p-4;
 }
 /*

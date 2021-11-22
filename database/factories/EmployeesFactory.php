@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Employees;
 use App\Models\Genders;
+use App\Models\Parishes;
 use Illuminate\Database\Eloquent\Factories\Factory;
 //use App\Models\User;
 
@@ -39,7 +40,7 @@ class EmployeesFactory extends Factory
             'gender_id'         => Genders::all()->random(), // Get the data from the the Genders Table
             'current_address'   => $this->faker->secondaryAddress,
             'city'              => $this->faker->state,
-            'parish_id'         => $this->faker->numberBetween($min = 1, $max = 14),
+            'parish_id'         => Parishes::all()->random(),
             'notes'             => $this->faker->text($maxNbChars = 200),
             'status_id'         => $this->faker->numberBetween($min = 1, $max = 8),
         ];

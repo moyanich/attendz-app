@@ -47,7 +47,7 @@ class Employees extends Model
 
     protected $dates = [
         'retirement_date', 
-        'dob'
+        'date_of_birth'
     ];
 
     /**

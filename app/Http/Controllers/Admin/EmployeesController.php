@@ -8,6 +8,7 @@ use App\Models\Employees;
 use App\Models\Role;
 use App\Models\User;
 use App\Models\Genders;
+use App\Models\Parishes;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Validation\Rule;
@@ -142,12 +143,15 @@ class EmployeesController extends Controller
         $employee = Employees::findOrFail($id);
         $gender = Genders::find($employee->gender_id);
         $genders['genders'] = Genders::pluck('name', 'id')->toArray(); // Get Genders Table
+        $parish = Parishes::find($employee->parish_id);
+        $parishes = Parishes::pluck('name', 'id')->toArray(); // Get Genders Table
 
         return view('admin.employees.show')
             ->with('employee', $employee)
             ->with('genders', $genders)
-            ->with('gender', $gender);
-           // ->with('parishes', $parishes)
+            ->with('gender', $gender)
+            ->with('parish', $parish)
+            ->with('parishes', $parishes);
            // ->with('employments', $employments)
            // ->with('recentEmployment', $recentEmployment); 
     }
@@ -183,11 +187,8 @@ class EmployeesController extends Controller
                 'trn' => ['nullable', Rule::unique('App\Models\Employees')->ignore($id, 'id' ),  'min:9', 'max:9'],
             ]
         );
-
-        // Update Employee
         
-        //TODO: format input string length FOR NIS AND TRN 9 CHARACTERS
-       
+        //TODO: format input string length FOR NIS AND TRN 9 CHARACTER
         $employee = Employees::findOrFail($id);
         $employee->firstname = $request->input('firstname');
         $employee->middlename = $request->input('middlename');
@@ -197,30 +198,49 @@ class EmployeesController extends Controller
         $employee->hire_date = $request->input('hire_date');
         $employee->trn = $request->input('trn');
         $employee->nis = $request->input('nis');
-
+        $employee->email = $request->input('email');
+        
         /**
          * Calculate Retirement based on Gender and DOB
          */
         $year = Genders::select('retirementYears')->where('id', '=', $employee->gender_id)->get()->first();
         $newDate = Carbon::parse($employee->date_of_birth)->addYears($year->retirementYears)->format('Y-m-d');
         $employee->retirement_date = $newDate;
-
-        /* $employee->email_address = $request->input('email_address');
-        $employee->phone_number1 = $request->input('phone_number1');
-        $employee->phone_number2 = $request->input('phone_number2');
-        $employee->address = $request->input('address');
-        $employee->city = $request->input('city');
-        $employee->parish_id = $request->input('parish_id');    
-        $employee->notes = $request->input('notes'); */
-        
-          
-     
     
         $employee->save();
 
         return redirect()->back()->with('success', 'Employee profile updated sucessfully!!');
-        
     }
+
+     /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update_contact(Request $request, $id)
+    {
+        $this->validate($request, 
+            [
+                
+            ]
+        );
+
+        $employee = Employees::findOrFail($id);
+        $employee->current_address = $request->input('address');
+        $employee->city = $request->input('city');
+        $employee->parish_id = $request->input('parish'); 
+        $employee->phone_number = $request->input('phone_number');
+        $employee->emergency_number = $request->input('emergency_number');
+        $employee->private_email = $request->input('private_email');
+         
+       // $employee->notes = $request->input('notes'); 
+    
+        $employee->save();
+        return redirect()->back()->with('success', 'Employee Contact Information updated sucessfully!!');
+    }
+
 
     /**
      * Remove the specified resource from storage.

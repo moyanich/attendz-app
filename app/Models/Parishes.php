@@ -18,5 +18,5 @@ class Parishes extends Model
     // Timestamps
     public $timestamps = true;
 
-    protected $fillable = ['parish_name'];
+    protected $fillable = ['name'];
 }

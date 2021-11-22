@@ -18,10 +18,12 @@ class DatabaseSeeder extends Seeder
        $this->call([
             CalendarSeeder::class,
             GendersSeeder::class,
+            ParishesSeeder::class,
             DepartmentsSeeder::class,
             EmployeesSeeder::class,
             UserSeeder::class,
             RoleSeeder::class,
+            RoleUserSeeder::class,
             RoleUserSeeder::class,
             
           /* 
@@ -33,7 +35,7 @@ class DatabaseSeeder extends Seeder
             CreateAdminUserSeeder::class,
             EmployeeSeeder::class,
             
-            ParishSeeder::class,
+            
            
             RetirementSeeder::class,
             StatusCodeSeeder::class,
