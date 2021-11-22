@@ -7,6 +7,13 @@ use App\Http\Controllers\Admin\{
     DepartmentsController,
     EmployeesController
 };
+
+use App\Http\Controllers\HR\{
+    //UserController,
+    //RoleController,
+    //DepartmentsController,
+    HrEmployeesController
+};
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -61,7 +68,9 @@ Route::prefix('admin')->middleware(['auth', 'auth.isAdmin'])->name('admin.')->gr
  * 
  */
 Route::prefix('hr')->middleware(['auth', 'can:hr-access'])->name('hr.')->group(function () {
-    Route::resource('/employees', EmployeesController::class);
+    Route::resource('/employees', HrEmployeesController::class)->except([
+        'destroy'
+    ]); 
 
    /* 
         Route::resource('/roles', RoleController::class)

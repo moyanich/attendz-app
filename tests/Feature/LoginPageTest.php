@@ -20,8 +20,8 @@ class LoginPageTest extends TestCase
         $user = USER::factory()->create();
 
         $response = $this->post('/login' , [
-            'name' => $user->name,
-            'email' => $user->email,
+            //'name' => $user->name,
+            'username' => $user->username,
             'password' => 'password',
         ]);
 
@@ -42,8 +42,8 @@ class LoginPageTest extends TestCase
         $user = USER::factory()->create();
 
         $response = $this->post('/login' , [
-            'name' => $user->name,
-            'email' => $user->email,
+            //'name' => $user->name,
+            'username' => $user->username,
             'password' => 'password',
         ]);
 
@@ -68,8 +68,8 @@ class LoginPageTest extends TestCase
         $user->roles()->attach(1);
 
         $this->post('/login' , [
-            'name' => $user->name,
-            'email' => $user->email,
+           // 'name' => $user->name,
+            'username' => $user->username,
             'password' => 'password',
         ]);
 

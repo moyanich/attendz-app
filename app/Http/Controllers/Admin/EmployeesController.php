@@ -109,11 +109,19 @@ class EmployeesController extends Controller
         $user->email = $request->input('email');
         $user->save(); 
         */
-       
-        $newUser = $request->except(['_token', 'roles']);
-        $user = User::create($newUser);
-        $user->roles()->sync($request->input('role'));
+        //$newUser = $request->except(['_token', 'roles']);
+        //$user = User::create($newUser);
+        
+        $user = User::create([
+            'employee_id' => $request->input('id'),
+            'firstname' => $request->input('firstname'), 
+            'lastname' => $request->input('lastname'), 
+            'username' => $request->input('username'),
+            'password' => $request->input('password'),
+            'email' => $request->input('email'),
+        ]);
 
+        $user->roles()->sync($request->input('role'));
         Password::sendResetLink($request->only(['email']));
 
         // Redirect to employee profile
