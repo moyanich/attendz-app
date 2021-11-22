@@ -8,4 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class Parishes extends Model
 {
     use HasFactory;
+
+    // Table Name
+    protected $table = 'parishes';
+
+    // Primary Key
+    public $primaryKey = 'id';
+ 
+    // Timestamps
+    public $timestamps = true;
+
+    protected $fillable = ['parish_name'];
 }

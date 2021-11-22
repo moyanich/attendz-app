@@ -15,6 +15,7 @@ class CreateParishesTable extends Migration
     {
         Schema::create('parishes', function (Blueprint $table) {
             $table->id();
+            $table->string('parish_name', 50);
             $table->timestamps();
         });
     }

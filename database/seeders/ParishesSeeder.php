@@ -13,6 +13,6 @@ class ParishesSeeder extends Seeder
      */
     public function run()
     {
-        //
+        \App\Models\Parish::factory(14)->create();
     }
 }
