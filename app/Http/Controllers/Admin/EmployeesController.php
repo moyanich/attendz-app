@@ -156,7 +156,6 @@ class EmployeesController extends Controller
     public function edit($id)
     {
         $employee = Employees::findOrFail($id);
-
         return view('admin.employees.edit')
             ->with('employee', $employee);
     }
@@ -170,7 +169,6 @@ class EmployeesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        
         $this->validate($request, 
             [
                 'firstname' => 'required',
@@ -194,6 +192,14 @@ class EmployeesController extends Controller
         $employee->hire_date = $request->input('hire_date');
         $employee->trn = $request->input('trn');
         $employee->nis = $request->input('nis');
+
+        /**
+         * Calculate Retirement based on Gender and DOB
+         */
+        //$year = Genders::select('retirementYears')->where('id', '=', $employee->gender_id)->get()->first();
+        //$newDate = Carbon::parse($employee->dob)->addYears($year->years)->format('Y-m-d');
+       // $employee->retirement_date = $newDate;
+
         /* $employee->email_address = $request->input('email_address');
         $employee->phone_number1 = $request->input('phone_number1');
         $employee->phone_number2 = $request->input('phone_number2');
@@ -202,11 +208,8 @@ class EmployeesController extends Controller
         $employee->parish_id = $request->input('parish_id');    
         $employee->notes = $request->input('notes'); */
         
-            // Calculate Retirement based on Gender and DOB
-           // $year = Retirement::select('years')->where('gender_id', '=', $employee->gender_id)->get()->first();
-           // $newDate = Carbon::parse($employee->dob)->addYears($year->years)->format('Y-m-d');
-
-       // $employee->retirement_date = $newDate;
+          
+     
     
         $employee->save();
 
@@ -222,6 +225,12 @@ class EmployeesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        // Delete Employee
+        $employee = Employees::findOrFail($id);
+        $employee->delete();
+
+        return redirect('/admin/employees')->with('success', "Employee " . $employee->firstname . " "  . $employee->lastname . " removed sucessfully");
+
+        //return redirect()->with('success', "Employee removed sucessfully"); 
     }
 }

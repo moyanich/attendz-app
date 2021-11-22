@@ -18,6 +18,6 @@ class Genders extends Model
     // Timestamps
     public $timestamps = true;
 
-    protected $fillable = ['name'];
+    protected $fillable = ['name', 'retirementYears'];
 
 }

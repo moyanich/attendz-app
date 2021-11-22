@@ -26,6 +26,10 @@ class GendersFactory extends Factory
             'name' => $this->faker->unique()->randomElement([
                 'Male',
                 'Female'
+            ]),
+            'retirementYears' => $this->faker->unique()->randomElement([
+                '65',
+                '60'
             ])
         ];
     }
