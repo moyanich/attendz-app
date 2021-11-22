@@ -44,9 +44,9 @@
                 <div class="flex flex-wrap">
                     <div class="w-full lg:w-4/12 px-4">
                         <div class="relative w-full mb-3">
-                            {{ Form::label('first_name', 'First Name', ['class' => 'block uppercase text-blueGray-600 text-xs font-bold mb-2']) }}
+                            {{ Form::label('firstname', 'First Name', ['class' => 'block uppercase text-blueGray-600 text-xs font-bold mb-2']) }}
                             
-                            {{ Form::text('first_name', $employee->firstname, ['class' => 'border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-gray-100 rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150']) }}
+                            {{ Form::text('firstname', $employee->firstname, ['class' => 'border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-gray-100 rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150']) }}
 
                             @error('firstname')
                                 <p class="text-xs text-red-600">{{ $message }}</p>
@@ -64,9 +64,9 @@
 
                     <div class="w-full lg:w-4/12 px-4">
                         <div class="relative w-full mb-3">
-                            {{Form::label('last_name', 'Last Name', ['class' => 'block uppercase text-blueGray-600 text-xs font-bold mb-2'])}}
+                            {{Form::label('lastname', 'Last Name', ['class' => 'block uppercase text-blueGray-600 text-xs font-bold mb-2'])}}
 
-                            {{Form::text('last_name', $employee->lastname, ['class' => 'border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-gray-100 rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150'])}}
+                            {{Form::text('lastname', $employee->lastname, ['class' => 'border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-gray-100 rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150'])}}
 
                             @error('lastname')
                                 <p class="text-xs text-red-600">{{$message}}</p>
@@ -101,7 +101,7 @@
                             {{ Form::date('hire_date', $employee->hire_date, ['class' => 'border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-gray-100 rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150']) }}
 
                             @error('hire_date')
-                                <p class="text-xs text-red-600">{{$message}}</p>
+                                <p class="text-xs text-red-600">{{ $message }}</p>
                             @enderror
                         </div>
                     </div>
@@ -113,7 +113,7 @@
                             {{ Form::text('nis', $employee->nis, ['class' => 'border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-gray-100 rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150']) }}
 
                             @error('nis')
-                                <p class="text-xs text-red-600">{{$message}}</p>
+                                <p class="text-xs text-red-600">{{ $message }}</p>
                             @enderror
                         </div>
                     </div>

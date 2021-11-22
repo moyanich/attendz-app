@@ -9,8 +9,6 @@ use App\Http\Controllers\Admin\{
 };
 
 use App\Http\Controllers\HR\{
-    //UserController,
-    //RoleController,
     //DepartmentsController,
     HrEmployeesController
 };

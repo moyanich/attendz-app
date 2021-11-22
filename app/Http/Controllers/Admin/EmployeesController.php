@@ -30,6 +30,7 @@ class EmployeesController extends Controller
             
             return Datatables::of($employees)
             ->addColumn('status', function ($statusRow) {
+                // TODO: refactor 
                 if ($statusRow->status == "Active") { 
                     return '<div class="px-2 flex text-sm leading-5 font-semibold bg-transparent rounded-full items-center"><i class="fas fa-circle fa-xs text-emerald-500 mr-1 leading-none"></i></div>'; 
                 }
@@ -42,7 +43,7 @@ class EmployeesController extends Controller
             })
             ->addIndexColumn()
                 ->addColumn('action', function($row){
-                    $actionBtn = 
+                    return
                         '<div class="flex flex-wrap items-center p-4">
                             <a href="' . route('admin.employees.show', $row->id) . ' " class="flex items-center bg-teal-500 text-white active:bg-teal-600 font-bold uppercase text-xs px-2 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -50,7 +51,7 @@ class EmployeesController extends Controller
                                 </svg>
                             </a>
                         </div>';
-                    return $actionBtn;
+                   // return $actionBtn;
                 })
                 ->rawColumns(['action'])
                 ->addIndexColumn()
@@ -92,7 +93,7 @@ class EmployeesController extends Controller
         ]);
 
 
-        $employee = new Employees;
+        $employee = new Employees();
         $employee->id = $request->input('id');
         $employee->firstname = $request->input('firstname');
         $employee->lastname = $request->input('lastname');
@@ -172,8 +173,8 @@ class EmployeesController extends Controller
         
         $this->validate($request, 
             [
-                'first_name' => 'required',
-                'last_name' => 'required',
+                'firstname' => 'required',
+                'lastname' => 'required',
                 'dob' => 'required',
                 'nis' => ['nullable', Rule::unique('App\Models\Employees')->ignore($id, 'id' ), 'max:9'],
                 'trn' => ['nullable', Rule::unique('App\Models\Employees')->ignore($id, 'id' ),  'min:9', 'max:9'],

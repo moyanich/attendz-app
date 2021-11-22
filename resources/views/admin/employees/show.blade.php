@@ -144,7 +144,7 @@
                                     {{ __('TRN') }}
                                 </div>
                                 <div class="info-text">
-                                    {{ $employee->trn }}
+                                    {{ hyphenate($employee->trn) }}
                                 </div>
                             </div>
                         </div>
@@ -228,21 +228,19 @@
                             </div>
                 
                             <div class="w-full lg:w-4/12 px-4">
-                                <div class="relative w-full mb-3">
-                                    
+                                <div class="relative w-full mb-3">=
                                     {{ Form::label('lastname', 'Last Name', ['class' => 'block uppercase text-blueGray-600 text-xs font-bold mb-2']) }}
         
                                     {{ Form::text('lastname', $employee->lastname, ['class' => 'border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-gray-100 rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150']) }}
         
                                     @error('lastname')
-                                        <p class="text-xs text-red-600">{{$message}}</p>
+                                        <p class="text-xs text-red-600">{{ $message }}</p>
                                     @enderror
                                 </div>
                             </div>
                         </div>
 
                         <div class="flex flex-wrap">
-                            
                             <div class="w-full lg:w-4/12 px-4">
                                 <div class="relative w-full mb-3">
                                     {{ Form::label('dob', 'Date of Birth', ['class' => 'block uppercase text-blueGray-600 text-xs font-bold mb-2']) }}
@@ -250,7 +248,7 @@
                                     {{ Form::date('dob', $employee->date_of_birth, ['class' => 'border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-gray-100 rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150']) }}
         
                                     @error('dob')
-                                        <p class="text-xs text-red-600">{{$message}}</p>
+                                        <p class="text-xs text-red-600">{{ $message }}</p>
                                     @enderror
                                 </div>
                             </div>
@@ -286,7 +284,7 @@
                                     {{ Form::text('trn', $employee->trn, ['class' => 'border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-gray-100 rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150']) }}
         
                                     @error('trn')
-                                        <p class="text-xs text-red-600">{{$message}}</p>
+                                        <p class="text-xs text-red-600">{{ $message }}</p>
                                     @enderror
                                 </div>
                             </div>
@@ -299,19 +297,15 @@
                                 </div>
                             </div>
                         </div>
-                        
                     </div>
 
                     <!--footer-->
                     <div class="flex items-center justify-end p-6 border-t border-solid border-blueGray-200 rounded-b">
-
                         <button type="button" class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 mr-1 mb-1 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm" onclick="toggleModal('contact-modal')">
                             {{ __('Cancel') }}
                         </button>
 
-
                         {{ Form::submit('Update', ['class' => 'mt-3 w-full inline-flex justify-center rounded-md border border-blue-600 shadow-sm px-4 py-2 bg-blue-600 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 mr-1 mb-1 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm cursor-pointer']) }}
-
                     </div>
 
                 {{Form::hidden('_method', 'PUT') }}
