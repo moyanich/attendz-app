@@ -119,7 +119,7 @@
                                             {{ __('Gender') }}
                                         </div>
                                         <div class="info-text">
-                                            {{ $gender->name }}
+                                            {{-- $gender->name --}}
                                         </div>
 
                                         <div class="info-heading">
@@ -191,7 +191,7 @@
                                             {{ __('Parish') }}
                                         </div>
                                         <div class="info-text">
-                                            {{ $parish->name }}
+                                            {{-- $parish->name --}}
                                         </div>
 
                                         <div class="info-heading">

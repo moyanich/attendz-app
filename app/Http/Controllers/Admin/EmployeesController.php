@@ -170,7 +170,7 @@ class EmployeesController extends Controller
     } */
 
     /**
-     * Update the specified resource in storage.
+     * Update the employee personal information.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
@@ -213,7 +213,7 @@ class EmployeesController extends Controller
     }
 
      /**
-     * Update the specified resource in storage.
+     * Update the employee contact information.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
