@@ -69,6 +69,7 @@ class Employees extends Model
     {
         return "{$this->firstname} {$this->middlename} {$this->lastname}";
     }
-    
+
+   
  
 }

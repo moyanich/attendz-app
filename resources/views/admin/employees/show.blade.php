@@ -78,7 +78,7 @@
                 <div x-data="{active: 0}">
                     <div class="flex border border-b-2 border-black overflow-hidden -mb-px">
                         <button class="px-4 py-2 w-full" x-on:click.prevent="active = 0" x-bind:class="{'bg-black text-white': active === 0}">
-                            {{ __('Personal Information') }}
+                            {{ __('Profile') }}
                         </button>
                         <button class="px-4 py-2 w-full" x-on:click.prevent="active = 1" x-bind:class="{'bg-black text-white': active === 1}">
                             {{ __('Job History') }}
@@ -95,58 +95,126 @@
                         x-transition:enter-start="opacity-0 transform scale-90"
                         x-transition:enter-end="opacity-100 transform scale-100">
 
-                            <div class="w-full flex justify-end">
-                               {{--  
-                                  <a class="flex items-center px-4 py-2 font-bold uppercase text-xs bg-lightBlue-500 hover:bg-lightBlue-300 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" style="color:#fff" href="{{ route('admin.employees.edit', $employee->id) }}" type="button">Edit</a> --}}
+                            {{-- ----- PERSONAL INFORMATION --}}
+                            <div class="mb-8">
+                                <div class="w-full flex justify-between border-t border-r border-l border- border-gray-200 p-2">
+                                    <h2 class="font-bold">{{ __('Personal Information') }}</h2>
+                                    <button class="flex items-center text-white px-4 py-2 font-bold uppercase text-xs bg-lightBlue-500 hover:bg-lightBlue-300 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button" onclick="toggleModal('contact-modal')">
+                                        {{ __('Edit') }}
+                                    </button>
+                                </div>
+                                <div class="inner-tab border-b border-r border-gray-200">
+                                    <div class="grid grid-cols-6 personal-info">
+                                        <div class="info-heading">
+                                            {{ __('Date of Birth') }}
+                                        </div>
+                                        <div class="info-text">
+                                            {{ format_date($employee->date_of_birth) }}
+                                        </div>
 
-                                <button class="flex items-center text-white px-4 py-2 font-bold uppercase text-xs bg-lightBlue-500 hover:bg-lightBlue-300 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button" onclick="toggleModal('contact-modal')">
-                                    {{ __('Edit') }}
-                                </button>
+                                        <div class="info-heading">
+                                            {{ __('Gender') }}
+                                        </div>
+                                        <div class="info-text">
+                                            {{ $gender->name }}
+                                        </div>
+
+                                        <div class="info-heading">
+                                            {{ __('Hire Date') }}
+                                        </div>
+                                        <div class="info-text">
+                                            {{ format_date($employee->hire_date) }}
+                                        </div>
+
+                                        <div class="info-heading">
+                                            {{ __('Retirement Date') }}
+                                        </div>
+                                        <div class="info-text">
+                                            @if (@empty($employee->retirement_date))
+                                                <span class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded text-red-600 bg-red-200 uppercase last:mr-0 mr-1">
+                                                    {{ __('Update DOB Field') }}
+                                                </span> 
+                                            @else
+                                            {{ format_date($employee->retirement_date) }}
+                                            @endif
+                                        </div>
+
+                                        <div class="info-heading">
+                                            {{ __('NIS') }}
+                                        </div>
+                                        <div class="info-text">
+                                            {{ $employee->nis }}
+                                        </div>
+
+                                        <div class="info-heading">
+                                            {{ __('TRN') }}
+                                        </div>
+                                        <div class="info-text">
+                                            {{ hyphenate($employee->trn) }}
+                                        </div>
+                                    </div>
+                                    
+                                </div>
                             </div>
 
-                            <div class="grid grid-cols-6 personal-info">
-                                <div class="info-heading">
-                                    {{ __('Date of Birth') }}
+                            {{-- ----- CONTACT INFORMATION --}}
+                            <div class="mb-8">
+                                <div class="w-full flex justify-between border-t border-r border-l border- border-gray-200 p-2">
+                                    <h2 class="font-bold">{{ __('Contact Information') }}</h2>
+                                    <button class="flex items-center text-white px-4 py-2 font-bold uppercase text-xs bg-lightBlue-500 hover:bg-lightBlue-300 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button" onclick="toggleModal('contact-modal')">
+                                        {{ __('Edit') }}
+                                    </button>
                                 </div>
-                                <div class="info-text">
-                                    {{ $employee->date_of_birth }}
-                                </div>
+                                <div class="inner-tab border-b border-r border-gray-200">
+                                    <div class="grid grid-cols-6 personal-info">
+                                        <div class="info-heading">
+                                            {{ __('Address') }}
+                                        </div>
+                                        <div class="col-span-5 info-text">
+                                            {{ $employee->current_address }}
+                                        </div>
+                                    </div>
+                                    <div class="grid grid-cols-6 personal-info">
+                                        <div class="info-heading span">
+                                            {{ __('City') }}
+                                        </div>
+                                        <div class="col-span-2 info-text">
+                                            {{ $employee->city }}
+                                        </div>
 
-                                <div class="info-heading">
-                                    {{ __('Gender') }}
-                                </div>
-                                <div class="info-text">
-                                    {{ $employee->name }}
-                                </div>
+                                        <div class="info-heading">
+                                            {{ __('Parish') }}
+                                        </div>
+                                        <div class="col-span-2 info-text">
+                                            {{ $employee->parish_id }}
+                                        </div>
+                                    </div>
+                                    <div class="grid grid-cols-6 personal-info">
+                                        <div class="info-heading">
+                                            {{ __('Home Phone') }}
+                                        </div>
+                                        <div class="info-text">
+                                            {{ $employee->phone_number }}
+                                        </div>
 
-                                <div class="info-heading">
-                                    {{ __('Hire Date') }}
-                                </div>
-                                <div class="info-text">
-                                    {{ $employee->hire_date }}
-                                </div>
+                                        <div class="info-heading">
+                                            {{ __('Emergency Number') }}
+                                        </div>
+                                        <div class="info-text">
+                                            {{ $employee->emergency_number }}
+                                        </div>
 
-                                <div class="info-heading">
-                                    {{ __('Retirement Date') }}
-                                </div>
-                                <div class="info-text">
-                                    {{ $employee->retirement_date }}
-                                </div>
-
-                                <div class="info-heading">
-                                    {{ __('NIS') }}
-                                </div>
-                                <div class="info-text">
-                                    {{ $employee->nis }}
-                                </div>
-
-                                <div class="info-heading">
-                                    {{ __('TRN') }}
-                                </div>
-                                <div class="info-text">
-                                    {{ hyphenate($employee->trn) }}
+                                        <div class="info-heading">
+                                            {{ __('Private Email') }}
+                                        </div>
+                                        <div class="info-text">
+                                            {{ hyphenate($employee->private_email) }}
+                                        </div>
+                                    </div>
+                                    
                                 </div>
                             </div>
+                            
                         </div>
 
                         {{-- TAB 2 --}}
@@ -190,7 +258,7 @@
             <!--header-->
             <div class="flex items-start justify-between p-5 border-b border-solid border-blueGray-200 rounded-t">
                 <h3 class="text-3xl font-semibold">
-                    Modal Title
+                    {{ __('Update Employee Information') }}
                 </h3>
                 <button class="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none" onclick="toggleModal('contact-modal')">
                 <span class="bg-transparent text-black opacity-5 h-6 w-6 text-2xl block outline-none focus:outline-none">
@@ -205,7 +273,6 @@
                 {!! Form::open(['action' => ['App\Http\Controllers\Admin\EmployeesController@update', $employee->id], 'method' => 'POST']) !!}
 
                     <div class="flex-auto py-10 pt-0">
-                    
                         <div class="flex flex-wrap">
                             <div class="w-full lg:w-4/12 px-4">
                                 <div class="relative w-full mb-3">
@@ -252,6 +319,20 @@
                                     @enderror
                                 </div>
                             </div>
+
+                            <div class="w-full lg:w-4/12 px-4">
+                                <div class="relative w-full mb-3">
+                                    {{ Form::label('gender', 'Gender', ['class' => 'block uppercase text-blueGray-600 text-xs font-bold mb-2']) }}
+
+                                    {!! Form::select('gender', $genders, $employee->gender_id, ['class' => 'form-select block w-full mt-1 border-0 px-3 py-3 placeholder-blueGray-400 text-gray-600 bg-gray-100 rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150']) !!}
+
+                                    @error('gender')
+                                        <p class="text-xs text-red-600">{{ $message }}</p>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            
         
                             <div class="w-full lg:w-4/12 px-4">
                                 <div class="relative w-full mb-3">
@@ -272,7 +353,7 @@
                                     {{ Form::text('nis', $employee->nis, ['class' => 'border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-gray-100 rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150']) }}
         
                                     @error('nis')
-                                        <p class="text-xs text-red-600">{{$message}}</p>
+                                        <p class="text-xs text-red-600">{{ $message }}</p>
                                     @enderror
                                 </div>
                             </div>
@@ -320,8 +401,11 @@
 
 
 
-{{-- Delete Employee Modal --}}
 
+
+
+
+{{-- Delete Employee Modal --}}
 <div class="hidden overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none justify-center items-center" aria-labelledby="modal-title" role="dialog" aria-modal="true" id="employee-delete-modal">
     <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
         <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>

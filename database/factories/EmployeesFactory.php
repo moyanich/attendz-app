@@ -31,11 +31,11 @@ class EmployeesFactory extends Factory
             'middlename'        => $this->faker->lastName(),
             'lastname'          => $this->faker->lastName(),
             'email'             => $this->faker->email(),
+            'private_email'     => $this->faker->email(),
             'phone_number'      => $this->faker->tollFreePhoneNumber(),
             'emergency_number'  => $this->faker->tollFreePhoneNumber(),
             'date_of_birth'     => $this->faker->date($format = 'Y-m-d', $max = 'now') ,
             'hire_date'         => $this->faker->date($format = 'Y-m-d', $max = 'now'),
-            //'gender_id'         => $this->faker->numberBetween($min = 1, $max = 2),
             'gender_id'         => Genders::all()->random(), // Get the data from the the Genders Table
             'current_address'   => $this->faker->secondaryAddress,
             'city'              => $this->faker->state,

@@ -7,10 +7,12 @@ use Illuminate\Http\Request;
 use App\Models\Employees;
 use App\Models\Role;
 use App\Models\User;
+use App\Models\Genders;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Validation\Rule;
 use DataTables;
+use Carbon\Carbon;
 
 class EmployeesController extends Controller
 {
@@ -138,10 +140,13 @@ class EmployeesController extends Controller
     public function show($id)
     {
         $employee = Employees::findOrFail($id);
+        $gender = Genders::find($employee->gender_id);
+        $genders['genders'] = Genders::pluck('name', 'id')->toArray(); // Get Genders Table
 
         return view('admin.employees.show')
-            ->with('employee', $employee);
-           // ->with('genders', $genders)
+            ->with('employee', $employee)
+            ->with('genders', $genders)
+            ->with('gender', $gender);
            // ->with('parishes', $parishes)
            // ->with('employments', $employments)
            // ->with('recentEmployment', $recentEmployment); 
@@ -153,12 +158,12 @@ class EmployeesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+   /* public function edit($id)
     {
         $employee = Employees::findOrFail($id);
         return view('admin.employees.edit')
             ->with('employee', $employee);
-    }
+    } */
 
     /**
      * Update the specified resource in storage.
@@ -196,9 +201,9 @@ class EmployeesController extends Controller
         /**
          * Calculate Retirement based on Gender and DOB
          */
-        //$year = Genders::select('retirementYears')->where('id', '=', $employee->gender_id)->get()->first();
-        //$newDate = Carbon::parse($employee->dob)->addYears($year->years)->format('Y-m-d');
-       // $employee->retirement_date = $newDate;
+        $year = Genders::select('retirementYears')->where('id', '=', $employee->gender_id)->get()->first();
+        $newDate = Carbon::parse($employee->date_of_birth)->addYears($year->retirementYears)->format('Y-m-d');
+        $employee->retirement_date = $newDate;
 
         /* $employee->email_address = $request->input('email_address');
         $employee->phone_number1 = $request->input('phone_number1');

@@ -20,4 +20,8 @@ class Genders extends Model
 
     protected $fillable = ['name', 'retirementYears'];
 
+   
+    
+
+   
 }

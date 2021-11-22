@@ -45,7 +45,7 @@ Route::prefix('admin')->middleware(['auth', 'auth.isAdmin'])->name('admin.')->gr
     Route::resource('/users', UserController::class);
     Route::resource('/departments', DepartmentsController::class)->except(['edit']); 
     Route::resource('/roles', RoleController::class);
-    Route::resource('/employees', EmployeesController::class);
+    Route::resource('/employees', EmployeesController::class)->except(['edit']);
 
    /* 
         Route::resource('/roles', RoleController::class)
