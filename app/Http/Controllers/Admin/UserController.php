@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Role;
 use App\Models\User;
+use App\Models\Employees;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Password;
@@ -37,8 +38,10 @@ class UserController extends Controller
      */
     public function create()
     {
-        $roles = Role::all();
-        
+        //$roles = Role::all();
+
+        $roles =  Role::orderBy('name')->get()->pluck('name', 'id')->toArray();
+       
         /* 
             NOTE: example of Gate::allows
             if(Gate::allows('is-admin')) {
@@ -58,6 +61,7 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
+            'employee_id' => 'required',
             'firstname' => 'required',
             'lastname' => 'required',
             'username' => 'required|unique:users,username',
@@ -66,11 +70,26 @@ class UserController extends Controller
             'password' => 'required|same:confirm-password',
             'roles' => 'required',
         ]);
+
+        $employee = Employees::firstOrCreate(
+            [
+                
+                'firstname' => $request->input('firstname'), 
+                'lastname' => $request->input('lastname'), 
+                'email' => $request->input('email'),
+                'id' => $request->input('employee_id') ,
+            ]
+        );
+        $employee->save();
         
         //$newUser = $request->all();
         $newUser = $request->except(['_token', 'roles']);
         $user = User::create($newUser);
         $user->roles()->sync($request->input('roles'));
+
+        
+
+        
 
         Password::sendResetLink($request->only(['email']));
 

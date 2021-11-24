@@ -47,13 +47,13 @@
             <table class="items-center w-full bg-transparent border-collapse">
                 <thead class="bg-gray-200">
                     <tr>
-                        <th scope="col" class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                        <th scope="col" class="px-6 bg-blueGray-50 text-gray-900 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
                             {{ __('No') }}
                         </th>
-                        <th scope="col" class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                        <th scope="col" class="px-6 bg-blueGray-50 text-gray-900 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
                             {{ __('Name') }}
                         </th>
-                        {{-- <th scope="col" class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                        {{-- <th scope="col" class="px-6 bg-blueGray-50 text-gray-900 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
                             {{ __('Actions') }}
                         </th> --}}
                     </tr>
@@ -89,7 +89,7 @@
                 </tbody>
             </table>
 
-            <div class="p-5">
+            <div class="pagination p-5">
                 {!! $roles->render() !!}
             </div>
         </div>

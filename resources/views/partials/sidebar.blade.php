@@ -94,14 +94,14 @@
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                                     <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
                                 </svg>
-                                <span class="mx-2">{{ __('Users') }}</span>
+                                <span class="mx-2">{{ __('User Management') }}</span>
                             </x-dropdown-link>
 
                             <x-dropdown-link :href="route('admin.roles.index')" :active="request()->routeIs('admin.roles.index')">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                                     <path d="M10 2a5 5 0 00-5 5v2a2 2 0 00-2 2v5a2 2 0 002 2h10a2 2 0 002-2v-5a2 2 0 00-2-2H7V7a3 3 0 015.905-.75 1 1 0 001.937-.5A5.002 5.002 0 0010 2z" />
                                 </svg>
-                                <span class="mx-2">{{ __('Roles') }}</span>
+                                <span class="mx-2">{{ __('Role Management') }}</span>
                             </x-dropdown-link>
                         
                             

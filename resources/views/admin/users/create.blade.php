@@ -31,6 +31,21 @@
                     {!! Form::open(array('route' => 'admin.users.store', 'method'=>'POST')) !!}
 
                         <div class="flex flex-wrap">
+
+                            <div class="w-full px-4">
+                                <div class="relative w-full mb-3">
+                                    {{ Form::label('employee_id', 'Employee ID', ['class' => 'block uppercase text-blueGray-600 text-xs font-bold mb-2']) }}
+
+                                    {!! Form::number('employee_id', null, array('placeholder' => 'Employee ID','class' => 'border-0 px-3 py-3 placeholder-blueGray-400 text-gray-600 bg-gray-100 rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150')) !!}
+
+                                    @error('employee_id')
+                                        <p class="text-xs text-red-600">{{ $message }}</p>
+                                    @enderror
+                                </div>
+                            </div>
+
+
+
                             <div class="w-full lg:w-6/12 px-4">
                                 <div class="relative w-full mb-3">
                                     {{ Form::label('firstname', 'First Name', ['class' => 'block uppercase text-blueGray-600 text-xs font-bold mb-2']) }}
@@ -109,22 +124,25 @@
                                 <div class="relative w-full mb-3">
                                     {{ Form::label('roles', 'Roles', ['class' => 'block uppercase text-blueGray-600 text-xs font-bold mb-2']) }}
 
-                                @foreach($roles as $role)
-                                    {!! Form::checkbox('roles[]', $role->id, false, array('class' => 'name ')) !!}
-                                    {{ $role->name }}
-                                    <br/>
-                                @endforeach
+                                    {!! Form::select('roles', $roles, null, ['class' => 'js-department-select form-select block w-full mt-1 border-0 px-3 py-3 placeholder-blueGray-400 text-gray-600 bg-gray-100 rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150  js-example-basic-multiple js-states form-control', 'multiple'=> 'multiple']) !!}
+                                
 
-                                @error('roles[]')
-                                    <p class="text-xs text-red-600">{{ $message }}</p>
-                                @enderror
+                                    {{--  @foreach($roles as $role)
+                                        {!! Form::checkbox('roles[]', $role->id, false, array('class' => 'name')) !!}
+                                        {{ $role->name }}
+                                        <br/>
+                                    @endforeach--}}
+
+                                    @error('roles[]')
+                                        <p class="text-xs text-red-600">{{ $message }}</p>
+                                    @enderror
                                 </div>
                             </div>
                         </div>
 
-                        <div class="w-full flex justify-end">
+                        <div class="w-full flex justify-start">
                             <div class="px-4 py-5">
-                                {{ Form::submit('Save', ['class' => 'mt-3 w-full inline-flex text-base font-medium text-white justify-center rounded-md shadow-sm px-6 py-2 border border-blue-600 bg-blue-600 hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm cursor-pointer transition ease-in-out duration-150']) }}
+                                {{ Form::submit('Save', ['class' => 'mt-3 w-full inline-flex text-base btn btn-md cursor-pointer transition ease-in-out duration-150']) }}
                             </div>
                         </div>
                     {!! Form::close() !!}
