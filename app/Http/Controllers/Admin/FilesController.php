@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
-use App\Http\Requests\StoreEmployeeFilesRequest;
-use App\Http\Requests\UpdateEmployeeFilesRequest;
-use App\Models\EmployeeFiles;
+use App\Http\Requests\StoreFilesRequest;
+use App\Http\Requests\UpdateFilesRequest;
+use App\Models\Files;
 
-class EmployeeFilesController extends Controller
+class FilesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -31,10 +31,10 @@ class EmployeeFilesController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreEmployeeFilesRequest  $request
+     * @param  \App\Http\Requests\StoreFilesRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreEmployeeFilesRequest $request)
+    public function store(StoreFilesRequest $request)
     {
         //
     }
@@ -42,10 +42,10 @@ class EmployeeFilesController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\EmployeeFiles  $employeeFiles
+     * @param  \App\Models\Files  $files
      * @return \Illuminate\Http\Response
      */
-    public function show(EmployeeFiles $employeeFiles)
+    public function show(Files $files)
     {
         //
     }
@@ -53,10 +53,10 @@ class EmployeeFilesController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\EmployeeFiles  $employeeFiles
+     * @param  \App\Models\Files  $files
      * @return \Illuminate\Http\Response
      */
-    public function edit(EmployeeFiles $employeeFiles)
+    public function edit(Files $files)
     {
         //
     }
@@ -64,11 +64,11 @@ class EmployeeFilesController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateEmployeeFilesRequest  $request
-     * @param  \App\Models\EmployeeFiles  $employeeFiles
+     * @param  \App\Http\Requests\UpdateFilesRequest  $request
+     * @param  \App\Models\Files  $files
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateEmployeeFilesRequest $request, EmployeeFiles $employeeFiles)
+    public function update(UpdateFilesRequest $request, Files $files)
     {
         //
     }
@@ -76,10 +76,10 @@ class EmployeeFilesController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\EmployeeFiles  $employeeFiles
+     * @param  \App\Models\Files  $files
      * @return \Illuminate\Http\Response
      */
-    public function destroy(EmployeeFiles $employeeFiles)
+    public function destroy(Files $files)
     {
         //
     }

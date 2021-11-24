@@ -9,6 +9,7 @@ use App\Models\Role;
 use App\Models\User;
 use App\Models\Genders;
 use App\Models\Parishes;
+use App\Models\Files;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Validation\Rule;
@@ -145,6 +146,8 @@ class EmployeesController extends Controller
         $genders['genders'] = Genders::pluck('name', 'id')->toArray(); // Get Genders Table
         $parish = Parishes::find($employee->parish_id);
         $parishes = Parishes::pluck('name', 'id')->toArray(); // Get Genders Table
+        $profile = Files::select('name')->where('employee_id', '=', $id)->where('tag', '=', 'profile')->get()->limit(1);
+        dd($profile);
 
         //dd($employee);
         return view('admin.employees.show')
@@ -152,7 +155,9 @@ class EmployeesController extends Controller
             ->with('genders', $genders)
             ->with('gender', $gender)
             ->with('parish', $parish)
-            ->with('parishes', $parishes);
+            ->with('parishes', $parishes)
+            ->with('profile', $profile);
+
            // ->with('employments', $employments)
            // ->with('recentEmployment', $recentEmployment); 
     }
@@ -209,6 +214,22 @@ class EmployeesController extends Controller
         $employee->retirement_date = $newDate;
     
         $employee->save();
+
+
+        $fileName = auth()->id() . '_' . time() . '.'. $request->file->extension();  
+
+        $type = $request->file->getClientMimeType();
+        $size = $request->file->getSize();
+
+        $request->file->move(public_path('file'), $fileName);
+
+        Files::create([
+            'employee_id' => $id,
+            'name' => $fileName,
+            'type' => $type,
+            'size' => $size,
+            'tag' => 'profile'
+        ]);
 
         return redirect()->back()->with('success', 'Employee profile updated sucessfully!!');
     }

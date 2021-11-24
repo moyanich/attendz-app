@@ -5,13 +5,15 @@ use App\Http\Controllers\Admin\{
     UserController,
     RoleController,
     DepartmentsController,
-    EmployeesController
+    EmployeesController,
+    FilesController
 };
 
 use App\Http\Controllers\HR\{
     //DepartmentsController,
     HrEmployeesController
 };
+
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 

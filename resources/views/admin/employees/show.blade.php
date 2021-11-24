@@ -35,6 +35,10 @@
                 <div class="flex items-start space-x-6 mb-4">
                     <img class="h-28 w-28 object-cover object-center rounded-full" 
                     src="https://images.unsplash.com/flagged/photo-1570612861542-284f4c12e75f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80" alt="photo">
+                    <img class="h-28 w-28 object-cover object-center rounded-full" 
+                    src="{{ $profile->name }}" alt="photo">
+
+                    
                     <div>
                         <p class="text-xl text-gray-800 font-bold mb-1">
                             {{ $employee->completename ?? '' }}
@@ -304,10 +308,24 @@
             <div class="relative p-6 flex-auto">
                 
                {{--  FORM --}}
-                {!! Form::open(['action' => ['App\Http\Controllers\Admin\EmployeesController@update', $employee->id], 'method' => 'POST']) !!}
+                {!! Form::open(['action' => ['App\Http\Controllers\Admin\EmployeesController@update', $employee->id], 'method' => 'POST', 'enctype' => 'multipart/form-data']) !!}
 
                     <div class="flex-auto py-10 pt-0">
                         <div class="flex flex-wrap">
+
+                            <div class="w-full px-4">
+                                <div class="relative w-full mb-3">
+                                    {{ Form::label('file', 'Profile Image', ['class' => 'block uppercase text-blueGray-600 text-xs font-bold mb-2']) }}
+
+                                    <input type="file" name="file" class="border-0 px-3 py-3 text-blueGray-600 rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" accept=".jpg,.jpeg,.bmp,.png,.gif,.doc,.docx,.csv,.rtf,.xlsx,.xls,.txt,.pdf,.zip">
+                
+                                    @error('file')
+                                        <p class="text-xs text-red-600">{{ $message }}</p>
+                                    @enderror
+                                </div>
+                            </div>
+
+
                             <div class="w-full lg:w-4/12 px-4">
                                 <div class="relative w-full mb-3">
                                     {{ Form::label('firstname', 'First Name', ['class' => 'block uppercase text-blueGray-600 text-xs font-bold mb-2']) }}
