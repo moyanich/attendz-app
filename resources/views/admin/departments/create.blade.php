@@ -93,7 +93,10 @@
                             {{ __('Cancel') }}
                         </a>
 
-                        {{ Form::submit('Save', ['class' => 'mt-3 w-full inline-flex text-base font-medium text-white justify-center rounded-md shadow-sm px-6 py-2 border border-blue-600 bg-blue-600 hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm cursor-pointer transition ease-in-out duration-150']) }}
+                        {{ Form::submit('Save', ['class' => 'mt-3 w-full inline-flex justify-center shadow-sm btn btn-md btn-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm cursor-pointer transition duration-500 ease-in-out hover:bg-blue-600 transform hover:-translate-y-1 hover:scale-110']) }}
+
+
+                        {{--  mt-3 w-full inline-flex text-base btn btn-md btn-dark cursor-pointer transition ease-in-out duration-150 --}}
 
                     </div>
                 </div>

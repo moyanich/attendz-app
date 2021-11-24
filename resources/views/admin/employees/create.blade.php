@@ -130,20 +130,6 @@
                 <div class="w-full lg:w-6/12 px-4">
                     <div class="relative w-full mb-3">
                         {!! Form::hidden('role', $role->id, array('class' => 'name', 'default')) !!}
-                        
-                      {{--    {{ Form::label('role', 'Role', ['class' => 'block uppercase text-blueGray-600 text-xs font-bold mb-2']) }} --}}
-
-                       
-
-{{--  
-                        {{ Form::label('role', 'Role', ['class' => 'block uppercase text-blueGray-600 text-xs font-bold mb-2']) }}
-
-                        {!! Form::checkbox('role', $role->id, true, array('class' => 'name', 'default')) !!}
-                        {{ $role->name }}
-
-                        @error('role]')
-                            <p class="text-xs text-red-600">{{ $message }}</p>
-                        @enderror --}}
                     </div>
                 </div>
         

@@ -108,11 +108,15 @@
                         <div class="relative w-full md:w-6/12 mb-3 px-4">
                             {{ Form::label('roles', 'Roles', ['class' => 'block uppercase text-blueGray-600 text-xs font-bold mb-2']) }}
 
+                            {!! Form::select('roles[]', $roles, null, ['class' => 'js-department-select form-select block w-full mt-1 border-0 px-3 py-3 placeholder-blueGray-400 text-gray-600 bg-gray-100 rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150  js-example-basic-multiple js-states form-control', 'multiple'=> 'multiple']) !!}
+
+                            {{--  
                             @foreach($roles as $role)
                                 {!! Form::checkbox('roles[]', $role->id, in_array($role->id, $user->roles->pluck('id')->toArray()) ? true : false, array('class' => 'name ')) !!}
                                 {{ $role->name }}
                                 <br/>
                             @endforeach
+                            --}}
                             
                             @error('roles[]')
                                 <p class="text-xs text-red-600">{{ $message }}</p>
@@ -120,9 +124,10 @@
                         </div>
                     </div>
 
-                    <div class="w-full flex justify-end">
+                    <div class="w-full flex justify-start">
                         <div class="px-4 py-5">
-                            {{ Form::submit('Save', ['class' => 'cursor-pointer bg-lightBlue-500 active:bg-lightBlue-600 uppercase text-white font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1 ease-linear transition-all duration-150']) }}
+                            {{ Form::submit('Save', ['class' => 'btn btn-md btn-dark 
+                            outline-none mb-1 transition duration-500 ease-in-out hover:bg-blue-600 transform hover:-translate-y-1 hover:scale-110']) }}
                         </div>
                     </div>
 

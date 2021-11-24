@@ -71,7 +71,7 @@ class UserController extends Controller
             'roles' => 'required',
         ]);
 
-        $employee = Employees::firstOrCreate(
+       /* $employee = Employees::firstOrCreate(
             [
                 
                 'firstname' => $request->input('firstname'), 
@@ -80,16 +80,12 @@ class UserController extends Controller
                 'id' => $request->input('employee_id') ,
             ]
         );
-        $employee->save();
+        $employee->save(); */
         
         //$newUser = $request->all();
         $newUser = $request->except(['_token', 'roles']);
         $user = User::create($newUser);
         $user->roles()->sync($request->input('roles'));
-
-        
-
-        
 
         Password::sendResetLink($request->only(['email']));
 
@@ -123,8 +119,8 @@ class UserController extends Controller
     public function edit($id)
     {
         $user = User::findOrFail($id);
-        $roles = Role::all();
-        //$role_user = 
+        //$roles = Role::all();
+        $roles =  Role::orderBy('name')->get()->pluck('name', 'id')->toArray();
         return view('admin.users.edit', compact('user', 'roles'));
     }
 
@@ -153,9 +149,6 @@ class UserController extends Controller
         $user->roles()->sync($request->input('roles'));
 
         return redirect()->route('admin.users.index')->with('success', 'User updated successfully');
-
-       /* return redirect('/employees/'. $employment->employee_id . '/employment')
-            ->with('success', 'User updated successfully'); */
     }
 
     /**
