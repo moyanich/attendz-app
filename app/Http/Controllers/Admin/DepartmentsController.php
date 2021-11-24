@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Departments;
 use App\Models\User;
+use App\Models\Employees;
 use Illuminate\Http\Request;
 use DB;
 
@@ -21,10 +22,10 @@ class DepartmentsController extends Controller
 
        // TODO: Find the eloquent way
         $departments = Departments::select('departments.*', 
-            DB::raw('CONCAT(users.firstname, " " , users.lastname) as managerName'), 
+            DB::raw('CONCAT(employees.firstname, " " , employees.lastname) as managerName'), 
             DB::raw('CONCAT(userSup.firstname, " " , userSup.lastname) as supervisorName'))
-                ->leftJoin('users', 'departments.manager_id', '=', 'users.id')
-                ->leftJoin('users as userSup', 'departments.supervisor_id', '=', 'userSup.id')
+                ->leftJoin('employees', 'departments.manager_id', '=', 'employees.id')
+                ->leftJoin('employees as userSup', 'departments.supervisor_id', '=', 'userSup.id')
                 ->orderBy('id', 'asc')->paginate(15);
       
         return view('admin.departments.index', compact('departments'))
@@ -38,8 +39,9 @@ class DepartmentsController extends Controller
      */
     public function create()
     {
-        $users = User::orderBy('firstname')->get()->pluck('full_name', 'id')->toArray();
-        return view('admin.departments.create', compact('users'));
+       // $users = User::orderBy('firstname')->get()->pluck('full_name', 'id')->toArray();
+        $employees = Employees::orderBy('firstname')->get()->pluck('full_name', 'id')->toArray();
+        return view('admin.departments.create', compact('employees'));
     }
 
     /**
@@ -75,8 +77,9 @@ class DepartmentsController extends Controller
      */
     public function show(Departments $department)    
     {
-        $users = User::orderBy('firstname')->get()->pluck('full_name', 'id')->toArray();
-        return view('admin.departments.show', ['department' => $department, 'users' => $users]);        
+       // $users = User::orderBy('firstname')->get()->pluck('full_name', 'id')->toArray();
+        $employees = Employees::orderBy('firstname')->get()->pluck('full_name', 'id')->toArray();
+        return view('admin.departments.show', ['department' => $department, 'employees' => $employees]);        
     }
 
     /**

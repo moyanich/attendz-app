@@ -23,7 +23,7 @@ class UserFactory extends Factory
      */
     public function definition()
     {
-
+        // TODO properly seed employees in User table
         return [
            // 'name' => $this->faker->name(),
             'employee_id' => Employees::all()->pluck('id')->random(), 

@@ -24,8 +24,8 @@ class CreateDepartmentsTable extends Migration
             $table->longText('description');
             $table->unsignedBigInteger('supervisor_id')->nullable()->default(null);
             $table->unsignedBigInteger('manager_id')->nullable()->default(null); 
-            $table->foreign('manager_id')->references('id')->on('users');
-            $table->foreign('supervisor_id')->references('id')->on('users');
+            $table->foreign('manager_id')->references('id')->on('employees');
+            $table->foreign('supervisor_id')->references('id')->on('employees');
             $table->timestamps();
             $table->softDeletes();
             $table->engine = 'InnoDB';

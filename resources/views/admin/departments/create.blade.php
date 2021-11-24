@@ -49,7 +49,7 @@
                         <div class="relative w-full mb-3">
                             {{ Form::label('manager', 'Manager', ['class' => 'block text-sm font-bold capitalize text-blueGray-600 mb-2']) }}
 
-                            {!! Form::select('manager', $users, null, ['class' => 'js-department-select form-select block w-full mt-1 border-0 px-3 py-3 placeholder-blueGray-400 text-gray-600 bg-gray-100 rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150', 'placeholder' => 'Select employee..']) !!}
+                            {!! Form::select('manager', $employees, null, ['class' => 'js-department-select form-select block w-full mt-1 border-0 px-3 py-3 placeholder-blueGray-400 text-gray-600 bg-gray-100 rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150', 'placeholder' => 'Select employee..']) !!}
 
                             @error('manager')
                                 <p class="text-xs text-red-600">{{ $message }}</p>
@@ -62,7 +62,7 @@
                         <div class="relative w-full mb-3">
                             {{ Form::label('supervisor', 'Supervisor', ['class' => 'block text-sm font-bold capitalize text-blueGray-600 mb-2']) }}
 
-                            {!! Form::select('supervisor', $users, null, ['class' => 'js-department-select form-select block w-full mt-1 border-0 px-3 py-3 placeholder-blueGray-400 text-gray-600 bg-gray-100 rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150', 'placeholder' => 'Select employee..']) !!}
+                            {!! Form::select('supervisor', $employees, null, ['class' => 'js-department-select form-select block w-full mt-1 border-0 px-3 py-3 placeholder-blueGray-400 text-gray-600 bg-gray-100 rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150', 'placeholder' => 'Select employee..']) !!}
 
                             @error('supervisor')
                                 <p class="text-xs text-red-600">{{$message}}</p>

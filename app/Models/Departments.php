@@ -25,7 +25,6 @@ class Departments extends Model
         'manager_id'    => 'numeric|nullable',
     ]; 
 
-
     /**
      * The attributes that are mass assignable.
      *
@@ -35,9 +34,4 @@ class Departments extends Model
         'name',
         'description'
     ];
-    
-    
-    
-
-
 }

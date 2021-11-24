@@ -146,6 +146,7 @@ class EmployeesController extends Controller
         $parish = Parishes::find($employee->parish_id);
         $parishes = Parishes::pluck('name', 'id')->toArray(); // Get Genders Table
 
+        //dd($employee);
         return view('admin.employees.show')
             ->with('employee', $employee)
             ->with('genders', $genders)

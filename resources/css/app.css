@@ -65,9 +65,11 @@
 * DataTables
 */
 .dataTables_length,
-.dataTables_filter {
-  padding: 1rem;
-  font-size: .875rem;
+.dataTables_filter,
+.dataTables_info,
+.dataTables_paginate {
+  @apply p-4;
+  @apply text-sm;
 }
 
 .dataTables_wrapper select {
@@ -75,7 +77,21 @@
   background-position-x: 20px;
 }
 
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+  @apply bg-white border-gray-300 text-gray-500 hover:bg-blue-600 px-4 py-2 border text-sm font-medium !important;
+  --tw-bg-opacity: 1;
+  background: rgba(37, 99, 235, var(--tw-bg-opacity)) !important;
+}
 
+.dataTables_wrapper .dataTables_paginate .paginate_button.current {
+  @apply bg-blue-600 border-blue-200 text-white px-4 py-2 border text-sm font-medium !important;
+  background: rgba(37, 99, 235, var(--tw-bg-opacity)) !important;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button:hover{
+  --tw-bg-opacity: 1 !important;
+  background: rgba(37, 99, 235, var(--tw-bg-opacity)) !important;
+}
 /*
 * Profile Page
 */
