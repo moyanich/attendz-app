@@ -73,7 +73,7 @@
                             {!! Form::select('supervisor', $employees, $department->supervisor_id, ['class' => 'js-department-select form-select block w-full mt-1 border-0 px-3 py-3 placeholder-blueGray-400 text-gray-600 bg-gray-100 rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150', 'placeholder' => 'Select employee..']) !!}
 
                             @error('supervisor')
-                                <p class="text-xs text-red-600">{{$message}}</p>
+                                <p class="text-xs text-red-600">{{ $message }}</p>
                             @enderror
                             
                         </div>

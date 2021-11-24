@@ -8,7 +8,7 @@
                         {{ __('Employee Profile') }}
                     </div>
                     <div class="text-xl font-bold">
-                        {{ $employee->completename }}
+                        {{ $employee->completename ?? '' }}
                     </div>
                     <div class="breadcrumb">
                         <x-breadcrumbs></x-breadcrumbs> 
@@ -37,7 +37,7 @@
                     src="https://images.unsplash.com/flagged/photo-1570612861542-284f4c12e75f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80" alt="photo">
                     <div>
                         <p class="text-xl text-gray-800 font-bold mb-1">
-                            {{ $employee->completename }}
+                            {{ $employee->completename ?? '' }}
                         </p>
                         <p class="text-sm text-gray-800 font-bold mb-1">
                             Job here and position
@@ -46,13 +46,13 @@
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-500" viewBox="0 0 20 20" fill="currentColor">
                                 <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
                             </svg>
-                            {{ $employee->phone_number }}</p>
+                            {{ $employee->phone_number ?? '' }}</p>
                         <p class="flex text-sm text-gray-500">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-blue-500" viewBox="0 0 20 20" fill="currentColor">
                                 <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
                                 <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
                             </svg>
-                            <a class="" href="mailto:{{ $employee->email }}">{{ $employee->email }}</a>
+                            <a class="" href="mailto:{{ $employee->email ?? '' }}">{{ $employee->email ?? '' }}</a>
                         </p>
                     </div>
                 </div>                
@@ -98,15 +98,15 @@
                         x-transition:enter-start="opacity-0 transform scale-90"
                         x-transition:enter-end="opacity-100 transform scale-100">
 
-                            {{-- ----- PERSONAL INFORMATION --}}
-                            <div class="mb-8">
+                            {{-- ----- PERSONAL INFORMATION ----- --}}
+                            <div class="">
                                 <div class="w-full flex justify-between border-t border-r border-l border- border-gray-200 p-2">
                                     <h2 class="font-bold">{{ __('Personal Information') }}</h2>
                                     <button class="flex items-center text-white px-4 py-2 font-bold uppercase text-xs bg-lightBlue-500 hover:bg-lightBlue-300 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button" onclick="toggleModal('personal-modal')">
                                         {{ __('Edit') }}
                                     </button>
                                 </div>
-                                <div class="inner-tab border-b border-r border-gray-200">
+                                <div class="inner-tab border-b border-r border-gray-200 mb-8">
                                     <div class="grid md:grid-cols-6 profile-info">
                                         <div class="info-heading">
                                             {{ __('Date of Birth') }}
@@ -160,8 +160,8 @@
                                 </div>
                             </div>
 
-                            {{-- ----- CONTACT INFORMATION --}}
-                            <div class="mb-8">
+                            {{-- ----- CONTACT INFORMATION ----- --}}
+                            <div class="">
                                 <div class="w-full flex justify-between border-t border-r border-l border- border-gray-200 p-2">
                                     <h2 class="font-bold">{{ __('Contact Information') }}</h2>
                                     <button class="flex items-center text-white px-4 py-2 font-bold uppercase text-xs bg-lightBlue-500 hover:bg-lightBlue-300 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button" onclick="toggleModal('contact-modal')">
@@ -169,7 +169,7 @@
                                     </button>
                                 </div>
 
-                                <div class="inner-tab border-b border-r border-gray-200">
+                                <div class="inner-tab border-b border-r border-gray-200 mb-8">
                                     <div class="grid md:grid-cols-6 profile-info">
                                         <div class="info-heading">
                                             {{ __('Address') }}
@@ -213,14 +213,43 @@
                                         <div class="info-heading">
                                             {{ __('Private Email') }}
                                         </div>
-                                        <div class="md:col-span-3 info-text">
-                                            <a href="mailto:{{ $employee->private_email }}">{{ $employee->private_email }}</a>
+                                        <div class="flex md:col-span-3 info-text items-center">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-blue-500" viewBox="0 0 20 20" fill="currentColor">
+                                                <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
+                                                <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
+                                            </svg>
+                                            <a href="mailto:{{ $employee->private_email  ?? '' }}">{{ $employee->private_email  ?? '' }}</a>
                                         </div>
                                     </div>
+                                </div>
+                            </div>
+
+                            {{-- ----- Documents and Notes ----- --}}
+                            <div class="flex">
+                                <div class="w-full md:w-1/2 flex justify-between border-t border-r border-l border- border-gray-200 p-2">
+                                    <h2 class="font-bold">{{ __('Files/Documents') }}</h2>
+                                    <button class="flex items-center text-white px-4 py-2 font-bold uppercase text-xs bg-lightBlue-500 hover:bg-lightBlue-300 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button" onclick="toggleModal('contact-modal')">
+                                        {{ __('Edit') }}
+                                    </button>
+                                </div>
+
+
+
+                                <div class="w-full md:w-1/2 flex justify-between border-t border-r border-l border- border-gray-200 p-2">
+                                    <h2 class="font-bold">{{ __('Notes') }}</h2>
+                                    <button class="flex items-center text-white px-4 py-2 font-bold uppercase text-xs bg-lightBlue-500 hover:bg-lightBlue-300 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button" onclick="toggleModal('contact-modal')">
+                                        {{ __('Edit') }}
+                                    </button>
                                 </div>
 
                             </div>
                         </div>
+
+
+
+
+
+
 
                         {{-- TAB 2 --}}
                         <div class="p-4 space-y-2" x-show="active === 1"
