@@ -146,8 +146,13 @@ class EmployeesController extends Controller
         $genders['genders'] = Genders::pluck('name', 'id')->toArray(); // Get Genders Table
         $parish = Parishes::find($employee->parish_id);
         $parishes = Parishes::pluck('name', 'id')->toArray(); // Get Genders Table
-        $profile = Files::select('name')->where('employee_id', '=', $id)->where('tag', '=', 'profile')->get()->limit(1);
-        dd($profile);
+        //$profile['profile'] = Files::select('name')->where('employee_id', '=', $id)->where('tag', '=', 'profile')->get();
+        //dd($profile);
+
+        $profile = Files::when($id, function ($query, $id) {
+            return $query->where('employee_id', $id);
+        })
+        ->get();
 
         //dd($employee);
         return view('admin.employees.show')
