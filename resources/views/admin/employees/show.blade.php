@@ -36,7 +36,7 @@
                     
                     @if($employee->photo)
                         <img class="h-28 w-28 object-cover object-center rounded-full" 
-                    src="{{asset('/storage/images/'.$employee->photo)}}" alt="photo">
+                    src="{{ asset('/storage/images/'.$employee->photo) }}" alt="photo">
                     @endif
 
                     <div>
@@ -103,11 +103,11 @@
                         x-transition:enter-end="opacity-100 transform scale-100">
 
                             {{-- ----- PERSONAL INFORMATION ----- --}}
-                            <div class="">
+                            <div class="w-full">
                                 <div class="w-full flex justify-between border-t border-r border-l border- border-gray-200 p-2">
                                     <h2 class="font-bold">{{ __('Personal Information') }}</h2>
                                     <button class="flex items-center text-white px-4 py-2 font-bold uppercase text-xs bg-lightBlue-500 hover:bg-lightBlue-300 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button" onclick="toggleModal('personal-modal')">
-                                        {{ __('Edit') }}
+                                        {{ __('Edit Profile') }}
                                     </button>
                                 </div>
                                 <div class="inner-tab border-b border-r border-gray-200 mb-8">
@@ -130,7 +130,7 @@
                                             {{ __('Hire Date') }}
                                         </div>
                                         <div class="info-text">
-                                            {{ format_date($employee->hire_date) }}
+                                            {{ $employee->hire_date }}
                                         </div>
 
                                         <div class="info-heading">
@@ -169,7 +169,7 @@
                                 <div class="w-full flex justify-between border-t border-r border-l border- border-gray-200 p-2">
                                     <h2 class="font-bold">{{ __('Contact Information') }}</h2>
                                     <button class="flex items-center text-white px-4 py-2 font-bold uppercase text-xs bg-lightBlue-500 hover:bg-lightBlue-300 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button" onclick="toggleModal('contact-modal')">
-                                        {{ __('Edit') }}
+                                        {{ __('Edit Contact') }}
                                     </button>
                                 </div>
 
@@ -229,30 +229,88 @@
                             </div>
 
                             {{-- ----- Documents and Notes ----- --}}
-                            <div class="flex">
-                                <div class="w-full md:w-1/2 flex justify-between border-t border-r border-l border- border-gray-200 p-2">
-                                    <h2 class="font-bold">{{ __('Files/Documents') }}</h2>
-                                    <button class="flex items-center text-white px-4 py-2 font-bold uppercase text-xs bg-lightBlue-500 hover:bg-lightBlue-300 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button" onclick="toggleModal('contact-modal')">
-                                        {{ __('Edit') }}
-                                    </button>
+                            <div class="flex justify-between space-x-4">
+                               <div class="w-full md:w-1/2 border-t border-r border-l border- border-gray-200">
+                                    <div class="w-full flex justify-between border-b border-gray-200 p-2">
+                                        <h2 class="font-bold">{{ __('Files/Documents') }}</h2>
+                                        <button class="flex items-center text-white px-4 py-2 font-bold uppercase text-xs bg-lightBlue-500 hover:bg-lightBlue-300 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button" onclick="toggleModal('files-modal')">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 13h6m-3-3v6m5 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                                            </svg>
+                                            {{ __('Add File') }}
+                                        </button>
+                                    </div>
+                                    <div class="p-2 pt-4">
+                                        <table class="table-striped items-center w-full bg-transparent border-collapse">
+                                            <thead class="bg-gray-200">
+                                                <tr>
+                                                    <th scope="col" class="px-6 bg-blueGray-50 text-gray-900 align-middle border border-solid border-blueGray-100 py-3 text-sm uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                                                        {{ __('#') }}
+                                                    </th>
+                                                    <th scope="col" class="px-6 bg-blueGray-50 text-gray-900 align-middle border border-solid border-blueGray-100 py-3 text-sm uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                                                        {{ __('File Name') }}
+                                                    </th>
+                                                    <th scope="col" class="px-6 bg-blueGray-50 text-gray-900 align-middle border border-solid border-blueGray-100 py-3 text-sm uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-center">
+                                                        {{ __('Actions') }}
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach($files as $file)
+                                                    <tr>
+                                                        <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 whitespace-nowrap p-4">
+                                                            {{ $loop->iteration }}
+                                                        </td>
+                                                        <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 whitespace-nowrap p-4">
+                                                            {{ $file->filename }}
+                                                        </td>
+                                                        <td class="flex flex-wrap justify-center p-4">
+                                                            <a href="{{  asset('/storage/files/'. $file->name ) }}" class="flex items-center bg-blue-500 text-white active:bg-blue-600 font-bold uppercase text-xs px-2 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button" target="_blank">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-0.5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                                                                </svg>
+                                                            </a>
+
+                                                            <a href="{{ route('admin.employees.editfile', $file->id) }}" class="flex items-center bg-teal-500 text-white active:bg-teal-600 font-bold uppercase text-xs px-2 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                                                                </svg>
+                                                            </a>
+
+                                                            <button class="flex items-center bg-teal-500 text-white active:bg-teal-600 font-bold uppercase text-xs px-2 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button" onclick="toggleModal('file-edit-{{ $file->id }}')">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                                                                </svg>
+                                                            </button>
+
+                                                            <button class="flex items-center bg-red-500 text-white active:bg-red-600 font-bold uppercase text-xs px-2 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button" onclick="toggleModal('file-delete-{{ $file->id }}')">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                                                </svg>
+                                                            </button>
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
 
 
-
-                                <div class="w-full md:w-1/2 flex justify-between border-t border-r border-l border- border-gray-200 p-2">
-                                    <h2 class="font-bold">{{ __('Notes') }}</h2>
-                                    <button class="flex items-center text-white px-4 py-2 font-bold uppercase text-xs bg-lightBlue-500 hover:bg-lightBlue-300 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button" onclick="toggleModal('contact-modal')">
-                                        {{ __('Edit') }}
-                                    </button>
+                                <div class="w-full md:w-1/2 border-t border-r border-l border- border-gray-200">
+                                    <div class="w-full flex justify-between border-b border-gray-200 p-2">
+                                        <h2 class="font-bold">{{ __('Notes') }}</h2>
+                                        <button class="flex items-center text-white px-4 py-2 font-bold uppercase text-xs bg-lightBlue-500 hover:bg-lightBlue-300 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button" onclick="toggleModal('contact-modal')">
+                                            {{ __('Edit') }}
+                                        </button>
+                                    </div>
+                                    <div class="p-2">
+                                        texts
+                                    </div>
                                 </div>
-
+                                
                             </div>
                         </div>
-
-
-
-
-
 
 
                         {{-- TAB 2 --}}
@@ -299,7 +357,7 @@
                     {{ __('Update Employee Information') }}
                 </h3>
                 <button class="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none" onclick="toggleModal('personal-modal')">
-                <span class="bg-transparent text-black opacity-5 h-6 w-6 text-2xl block outline-none focus:outline-none">
+                <span class="bg-transparent text-black h-6 w-6 text-2xl block outline-none focus:outline-none">
                     ×
                 </span>
                 </button>
@@ -307,12 +365,11 @@
             <!--body-->
             <div class="relative p-6 flex-auto">
                 
-               {{--  FORM --}}
+               {{-- FORM --}}
                 {!! Form::open(['action' => ['App\Http\Controllers\Admin\EmployeesController@update', $employee->id], 'method' => 'POST', 'enctype' => 'multipart/form-data']) !!}
-
+                    @csrf
                     <div class="flex-auto py-10 pt-0">
                         <div class="flex flex-wrap">
-
                             <div class="w-full px-4">
                                 <div class="relative w-full mb-3">
                                     {{ Form::label('photo', 'Profile Image', ['class' => 'block uppercase text-blueGray-600 text-xs font-bold mb-2']) }}
@@ -326,7 +383,6 @@
                                     @enderror
                                 </div>
                             </div>
-
 
                             <div class="w-full lg:w-4/12 px-4">
                                 <div class="relative w-full mb-3">
@@ -460,7 +516,6 @@
 <div class="hidden opacity-25 fixed inset-0 z-40 bg-black" id="personal-modal-backdrop"></div>
 
 
-
 {{-- Contact Modal --}}
 <div class="hidden overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none justify-center items-center" id="contact-modal">
     <div class="relative w-auto my-6 mx-auto max-w-3xl">
@@ -481,8 +536,8 @@
             <div class="relative p-6 flex-auto">
                 
                {{--  FORM --}}
-                {!! Form::open(['action' => ['App\Http\Controllers\Admin\EmployeesController@update_contact', $employee->id], 'method' => 'POST']) !!}
-
+                {!! Form::open(['action' => ['App\Http\Controllers\Admin\EmployeesController@updatecontact', $employee->id], 'method' => 'POST']) !!}
+                    @csrf
                     <div class="flex-auto py-10 pt-0">
                         <div class="flex flex-wrap">
                             <div class="w-full px-4">
@@ -499,7 +554,7 @@
 
                             <div class="w-full lg:w-6/12 px-4">
                                 <div class="relative w-full mb-3">
-                                    {{ Form::label('lcity', 'City', ['class' => 'block uppercase text-blueGray-600 text-xs font-bold mb-2']) }}
+                                    {{ Form::label('city', 'City', ['class' => 'block uppercase text-blueGray-600 text-xs font-bold mb-2']) }}
         
                                     {{ Form::text('city', $employee->city, ['class' => 'border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-gray-100 rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150']) }}
                                   
@@ -576,7 +631,141 @@
 <div class="hidden opacity-25 fixed inset-0 z-40 bg-black" id="contact-modal-backdrop"></div>
 
 
+{{-- Files Edit Modal 
+@foreach($files as $key => $file)
+    <div class="hidden overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none justify-center items-center" aria-labelledby="modal-title" role="dialog" aria-modal="true" id="file-edit-{{ $file->id }}">
+        <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+            <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
 
+            <!-- This element is to trick the browser into centering the modal contents. -->
+            <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+
+            <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+                <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                    <div class="sm:flex sm:items-start">
+                        <div class="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-blue-100 sm:mx-0 sm:h-10 sm:w-10">
+                            <!-- Heroicon name: outline/exclamation -->
+                            <svg class="h-6 w-6 text-blue-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                            </svg>
+                        </div>
+                        <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+                            <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-title">
+                                {{ __('Update File') }}
+                            </h3>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+                    {{-- FORM --}}
+                     {{--
+                    {!! Form::open(['action' => ['App\Http\Controllers\Admin\EmployeesController@editfile', $file->id], 'method' => 'POST', 'enctype' => 'multipart/form-data']) !!}
+                        @csrf
+                        <div class="flex-auto py-10 pt-0">
+                            <div class="flex flex-wrap">
+                                <div class="relative w-full mb-3">
+                                    {{ Form::label('filename', 'Document Name', ['class' => 'block uppercase text-blueGray-600 text-xs font-bold mb-2']) }}
+
+                                    {{ Form::text('filename', $file->filename, ['class' => 'border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-gray-100 rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150']) }}
+
+                                    @error('filename')
+                                        <p class="text-xs text-red-600">{{ $message }}</p>
+                                    @enderror
+                                </div>
+
+                                <div class="relative w-full mb-3">
+                                    {{ Form::label('file', 'Update Document', ['class' => 'block uppercase text-blueGray-600 text-xs font-bold mb-2']) }}
+
+                                    <input type="file" name="file" class="border-0 px-3 py-3 text-blueGray-600 rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" accept=".jpg,.jpeg,.bmp,.png,.gif,.doc,.docx,.csv,.rtf,.xlsx,.xls,.txt,.pdf,.zip">
+
+                                    @error('file')
+                                        <p class="text-xs text-red-600">{{ $message }}</p>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--footer-->
+                        <div class="flex items-center justify-end p-6 border-t border-solid border-blueGray-200 rounded-b">
+                            <button type="button" class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 mr-1 mb-1 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm" onclick="toggleModal('file-edit-{{ $file->id }}')">
+                                {{ __('Cancel') }}
+                            </button>
+
+                            {{ Form::submit('Update', ['class' => 'mt-3 w-full inline-flex justify-center rounded-md border border-blue-600 shadow-sm px-4 py-2 bg-blue-600 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 mr-1 mb-1 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm cursor-pointer']) }}
+                        </div>
+
+                    {{ Form::hidden('_method', 'PUT') }}
+                    {!! Form::close() !!}
+                </div>
+            </div>
+        </div>
+    </div>
+@endforeach
+--}}
+
+{{-- File Management Modal --}}
+<div class="hidden overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none justify-center items-center" id="files-modal">
+    <div class="relative w-auto my-6 mx-auto max-w-3xl">
+        <!--content-->
+        <div class="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+            <!--header-->
+            <div class="flex items-start justify-between p-5 border-b border-solid border-blueGray-200 rounded-t">
+                <h3 class="text-3xl font-semibold">
+                    {{ __('Add File') }}
+                </h3>
+                <button class="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none" onclick="toggleModal('contact-modal')">
+                <span class="bg-transparent text-black opacity-5 h-6 w-6 text-2xl block outline-none focus:outline-none">
+                    ×
+                </span>
+                </button>
+            </div>
+            <!--body-->
+            <div class="relative p-6 flex-auto">
+                
+               {{--  FORM --}}
+                {!! Form::open(['action' => ['App\Http\Controllers\Admin\EmployeesController@addfile', $employee->id], 'method' => 'POST', 'enctype' => 'multipart/form-data']) !!}
+                    @csrf
+
+                    <div class="flex-auto py-10 pt-0">
+                        <div class="flex flex-wrap">
+                            {{ Form::hidden('employee_id', $employee->id ) }}
+                            <div class="relative w-full mb-3">
+                                {{ Form::label('filename', 'Document Name', ['class' => 'block uppercase text-blueGray-600 text-xs font-bold mb-2']) }}
+    
+                                {{ Form::text('filename', '', ['class' => 'border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-gray-100 rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150']) }}
+                            </div>
+                        
+                            <div class="relative w-full mb-3">
+                                {{ Form::label('file', 'Upload Document', ['class' => 'block uppercase text-blueGray-600 text-xs font-bold mb-2']) }}
+
+                                <input type="file" name="file" class="border-0 px-3 py-3 text-blueGray-600 rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" accept=".jpg,.jpeg,.bmp,.png,.gif,.doc,.docx,.csv,.rtf,.xlsx,.xls,.txt,.pdf,.zip">
+
+                                @error('file')
+                                    <p class="text-xs text-red-600">{{ $message }}</p>
+                                @enderror
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!--footer-->
+                    <div class="flex items-center justify-end p-6 border-t border-solid border-blueGray-200 rounded-b">
+                        <button type="button" class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 mr-1 mb-1 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm" onclick="toggleModal('files-modal')">
+                            {{ __('Cancel') }}
+                        </button>
+
+                        {{ Form::submit('Update', ['class' => 'mt-3 w-full inline-flex justify-center rounded-md border border-blue-600 shadow-sm px-4 py-2 bg-blue-600 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 mr-1 mb-1 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm cursor-pointer']) }}
+                    </div>
+
+                {{Form::hidden('_method', 'PUT') }}
+                {!! Form::close() !!}
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="hidden opacity-25 fixed inset-0 z-40 bg-black" id="files-modal-backdrop"></div>
 
 
 {{-- Delete Employee Modal --}}

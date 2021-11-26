@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreFilesRequest;
 use Illuminate\Http\Request;
 use App\Models\Employees;
 use App\Models\Files;
@@ -124,13 +125,17 @@ class EmployeesController extends Controller
         $parish = '';
         $parish = Parishes::findOrFail($employee->parish_id);
         $parishes = Parishes::pluck('name', 'id')->toArray(); // Get Genders Table
+        $files = Files::where('employee_id', $id)->get();
+       // dd($files);
       
         return view('admin.employees.show')
             ->with('employee', $employee)
             ->with('genders', $genders)
             ->with('gender', $gender)
             ->with('parish', $parish)
-            ->with('parishes', $parishes);
+            ->with('parishes', $parishes)
+            ->with('files', $files)
+            ;
            // ->with('employments', $employments)
            // ->with('recentEmployment', $recentEmployment); 
     }
@@ -202,7 +207,7 @@ class EmployeesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update_contact(Request $request, $id)
+    public function updatecontact(Request $request, $id)
     {
         $this->validate($request,
             [
@@ -224,6 +229,54 @@ class EmployeesController extends Controller
         return redirect()->back()->with('success', 'Employee Contact Information updated sucessfully!!');
     }
 
+    /**
+     * Update the employee contact information.
+     *
+     * @param  \Illuminate\Http\StoreFilesRequest  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function editfile($id)
+    {
+        
+    }
+
+
+    /**
+     * Update the employee contact information.
+     *
+     * @param  \Illuminate\Http\StoreFilesRequest  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function updatefile(StoreFilesRequest $request)
+    {
+        $this->validate($request, [
+            'employee_id' => 'required',
+            'filename' => 'required',
+        ]);
+
+        $fileName = auth()->id() . '_' . time() . '.'. $request->file->extension();   
+
+        $type = $request->file->getClientMimeType();
+        $size = $request->file->getSize();
+
+        //$request->file->move(public_path('file'), $fileName);
+
+        $request->file->storeAs('files', $fileName, 'public');
+
+        Files::create([
+            'employee_id' => $request->input('employee_id'),
+            'filename' => $request->input('filename'),
+            'name' => $fileName,
+            'type' => $type,
+            'size' => $size
+        ]);
+
+        return redirect()->back()->with('success', 'File Uploaded sucessfully!!');
+    }
+
+    
     /**
      * Remove the employee resource from the database.
      *

@@ -20,6 +20,7 @@ class Files extends Model
 
     protected $fillable = [
         'employee_id',
+        'filename',
         'name',
         'type',
         'size',

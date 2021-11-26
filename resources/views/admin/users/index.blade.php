@@ -33,7 +33,6 @@
     {{-- End Messages --}}
 
     {{-- Content --}}
-
     <div class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded">
         <div class="rounded-t mb-0 px-4 py-3 border-0">
             <div class="flex flex-wrap items-center">
@@ -95,7 +94,6 @@
                                 // TODO 
                             </td>
                             <td class="flex flex-wrap items-center p-4">
-
                                 <a href="{{ route('admin.users.show', $user->id) }}" class="flex items-center bg-blue-500 text-white active:bg-blue-600 font-bold uppercase text-xs px-2 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16l2.879-2.879m0 0a3 3 0 104.243-4.242 3 3 0 00-4.243 4.242zM21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -124,15 +122,12 @@
             </div>
         </div>
     </div>
-    
     {{-- End Content --}}
 </x-app-layout>
 
 
-
 {{-- Delete Modal --}}
 @foreach($users as $key => $user)
-  
     <div class="hidden overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none justify-center items-center" aria-labelledby="modal-title" role="dialog" aria-modal="true" id="user-delete-{{ $user->id }}">
         <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
             <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
@@ -176,5 +171,4 @@
             </div>
         </div>
     </div>
-
 @endforeach
