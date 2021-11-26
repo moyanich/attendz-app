@@ -18,7 +18,7 @@ class ParishesPolicy
      */
     public function viewAny(User $user)
     {
-        //
+        
     }
 
     /**
@@ -30,7 +30,7 @@ class ParishesPolicy
      */
     public function view(User $user, Parishes $parishes)
     {
-        //
+       
     }
 
     /**
@@ -41,7 +41,7 @@ class ParishesPolicy
      */
     public function create(User $user)
     {
-        //
+        
     }
 
     /**
@@ -53,7 +53,7 @@ class ParishesPolicy
      */
     public function update(User $user, Parishes $parishes)
     {
-        //
+        
     }
 
     /**
@@ -65,7 +65,7 @@ class ParishesPolicy
      */
     public function delete(User $user, Parishes $parishes)
     {
-        //
+        
     }
 
     /**
@@ -77,7 +77,7 @@ class ParishesPolicy
      */
     public function restore(User $user, Parishes $parishes)
     {
-        //
+        
     }
 
     /**
@@ -89,6 +89,6 @@ class ParishesPolicy
      */
     public function forceDelete(User $user, Parishes $parishes)
     {
-        //
+        
     }
 }

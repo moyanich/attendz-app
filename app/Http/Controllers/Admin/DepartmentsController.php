@@ -54,14 +54,14 @@ class DepartmentsController extends Controller
     {
         $this->validate($request, 
             [
-                'name'  => 'required|unique:departments'
+                'name' => 'required|unique:departments'
             ]
         );
 
         $department = new Departments;
         $department->name = $request->input('name');
         $department->description = $request->input('description');
-        $department->manager_id  = $request->input('manager');
+        $department->manager_id = $request->input('manager');
         $department->supervisor_id = $request->input('supervisor');
         $department->save();
         
@@ -93,13 +93,13 @@ class DepartmentsController extends Controller
     {
         $this->validate($request, 
             [
-                'name'  => 'required'
+                'name' => 'required'
             ]
         );
 
         $department->name = $request->input('name');
         $department->description = $request->input('description');
-        $department->manager_id  = $request->input('manager');
+        $department->manager_id = $request->input('manager');
         $department->supervisor_id = $request->input('supervisor');
         $department->save();
 

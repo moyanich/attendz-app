@@ -18,7 +18,7 @@ class FilesPolicy
      */
     public function viewAny(User $user)
     {
-        //
+        
     }
 
     /**
@@ -30,7 +30,7 @@ class FilesPolicy
      */
     public function view(User $user, Files $files)
     {
-        //
+       
     }
 
     /**
@@ -41,7 +41,7 @@ class FilesPolicy
      */
     public function create(User $user)
     {
-        //
+       
     }
 
     /**
@@ -53,7 +53,7 @@ class FilesPolicy
      */
     public function update(User $user, Files $files)
     {
-        //
+       
     }
 
     /**
@@ -65,7 +65,7 @@ class FilesPolicy
      */
     public function delete(User $user, Files $files)
     {
-        //
+        
     }
 
     /**
@@ -77,7 +77,7 @@ class FilesPolicy
      */
     public function restore(User $user, Files $files)
     {
-        //
+       
     }
 
     /**
@@ -89,6 +89,6 @@ class FilesPolicy
      */
     public function forceDelete(User $user, Files $files)
     {
-        //
+        
     }
 }

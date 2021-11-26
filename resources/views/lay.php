@@ -572,3 +572,66 @@
             </div>
         </div>
     </div>
+
+
+
+
+
+    //$profile['profile'] = Files::select('name')->where('employee_id', '=', $id)->where('tag', '=', 'profile')->get();
+        //dd($profile);
+ /*
+        $user = new User;
+        $user->id = $request->input('id');
+        $user->firstname = $request->input('firstname');
+        $user->lastname = $request->input('lastname');
+        $user->username = $request->input('username');
+        $user->password = $request->input('password');
+        $user->email = $request->input('email');
+        $user->save(); 
+       
+        //$newUser = $request->except(['_token', 'roles']);
+        //$user = User::create($newUser);
+     */    
+/*
+        if ($request->hasFile('photo')) {
+            // Deleting the old image
+            if ($employee->photo != 'user.png') {
+                $old_filepath = public_path(DIRECTORY_SEPARATOR.'storage'.DIRECTORY_SEPARATOR.'employee_photos'.DIRECTORY_SEPARATOR. $employee->photo);
+                if(file_exists($old_filepath)) {
+                    unlink($old_filepath);
+                }    
+            }
+            // GET FILENAME
+            $filename_ext = $request->file('photo')->getClientOriginalName();
+            // GET FILENAME WITHOUT EXTENSION
+            $filename = pathinfo($filename_ext, PATHINFO_FILENAME);
+            // GET EXTENSION
+            $ext = $request->file('photo')->getClientOriginalExtension();
+            //FILNAME TO STORE
+            $filename_store = $filename.'_'.time().'.'.$ext;
+            // UPLOAD IMAGE
+            // $path = $request->file('photo')->storeAs('public'.DIRECTORY_SEPARATOR.'employee_photos', $filename_store);
+            // add new file name
+            $image = $request->file('photo');
+            $image_resize = Image::make($image->getRealPath());              
+            $image_resize->resize(300, 300);
+            $image_resize->save(public_path(DIRECTORY_SEPARATOR.'storage'.DIRECTORY_SEPARATOR.'employee_photos'.DIRECTORY_SEPARATOR.$filename_store));
+            $employee->photo = $filename_store;
+        } */
+
+
+        /*$fileName = auth()->id() . '_' . time() . '.'. $request->file->extension();  
+
+        $type = $request->file->getClientMimeType();
+        $size = $request->file->getSize();
+
+        $request->file->move(public_path('file'), $fileName);
+
+        Files::create([
+            'employee_id' => $id,
+            'name' => $fileName,
+            'type' => $type,
+            'size' => $size,
+            'tag' => 'profile'
+        ]);
+        */

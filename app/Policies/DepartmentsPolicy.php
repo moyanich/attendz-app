@@ -18,7 +18,7 @@ class DepartmentsPolicy
      */
     public function viewAny(User $user)
     {
-        //
+        
     }
 
     /**
@@ -30,7 +30,7 @@ class DepartmentsPolicy
      */
     public function view(User $user, Departments $departments)
     {
-        //
+        
     }
 
     /**
@@ -41,7 +41,7 @@ class DepartmentsPolicy
      */
     public function create(User $user)
     {
-        //
+        
     }
 
     /**
@@ -53,7 +53,7 @@ class DepartmentsPolicy
      */
     public function update(User $user, Departments $departments)
     {
-        //
+        
     }
 
     /**
@@ -65,7 +65,7 @@ class DepartmentsPolicy
      */
     public function delete(User $user, Departments $departments)
     {
-        //
+        
     }
 
     /**
@@ -77,7 +77,7 @@ class DepartmentsPolicy
      */
     public function restore(User $user, Departments $departments)
     {
-        //
+       
     }
 
     /**
@@ -89,6 +89,6 @@ class DepartmentsPolicy
      */
     public function forceDelete(User $user, Departments $departments)
     {
-        //
+        
     }
 }

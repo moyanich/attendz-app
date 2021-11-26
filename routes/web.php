@@ -1,18 +1,11 @@
 <?php
 
-//use App\Http\Controllers\Admin\UserController;
-use App\Http\Controllers\Admin\{
-    UserController,
-    RoleController,
-    DepartmentsController,
-    EmployeesController,
-    FilesController
-};
-
-use App\Http\Controllers\HR\{
-    //DepartmentsController,
-    HrEmployeesController
-};
+use App\Http\Controllers\Admin\FilesController;
+use App\Http\Controllers\Admin\RoleController;
+use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\DepartmentsController;
+use App\Http\Controllers\Admin\EmployeesController;
+use App\Http\Controllers\HR\HrEmployeesController;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -66,10 +59,8 @@ Route::prefix('admin')->middleware(['auth', 'auth.isAdmin'])->name('admin.')->gr
 });
 
 
-
 /**
  * HR Routes
- * 
  */
 Route::prefix('hr')->middleware(['auth', 'can:hr-access'])->name('hr.')->group(function () {
     Route::resource('/employees', HrEmployeesController::class)->except([

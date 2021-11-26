@@ -40,7 +40,7 @@ class UserController extends Controller
     {
         //$roles = Role::all();
 
-        $roles =  Role::orderBy('name')->get()->pluck('name', 'id')->toArray();
+        $roles = Role::orderBy('name')->get()->pluck('name', 'id')->toArray();
        
         /* 
             NOTE: example of Gate::allows
@@ -120,7 +120,7 @@ class UserController extends Controller
     {
         $user = User::findOrFail($id);
         //$roles = Role::all();
-        $roles =  Role::orderBy('name')->get()->pluck('name', 'id')->toArray();
+        $roles = Role::orderBy('name')->get()->pluck('name', 'id')->toArray();
         return view('admin.users.edit', compact('user', 'roles'));
     }
 

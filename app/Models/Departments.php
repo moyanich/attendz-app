@@ -20,9 +20,9 @@ class Departments extends Model
     public $timestamps = true;
 
     protected $rules = [
-        'name'          => 'required|max:255',
+        'name' => 'required|max:255',
         'supervisor_id' => 'numeric|nullable',
-        'manager_id'    => 'numeric|nullable',
+        'manager_id' => 'numeric|nullable',
     ]; 
 
     /**

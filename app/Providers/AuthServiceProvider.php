@@ -43,12 +43,12 @@ class AuthServiceProvider extends ServiceProvider
         });
 
         // Gate for employee
-        Gate::define('hr-access', function($user){
+        Gate::define('hr-access', function($user) {
             return $user->hasAnyRole('hr');
         });
 
         // Gate for employee
-        Gate::define('employee-access', function($user){
+        Gate::define('employee-access', function($user) {
             return $user->hasAnyRole('employee');
         });
 

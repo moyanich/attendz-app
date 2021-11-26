@@ -18,7 +18,7 @@ class EmployeeFilesPolicy
      */
     public function viewAny(User $user)
     {
-        //
+       
     }
 
     /**
@@ -30,7 +30,7 @@ class EmployeeFilesPolicy
      */
     public function view(User $user, EmployeeFiles $employeeFiles)
     {
-        //
+        
     }
 
     /**
@@ -41,7 +41,7 @@ class EmployeeFilesPolicy
      */
     public function create(User $user)
     {
-        //
+        
     }
 
     /**
@@ -53,7 +53,7 @@ class EmployeeFilesPolicy
      */
     public function update(User $user, EmployeeFiles $employeeFiles)
     {
-        //
+       
     }
 
     /**
@@ -65,7 +65,7 @@ class EmployeeFilesPolicy
      */
     public function delete(User $user, EmployeeFiles $employeeFiles)
     {
-        //
+       
     }
 
     /**
@@ -77,7 +77,7 @@ class EmployeeFilesPolicy
      */
     public function restore(User $user, EmployeeFiles $employeeFiles)
     {
-        //
+       
     }
 
     /**
@@ -89,6 +89,6 @@ class EmployeeFilesPolicy
      */
     public function forceDelete(User $user, EmployeeFiles $employeeFiles)
     {
-        //
+       
     }
 }

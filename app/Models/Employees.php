@@ -42,11 +42,13 @@ class Employees extends Model
         'city',
         'parish_id',
         'notes',
+        'photo',
+        'department_id',
         'status_id'
     ];
 
     protected $dates = [
-        'retirement_date', 
+        'retirement_date',
         'date_of_birth'
     ];
 

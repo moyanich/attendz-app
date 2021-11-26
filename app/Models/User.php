@@ -101,28 +101,22 @@ class User extends Authenticatable
      */
     public function getFullNameAttribute()
     {
-        return $this->firstname.' '.$this->lastname;  
+        return $this->firstname.' '.$this->lastname; 
     }
 
-
-
     /**
-     * Get the comments for the blog post.
+     * Get the employee for the user.
      */
     public function employees()
     {
         return $this->hasOne(Employees::class);
     }
-
-
-
-     /**
-     * Get the phone associated with the user.
+    
+    /**
+     * Get the department associated with the user.
      */
     public function department()
     {
         return $this->hasOne(Departments::class);
     }
-   
-
 }

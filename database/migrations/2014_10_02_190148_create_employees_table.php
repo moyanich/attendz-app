@@ -34,6 +34,7 @@ class CreateEmployeesTable extends Migration
             $table->mediumText('city')->nullable();
             $table->integer('parish_id')->unsigned()->nullable();
             $table->longText('notes')->nullable();
+            $table->string('photo')->default('user.png');
             $table->tinyInteger('status_id')->nullable();
             $table->primary('id');
             $table->timestamps();
