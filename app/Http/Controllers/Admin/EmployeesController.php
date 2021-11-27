@@ -55,8 +55,7 @@ class EmployeesController extends Controller
                 ->rawColumns(['action'])
                 ->addIndexColumn()
                 ->make(true);
-        }
-        
+        }        
         return view('admin.employees.index')->with('employees', $employees); 
     }
 
@@ -238,9 +237,10 @@ class EmployeesController extends Controller
      */
     public function editfile($id)
     {
-        
+        $files = Files::findOrFail($id);
+        return view('admin.employees.editfile')
+            ->with('files', $files);
     }
-
 
     /**
      * Update the employee contact information.
