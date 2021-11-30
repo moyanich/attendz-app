@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreFilesRequest;
 use App\Http\Requests\UpdateFilesRequest;
 use App\Models\Files;
@@ -21,12 +22,14 @@ class FilesController extends Controller
     /**
      * Show the form for creating a new resource.
      *
+     * @param  \Illuminate\Http\StoreFilesRequest  $request
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    /*public function create(StoreFilesRequest $request)
     {
-        //
-    }
+        
+    } */
 
     /**
      * Store a newly created resource in storage.
@@ -36,7 +39,28 @@ class FilesController extends Controller
      */
     public function store(StoreFilesRequest $request)
     {
-        //
+
+        $this->validate($request, [
+            'employee_id' => 'required',
+            'description' => 'required',
+        ]);
+
+        $fileName = auth()->id() . '_' . time() . '.'. $request->file->extension();  
+
+        $type = $request->file->getClientMimeType();
+        $size = $request->file->getSize();
+
+        $request->file->move(public_path('file'), $fileName);
+
+        File::create([
+            'employee_id' => auth()->id(),
+            'description'
+            'name' => $fileName,
+            'type' => $type,
+            'size' => $size
+        ]);
+
+
     }
 
     /**

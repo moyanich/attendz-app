@@ -46,6 +46,9 @@
                         <p class="text-sm text-gray-800 font-bold mb-1">
                             Job here and position
                         </p>
+                        <p class="text-sm text-gray-800 font-bold mb-1">
+                           emp type
+                        </p>
                         <p class="flex text-sm text-gray-500 mb-1">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-500" viewBox="0 0 20 20" fill="currentColor">
                                 <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
@@ -256,6 +259,7 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
+                                                 {{-- 
                                                 @foreach($files as $file)
                                                     <tr>
                                                         <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 whitespace-nowrap p-4">
@@ -265,23 +269,24 @@
                                                             {{ $file->filename }}
                                                         </td>
                                                         <td class="flex flex-wrap justify-center p-4">
-                                                            <a href="{{  asset('/storage/files/'. $file->name ) }}" class="flex items-center bg-blue-500 text-white active:bg-blue-600 font-bold uppercase text-xs px-2 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button" target="_blank">
+                                                            <a href="{{  asset('/storage/files/'. $file->name ) }}" class="flex items-center bg-teal-500 text-white active:bg-teal-600 font-bold uppercase text-xs px-2 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button" target="_blank">
                                                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-0.5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                                                                 </svg>
                                                             </a>
 
-                                                            <a href="{{ route('admin.employees.editfile', $file->id) }}" class="flex items-center bg-teal-500 text-white active:bg-teal-600 font-bold uppercase text-xs px-2 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button">
-                                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                           {{--  <a href="{{ route('admin.employees.editfile', $file->id) }}" class="flex items-center bg-teal-500 text-white active:bg-teal-600 font-bold uppercase text-xs px-2 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-0.5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
                                                                 </svg>
-                                                            </a>
+                                                            </a> --}}
 
-                                                            <button class="flex items-center bg-teal-500 text-white active:bg-teal-600 font-bold uppercase text-xs px-2 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button" onclick="toggleModal('file-edit-{{ $file->id }}')">
+                                                             {{-- 
+                                                          <button class="flex items-center bg-teal-500 text-white active:bg-teal-600 font-bold uppercase text-xs px-2 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button" onclick="toggleModal('file-edit-{{ $file->id }}')">
                                                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
                                                                 </svg>
-                                                            </button>
+                                                            </button> 
 
                                                             <button class="flex items-center bg-red-500 text-white active:bg-red-600 font-bold uppercase text-xs px-2 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button" onclick="toggleModal('file-delete-{{ $file->id }}')">
                                                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -290,7 +295,7 @@
                                                             </button>
                                                         </td>
                                                     </tr>
-                                                @endforeach
+                                                @endforeach --}}
                                             </tbody>
                                         </table>
                                     </div>
@@ -659,8 +664,8 @@
 
                 <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
                     {{-- FORM --}}
-                     {{--
-                    {!! Form::open(['action' => ['App\Http\Controllers\Admin\EmployeesController@editfile', $file->id], 'method' => 'POST', 'enctype' => 'multipart/form-data']) !!}
+                     {{-- 
+                    {!! Form::open(['action' => ['App\Http\Controllers\Admin\EmployeesController@updatefile', $file->id], 'method' => 'POST', 'enctype' => 'multipart/form-data']) !!}
                         @csrf
                         <div class="flex-auto py-10 pt-0">
                             <div class="flex flex-wrap">
@@ -675,7 +680,7 @@
                                 </div>
 
                                 <div class="relative w-full mb-3">
-                                    {{ Form::label('file', 'Update Document', ['class' => 'block uppercase text-blueGray-600 text-xs font-bold mb-2']) }}
+                                    {{ Form::label('file', 'Upload Document', ['class' => 'block uppercase text-blueGray-600 text-xs font-bold mb-2']) }}
 
                                     <input type="file" name="file" class="border-0 px-3 py-3 text-blueGray-600 rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" accept=".jpg,.jpeg,.bmp,.png,.gif,.doc,.docx,.csv,.rtf,.xlsx,.xls,.txt,.pdf,.zip">
 
@@ -705,6 +710,7 @@
 --}}
 
 {{-- File Management Modal --}}
+ {{-- 
 <div class="hidden overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none justify-center items-center" id="files-modal">
     <div class="relative w-auto my-6 mx-auto max-w-3xl">
         <!--content-->
@@ -724,6 +730,7 @@
             <div class="relative p-6 flex-auto">
                 
                {{--  FORM --}}
+                {{-- 
                 {!! Form::open(['action' => ['App\Http\Controllers\Admin\EmployeesController@addfile', $employee->id], 'method' => 'POST', 'enctype' => 'multipart/form-data']) !!}
                     @csrf
 
@@ -766,7 +773,7 @@
     </div>
 </div>
 <div class="hidden opacity-25 fixed inset-0 z-40 bg-black" id="files-modal-backdrop"></div>
-
+--}}
 
 {{-- Delete Employee Modal --}}
 <div class="hidden overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none justify-center items-center" aria-labelledby="modal-title" role="dialog" aria-modal="true" id="employee-delete-modal">

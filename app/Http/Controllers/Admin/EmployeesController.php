@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreFilesRequest;
 use Illuminate\Http\Request;
 use App\Models\Employees;
 use App\Models\Files;
@@ -16,6 +15,7 @@ use DataTables;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Validation\Rule;
+use Symfony\Component\Console\Input\Input;
 
 class EmployeesController extends Controller
 {
@@ -228,55 +228,7 @@ class EmployeesController extends Controller
         return redirect()->back()->with('success', 'Employee Contact Information updated sucessfully!!');
     }
 
-    /**
-     * Update the employee contact information.
-     *
-     * @param  \Illuminate\Http\StoreFilesRequest  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function editfile($id)
-    {
-        $files = Files::findOrFail($id);
-        return view('admin.employees.editfile')
-            ->with('files', $files);
-    }
 
-    /**
-     * Update the employee contact information.
-     *
-     * @param  \Illuminate\Http\StoreFilesRequest  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function updatefile(StoreFilesRequest $request)
-    {
-        $this->validate($request, [
-            'employee_id' => 'required',
-            'filename' => 'required',
-        ]);
-
-        $fileName = auth()->id() . '_' . time() . '.'. $request->file->extension();   
-
-        $type = $request->file->getClientMimeType();
-        $size = $request->file->getSize();
-
-        //$request->file->move(public_path('file'), $fileName);
-
-        $request->file->storeAs('files', $fileName, 'public');
-
-        Files::create([
-            'employee_id' => $request->input('employee_id'),
-            'filename' => $request->input('filename'),
-            'name' => $fileName,
-            'type' => $type,
-            'size' => $size
-        ]);
-
-        return redirect()->back()->with('success', 'File Uploaded sucessfully!!');
-    }
-
-    
     /**
      * Remove the employee resource from the database.
      *
@@ -290,4 +242,92 @@ class EmployeesController extends Controller
 
         return redirect('/admin/employees')->with('success', 'Employee ' . $employee->firstname . ' ' . $employee->lastname . ' removed sucessfully'); 
     }
+
+
+
+    
 }
+
+
+
+    
+    // BEGIN FILES
+    /**
+     * Update the employee contact information.
+     *
+     * @param  \Illuminate\Http\StoreFilesRequest  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+   /* public function addfile($id)
+    {
+        
+    }  */
+
+    /**
+     * Update the employee contact information.
+     *
+     * @param  \Illuminate\Http\StoreFilesRequest  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+   /* public function editfile($id)
+    {
+        $files = Files::findOrFail($id);
+        return view('admin.employees.edit-file')
+            ->with('files', $files);
+    } */
+
+    /**
+     * Update the employee contact information.
+     *
+     * @param  \Illuminate\Http\UpdateFilesRequest  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    /*public function updatefile(UpdateFilesRequest $request, $id)
+    {
+        $this->validate($request, [
+            'employee_id' => 'required',
+            'filename' => 'required',
+        ]);
+
+
+        $file = Files::findOrFail($id);
+        $file->employee_id = $request->input('employee_id');
+        $file->filename = $request->input('filename');
+        
+
+        if($request->hasFile('file')) {
+            $file->name = $request->input('filename');
+            $file->type = $type;
+            $file->size = $size;
+            $fileName = auth()->id() . '_' . time() . '.'. $request->file->extension();
+            $type = $request->file->getClientMimeType();
+            $size = $request->file->getSize();
+            $request->file->storeAs('files', $fileName, 'public');
+        }  
+
+        if($request->input('file') == true)
+    
+        $file->save();
+
+
+       /* $fileName = auth()->id() . '_' . time() . '.'. $request->file->extension();   
+
+        $type = $request->file->getClientMimeType();
+        $size = $request->file->getSize();
+
+
+        $request->file->storeAs('files', $fileName, 'public');
+
+        Files::create([
+            'employee_id' => $request->input('employee_id'),
+            'filename' => $request->input('filename'),
+            'name' => $fileName,
+            'type' => $type,
+            'size' => $size
+        ]); 
+
+        return redirect()->back()->with('success', 'File Uploaded sucessfully!!');
+    }*/
