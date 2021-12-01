@@ -125,7 +125,6 @@ class EmployeesController extends Controller
         $parish = Parishes::findOrFail($employee->parish_id);
         $parishes = Parishes::pluck('name', 'id')->toArray(); // Get Genders Table
         $files = Files::where('employee_id', $id)->get();
-       // dd($files);
       
         return view('admin.employees.show')
             ->with('employee', $employee)
@@ -133,8 +132,7 @@ class EmployeesController extends Controller
             ->with('gender', $gender)
             ->with('parish', $parish)
             ->with('parishes', $parishes)
-            ->with('files', $files)
-            ;
+            ->with('files', $files);
            // ->with('employments', $employments)
            // ->with('recentEmployment', $recentEmployment); 
     }

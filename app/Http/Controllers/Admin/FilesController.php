@@ -50,17 +50,20 @@ class FilesController extends Controller
         $type = $request->file->getClientMimeType();
         $size = $request->file->getSize();
 
-        $request->file->move(public_path('file'), $fileName);
+        // $request->file->move(public_path('files'), $fileName);
 
-        File::create([
-            'employee_id' => auth()->id(),
-            'description'
+        $request->file->storeAs('files', $fileName, 'public');
+
+        Files::create([
+            //'employee_id' => auth()->id(),
+            'employee_id' => $request->input('employee_id'),
+            'description' => $request->input('description'),
             'name' => $fileName,
             'type' => $type,
             'size' => $size
         ]);
 
-
+        return redirect()->back()->with('success', 'File uploaded sucessfully!!')->with('file', $fileName);
     }
 
     /**
@@ -69,7 +72,7 @@ class FilesController extends Controller
      * @param  \App\Models\Files  $files
      * @return \Illuminate\Http\Response
      */
-    public function show(Files $files)
+    public function show(Files $files, $id)
     {
         //
     }

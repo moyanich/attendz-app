@@ -43,8 +43,10 @@ Route::prefix('admin')->middleware(['auth', 'auth.isAdmin'])->name('admin.')->gr
     Route::resource('/employees', EmployeesController::class)->except(['edit']);
     Route::put('/employees/{employee}/contact', [EmployeesController::class, 'updatecontact'])->name('employees.updatecontact');
 
+    Route::resource('/files', FilesController::class)->except(['index', 'create']);
+
    // Route::get('/files/add', 'FilesController@create')->name('employees.files.create');
-    Route::post('/files/add', 'FilesController@store')->name('employees.files.store');
+   // Route::post('/files/add', 'FilesController@store')->name('employees.files.store');
 
 
     //Route::post('/employees/{employee}/addfile', [EmployeesController::class, 'addfile'])->name('employees.addfile');
