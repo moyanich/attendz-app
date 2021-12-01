@@ -300,7 +300,6 @@
                                     </div>
                                 </div>
 
-
                                 <div class="w-full md:w-1/2 border-t border-r border-l border- border-gray-200">
                                     <div class="w-full flex justify-between border-b border-gray-200 p-2">
                                         <h2 class="font-bold">{{ __('Notes') }}</h2>
@@ -344,10 +343,28 @@
     </div>
     {{-- End Content --}}
 
+
+    <x-modals :modalID="modalisID">
+
+        <x-slot name="description">
+            modal-pixk
+        </x-slot>
+
+        <x-slot name="modalBody">
+            modal body
+        </x-slot>
+
+       
+
+    </x-modals>
+
+
 </x-app-layout>
 
 
-       
+
+
+
 
 
 {{-- Personal Info Modal --}}
@@ -670,6 +687,8 @@
                 <!-- Form -->
                 {!! Form::open(['action' => ['App\Http\Controllers\Admin\EmployeesController@destroy', $employee->id], 'method' => 'POST']) !!}
 
+                @csrf
+
                 {{ Form::submit('Delete', ['class' => 'w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm']) }}
 
                 {{Form::hidden('_method', 'DELETE') }}
@@ -761,7 +780,6 @@
 --}}
 
 {{-- File Management Modal --}}
-
 <div class="hidden overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none justify-center items-center" id="files-modal">
     <div class="relative w-auto my-6 mx-auto max-w-3xl">
         <!--content-->
@@ -780,11 +798,9 @@
             <!--body-->
             <div class="relative p-6 flex-auto">
                 
-               {{--  FORM --}}
-                
+               {{-- FORM --}}
                 {!! Form::open(['action' => ['App\Http\Controllers\Admin\FilesController@store'], 'method' => 'POST', 'enctype' => 'multipart/form-data']) !!}
                     @csrf
-
                     <div class="flex-auto py-10 pt-0">
                         <div class="flex flex-wrap">
                             {{ Form::hidden('employee_id', $employee->id ) }}
@@ -803,7 +819,6 @@
                                     <p class="text-xs text-red-600">{{ $message }}</p>
                                 @enderror
                             </div>
-
                         </div>
                     </div>
 

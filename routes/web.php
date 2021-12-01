@@ -45,10 +45,6 @@ Route::prefix('admin')->middleware(['auth', 'auth.isAdmin'])->name('admin.')->gr
 
     Route::resource('/files', FilesController::class)->except(['index', 'create']);
 
-   // Route::get('/files/add', 'FilesController@create')->name('employees.files.create');
-   // Route::post('/files/add', 'FilesController@store')->name('employees.files.store');
-
-
     //Route::post('/employees/{employee}/addfile', [EmployeesController::class, 'addfile'])->name('employees.addfile');
     //Route::put('/employees/{employee}/edit-file', [EmployeesController::class, 'editfile'])->name('employees.editfile');
     //Route::put('/employees/{employee}/update-file', [EmployeesController::class, 'updatefile'])->name('employees.updatefile');
