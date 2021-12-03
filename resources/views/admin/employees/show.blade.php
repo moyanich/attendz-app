@@ -789,7 +789,7 @@
                     {{ Form::hidden('employee_id', $employee->id ) }}
 
                     <div class="grid grid-cols-1 space-y-2">
-                        {{ Form::label('description', 'Document Title', ['class' => 'text-sm font-bold text-gray-500 tracking-wide']) }}
+                        {{ Form::label('description', 'Document Title', ['class' => 'block uppercase text-blueGray-600 text-xs font-bold mt-2']) }}
     
                         {{ Form::text('description', '', ['class' => 'text-base p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500', 'placeholder' => 'Document Name']) }}
 
@@ -798,6 +798,32 @@
                         @enderror
                     </div>
 
+
+                    <div class="relative w-full mb-3">
+                        {{ Form::label('file', 'Upload File', ['class' => 'block uppercase text-blueGray-600 text-xs font-bold mt-4 mb-2']) }}
+                        <div class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
+                            <div class="space-y-1 text-center">
+                                <svg id="svg-image" class="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48" aria-hidden="true">
+                                    <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                                <div id="fileList"></div> {{-- Display File --}}
+                                <div class="text-sm text-gray-600">
+                                    <label for="file" class="relative cursor-pointer bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500">
+                                        <span>{{ __('Upload a file') }}</span>
+                                        <input id="file" name="file" type="file" class="sr-only" accept=".jpg,.jpeg,.png,.doc,.docx,.csv,.xlsx,.xls,.txt,.pdf,.zip" onchange="javascript:updateList()">
+                                    </label>
+                                </div>
+                                <p class="text-xs text-gray-500">
+                                    {{ __('PNG, JPG, JPEG, PDF, DOC, XLS, XLSX up to 10MB') }}
+                                </p>
+                                @error('file')
+                                    <p class="text-xs text-red-600">{{ $message }}</p>
+                                @enderror
+                            </div>
+                        </div>
+                    </div>
+
+                    {{--  
                     <div class="grid grid-cols-1 space-y-2">
                         {{ Form::label('file', 'Attach Document', ['class' => 'text-sm font-bold text-gray-500 tracking-wide mt-4']) }}
 
@@ -805,11 +831,12 @@
                         <p class="text-sm text-gray-300">
                             <span>File type: jpg,jpeg,png,doc,docx,csv,xlsx,xls,txt,pdf</span>
                         </p>
+                        ''
 
                         @error('file')
                             <p class="text-xs text-red-600">{{ $message }}</p>
                         @enderror
-                    </div>
+                    </div> --}}
                     
                     <!--footer-->
                     <div class="flex items-center justify-end p-6 border-t border-solid border-blueGray-200 rounded-b">
@@ -830,105 +857,108 @@
 
 
 
-
+{{-- File Edit Modal --}}
 @foreach($files as $key => $file)
-<div class="hidden overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none justify-center items-center" id="file-edit-{{ $file->id }}">
-    <div class="relative w-auto my-6 mx-auto max-w-3xl">
-        <!--content-->
-        <div class="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
-            <!--header-->
-            <div class="flex items-start justify-between p-5 border-b border-solid border-blueGray-200 rounded-t">
-                <h3 class="text-3xl font-semibold">
-                    {{ __('Edit File') }}
-                </h3>
-                <button class="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none" onclick="toggleModal('contact-modal')">
-                <span class="bg-transparent text-black opacity-5 h-6 w-6 text-2xl block outline-none focus:outline-none">
-                    ×
-                </span>
-                </button>
-            </div>
-            <!--body-->
-            <div class="relative p-6 flex-auto">
-                
-               {{-- FORM --}}
-                {!! Form::open(['action' => ['App\Http\Controllers\Admin\FilesController@update', $file->id], 'method' => 'PATCH', 'enctype' => 'multipart/form-data']) !!}
-                    @csrf
+    <div class="hidden overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none justify-center items-center" id="file-edit-{{ $file->id }}">
+        <div class="relative w-auto my-6 mx-auto max-w-3xl">
+            <!--content-->
+            <div class="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+                <!--header-->
+                <div class="flex items-start justify-between p-5 border-b border-solid border-blueGray-200 rounded-t">
+                    <h3 class="text-3xl font-semibold">
+                        {{ __('Edit File') }}
+                    </h3>
+                    <button class="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none" onclick="toggleModal('contact-modal')">
+                    <span class="bg-transparent text-black opacity-5 h-6 w-6 text-2xl block outline-none focus:outline-none">
+                        ×
+                    </span>
+                    </button>
+                </div>
+                <!--body-->
+                <div class="relative p-6 flex-auto">
                     
-                    <div class="flex-auto py-10 pt-0">
-                        <div class="flex flex-wrap">
-                            {{ Form::hidden('employee_id', $employee->id ) }}
-                            <div class="relative w-full mb-3">
-                                {{ Form::label('description', 'Document Name', ['class' => 'block uppercase text-blueGray-600 text-xs font-bold mb-2']) }}
-    
-                                {{ Form::text('description', $file->description, ['class' => 'border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-gray-100 rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150']) }}
-                            </div>
+                {{-- FORM --}}
+                    {!! Form::open(['action' => ['App\Http\Controllers\Admin\FilesController@update', $file->id], 'method' => 'POST', 'enctype' => 'multipart/form-data']) !!}
+                        @csrf
+                        
+                        <div class="flex-auto py-10 pt-0">
+                            <div class="flex flex-wrap">
+                                {{ Form::hidden('employee_id', $employee->id ) }}
+                                <div class="relative w-full mb-3">
+                                    {{ Form::label('description', 'Document Name', ['class' => 'block uppercase text-blueGray-600 text-xs font-bold mb-2']) }}
+        
+                                    {{ Form::text('description', $file->description, ['class' => 'border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-gray-100 rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150']) }}
+                                </div>
 
-                            <div class="relative w-full mb-3">
-                                <label class="block text-sm font-medium text-gray-700">
-                                    {{ __('File') }}
-                                </label>
-                                <div class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
-                                    <div class="space-y-1 text-center">
-                                        <svg id="svg-image" class="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48" aria-hidden="true">
-                                            <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                                        </svg>
-                                        <div id="fileList"></div> {{-- Display File --}}
-                                        <div class="text-sm text-gray-600">
-                                            <label for="file" class="relative cursor-pointer bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500">
-                                                <span>{{ __('Upload a file') }}</span>
-                                                <input id="file" name="file" type="file" class="sr-only" accept=".jpg,.jpeg,.png,.doc,.docx,.csv,.xlsx,.xls,.txt,.pdf,.zip" onchange="javascript:updateList()">
-                                            </label>
+                                <div class="relative w-full mb-3 text-left flex items-center ">
+                                    <svg xmlns='http://www.w3.org/2000/svg' class='h-12 w-12 text-gray-400' fill='none' viewBox='0 0 24 24' stroke='currentColor'><path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z'></svg>
+                                    <span class="mr-2">{{ $file->name }}</span>
+                                </div>
+
+                                <div class="relative w-full mb-3">
+                                    {{ Form::label('file', 'Upload File', ['class' => 'block uppercase text-blueGray-600 text-xs font-bold mb-2 mt-4']) }}
+                                    <div class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
+                                        <div class="space-y-1 text-center">
+                                            <svg id="svg-imageEdit" class="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48" aria-hidden="true">
+                                                <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                            </svg>
+                                            <div id="fileListEdit"></div> {{-- Display File --}}
+                                            <div class="text-sm text-gray-600">
+                                                <label for="fileEdit" class="relative cursor-pointer bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500">
+                                                    <span>{{ __('Upload a file') }}</span>
+                                                    <input id="fileEdit" name="file" type="file" value="{{ $file->name }}" class="sr-only" accept=".jpg,.jpeg,.png,.doc,.docx,.csv,.xlsx,.xls,.txt,.pdf,.zip" onchange="javascript:updateList()">
+                                                </label>
+                                            </div>
+                                            <p class="text-xs text-gray-500">
+                                                {{ __('PNG, JPG, JPEG, PDF, DOC, XLS, XLSX up to 10MB') }}
+                                            </p>
+                                            @error('file')
+                                                <p class="text-xs text-red-600">{{ $message }}</p>
+                                            @enderror
                                         </div>
-                                        <p class="text-xs text-gray-500">
-                                            {{ __('PNG, JPG, JPEG, PDF, DOC, XLS, XLSX up to 10MB') }}
-                                        </p>
-                                        @error('file')
-                                            <p class="text-xs text-red-600">{{ $message }}</p>
-                                        @enderror
                                     </div>
                                 </div>
-                            </div>
-                        
-
-
-                        {{-- 
                             
-                            <div class="relative w-full mb-3">
-                                {{ Form::label('file', 'Upload Document', ['class' => 'block uppercase text-blueGray-600 text-xs font-bold mb-2']) }}
 
-                                <div class="">
-                                    <div id="fileList"></div>
+
+                            {{-- 
+                                <div class="relative w-full mb-3">
+                                    {{ Form::label('file', 'Upload Document', ['class' => 'block uppercase text-blueGray-600 text-xs font-bold mb-2']) }}
+
+                                    <div class="">
+                                        <div id="fileList"></div>
+                                    </div>
+                                    
+
+                                    <input type="file" name="file" id="file" class="border-0 px-3 py-3 text-blueGray-600 rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" accept=".jpg,.jpeg,.png,.doc,.docx,.csv,.xlsx,.xls,.txt,.pdf,.zip" onchange="javascript:updateList()">
+
+                                    @error('file')
+                                        <p class="text-xs text-red-600">{{ $message }}</p>
+                                    @enderror
                                 </div>
+                      
+                                --}}
                                 
-
-                                <input type="file" name="file" id="file" class="border-0 px-3 py-3 text-blueGray-600 rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" accept=".jpg,.jpeg,.png,.doc,.docx,.csv,.xlsx,.xls,.txt,.pdf,.zip" onchange="javascript:updateList()">
-
-                                @error('file')
-                                    <p class="text-xs text-red-600">{{ $message }}</p>
-                                @enderror
                             </div>
-                            
-                            --}}
-                            
                         </div>
-                    </div>
 
-                    <!--footer-->
-                    <div class="flex items-center justify-end p-6 border-t border-solid border-blueGray-200 rounded-b">
-                        <button type="button" class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 mr-1 mb-1 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm" onclick="toggleModal('file-edit-{{ $file->id }}')">
-                            {{ __('Cancel') }}
-                        </button>
+                        <!--footer-->
+                        <div class="flex items-center justify-end p-6 border-t border-solid border-blueGray-200 rounded-b">
+                            <button type="button" class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 mr-1 mb-1 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm" onclick="toggleModal('file-edit-{{ $file->id }}')">
+                                {{ __('Cancel') }}
+                            </button>
 
-                        {{ Form::submit('Save', ['class' => 'mt-3 w-full inline-flex justify-center rounded-md border border-blue-600 shadow-sm px-4 py-2 bg-blue-600 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 mr-1 mb-1 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm cursor-pointer']) }}
-                    </div>
+                            {{ Form::submit('Save', ['class' => 'mt-3 w-full inline-flex justify-center rounded-md border border-blue-600 shadow-sm px-4 py-2 bg-blue-600 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 mr-1 mb-1 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm cursor-pointer']) }}
+                        </div>
                     
-                {!! Form::close() !!}
+                    {{ Form::hidden('_method', 'PUT') }}
+                    {!! Form::close() !!}
 
+                </div>
             </div>
         </div>
     </div>
-</div>
-<div class="hidden opacity-25 fixed inset-0 z-40 bg-black" id="file-edit-{{ $file->id }}-backdrop"></div>
+    <div class="hidden opacity-25 fixed inset-0 z-40 bg-black" id="file-edit-{{ $file->id }}-backdrop"></div>
 @endforeach
 
 
@@ -948,3 +978,21 @@ updateList = function() {
     svg.classList.add("hidden");
 }
 </script>
+
+
+
+<script>
+    updateList = function() {
+        var input = document.getElementById('fileEdit');
+        var output = document.getElementById('fileListEdit');
+        var svg = document.getElementById('svg-imageEdit' );
+    
+        output.innerHTML = "<div class='space-y-1 text-center'><svg xmlns='http://www.w3.org/2000/svg' class='mx-auto h-12 w-12 text-gray-400' fill='none' viewBox='0 0 24 24' stroke='currentColor'><path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z'></svg>";
+        for (var i = 0; i < input.files.length; ++i) {
+            output.innerHTML += '<div>' + input.files.item(i).name + '</div>';
+        }
+        output.innerHTML += '</div>';
+    
+        svg.classList.add("hidden");
+    }
+    </script>

@@ -95,8 +95,26 @@ class FilesController extends Controller
      * @param  \App\Models\Files  $files
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateFilesRequest $request, Files $files)
+    public function update(UpdateFilesRequest $request, $id)
     {
+        //$file = Files::findOrFail($id);
+        $file = Files::findOrFail($id);
+        $file->description = $request->input('description');
+
+        if($request->hasFile('file')) {
+            
+            $fileName = auth()->id() . '_' . time() . '.'. $request->file->extension();  
+
+            $type = $request->file->getClientMimeType();
+            $size = $request->file->getSize();
+            $request->file->storeAs('files', $fileName, 'public');
+            $file->name = $fileName;
+            $file->type = $type;
+            $file->size = $size;
+        }  
+
+        $file->save();
+
         return redirect()->back()->with('success', 'File uploaded sucessfully!!');
     }
 
