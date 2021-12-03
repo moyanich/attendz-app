@@ -59,7 +59,7 @@
 }
 
 /*
-* Select
+* Forms
 */
 .select2-container--default .select2-selection--single {
   border: 0 !important;
@@ -76,13 +76,6 @@
 
 .select2-results__option--selectable {
   font-size: .875rem !important;
-}
-
-
-
-.has-mask {
-  position: absolute;
-  clip: rect(10px, 150px, 130px, 10px);
 }
 
 

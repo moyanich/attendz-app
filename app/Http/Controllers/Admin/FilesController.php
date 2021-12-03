@@ -97,7 +97,7 @@ class FilesController extends Controller
      */
     public function update(UpdateFilesRequest $request, Files $files)
     {
-        //
+        return redirect()->back()->with('success', 'File uploaded sucessfully!!');
     }
 
     /**

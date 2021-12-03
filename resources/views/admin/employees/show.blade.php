@@ -801,39 +801,16 @@
                     <div class="grid grid-cols-1 space-y-2">
                         {{ Form::label('file', 'Attach Document', ['class' => 'text-sm font-bold text-gray-500 tracking-wide mt-4']) }}
 
-                       {{--   <input type="file" name="file" class="border-0 px-3 py-3 text-blueGray-600 rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" accept=".jpg,.jpeg,.bmp,.png,.gif,.doc,.docx,.csv,.rtf,.xlsx,.xls,.txt,.pdf,.zip">
+                       <input type="file" name="file" class="border-0 px-3 py-3 text-blueGray-600 rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" accept=".jpg,.jpeg,.bmp,.png,.gif,.doc,.docx,.csv,.rtf,.xlsx,.xls,.txt,.pdf,.zip">
+                        <p class="text-sm text-gray-300">
+                            <span>File type: jpg,jpeg,png,doc,docx,csv,xlsx,xls,txt,pdf</span>
+                        </p>
 
                         @error('file')
                             <p class="text-xs text-red-600">{{ $message }}</p>
-                        @enderror--}}
-       
-                        <div class="flex items-center justify-center w-full">
-                            <label class="flex flex-col rounded-lg border-4 border-dashed w-full h-60 p-10 group text-center">
-                                <div id="drop_file_zone" class="h-full w-full text-center flex flex-col items-center justify-center items-center" ondrop="upload_file(event)" ondragover="return false">
-                                    <!---<svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 text-blue-400 group-hover:text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
-                                    </svg>-->
-                                    <div class="flex flex-auto max-h-48 w-2/5 mx-auto -mt-10">
-                                        <img class="has-mask h-36 object-center" src="https://img.freepik.com/free-vector/image-upload-concept-landing-page_52683-27130.jpg?size=338&ext=jpg" alt="freepik image">
-                                    </div>
-                                    <p class="pointer-none text-gray-500 "><span class="text-sm">Drag and drop</span> files here <br /> or <input type="button" value="Select File" onclick="file_explorer();" /></p>
-                                    <input type="file" id="selectfile" />
-                                        
-                                        <a href="" id="" class="text-blue-600 hover:underline">select a file</a> from your computer</p>
-                                </div>
-                                <input type="file" class="hidden" name="file" accept=".jpg,.jpeg,.png,.doc,.docx,.csv,.xlsx,.xls,.txt,.pdf">
-                            </label>
-
-                            @error('file')
-                                <p class="text-xs text-red-600">{{ $message }}</p>
-                            @enderror
-                        </div>
+                        @enderror
                     </div>
-                    <p class="text-sm text-gray-300">
-                        <span>File type: jpg,jpeg,png,doc,docx,csv,xlsx,xls,txt,pdf</span>
-                    </p>
-                 
-
+                    
                     <!--footer-->
                     <div class="flex items-center justify-end p-6 border-t border-solid border-blueGray-200 rounded-b">
                         <button type="button" class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 mr-1 mb-1 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm" onclick="toggleModal('files-modal')">
@@ -862,7 +839,7 @@
             <!--header-->
             <div class="flex items-start justify-between p-5 border-b border-solid border-blueGray-200 rounded-t">
                 <h3 class="text-3xl font-semibold">
-                    {{ __('Add File') }}
+                    {{ __('Edit File') }}
                 </h3>
                 <button class="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none" onclick="toggleModal('contact-modal')">
                 <span class="bg-transparent text-black opacity-5 h-6 w-6 text-2xl block outline-none focus:outline-none">
@@ -874,7 +851,7 @@
             <div class="relative p-6 flex-auto">
                 
                {{-- FORM --}}
-                {!! Form::open(['action' => ['App\Http\Controllers\Admin\FilesController@store'], 'method' => 'POST', 'enctype' => 'multipart/form-data']) !!}
+                {!! Form::open(['action' => ['App\Http\Controllers\Admin\FilesController@update', $file->id], 'method' => 'PATCH', 'enctype' => 'multipart/form-data']) !!}
                     @csrf
                     
                     <div class="flex-auto py-10 pt-0">
@@ -885,19 +862,54 @@
     
                                 {{ Form::text('description', $file->description, ['class' => 'border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-gray-100 rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150']) }}
                             </div>
-                        
-                            <div class="relative w-full mb-3">
-                                <div>
 
+                            <div class="relative w-full mb-3">
+                                <label class="block text-sm font-medium text-gray-700">
+                                    {{ __('File') }}
+                                </label>
+                                <div class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
+                                    <div class="space-y-1 text-center">
+                                        <svg id="svg-image" class="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48" aria-hidden="true">
+                                            <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                        </svg>
+                                        <div id="fileList"></div> {{-- Display File --}}
+                                        <div class="text-sm text-gray-600">
+                                            <label for="file" class="relative cursor-pointer bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500">
+                                                <span>{{ __('Upload a file') }}</span>
+                                                <input id="file" name="file" type="file" class="sr-only" accept=".jpg,.jpeg,.png,.doc,.docx,.csv,.xlsx,.xls,.txt,.pdf,.zip" onchange="javascript:updateList()">
+                                            </label>
+                                        </div>
+                                        <p class="text-xs text-gray-500">
+                                            {{ __('PNG, JPG, JPEG, PDF, DOC, XLS, XLSX up to 10MB') }}
+                                        </p>
+                                        @error('file')
+                                            <p class="text-xs text-red-600">{{ $message }}</p>
+                                        @enderror
+                                    </div>
                                 </div>
+                            </div>
+                        
+
+
+                        {{-- 
+                            
+                            <div class="relative w-full mb-3">
                                 {{ Form::label('file', 'Upload Document', ['class' => 'block uppercase text-blueGray-600 text-xs font-bold mb-2']) }}
 
-                                <input type="file" name="file" class="border-0 px-3 py-3 text-blueGray-600 rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" accept=".jpg,.jpeg,.bmp,.png,.gif,.doc,.docx,.csv,.rtf,.xlsx,.xls,.txt,.pdf,.zip">
+                                <div class="">
+                                    <div id="fileList"></div>
+                                </div>
+                                
+
+                                <input type="file" name="file" id="file" class="border-0 px-3 py-3 text-blueGray-600 rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" accept=".jpg,.jpeg,.png,.doc,.docx,.csv,.xlsx,.xls,.txt,.pdf,.zip" onchange="javascript:updateList()">
 
                                 @error('file')
                                     <p class="text-xs text-red-600">{{ $message }}</p>
                                 @enderror
                             </div>
+                            
+                            --}}
+                            
                         </div>
                     </div>
 
@@ -920,3 +932,19 @@
 @endforeach
 
 
+
+<script>
+updateList = function() {
+    var input = document.getElementById('file');
+    var output = document.getElementById('fileList');
+    var svg = document.getElementById('svg-image' );
+
+    output.innerHTML = "<div class='space-y-1 text-center'><svg xmlns='http://www.w3.org/2000/svg' class='mx-auto h-12 w-12 text-gray-400' fill='none' viewBox='0 0 24 24' stroke='currentColor'><path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z'></svg>";
+    for (var i = 0; i < input.files.length; ++i) {
+        output.innerHTML += '<div>' + input.files.item(i).name + '</div>';
+    }
+    output.innerHTML += '</div>';
+
+    svg.classList.add("hidden");
+}
+</script>
