@@ -72,6 +72,14 @@ class Employees extends Model
         return "{$this->firstname} {$this->middlename} {$this->lastname}";
     }
 
+    /**
+     * Get the parish associated with the employee.
+     */
+    public function parish()
+    {
+        return $this->hasOne(Parishes::class, 'parish_id');
+    }
+
    
  
 }
