@@ -5,7 +5,7 @@ use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\DepartmentsController;
 use App\Http\Controllers\Admin\EmployeesController;
-use App\Http\Controllers\HR\HrEmployeesController;
+//use App\Http\Controllers\HR\HrEmployeesController;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -25,25 +25,53 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+/*
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
-
+*/
 require __DIR__.'/auth.php';
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware('auth')->name('dashboard');
+
 
 /**
  * Admin Routes
  * 
  */
-Route::prefix('admin')->middleware(['auth', 'auth.isAdmin'])->name('admin.')->group(function () {
-
+//Route::prefix('admin')->middleware(['auth', 'auth.admin'])->name('admin.')->group(function () {
+Route::prefix('admin')->middleware('auth')->name('admin.')->group(function () {
     Route::resource('/users', UserController::class);
-    Route::resource('/departments', DepartmentsController::class)->except(['edit']); 
+    Route::resource('/departments', DepartmentsController::class)->except(['edit'])->middleware('auth.admin'); 
     Route::resource('/roles', RoleController::class);
     Route::resource('/employees', EmployeesController::class)->except(['edit']);
     Route::put('/employees/{employee}/contact', [EmployeesController::class, 'updatecontact'])->name('employees.updatecontact');
 
     Route::resource('/files', FilesController::class)->except(['index', 'create']);
+    
+});
+
+
+
+
+
+/**
+ * HR Routes
+ */
+  /* 
+Route::prefix('hr')->middleware(['auth', 'can:hr-access'])->name('hr.')->group(function () {
+ Route::resource('/employees', HrEmployeesController::class)->except([
+        'destroy'
+    ]);  
+
+
+    
+});*/
+
+
+// auth.isSecurity 'auth.isSuperUser'
 
     //Route::post('/employees/{employee}/addfile', [EmployeesController::class, 'addfile'])->name('employees.addfile');
     //Route::put('/employees/{employee}/edit-file', [EmployeesController::class, 'editfile'])->name('employees.editfile');
@@ -62,30 +90,3 @@ Route::prefix('admin')->middleware(['auth', 'auth.isAdmin'])->name('admin.')->gr
             }
         );
   */
-
-    
-});
-
-
-/**
- * HR Routes
- */
-Route::prefix('hr')->middleware(['auth', 'can:hr-access'])->name('hr.')->group(function () {
-    Route::resource('/employees', HrEmployeesController::class)->except([
-        'destroy'
-    ]); 
-
-   /* 
-        Route::resource('/roles', RoleController::class)
-        ->missing(
-            function (Request $request) {
-                return Redirect::route('RoleController');
-            }
-        );
-  */
-
-    
-});
-
-
-// auth.isSecurity 'auth.isSuperUser'

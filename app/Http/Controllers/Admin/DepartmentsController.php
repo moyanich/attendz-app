@@ -7,6 +7,7 @@ use App\Models\Departments;
 use App\Models\User;
 use App\Models\Employees;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use DB;
 
 class DepartmentsController extends Controller
@@ -21,15 +22,22 @@ class DepartmentsController extends Controller
        //$departments = Departments::orderBy('id', 'DESC')->paginate(10);
 
        // TODO: Find the eloquent way
-        $departments = Departments::select('departments.*', 
-            DB::raw('CONCAT(employees.firstname, " " , employees.lastname) as managerName'), 
-            DB::raw('CONCAT(userSup.firstname, " " , userSup.lastname) as supervisorName'))
-                ->leftJoin('employees', 'departments.manager_id', '=', 'employees.id')
-                ->leftJoin('employees as userSup', 'departments.supervisor_id', '=', 'userSup.id')
-                ->orderBy('id', 'asc')->paginate(15);
-      
-        return view('admin.departments.index', compact('departments'))
-            ->with('i', ($request->input('page', 1) - 1) * 5);
+
+       if(Gate::denies('hr-access')  ) {
+            dd('no');
+       }
+
+       if(Gate::allows('admin')  ) {
+            $departments = Departments::select('departments.*', 
+                DB::raw('CONCAT(employees.firstname, " " , employees.lastname) as managerName'), 
+                DB::raw('CONCAT(userSup.firstname, " " , userSup.lastname) as supervisorName'))
+                    ->leftJoin('employees', 'departments.manager_id', '=', 'employees.id')
+                    ->leftJoin('employees as userSup', 'departments.supervisor_id', '=', 'userSup.id')
+                    ->orderBy('id', 'asc')->paginate(15);
+        
+            return view('admin.departments.index', compact('departments'))
+                ->with('i', ($request->input('page', 1) - 1) * 5);
+        }
     }
 
     /**

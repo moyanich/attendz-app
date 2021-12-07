@@ -12,6 +12,7 @@ use App\Models\Role;
 use App\Models\User;
 use Carbon\Carbon;
 use DataTables;
+use Illuminate\Auth\Access\Response;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Validation\Rule;
@@ -26,37 +27,53 @@ class EmployeesController extends Controller
      */
     public function index(Request $request)
     {
-        $employees = Employees::get();
 
-        if ($request->ajax()) {
-            return Datatables::of($employees)
-            ->addColumn('status', function ($statusRow) {
-                // TODO: refactor 
-                /* if ($statusRow->status == "Active") { 
-                    return '<div class="px-2 flex text-sm leading-5 font-semibold bg-transparent rounded-full items-center"><i class="fas fa-circle fa-xs text-emerald-500 mr-1 leading-none"></i></div>'; 
-                }
-                else if ($statusRow->status == "Inactive") { 
-                    return '<div class="px-2 flex text-sm leading-5 font-semibold bg-transparent rounded-full items-center"><i class="fas fa-circle fa-xs text-red-500 mr-1 leading-none"></i></div>'; 
-                }
-                else { 
-                    return ''; 
-                } */
-            })
-            ->addIndexColumn()
-                ->addColumn('action', function($row) {
-                    return '<div class="flex flex-wrap items-center p-4">
-                            <a href="' . route('admin.employees.show', $row->id) . ' " class="flex items-center bg-teal-500 text-white active:bg-teal-600 font-bold uppercase text-xs px-2 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
-                                </svg>
-                            </a>
-                        </div>';
+        //$this->authorize('admin'); // return 403
+        //$this->authorize('hr-access'); // return 403
+
+
+        if(Gate::allows('admin') || Gate::allows('hr-access')) { 
+           
+            $employees = Employees::get();
+
+            if ($request->ajax()) {
+                return Datatables::of($employees)
+                ->addColumn('status', function ($statusRow) {
+                    // TODO: refactor 
+                    /* if ($statusRow->status == "Active") { 
+                        return '<div class="px-2 flex text-sm leading-5 font-semibold bg-transparent rounded-full items-center"><i class="fas fa-circle fa-xs text-emerald-500 mr-1 leading-none"></i></div>'; 
+                    }
+                    else if ($statusRow->status == "Inactive") { 
+                        return '<div class="px-2 flex text-sm leading-5 font-semibold bg-transparent rounded-full items-center"><i class="fas fa-circle fa-xs text-red-500 mr-1 leading-none"></i></div>'; 
+                    }
+                    else { 
+                        return ''; 
+                    } */
                 })
-                ->rawColumns(['action'])
                 ->addIndexColumn()
-                ->make(true);
-        }        
-        return view('admin.employees.index')->with('employees', $employees); 
+                    ->addColumn('action', function($row) {
+                        return '<div class="flex flex-wrap items-center p-4">
+                                <a href="' . route('admin.employees.show', $row->id) . ' " class="flex items-center bg-teal-500 text-white active:bg-teal-600 font-bold uppercase text-xs px-2 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                                    </svg>
+                                </a>
+                            </div>';
+                    })
+                    ->rawColumns(['action'])
+                    ->addIndexColumn()
+                    ->make(true);
+            }   
+                 
+            return view('admin.employees.index')->with('employees', $employees); 
+
+        } else {
+            echo 'You must be an administrator.';
+        }
+       
+
+
+        
     }
 
     /**
@@ -67,7 +84,10 @@ class EmployeesController extends Controller
     public function create()
     {
         $role = Role::where('name', 'like', '%Employee%')->first();
-        return view('admin.employees.create')->with('role', $role);
+        $genders['genders'] = Genders::pluck('name', 'id')->toArray(); // Get Genders Table
+        return view('admin.employees.create')
+        ->with('role', $role)
+        ->with('genders', $genders);
     }
 
     /**
@@ -92,7 +112,14 @@ class EmployeesController extends Controller
         $employee->id = $request->input('id');
         $employee->firstname = $request->input('firstname');
         $employee->lastname = $request->input('lastname');
+        $employee->gender_id = $request->input('gender');
         $employee->email = $request->input('email');
+
+        /* Calculate Retirement based on Gender and DOB */
+       /*$year = Genders::select('retirementYears')->where('id', '=', $employee->gender_id)->get()->first();
+        $newDate = Carbon::parse($employee->date_of_birth)->addYears($year->retirementYears)->format('Y-m-d');
+        $employee->retirement_date = $newDate; */
+        
         $employee->save();
     
         $user = User::create([
@@ -121,8 +148,8 @@ class EmployeesController extends Controller
         $employee = Employees::findOrFail($id);
         $gender = Genders::find($employee->gender_id);
         $genders['genders'] = Genders::pluck('name', 'id')->toArray(); // Get Genders Table
-        $parish = '';
-        $parish = Parishes::findOrFail($employee->parish_id);
+    
+       // $parish = Parishes::findOrFail($employee->parish_id);
         $parishes = Parishes::pluck('name', 'id')->toArray(); // Get Genders Table
         $files = Files::where('employee_id', $id)->get();
       
@@ -130,11 +157,11 @@ class EmployeesController extends Controller
             ->with('employee', $employee)
             ->with('genders', $genders)
             ->with('gender', $gender)
-            ->with('parish', $parish)
             ->with('parishes', $parishes)
             ->with('files', $files);
            // ->with('employments', $employments)
            // ->with('recentEmployment', $recentEmployment); 
+           ;
     }
 
     /**

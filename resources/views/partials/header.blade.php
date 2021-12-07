@@ -20,7 +20,7 @@
 
     <div class="flex items-center">
         <div class="relative block overflow-hidden">
-            {{ __('Welcome: ') . '' . Auth::user()->name }}
+            {{ __('Welcome: ') . '' . Auth::user()->firstname . ' ' .  Auth::user()->lastname}}
         </div>
 
         <div x-data="{ notificationOpen: false }" class="relative">

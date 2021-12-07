@@ -63,7 +63,22 @@
                             @enderror
                         </div>
                     </div>
+                    <div class="w-full lg:w-3/12 px-4">
+                        <div class="relative w-full mb-3">
+                            {{ Form::label('gender', 'Gender', ['class' => 'block uppercase text-blueGray-600 text-xs font-bold mb-2']) }}
+
+                            {!! Form::select('gender', $genders, '', ['class' => 'form-select block w-full mt-1 border-0 px-3 py-3 placeholder-blueGray-400 text-gray-600 bg-gray-100 rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150']) !!}
+
+                            @error('gender')
+                                <p class="text-xs text-red-600">{{ $message }}</p>
+                            @enderror
+                        </div>
+                    </div>
                 </div>
+
+
+                
+
                 
                 <hr class="my-8 border-b-1 border-blueGray-300">
                 

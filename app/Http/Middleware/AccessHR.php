@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 
-class AccessSuperUser
+class AccessHR
 {
     /**
      * Handle an incoming request.
@@ -17,10 +17,10 @@ class AccessSuperUser
      */
     public function handle(Request $request, Closure $next)
     {
-        if (Gate::allows('is-superuser')) {
+        if (Gate::allows('hr-access')) {
             return $next($request);
         }
 
-        return redirect('/dashboard');
+        return redirect('/');
     }
 }

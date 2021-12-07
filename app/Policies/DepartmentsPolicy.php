@@ -4,7 +4,9 @@ namespace App\Policies;
 
 use App\Models\Departments;
 use App\Models\User;
+use App\Models\Role;
 use Illuminate\Auth\Access\HandlesAuthorization;
+use Illuminate\Auth\Access\Response;
 
 class DepartmentsPolicy
 {
@@ -18,7 +20,7 @@ class DepartmentsPolicy
      */
     public function viewAny(User $user)
     {
-        
+        //return $user->role == 'admin';
     }
 
     /**
@@ -30,7 +32,7 @@ class DepartmentsPolicy
      */
     public function view(User $user, Departments $departments)
     {
-        
+        //return $user->role == 'admin';
     }
 
     /**
