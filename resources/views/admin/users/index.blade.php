@@ -1,64 +1,50 @@
 @section('title', 'Users')
 <x-app-layout>
     <x-slot name="header">
-        <div class="w-full mb-6 pt-3">
-            <div class="flex flex-row items-center justify-between mb-4">
-                <div class="flex flex-col">
-                    <div class="text-xs uppercase font-light text-gray-500">
-                        {{ __('Management') }}
-                    </div>
-                    <div class="text-xl font-bold">
-                        {{ __('User Management') }}
-                    </div>
-                    <div class="breadcrumb">
-                        <x-breadcrumbs></x-breadcrumbs> 
-                    </div>
-                </div>
-                <div class="flex-shrink-0 space-x-2">
-                    <a href="{{ route('admin.users.create') }}" class="btn btn-sm flex align-items-center" type="button">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-                        </svg>
-                        {{ __('New User') }}
-                    </a>
-                </div>
+        <div class="flex flex-col">
+            <div class="text-xs uppercase font-light text-gray-500">
+                {{ __('Management') }}
             </div>
+            <div class="text-xl font-bold">
+                {{ __('User Management') }}
+            </div>
+            <div class="breadcrumb">
+                <x-breadcrumbs></x-breadcrumbs> 
+            </div>
+        </div>
+        <div class="flex-shrink-0 space-x-2">
+            <a href="{{ route('admin.users.create') }}" class="btn btn-sm flex align-items-center" type="button">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                </svg>
+                {{ __('New User') }}
+            </a>
         </div>
     </x-slot>
 
     {{-- Messages --}}
-    <div class="flex mt-8">
-        <x-messages />
-    </div>
+    <x-messages />
     {{-- End Messages --}}
 
     {{-- Content --}}
     <div class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded">
-        <div class="rounded-t mb-0 px-4 py-3 border-0">
-            <div class="flex flex-wrap items-center">
-                <div class="relative w-full px-4 max-w-full flex-grow flex-1">
-                    <h3 class="font-semibold text-base text-blueGray-700">Users</h3>
-                </div>
-            </div>
-        </div>
-    
         <div class="block w-full overflow-x-auto">
             <table class="items-center w-full bg-transparent border-collapse">
                 <thead class="bg-gray-200">
                     <tr>
-                        <th scope="col" class="px-6 bg-blueGray-50 text-gray-900 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
-                            {{ __('No') }}
+                        <th scope="col" class="px-6 bg-blueGray-50 text-black align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                            {{ __('#') }}
                         </th>
-                        <th scope="col" class="px-6 bg-blueGray-50 text-gray-900 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                        <th scope="col" class="px-6 bg-blueGray-50 text-black align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
                             {{ __('Name') }}
                         </th>
-                        <th scope="col" class="px-6 bg-blueGray-50 text-gray-900 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                        <th scope="col" class="px-6 bg-blueGray-50 text-black align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
                             {{ __('Roles') }}
                         </th>
-                        <th scope="col" class="px-6 bg-blueGray-50 text-gray-900 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                        <th scope="col" class="px-6 bg-blueGray-50 text-black align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
                             {{ __('Date Created') }}
                         </th>
-                        <th scope="col" class="px-6 bg-blueGray-50 text-gray-900 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                        <th scope="col" class="px-6 bg-blueGray-50 text-black align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
                             {{ __('Status') }}
                         </th>
                         <th scope="col" class="px-6 bg-blueGray-50 text-gray-900 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
@@ -124,7 +110,7 @@
     </div>
     {{-- End Content --}}
 </x-app-layout>
-
+ 
 
 {{-- Delete Modal --}}
 @foreach($users as $key => $user)

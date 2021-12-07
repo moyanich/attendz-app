@@ -1,59 +1,52 @@
 @section('title', 'Roles')
 <x-app-layout>
     <x-slot name="header">
-        <div class="w-full mb-6 pt-3">
-            <div class="flex flex-row items-center justify-between mb-4">
-                <div class="flex flex-col">
-                    <div class="text-xs uppercase font-light text-gray-500">
-                        {{ __('Management') }}
-                    </div>
-                    <div class="text-xl font-bold">
-                        {{ __('Roles') }}
-                    </div>
-                    <div class="breadcrumb">
-                        <x-breadcrumbs></x-breadcrumbs> 
-                    </div>
-                </div>
-                {{--  <div class="flex-shrink-0 space-x-2">
-                    <a href="{{ route('admin.roles.create') }}" class="flex items-center bg-lightBlue-500 text-white active:bg-lightBlue-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        </svg>
-                        {{ __('Add New Role') }}
-                    </a>
-                </div>--}}
+        <div class="flex flex-col">
+            <div class="text-xs uppercase font-light text-gray-500">
+                {{ __('Management') }}
+            </div>
+            <div class="text-xl font-bold">
+                {{ __('Roles') }}
+            </div>
+            <div class="breadcrumb">
+                <x-breadcrumbs></x-breadcrumbs> 
             </div>
         </div>
+        {{--  <div class="flex-shrink-0 space-x-2">
+            <a href="{{ route('admin.roles.create') }}" class="flex items-center bg-lightBlue-500 text-white active:bg-lightBlue-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                {{ __('Add New Role') }}
+            </a>
+        </div> --}}
     </x-slot>
 
     {{-- Messages --}}
-    <div class="flex mt-8">
-        <x-messages />
-    </div>
+    <x-messages />
     {{-- End Messages --}}
 
     {{-- Content --}}
-
     <div class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded">
         <div class="rounded-t mb-0 px-4 py-3 border-0">
-           <div class="flex flex-wrap items-center">
+        <div class="flex flex-wrap items-center">
                 <div class="relative w-full px-4 max-w-full flex-grow flex-1">
                     <h3 class="font-semibold text-base text-blueGray-700">Roles</h3>
                 </div>
-           </div>
+        </div>
         </div>
     
         <div class="block w-full overflow-x-auto">
             <table class="items-center w-full bg-transparent border-collapse">
                 <thead class="bg-gray-200">
                     <tr>
-                        <th scope="col" class="px-6 bg-blueGray-50 text-gray-900 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
-                            {{ __('No') }}
+                        <th scope="col" class="px-6 bg-blueGray-50 text-black align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                            {{ __('#') }}
                         </th>
-                        <th scope="col" class="px-6 bg-blueGray-50 text-gray-900 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                        <th scope="col" class="px-6 bg-blueGray-50 text-black align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
                             {{ __('Name') }}
                         </th>
-                        {{-- <th scope="col" class="px-6 bg-blueGray-50 text-gray-900 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                        {{-- <th scope="col" class="px-6 bg-blueGray-50 text-black align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
                             {{ __('Actions') }}
                         </th> --}}
                     </tr>
@@ -94,7 +87,6 @@
             </div>
         </div>
     </div>
-    
     {{-- End Content --}}
 
 

@@ -19,7 +19,7 @@
         <script src="{{ asset('js/app.js') }}" defer></script>
     
     </head>
-    <body class="bg-gray-100">
+    <body class="bg-white">
         <div x-data="{ sidebarOpen: false }" class="flex h-screen font-roboto">
             @include('partials.sidebar')
             
@@ -27,16 +27,16 @@
                 @include('partials.header')
 
                 <main class="flex-1 overflow-x-hidden overflow-y-auto">
-                    <div class="container mx-auto px-6 py-8">
-                        <header>
-                            <div class="w-full mb-6">
+                    <div class="container mx-auto">
+                        <header class="px-6 py-8">
+                            <div class="w-full mb-4">
                                 <div class="flex flex-row items-center justify-between">
                                     {{ $header }}
                                 </div>
                             </div>
                         </header>
                       
-                        <div class="main-content">
+                        <div class="main-content p-4">
                             {{ $slot }}
                         </div>
                     </div>

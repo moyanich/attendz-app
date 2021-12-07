@@ -1,35 +1,29 @@
 @section('title', 'Employees')
 <x-app-layout>
     <x-slot name="header">
-        <div class="w-full mb-6 pt-3">
-            <div class="flex flex-row items-center justify-between mb-4">
-                <div class="flex flex-col">
-                    <div class="text-xs uppercase font-light text-gray-500">
-                        {{ __('Listing') }}
-                    </div>
-                    <div class="text-xl font-bold">
-                        {{ __('Employees') }}
-                    </div>
-                    <div class="breadcrumb">
-                        <x-breadcrumbs></x-breadcrumbs> 
-                    </div>
-                </div>
-                <div class="flex-shrink-0 space-x-2">
-                    <a href="{{ route('admin.employees.create') }}" class="btn btn-sm flex align-items-center" type="button">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-                        </svg>
-                        {{ __('New Employee') }}
-                    </a>
-                </div>
+        <div class="flex flex-col">
+            <div class="text-xs uppercase font-light text-gray-500">
+                {{ __('Listing') }}
             </div>
+            <div class="text-xl font-bold">
+                {{ __('Employees') }}
+            </div>
+            <div class="breadcrumb">
+                <x-breadcrumbs></x-breadcrumbs> 
+            </div>
+        </div>
+        <div class="flex-shrink-0 space-x-2">
+            <a href="{{ route('admin.employees.create') }}" class="btn btn-sm flex align-items-center" type="button">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                </svg>
+                {{ __('New Employee') }}
+            </a>
         </div>
     </x-slot>
 
     {{-- Messages --}}
-    <div class="flex mt-8">
-        <x-messages />
-    </div>
+    <x-messages />
     {{-- End Messages --}}
 
     {{-- Content --}}
@@ -74,37 +68,31 @@
     </div>
     {{-- End Content --}}
 
-    <div class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded">
-        <div class="rounded-t mb-0 px-4 py-3 border-0 bg-gray-200">
-           <div class="flex flex-wrap items-center">
-                <div class="relative w-full max-w-full flex-grow flex-1">
-                    <h3 class="font-semibold text-base text-blueGray-700">
-                        {{ __('Employees') }}
-                    </h3>
-                </div>
-           </div>
-        </div>
     
+    <div class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded">
         <div class="block w-full overflow-x-auto">
             <table id="example" class="items-center w-full bg-transparent border-collapse">
                 <thead class="bg-gray-200">
                     <tr>
-                        <th scope="col" class="px-6 bg-blueGray-50 text-gray-900 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                        <th scope="col" class="px-6 bg-blueGray-50 text-black align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                            {{ __('#') }}
+                        </th>
+                        <th scope="col" class="px-6 bg-blueGray-50 text-black align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
                             {{ __('Emp. No.') }}
                         </th>
-                        <th scope="col" class="px-6 bg-blueGray-50 text-gray-900 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                        <th scope="col" class="px-6 bg-blueGray-50 text-black align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
                             {{ __('Name') }}
                         </th>
-                        <th scope="col" class="px-6 bg-blueGray-50 text-gray-900 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                        <th scope="col" class="px-6 bg-blueGray-50 text-black align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
                             {{ __('Department') }}
                         </th>
-                        <th scope="col" class="px-6 bg-blueGray-50 text-gray-900 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                        <th scope="col" class="px-6 bg-blueGray-50 text-black align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
                             {{ __('Type') }}
                         </th>
-                        <th scope="col" class="px-6 bg-blueGray-50 text-gray-900 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                        <th scope="col" class="px-6 bg-blueGray-50 text-black align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
                             {{ __('Status') }}
                         </th>
-                        <th scope="col" class="px-6 bg-blueGray-50 text-gray-900 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                        <th scope="col" class="px-6 bg-blueGray-50 text-black align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
                             {{ __('Actions') }}
                         </th>
                     </tr>
@@ -112,6 +100,9 @@
                 <tbody class="bg-white divide-y divide-gray-200">
                     @foreach ($employees as $key => $employee)
                         <tr>
+                            <td class="border-t-0 px-6 align-middle text-center border-l-0 border-r-0 text-sm whitespace-nowrap p-4">
+                                {{ $loop->iteration }}
+                            </td>
                             <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4">
                                 {{ $employee->id }}
                             </td>
@@ -146,13 +137,13 @@
             
                             <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4">
                         
-                                   type
+                                type
                                     {{-- $employee->current_address.','.$employee->city --}}
                                 
                             </td>
                             <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4">
             
-                               
+                            
                             </td>
                             <td class="flex flex-wrap items-center p-4">
                                 <a href="{{ route('admin.employees.show', $employee->id) }}" class="flex items-center bg-teal-500 text-white active:bg-teal-600 font-bold uppercase text-xs px-2 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button">
@@ -173,6 +164,7 @@
             </table>
         </div>
     </div>
+   
     {{-- End Content --}}
 
 

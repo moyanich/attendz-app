@@ -24,7 +24,7 @@ class UpdateFilesRequest extends FormRequest
     public function rules()
     {
         return [
-            'file' => 'required|file|mimes:jpg,jpeg,png,doc,docx,csv,xlsx,xls,txt,pdf'
+            'file' => 'file|mimes:jpg,jpeg,png,doc,docx,csv,xlsx,xls,txt,pdf'
         ];
     }
 }

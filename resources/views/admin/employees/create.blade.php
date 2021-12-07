@@ -1,38 +1,35 @@
 @section('title', 'New Employee')
 <x-app-layout>
     <x-slot name="header">
-        <div class="w-full mb-6 pt-3">
-            <div class="flex flex-row items-center justify-between mb-4">
-                <div class="flex flex-col">
-                    <div class="text-xs uppercase font-light text-gray-500">
-                        {{ __('New') }}
-                    </div>
-                    <div class="text-xl font-bold">
-                        {{ __('Employee') }}
-                    </div>
-                    <div class="breadcrumb">
-                        <x-breadcrumbs></x-breadcrumbs> 
-                    </div>
-                </div>
+        <div class="flex flex-col">
+            <div class="text-xs uppercase font-light text-gray-500">
+                {{ __('New') }}
+            </div>
+            <div class="text-xl font-bold">
+                {{ __('Employee') }}
+            </div>
+            <div class="breadcrumb">
+                <x-breadcrumbs></x-breadcrumbs> 
             </div>
         </div>
     </x-slot>
 
     {{-- Messages --}}
-    <div class="flex mt-8"><x-messages /></div>
+    <x-messages />
     {{-- End Messages --}}
 
     {{-- Content --}}
-    <div class="relative flex flex-col min-w-0 break-words bg-white w-full md:w-8/12 mx-auto px-6 py-10 mb-6 shadow-lg rounded">
+    <div class="relative flex flex-col min-w-0 break-words bg-white w-full mx-auto px-6 py-10 mb-6 shadow-lg rounded">
         <div class="block w-full overflow-x-auto px-6">
-            
+
             {!! Form::open(['action' => 'App\Http\Controllers\Admin\EmployeesController@store', 'method' => 'POST']) !!}
 
                 <div class="flex flex-wrap">
                     <div class="w-full px-4 text-blueGray-400 text-sm mb-6 font-bold uppercase">
                         {{ __('Employee Information') }}
                     </div>
-                    <div class="w-full px-4">
+                    
+                    <div class="w-full lg:w-2/12 px-4">
                         <div class="relative w-full mb-3">
                             {{ Form::label('id', 'Employee ID', ['class' => 'block uppercase text-blueGray-600 text-xs font-bold mb-2']) }}
 
@@ -43,10 +40,8 @@
                             @enderror
                         </div>
                     </div>
-                </div>
-
-                <div class="flex flex-wrap">
-                    <div class="w-full lg:w-6/12 px-4">
+               
+                    <div class="w-full lg:w-5/12 px-4">
                         <div class="relative w-full mb-3">
                             {{ Form::label('firstname', 'First Name', ['class' => 'block uppercase text-blueGray-600 text-xs font-bold mb-2']) }}
 
@@ -58,7 +53,7 @@
                         </div>
                     </div>
                     
-                    <div class="w-full lg:w-6/12 px-4">
+                    <div class="w-full lg:w-5/12 px-4">
                         <div class="relative w-full mb-3">
                             {{Form::label('lastname', 'Last Name', ['class' => 'block uppercase text-blueGray-600 text-xs font-bold mb-2'])}}
                             {{Form::text('lastname', '', ['class' => 'border-0 px-3 py-3 placeholder-blueGray-400 text-gray-600 bg-gray-100 rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150', 'placeholder' => 'Last Name'])}}
@@ -144,9 +139,12 @@
 
                     </div>
                 </div>
+                
             {!! Form::close() !!}
+
         </div>
     </div>
     {{-- End Content --}}
+
 
 </x-app-layout>

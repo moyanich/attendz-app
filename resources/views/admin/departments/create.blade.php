@@ -1,31 +1,25 @@
 @section('title', 'New Departments')
 <x-app-layout>
     <x-slot name="header">
-        <div class="w-full mb-6 pt-3">
-            <div class="flex flex-row items-center justify-between mb-4">
-                <div class="flex flex-col">
-                    <div class="text-xs uppercase font-light text-gray-500">
-                        {{ __('Create new') }}
-                    </div>
-                    <div class="text-xl font-bold">
-                        {{ __('Departments') }}
-                    </div>
-                    <div class="breadcrumb">
-                        <x-breadcrumbs></x-breadcrumbs> 
-                    </div>
-                </div>
+        <div class="flex flex-col">
+            <div class="text-xs uppercase font-light text-gray-500">
+                {{ __('Create new') }}
+            </div>
+            <div class="text-xl font-bold">
+                {{ __('Departments') }}
+            </div>
+            <div class="breadcrumb">
+                <x-breadcrumbs></x-breadcrumbs> 
             </div>
         </div>
     </x-slot>
 
     {{-- Messages --}}
-    <div class="flex mt-8">
-        <x-messages />
-    </div>
+    <x-messages />
     {{-- End Messages --}}
 
     {{-- Content --}}
-    <div class="relative flex flex-col min-w-0 break-words bg-white w-full md:w-8/12 mx-auto px-6 py-10 mb-6 shadow-lg rounded">
+    <div class="relative flex flex-col min-w-0 break-words bg-white w-full mx-auto px-6 py-10 mb-6 shadow-lg rounded">
         <div class="block w-full overflow-x-auto px-6">
 
             {!! Form::open(['action' => 'App\Http\Controllers\Admin\DepartmentsController@store', 'method' => 'POST']) !!}
