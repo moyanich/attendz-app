@@ -197,9 +197,9 @@
                                             {{ __('Parish') }}
                                         </div>
                                         <div class="info-text">
-                                           {{--   @isset( $parish->name)
+                                           @isset( $parish->id)
                                                 {{ $parish->name }}
-                                            @endisset   --}}
+                                            @endisset
                                             {{-- $parish->name??'' --}}
                                         </div>
 

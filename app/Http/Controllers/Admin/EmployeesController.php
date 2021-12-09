@@ -149,16 +149,13 @@ class EmployeesController extends Controller
         $gender = Genders::find($employee->gender_id);
         $genders['genders'] = Genders::pluck('name', 'id')->toArray(); // Get Genders Table
     
-       // $parish = Parishes::findOrFail($employee->parish_id);
-
-        $parished = $employee->parish_id::find(1)->parish;
-
-        dd($parished);
+        $parish = Parishes::find($employee->parish_id);
+        //dd($parish);
 
         $parishes = Parishes::pluck('name', 'id')->toArray(); // Get Genders Table
         $files = Files::where('employee_id', $id)->get();
       
-        /*return view('admin.employees.show')
+        return view('admin.employees.show')
             ->with('employee', $employee)
             ->with('genders', $genders)
             ->with('gender', $gender)
@@ -167,7 +164,7 @@ class EmployeesController extends Controller
             ->with('files', $files);
            // ->with('employments', $employments)
            // ->with('recentEmployment', $recentEmployment); 
-           ; */
+           ; 
     }
 
     /**
