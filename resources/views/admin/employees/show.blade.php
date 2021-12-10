@@ -276,15 +276,7 @@
                                                                 </svg>
                                                             </a>
 
-                                                           {{--  <a href="{{ route('admin.employees.editfile', $file->id) }}" class="flex items-center bg-teal-500 text-white active:bg-teal-600 font-bold uppercase text-xs px-2 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button">
-                                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-0.5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
-                                                                </svg>
-                                                            </a> --}}
-
-
-
-                                                          <button class="flex items-center bg-teal-500 text-white active:bg-teal-600 font-bold uppercase text-xs px-2 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button" onclick="toggleModal('file-edit-{{ $file->id }}')">
+                                                            <button class="flex items-center bg-teal-500 text-white active:bg-teal-600 font-bold uppercase text-xs px-2 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button" onclick="toggleModal('file-edit-{{ $file->id }}')">
                                                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
                                                                 </svg>
@@ -305,15 +297,31 @@
 
                                 <div class="w-full md:w-1/2 border-t border-r border-l border- border-gray-200">
                                     <div class="w-full flex justify-between border-b border-gray-200 p-2">
-                                        <h2 class="font-bold">{{ __('Notes') }}</h2>
-                                        <button class="flex items-center text-white px-4 py-2 font-bold uppercase text-xs bg-lightBlue-500 hover:bg-lightBlue-300 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button" onclick="toggleModal('contact-modal')">
-                                            {{ __('Edit') }}
-                                        </button>
+                                        <h2 class="font-bold">{{ __('Note') }}</h2>
+
+                                            {!! Form::open(['action' => ['App\Http\Controllers\Admin\EmployeesController@savenote', $employee->id], 'method' => 'POST']) !!}
+                                            @csrf
+                                   
+                                            {{ Form::submit('Save', ['class' => 'flex items-center text-white px-4 py-2 font-bold uppercase text-xs bg-violet-400 hover:bg-violet-300 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150 cursor-pointer']) }}
+                        
+
+                                            {{--<button class="flex items-center text-white px-4 py-2 font-bold uppercase text-xs bg-lightBlue-500 hover:bg-lightBlue-300 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button" onclick="toggleModal('contact-modal')">
+                                                {{ __('Save') }}
+                                            </button>--}}
+                                        </div>
+                                        <div class="p-2">
+                                            {{ Form::textarea('notes', $employee->notes, ['class' => 'border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-gray-100 rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150', 'rows' => '8']) }}
+                        
+                                            @error('address')
+                                                <p class="text-xs text-red-600">{{ $message }}</p>
+                                            @enderror
+                                        </div>
+                                   
                                     </div>
-                                    <div class="p-2">
-                                        texts
-                                    </div>
-                                </div>
+                                
+        
+                            {{Form::hidden('_method', 'PUT') }}
+                            {!! Form::close() !!}
                             </div>
                         </div>
 

@@ -48,6 +48,9 @@ Route::prefix('admin')->middleware('auth')->name('admin.')->group(function () {
     Route::resource('/roles', RoleController::class);
     Route::resource('/employees', EmployeesController::class)->except(['edit']);
     Route::put('/employees/{employee}/contact', [EmployeesController::class, 'updatecontact'])->name('employees.updatecontact');
+    Route::put('/employees/{employee}/savenote', [EmployeesController::class, 'savenote'])->name('employees.savenote');
+
+    
 
     Route::resource('/files', FilesController::class)->except(['index', 'create']);
     

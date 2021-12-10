@@ -256,6 +256,20 @@ class EmployeesController extends Controller
         return redirect()->back()->with('success', 'Employee Contact Information updated sucessfully!!');
     }
 
+    /**
+     * Update the employee contact information.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function savenote(Request $request, $id)
+    {
+        $employee = Employees::findOrFail($id);
+        $employee->notes = $request->input('notes'); 
+        $employee->save();
+        return redirect()->back()->with('success', 'Note Saved!!');
+    }
 
     /**
      * Remove the employee resource from the database.
