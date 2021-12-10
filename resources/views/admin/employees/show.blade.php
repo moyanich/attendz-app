@@ -105,7 +105,13 @@
                             {{-- ----- PERSONAL INFORMATION ----- --}}
                             <div class="w-full">
                                 <div class="w-full flex justify-between border-t border-r border-l border- border-gray-200 p-2">
-                                    <h2 class="font-bold">{{ __('Personal Information') }}</h2>
+                                    <div class="flex items-center">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                          </svg>
+                                        <h2 class="font-bold ml-2">{{ __('Personal Information') }}</h2>
+                                    </div>
+
                                     <button class="flex items-center text-white px-4 py-2 font-bold uppercase text-xs bg-lightBlue-500 hover:bg-lightBlue-300 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button" onclick="toggleModal('personal-modal')">
                                         {{ __('Edit Profile') }}
                                     </button>
@@ -169,7 +175,13 @@
                             {{-- ----- CONTACT INFORMATION ----- --}}
                             <div>
                                 <div class="w-full flex justify-between border-t border-r border-l border- border-gray-200 p-2">
-                                    <h2 class="font-bold">{{ __('Contact Information') }}</h2>
+                                    <div class="flex items-center">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                                        </svg>
+                                        <h2 class="font-bold ml-2">{{ __('Contact Information') }}</h2>
+                                    </div>
+
                                     <button class="flex items-center text-white px-4 py-2 font-bold uppercase text-xs bg-lightBlue-500 hover:bg-lightBlue-300 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button" onclick="toggleModal('contact-modal')">
                                         {{ __('Edit Contact') }}
                                     </button>
@@ -237,7 +249,13 @@
                             <div class="flex justify-between space-x-4">
                                <div class="w-full md:w-1/2 border-t border-r border-l border-b border-gray-200">
                                     <div class="w-full flex justify-between border-b border-gray-200 p-2">
-                                        <h2 class="font-bold">{{ __('Files/Documents') }}</h2>
+                                        <div class="flex items-center">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                                            </svg>
+                                            <h2 class="font-bold ml-2">{{ __('Files/Documents') }}</h2>
+                                        </div>
+
                                         <button class="flex items-center text-white px-4 py-2 font-bold uppercase text-xs bg-lightBlue-500 hover:bg-lightBlue-300 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button" onclick="toggleModal('files-modal')">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 13h6m-3-3v6m5 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
@@ -297,8 +315,13 @@
 
                                 <div class="w-full md:w-1/2 border-t border-r border-l border-b border-gray-200">
                                     <div class="w-full flex justify-between border-b border-gray-200 p-2">
-                                        <h2 class="font-bold">{{ __('Notes') }}</h2>
-
+                                            <div class="flex items-center">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+                                                </svg> 
+                                                <h2 class="font-bold ml-2">{{ __('Notes') }}</h2>
+                                            </div>
+                                           
                                             {!! Form::open(['action' => ['App\Http\Controllers\Admin\EmployeesController@savenote', $employee->id], 'method' => 'POST']) !!}
                                             @csrf
                                    
