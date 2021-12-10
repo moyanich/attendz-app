@@ -297,7 +297,7 @@
 
                                 <div class="w-full md:w-1/2 border-t border-r border-l border- border-gray-200">
                                     <div class="w-full flex justify-between border-b border-gray-200 p-2">
-                                        <h2 class="font-bold">{{ __('Note') }}</h2>
+                                        <h2 class="font-bold">{{ __('Notes') }}</h2>
 
                                             {!! Form::open(['action' => ['App\Http\Controllers\Admin\EmployeesController@savenote', $employee->id], 'method' => 'POST']) !!}
                                             @csrf
