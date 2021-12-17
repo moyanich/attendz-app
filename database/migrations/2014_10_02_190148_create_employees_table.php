@@ -14,7 +14,7 @@ class CreateEmployeesTable extends Migration
     public function up()
     {
         Schema::create('employees', function (Blueprint $table) {
-            $table->unsignedBigInteger('id');
+            $table->unsignedBigInteger('id')->comment('Employee number');
             $table->string('firstname');
             $table->string('middlename')->nullable();
             $table->string('lastname');
@@ -24,7 +24,7 @@ class CreateEmployeesTable extends Migration
             $table->string('emergency_number')->nullable();
             $table->date('date_of_birth')->nullable();
             $table->date('retirement_date')->nullable();
-            $table->date('hire_date')->nullable();
+            $table->date('hire_date')->nullable()->comment('Date of hire');
             $table->char('nis', 9)->nullable()->unique();
             $table->char('trn', 9)->nullable()->unique();
             $table->unsignedBigInteger('gender_id')->nullable();
