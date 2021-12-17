@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\EducationTypes;
 use App\Models\Employees;
 use App\Models\Files;
 use App\Models\Genders;
@@ -154,7 +155,7 @@ class EmployeesController extends Controller
 
         $parishes = Parishes::pluck('name', 'id')->toArray(); // Get Genders Table
         $files = Files::where('employee_id', $id)->get();
-      
+
         return view('admin.employees.show')
             ->with('employee', $employee)
             ->with('genders', $genders)
@@ -285,7 +286,60 @@ class EmployeesController extends Controller
         return redirect('/admin/employees')->with('success', 'Employee ' . $employee->firstname . ' ' . $employee->lastname . ' removed sucessfully'); 
     }
 
+    /**
+     * Update the employee contact information.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function education(Request $request, $id)
+    {
+        $employee = Employees::findOrFail($id);
+        
+        $educationTypes['educationTypes'] = EducationTypes::pluck('name', 'id')->toArray(); // Get Genders Table
 
+        return view('admin.employees.education')
+        ->with('educationTypes', $educationTypes);
+
+        //return redirect()->back()->with('success', 'Note Saved!!');
+    }
+
+    public function education_store(Request $request)
+    {
+
+        $this->validate($request, [
+            'education' => 'required',
+            'school' => 'required',
+            'course' => 'required',
+            'start' => 'email|unique:users,email',
+            'end' => 'required|unique:users,username',
+        ]);
+
+       /* $education = new Employees();
+        $employee->id = $request->input('id');
+        $employee->institution = $request->input('firstname');
+        $employee->lastname = $request->input('lastname');
+        $employee->education_types_id = $request->input('gender');
+        $employee->startYear = $request->input('email');
+        $employee->endYear = $request->input('email');
+
+     
+        
+        $employee->save(); */
+
+        /*
+        $table->foreignId('employee_id')->constrained('employees')->cascadeOnDelete();
+                $table->string('institution', 100)->comment('Institution Name');
+                $table->unsignedBigInteger('education_types_id')->nullable()->default(null);
+                $table->date('startYear')->nullable();
+                $table->date('endYear')->nullable();
+               
+                */
+    }
+
+
+    //employees.education
 
     
 }

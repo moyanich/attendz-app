@@ -103,7 +103,7 @@
                         x-transition:enter-end="opacity-100 transform scale-100">
 
                             {{-- ----- PERSONAL INFORMATION ----- --}}
-                            <div class="w-full">
+                            <section class="w-full personal">
                                 <div class="w-full flex justify-between border-t border-r border-l border- border-gray-200 p-2">
                                     <div class="flex items-center">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -170,10 +170,10 @@
                                     </div>
                                     
                                 </div>
-                            </div>
+                            </section>
 
                             {{-- ----- CONTACT INFORMATION ----- --}}
-                            <div>
+                            <section class="contact">
                                 <div class="w-full flex justify-between border-t border-r border-l border- border-gray-200 p-2">
                                     <div class="flex items-center">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -243,7 +243,57 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </section>
+
+                            {{-- ----- EDUCATION INFORMATION ----- --}}
+                            <section class="education">
+                                <div class="w-full flex justify-between border-t border-r border-l border- border-gray-200 p-2">
+                                    <div class="flex items-center">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path d="M12 14l9-5-9-5-9 5 9 5z" />
+                                            <path d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" />
+                                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222" />
+                                        </svg>
+                                        <h2 class="font-bold ml-2">{{ __('Education Details') }}</h2>
+                                    </div>
+
+                                    <a href="{{ route('admin.employees.education', $employee->id)  }}" class="flex items-center text-white px-4 py-2 font-bold uppercase text-xs bg-lightBlue-500 hover:bg-lightBlue-300 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button"> 
+                                        {{ __('Add Education') }}
+                                    </a>
+
+
+
+
+                                </div>
+
+                                <div class="inner-tab border-b border-r border-gray-200 mb-8">
+                                    <table class="table-auto w-full border-separate border border-gray-200">
+                                        <thead>
+                                            <tr>
+                                                <th class="border border-gray-200">Institution</th>
+                                                <th class="border border-gray-200">Qualification</th>
+                                                <th class="border border-gray-200">Start</th>
+                                                <th class="border border-gray-200">End</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Intro to CSS</td>
+                                                <td>Adam</td>
+                                                <td>858</td>
+                                                <td>858</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Intro to CSS</td>
+                                                <td>Adam</td>
+                                                <td>858</td>
+                                                <td>858</td>
+                                            </tr>
+                                        </tbody>
+                                      </table>
+                                </div>
+                            </section>
+
 
                             {{-- ----- Documents and Notes ----- --}}
                             <div class="flex justify-between space-x-4">

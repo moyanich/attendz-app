@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\DepartmentsController;
 use App\Http\Controllers\Admin\EmployeesController;
+use App\Http\Controllers\Admin\EducationTypesController;
 //use App\Http\Controllers\HR\HrEmployeesController;
 
 use Illuminate\Support\Facades\Auth;
@@ -43,20 +44,37 @@ Route::get('/dashboard', function () {
  */
 //Route::prefix('admin')->middleware(['auth', 'auth.admin'])->name('admin.')->group(function () {
 Route::prefix('admin')->middleware('auth')->name('admin.')->group(function () {
-    Route::resource('/users', UserController::class);
-    Route::resource('/departments', DepartmentsController::class)->except(['edit'])->middleware('auth.admin'); 
-    Route::resource('/roles', RoleController::class);
+
+    Route::resource('/users', UserController::class)->middleware('auth.admin'); 
+    Route::resource('/departments', DepartmentsController::class)->middleware('auth.admin')->except(['edit']); 
+    Route::resource('/roles', RoleController::class)->middleware('auth.admin'); 
+
+    // EMPLOYEE ROUTES
     Route::resource('/employees', EmployeesController::class)->except(['edit']);
     Route::put('/employees/{employee}/contact', [EmployeesController::class, 'updatecontact'])->name('employees.updatecontact');
     Route::put('/employees/{employee}/savenote', [EmployeesController::class, 'savenote'])->name('employees.savenote');
 
+    // EDUCATION ROUTES
+    Route::get('/employees/{employee}/education', [EmployeesController::class, 'education'])->name('employees.education'); 
+    Route::post('/employees/{employee}/education', [EmployeesController::class, 'education_store'])->name('employees.education.store'); 
     
-
+    
+    // FILES ROUTE
     Route::resource('/files', FilesController::class)->except(['index', 'create']);
     
 });
 
+/*
 
+// START: Employment Routes
+        Route::get('/employees/{employee}/employment', [EmployeesController::class, 'create_employment'])->name('employees.employment');
+        Route::post('/employees/{employee}/employment', [EmployeesController::class, 'store_employment'])->name('employees.employment_store'); 
+        Route::get('/employees/{employment}/edit_employment/', [EmployeesController::class, 'edit_employment'])->name('employees.employment_edit'); 
+        Route::post('/employees/{employee}/update_employment', [EmployeesController::class, 'update_employment'])->name('employees.employment_update'); 
+        Route::delete('/employees/{employment}/destroy_employment/', [EmployeesController::class, 'destroy_employment'])->name('employees.employment_delete'); 
+
+
+        */
 
 
 

@@ -17,8 +17,10 @@ class CreateEmployeeEducationsTable extends Migration
             $table->id();
             $table->foreignId('employee_id')->constrained('employees')->cascadeOnDelete();
             $table->string('institution', 100)->comment('Institution Name');
+            $table->string('course', 200)->comment('Course of Study');
             $table->unsignedBigInteger('education_types_id')->nullable()->default(null);
-            $table->date('passingYear');
+            $table->date('startYear')->nullable();
+            $table->date('endYear')->nullable();
             $table->foreign('education_types_id')->references('id')->on('education_types')->onDelete('set null');
             $table->timestamps();
         });

@@ -23,11 +23,11 @@ class DepartmentsController extends Controller
 
        // TODO: Find the eloquent way
 
-       if(Gate::denies('hr-access')  ) {
+        /*if(Gate::denies('hr-access')  ) {
             dd('no');
-       }
+        } */
 
-       if(Gate::allows('admin')  ) {
+        if(Gate::allows('admin')  ) {
             $departments = Departments::select('departments.*', 
                 DB::raw('CONCAT(employees.firstname, " " , employees.lastname) as managerName'), 
                 DB::raw('CONCAT(userSup.firstname, " " , userSup.lastname) as supervisorName'))
@@ -37,6 +37,8 @@ class DepartmentsController extends Controller
         
             return view('admin.departments.index', compact('departments'))
                 ->with('i', ($request->input('page', 1) - 1) * 5);
+        } else if (Gate::denies('hr-access')  ) {
+            dd('no');
         }
     }
 
