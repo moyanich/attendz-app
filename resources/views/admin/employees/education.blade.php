@@ -19,7 +19,7 @@
     {{-- End Messages --}}
 
     {{-- Content --}}
-    <div class="relative flex flex-col min-w-0 break-words bg-white w-full mx-auto px-6 py-10 mb-6 shadow-lg rounded">
+    <div class="relative flex flex-col min-w-0 break-words bg-white w-full mx-auto px-6 py-10 mb-6 card shadow">
         <div class="block w-full overflow-x-auto px-6">
 
             {!! Form::open(['action' => ['App\Http\Controllers\Admin\EmployeesController@education_store', $employee->id], 'method' => 'POST']) !!}
@@ -92,11 +92,11 @@
                 </div>
 
                 <div class="w-full flex justify-end px-4 py-5">
-                    <a href="{{ redirect()->back() }}" class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
+                    <a href="{{ route('admin.employees.show', $employee->id) }}" class="btn btn-outline mt-3 w-full inline-flex justify-center sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
                         {{ __('Cancel') }}
                     </a>
 
-                    {{ Form::submit('Save', ['class' => 'mt-3 w-full inline-flex text-base font-medium text-white justify-center rounded-md shadow-sm px-6 py-2 border border-blue-600 bg-blue-600 hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm cursor-pointer transition ease-in-out duration-150']) }}
+                    {{ Form::submit('Save', ['class' => 'btn btn-secondary mt-3 w-full inline-flex justify-center sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm cursor-pointer']) }}
                 </div>
                 
             {!! Form::close() !!}

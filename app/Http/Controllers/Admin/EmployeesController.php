@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreEmployeeEducationsRequest;
 use Illuminate\Http\Request;
 use App\Models\EducationTypes;
+use App\Models\EmployeeEducations;
 use App\Models\Employees;
 use App\Models\Files;
 use App\Models\Genders;
@@ -156,16 +158,21 @@ class EmployeesController extends Controller
         $parishes = Parishes::pluck('name', 'id')->toArray(); // Get Genders Table
         $files = Files::where('employee_id', $id)->get();
 
+        //$education = EmployeeEducations::where('employee_id', $id)->get();
+        
+        $education = EmployeeEducations::query()
+            ->join('education_types', 'employee_educations.education_types_id', '=', 'education_types.id')
+            ->selectRaw('institution, course, startYear, endYear, name')
+            ->get();
+
         return view('admin.employees.show')
             ->with('employee', $employee)
             ->with('genders', $genders)
             ->with('gender', $gender)
             ->with('parish', $parish)
             ->with('parishes', $parishes)
+            ->with('education', $education)
             ->with('files', $files);
-           // ->with('employments', $employments)
-           // ->with('recentEmployment', $recentEmployment); 
-           ; 
     }
 
     /**
@@ -269,6 +276,7 @@ class EmployeesController extends Controller
         $employee = Employees::findOrFail($id);
         $employee->notes = $request->input('notes'); 
         $employee->save();
+
         return redirect()->back()->with('success', 'Note Saved!!');
     }
 
@@ -296,57 +304,31 @@ class EmployeesController extends Controller
     public function education(Request $request, $id)
     {
         $employee = Employees::findOrFail($id);
-        
-        //$educationTypes['educationTypes'] = EducationTypes::pluck('name', 'id')->toArray(); // Get Genders Table
-
         $educationTypes = EducationTypes::pluck('name', 'id')->prepend('Please select', ''); // Get Education Type Table
-
-        return view('admin.employees.education')
-        ->with('employee', $employee)
-        ->with('educationTypes', $educationTypes);
-
-        //return redirect()->back()->with('success', 'Note Saved!!');
+        return view('admin.employees.education', compact('employee', 'educationTypes'));
     }
-
-    public function education_store(Request $request, $id)
-    {
-
-        $this->validate($request, [
-            'education' => 'required',
-            'school' => 'required',
-            'course' => 'required',
-            'start' => 'email|unique:users,email',
-            'end' => 'required|unique:users,username',
-        ]);
-
-        $education = new Employees();
-
-       /* $education = new Employees();
-        $employee->id = $request->input('id');
-        $employee->institution = $request->input('firstname');
-        $employee->lastname = $request->input('lastname');
-        $employee->education_types_id = $request->input('gender');
-        $employee->startYear = $request->input('email');
-        $employee->endYear = $request->input('email');
-
-     
-        
-        $employee->save(); */
-
-        /*
-        $table->foreignId('employee_id')->constrained('employees')->cascadeOnDelete();
-                $table->string('institution', 100)->comment('Institution Name');
-                $table->unsignedBigInteger('education_types_id')->nullable()->default(null);
-                $table->date('startYear')->nullable();
-                $table->date('endYear')->nullable();
-               
-                */
-    }
-
-
-    //employees.education
-
     
+    /**
+     * Store employee education in table
+     * 
+     * @param  \App\Http\Requests\StoreEmployeeEducationsRequest $request
+     * @return \Illuminate\Http\Response
+     */
+    public function education_store(StoreEmployeeEducationsRequest $request, $id)
+    {
+        $education = new EmployeeEducations();
+        $education->employee_id = $id;
+        $education->institution = $request->input('school');
+        $education->education_types_id = $request->input('education');
+        $education->course = $request->input('course');
+        $education->startYear = $request->input('start');
+        $education->endYear = $request->input('end');
+        $education->save(); 
+
+        return redirect()->route('admin.employees.show', $id)->with('success', 'Education saved'); // Redirect to employee profile
+    }
+
+
 }
 
 

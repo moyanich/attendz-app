@@ -80,6 +80,6 @@ class Employees extends Model
         return $this->hasOne(Parishes::class, 'parish_id');
     }
 
-   
+    
  
 }

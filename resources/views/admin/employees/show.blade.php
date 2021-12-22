@@ -111,7 +111,7 @@
                                         <h2 class="font-bold ml-2">{{ __('Personal Information') }}</h2>
                                     </div>
 
-                                    <button class="flex items-center text-white px-4 py-2 font-bold uppercase text-xs bg-lightBlue-500 hover:bg-lightBlue-300 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button" onclick="toggleModal('personal-modal')">
+                                    <button class="flex items-center btn btn-info btn-sm" type="button" onclick="toggleModal('personal-modal')">
                                         {{ __('Edit Profile') }}
                                     </button>
                                 </div>
@@ -181,7 +181,7 @@
                                         <h2 class="font-bold ml-2">{{ __('Contact Information') }}</h2>
                                     </div>
 
-                                    <button class="flex items-center text-white px-4 py-2 font-bold uppercase text-xs bg-lightBlue-500 hover:bg-lightBlue-300 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button" onclick="toggleModal('contact-modal')">
+                                    <button class="flex items-center btn btn-info btn-sm" type="button" onclick="toggleModal('contact-modal')">
                                         {{ __('Edit Contact') }}
                                     </button>
                                 </div>
@@ -208,7 +208,7 @@
                                             {{ __('Parish') }}
                                         </div>
                                         <div class="info-text">
-                                           @isset( $parish->id)
+                                            @isset( $parish->id)
                                                 {{ $parish->name }}
                                             @endisset
                                             {{-- $parish->name??'' --}}
@@ -256,40 +256,37 @@
                                         <h2 class="font-bold ml-2">{{ __('Education Details') }}</h2>
                                     </div>
 
-                                    <a href="{{ route('admin.employees.education', $employee->id)  }}" class="flex items-center text-white px-4 py-2 font-bold uppercase text-xs bg-lightBlue-500 hover:bg-lightBlue-300 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button"> 
+                                    <a href="{{ route('admin.employees.education', $employee->id) }}" class="flex items-center btn btn-info btn-sm text-white" type="button"> 
                                         {{ __('Add Education') }}
                                     </a>
-
-
-
 
                                 </div>
 
                                 <div class="inner-tab border-b border-r border-gray-200 mb-8">
-                                    <table class="table-auto w-full border-separate border border-gray-200">
-                                        <thead>
-                                            <tr>
-                                                <th class="border border-gray-200">Institution</th>
-                                                <th class="border border-gray-200">Qualification</th>
-                                                <th class="border border-gray-200">Start</th>
-                                                <th class="border border-gray-200">End</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>Intro to CSS</td>
-                                                <td>Adam</td>
-                                                <td>858</td>
-                                                <td>858</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Intro to CSS</td>
-                                                <td>Adam</td>
-                                                <td>858</td>
-                                                <td>858</td>
-                                            </tr>
-                                        </tbody>
-                                      </table>
+                                    <div class="overflow-x-auto">
+                                        <table class="table w-full table-compact">
+                                            <thead>
+                                                <tr>
+                                                    <th class="border border-gray-200">Qualification</th>
+                                                    <th class="border border-gray-200">Institution</th>
+                                                    <th class="border border-gray-200">Course</th>
+                                                    <th class="border border-gray-200">Start</th>
+                                                    <th class="border border-gray-200">End</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody class="border border-gray-200">
+                                                @foreach ($education ?? '' as $empEducation)
+                                                    <tr>
+                                                        <td>{{ $empEducation->name }}</td>
+                                                        <td>{{ $empEducation->institution }}</td>
+                                                        <td>{{ $empEducation->course }}</td>
+                                                        <td>{{ $empEducation->startYear }}</td>
+                                                        <td>{{ $empEducation->endYear }}</td>
+                                                    </tr>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
                             </section>
 
@@ -305,7 +302,7 @@
                                             <h2 class="font-bold ml-2">{{ __('Files/Documents') }}</h2>
                                         </div>
 
-                                        <button class="flex items-center text-white px-4 py-2 font-bold uppercase text-xs bg-lightBlue-500 hover:bg-lightBlue-300 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button" onclick="toggleModal('files-modal')">
+                                        <button class="flex items-center btn btn-info btn-sm" type="button" onclick="toggleModal('files-modal')">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 13h6m-3-3v6m5 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                                             </svg>
@@ -374,7 +371,7 @@
                                             {!! Form::open(['action' => ['App\Http\Controllers\Admin\EmployeesController@savenote', $employee->id], 'method' => 'POST']) !!}
                                             @csrf
                                    
-                                            {{ Form::submit('Save', ['class' => 'flex items-center text-white px-4 py-2 font-bold uppercase text-xs bg-violet-400 hover:bg-violet-300 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150 cursor-pointer']) }}
+                                            {{ Form::submit('Save Note', ['class' => 'flex items-center btn btn-info btn-sm']) }}
                         
 
                                             {{--<button class="flex items-center text-white px-4 py-2 font-bold uppercase text-xs bg-lightBlue-500 hover:bg-lightBlue-300 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button" onclick="toggleModal('contact-modal')">
