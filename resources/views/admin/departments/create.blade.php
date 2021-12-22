@@ -19,7 +19,7 @@
     {{-- End Messages --}}
 
     {{-- Content --}}
-    <div class="relative flex flex-col min-w-0 break-words bg-white w-full mx-auto px-6 py-10 mb-6 shadow-lg rounded">
+    <div class="relative flex flex-col min-w-0 break-words bg-white w-full mx-auto px-6 py-10 mb-6 card shadow">
         <div class="block w-full overflow-x-auto px-6">
 
             {!! Form::open(['action' => 'App\Http\Controllers\Admin\DepartmentsController@store', 'method' => 'POST']) !!}
@@ -82,16 +82,11 @@
 
                 <div class="w-full flex justify-end">
                     <div class="px-4 py-5">
-
                         <a href="{{ route('admin.departments.index') }}" class="btn btn-outline">
                             {{ __('Cancel') }}
                         </a>
 
-                        {{ Form::submit('Save', ['class' => 'btn btn-primary']) }}
-
-
-                        {{--  mt-3 w-full inline-flex text-base btn btn-md btn-dark cursor-pointer transition ease-in-out duration-150 --}}
-
+                        {{ Form::submit('Save', ['class' => 'btn btn-secondary']) }}
                     </div>
                 </div>
 

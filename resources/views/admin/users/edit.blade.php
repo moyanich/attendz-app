@@ -19,7 +19,7 @@
     {{-- End Messages --}}
 
     {{-- Content --}}
-    <div class="flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg">
+    <div class="flex flex-col min-w-0 break-words bg-white w-full mb-6 card shadow">
         <div class="px-6">
            <div class="flex flex-wrap">
               <div class="w-full px-4 py-10">
@@ -120,9 +120,9 @@
                         </div>
                     </div>
 
-                    <div class="w-full flex justify-start">
+                    <div class="w-full flex justify-end">
                         <div class="px-4 py-5">
-                            {{ Form::submit('Save', ['class' => 'btn btn-primary']) }}
+                            {{ Form::submit('Update', ['class' => 'btn btn-secondary btn-wide']) }}
                         </div>
                     </div>
 

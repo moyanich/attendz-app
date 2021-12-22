@@ -19,7 +19,7 @@
     {{-- End Messages --}}
 
     {{-- Content --}}
-    <div class="flex flex-col min-w-0 break-words bg-white mt-8 w-full md:w-8/12 mx-auto mb-6 shadow-xl rounded-lg">
+    <div class="flex flex-col min-w-0 break-words bg-white w-full mx-auto mb-6 card shadow">
         <div class="px-6">
             <div class="flex flex-wrap">
                 <div class="w-full px-4 py-10">

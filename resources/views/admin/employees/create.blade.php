@@ -145,18 +145,15 @@
         
                 <div class="w-full flex justify-end">
                     <div class="px-4 py-5">
-
                         <a href="{{ route('admin.employees.index') }}" class="btn btn-outline">
                             {{ __('Cancel') }}
                         </a>
 
-                        {{ Form::submit('Save', ['class' => 'btn btn-primary']) }}
-
+                        {{ Form::submit('Save', ['class' => 'btn btn-secondary']) }}
                     </div>
                 </div>
-                
-            {!! Form::close() !!}
 
+            {!! Form::close() !!}
         </div>
     </div>
     {{-- End Content --}}

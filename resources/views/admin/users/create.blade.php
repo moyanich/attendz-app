@@ -137,9 +137,9 @@
                             </div>
                         </div>
 
-                        <div class="w-full flex justify-start">
+                        <div class="w-full flex justify-end">
                             <div class="px-4 py-5">
-                                {{ Form::submit('Save', ['class' => 'btn btn-primary']) }}
+                                {{ Form::submit('Save', ['class' => 'btn btn-secondary btn-wide']) }}
                             </div>
                         </div>
                     {!! Form::close() !!}

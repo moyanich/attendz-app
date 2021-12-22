@@ -19,7 +19,7 @@
     {{-- End Messages --}}
 
     {{-- Content --}}
-    <div class="relative flex flex-col min-w-0 break-words bg-white w-full md:w-8/12 mx-auto px-6 py-10 mb-6 shadow-lg rounded">
+    <div class="relative flex flex-col min-w-0 break-words bg-white w-full mx-auto px-6 py-10 mb-6 card shadow">
         <div class="flex justify-end mb-3">
             <button class="flex items-center bg-red-500 text-white active:bg-red-600 font-bold uppercase text-xs px-2 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button" onclick="toggleModal('department-modal')">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -90,13 +90,11 @@
 
                 <div class="w-full flex justify-end">
                     <div class="px-4 py-5">
-
-                        <a href="{{ route('admin.departments.index') }}" class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
+                        <a href="{{ route('admin.departments.index') }}" class="btn btn-outline">
                             {{ __('Cancel') }}
                         </a>
 
-                        {{ Form::submit('Save', ['class' => 'mt-3 w-full inline-flex justify-center shadow-sm btn btn-md btn-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm cursor-pointer transition duration-500 ease-in-out hover:bg-blue-600 transform hover:-translate-y-1 hover:scale-110']) }}
-
+                        {{ Form::submit('Save', ['class' => 'btn btn-secondary']) }}
                     </div>
                 </div>
 
