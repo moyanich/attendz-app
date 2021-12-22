@@ -13,7 +13,7 @@
             </div>
         </div>
         <div class="flex-shrink-0 space-x-2">
-            <a href="{{ route('admin.users.create') }}" class="btn btn-sm flex align-items-center" type="button">
+            <a href="{{ route('admin.users.create') }}" class="btn flex align-items-center" type="button">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
                 </svg>
@@ -65,11 +65,11 @@
                                 </div>
                             </td>
                             <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                                <label class="badge badge-success">{{ $user->roleName}}</label>
+                                {{--  <label class="badge badge-success">{{ $user->roleName}}</label> --}}
 
                                 @if(!empty($user->roles))
                                     @foreach($user->roles as $user_has_roles)
-                                        <span class="inline-block rounded text-white bg-blue-400 px-2 py-1 text-xs font-bold mr-1">{{ $user_has_roles->name }}</span>
+                                        <span class="badge badge-primary px-2 py-1 text-xs font-bold mr-1">{{ $user_has_roles->name }}</span>
                                     @endforeach
                                 @endif
                             </td>

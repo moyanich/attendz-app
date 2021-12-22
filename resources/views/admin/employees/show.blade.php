@@ -32,8 +32,7 @@
                 <div class="flex items-start space-x-6 mb-4">
                     
                     @if($employee->photo)
-                        <img class="h-28 w-28 object-cover object-center rounded-full" 
-                    src="{{ asset('/storage/images/'.$employee->photo) }}" alt="photo">
+                        <img class="h-28 w-28 mask mask-circle" src="{{ asset('/storage/images/'.$employee->photo) }}" alt="{{ $employee->completename ?? '' }} photo">
                     @endif
 
                     <div>

@@ -56,7 +56,7 @@ Route::prefix('admin')->middleware('auth')->name('admin.')->group(function () {
 
     // EDUCATION ROUTES
     Route::get('/employees/{employee}/education', [EmployeesController::class, 'education'])->name('employees.education'); 
-    Route::post('/employees/{employee}/education', [EmployeesController::class, 'education_store'])->name('employees.education.store'); 
+    Route::post('/employees/{employee}/education', [EmployeesController::class, 'education_store'])->name('employees.education_store'); 
     
     
     // FILES ROUTE

@@ -38,6 +38,8 @@
 /*
 * Buttons
 */
+
+/*
 .btn {
   @apply text-sm text-gray-800 font-medium text-center align-middle leading-normal px-1 py-2 rounded-lg cursor-pointer select-none;
   background: transparent;
@@ -52,6 +54,7 @@
 .btn-dark {
   @apply px-4 py-2 rounded text-sm bg-gray-800 text-white ;
 }
+*/
 
 /*
 * Tables

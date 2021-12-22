@@ -22,8 +22,9 @@
     <div class="relative flex flex-col min-w-0 break-words bg-white w-full mx-auto px-6 py-10 mb-6 shadow-lg rounded">
         <div class="block w-full overflow-x-auto px-6">
 
-            {{--  {!! Form::open(['action' => 'App\Http\Controllers\Admin\EmployeesController@education_store', 'method' => 'POST']) !!}--}}
+            {!! Form::open(['action' => ['App\Http\Controllers\Admin\EmployeesController@education_store', $employee->id], 'method' => 'POST']) !!}
 
+            
                 <div class="flex flex-wrap">
                     <div class="w-full lg:w-4/12 px-4">
                         <div class="relative w-full mb-3">

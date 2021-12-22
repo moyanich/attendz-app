@@ -43,7 +43,7 @@
                         <div class="relative w-full mb-3">
                             {{ Form::label('manager', 'Manager', ['class' => 'block text-sm font-bold capitalize text-blueGray-600 mb-2']) }}
 
-                            {!! Form::select('manager', $employees, null, ['class' => 'js-department-select form-select block w-full mt-1 border-0 px-3 py-3 placeholder-blueGray-400 text-gray-600 bg-gray-100 rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150', 'placeholder' => 'Select employee..']) !!}
+                            {!! Form::select('manager', $employees, null, ['class' => 'js-department-select form-select block w-full mt-1 border-0 px-3 py-3 placeholder-blueGray-400 text-gray-600 bg-gray-100 rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150', 'placeholder' => 'Select manager']) !!}
 
                             @error('manager')
                                 <p class="text-xs text-red-600">{{ $message }}</p>
@@ -56,7 +56,7 @@
                         <div class="relative w-full mb-3">
                             {{ Form::label('supervisor', 'Supervisor', ['class' => 'block text-sm font-bold capitalize text-blueGray-600 mb-2']) }}
 
-                            {!! Form::select('supervisor', $employees, null, ['class' => 'js-department-select form-select block w-full mt-1 border-0 px-3 py-3 placeholder-blueGray-400 text-gray-600 bg-gray-100 rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150', 'placeholder' => 'Select employee..']) !!}
+                            {!! Form::select('supervisor', $employees, null, ['class' => 'js-department-select form-select block w-full mt-1 border-0 px-3 py-3 placeholder-blueGray-400 text-gray-600 bg-gray-100 rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150', 'placeholder' => 'Select supervisor']) !!}
 
                             @error('supervisor')
                                 <p class="text-xs text-red-600">{{$message}}</p>
@@ -83,11 +83,11 @@
                 <div class="w-full flex justify-end">
                     <div class="px-4 py-5">
 
-                        <a href="{{ route('admin.departments.index') }}" class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
+                        <a href="{{ route('admin.departments.index') }}" class="btn btn-outline">
                             {{ __('Cancel') }}
                         </a>
 
-                        {{ Form::submit('Save', ['class' => 'mt-3 w-full inline-flex justify-center shadow-sm btn btn-md btn-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm cursor-pointer transition duration-500 ease-in-out hover:bg-blue-600 transform hover:-translate-y-1 hover:scale-110']) }}
+                        {{ Form::submit('Save', ['class' => 'btn btn-primary']) }}
 
 
                         {{--  mt-3 w-full inline-flex text-base btn btn-md btn-dark cursor-pointer transition ease-in-out duration-150 --}}

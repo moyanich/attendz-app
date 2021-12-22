@@ -139,7 +139,7 @@
 
                         <div class="w-full flex justify-start">
                             <div class="px-4 py-5">
-                                {{ Form::submit('Save', ['class' => 'mt-3 w-full inline-flex text-base btn btn-md btn-dark transition duration-500 ease-in-out hover:bg-blue-600 transform hover:-translate-y-1 hover:scale-110']) }}
+                                {{ Form::submit('Save', ['class' => 'btn btn-primary']) }}
                             </div>
                         </div>
                     {!! Form::close() !!}

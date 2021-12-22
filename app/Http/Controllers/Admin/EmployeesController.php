@@ -297,15 +297,18 @@ class EmployeesController extends Controller
     {
         $employee = Employees::findOrFail($id);
         
-        $educationTypes['educationTypes'] = EducationTypes::pluck('name', 'id')->toArray(); // Get Genders Table
+        //$educationTypes['educationTypes'] = EducationTypes::pluck('name', 'id')->toArray(); // Get Genders Table
+
+        $educationTypes = EducationTypes::pluck('name', 'id')->prepend('Please select', ''); // Get Education Type Table
 
         return view('admin.employees.education')
+        ->with('employee', $employee)
         ->with('educationTypes', $educationTypes);
 
         //return redirect()->back()->with('success', 'Note Saved!!');
     }
 
-    public function education_store(Request $request)
+    public function education_store(Request $request, $id)
     {
 
         $this->validate($request, [
@@ -315,6 +318,8 @@ class EmployeesController extends Controller
             'start' => 'email|unique:users,email',
             'end' => 'required|unique:users,username',
         ]);
+
+        $education = new Employees();
 
        /* $education = new Employees();
         $employee->id = $request->input('id');

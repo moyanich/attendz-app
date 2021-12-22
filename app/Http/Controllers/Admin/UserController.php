@@ -40,6 +40,8 @@ class UserController extends Controller
     {
         //$roles = Role::all();
 
+        //$roles = Role::orderBy('name')->get()->pluck('name', 'id')->toArray();
+
         $roles = Role::orderBy('name')->get()->pluck('name', 'id')->toArray();
        
         /* 
