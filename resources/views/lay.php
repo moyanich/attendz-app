@@ -1,3 +1,53 @@
+CREATE TABLE Employee_Educational_Details (
+	Employee_Number INT PRIMARY KEY
+	, Education_Type_ID INT
+	, Institute_Name VARCHAR(100)
+	, Qualification_Category VARCHAR(50)
+	, Passing_Year DATE
+	, CONSTRAINT FK_EducationType FOREIGN KEY (Education_Type_ID) REFERENCES Education_Type(Education_Type_ID)
+	)
+
+CREATE TABLE Education_Type (
+	Education_Type_ID INT PRIMARY KEY
+	, NAME VARCHAR(100)
+	)
+/*
+Table - Education_Type	
+
+Education_Type_ID			Name	
+1					Highest Qualification
+2					Post Grad
+3					Grad
+4					XII
+5					X
+6					Other
+
+Table - Employee_Educational_Details	
+
+Employee_Number	Education_Type_ID Institute_Name	Qualification_Category	Passing_Year
+101		2		  Texas Institute	Cat-1			2001
+
+*/
+
+
+
+CREATE TABLE Education_Type (
+	Education_Type_ID INT PRIMARY KEY
+	, NAME VARCHAR(100)
+	)
+CREATE TABLE Employee_Educational_Details (
+	  Employee_Number INT PRIMARY KEY REFERENCES Employee (Employee_Number)
+	, Education_Type_ID INT
+	, Institute_Name VARCHAR(100)
+	, Qualification_Category VARCHAR(50)
+	, Passing_Year DATE
+	, CONSTRAINT FK_EducationType FOREIGN KEY (Education_Type_ID) REFERENCES Education_Type(Education_Type_ID)
+	)
+
+
+
+
+
 <x-app-layout>
     <x-slot name="header">
         <div class="w-full pt-3">
