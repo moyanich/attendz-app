@@ -159,11 +159,16 @@ class EmployeesController extends Controller
         $files = Files::where('employee_id', $id)->get();
 
         //$education = EmployeeEducations::where('employee_id', $id)->get();
-        
-        $education = EmployeeEducations::query()
+        $education = EmployeeEducations::where('employee_id', $id)
+        ->join('education_types', 'employee_educations.education_types_id', '=', 'education_types.id')
+        ->selectRaw('employee_educations.id, institution, course, startYear, endYear, name')
+        ->get();
+        /*$education = EmployeeEducations::query()
             ->join('education_types', 'employee_educations.education_types_id', '=', 'education_types.id')
             ->selectRaw('institution, course, startYear, endYear, name')
-            ->get();
+            ->get();*/
+
+        //dd($education );
 
         return view('admin.employees.show')
             ->with('employee', $employee)
@@ -328,6 +333,55 @@ class EmployeesController extends Controller
         return redirect()->route('admin.employees.show', $id)->with('success', 'Education saved'); // Redirect to employee profile
     }
 
+    /**
+     * Edit the Employee Education information
+     * 
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function education_edit($id)
+    {
+        $empEducation = EmployeeEducations::findOrFail($id);
+        $educationTypes = EducationTypes::pluck('name', 'id')->prepend('Please select', ''); // Get Education Type Table
+        return view('admin.employees.edit-education', compact('empEducation', 'educationTypes'));
+    }
+
+    /**
+     * Update the Employee Education information
+     * 
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function education_update(Request $request, $id)
+    {
+        //$empEducation = EmployeeEducations::findOrFail($id);
+        
+        $empEducation = EmployeeEducations::findOrFail($id);
+        $empEducation->institution = $request->input('school');
+        $empEducation->education_types_id = $request->input('education');
+        $empEducation->course = $request->input('course');
+        $empEducation->startYear = $request->input('start');
+        $empEducation->endYear = $request->input('end');
+        $empEducation->save();
+
+        return redirect()->route('admin.employees.show', $empEducation->employee_id)->with('success', 'Education updated');
+    }
+
+    /**
+     * Remove the employee education resource from the database.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function education_destroy($id)
+    {
+        $empEducation = EmployeeEducations::findOrFail($id);
+        $empEducation->delete();
+
+        return redirect()->route('admin.employees.show', $empEducation->employee_id)->with('success', 'Course ' . $empEducation->course . ' removed sucessfully');
+       
+    }
 
 }
 

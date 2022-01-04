@@ -18,7 +18,7 @@
     <x-messages />
 
     {{-- Content --}}
-    <div class="emp-profile relative flex flex-col min-w-0 break-words bg-white w-full mx-auto px-6 py-10 mb-6 shadow-lg rounded">
+    <div class="card emp-profile relative flex flex-col min-w-0 break-words bg-white w-full mx-auto px-6 py-10 mb-6 shadow-2xl rounded">
         <div class="flex justify-end mb-3">
             <button class="flex items-center bg-red-500 text-white active:bg-red-600 font-bold uppercase text-xs px-2 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button" onclick="toggleModal('employee-delete-modal')">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -272,6 +272,7 @@
                                                     <th class="border border-gray-200">Course</th>
                                                     <th class="border border-gray-200">Start</th>
                                                     <th class="border border-gray-200">End</th>
+                                                    <th class="border border-gray-200">Actions</th>
                                                 </tr>
                                             </thead>
                                             <tbody class="border border-gray-200">
@@ -282,6 +283,14 @@
                                                         <td>{{ $empEducation->course }}</td>
                                                         <td>{{ $empEducation->startYear }}</td>
                                                         <td>{{ $empEducation->endYear }}</td>
+                                                        <td class="flex flex-wrap justify-center p-4">
+                                                            {{-- //TODO:   --}}
+                                                            <a href="{{ route('admin.employees.edit-education', $empEducation->id) }}" class="flex items-center bg-teal-500 text-white active:bg-teal-600 font-bold uppercase text-xs px-2 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button"> 
+                                                                <svg xmlns="http://www.w3.org/2000/svg" class="text-white h-4 w-4 mr-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                                                                </svg>
+                                                            </a>
+                                                        </td>
                                                     </tr>
                                                 @endforeach
                                             </tbody>
@@ -395,6 +404,7 @@
                         </div>
 
 
+
                         {{-- TAB 2 --}}
                         <div class="p-4 space-y-2" x-show="active === 1"
                         x-transition:enter="transition ease-out duration-300"
@@ -403,6 +413,9 @@
                             <h2 class="text-2xl">Panel 2 Using x-show.transition</h2>
                             <p>Panel 2 content</p>
                         </div>
+
+
+
 
                         {{-- TAB 3 --}}
                         <div class="p-4 space-y-2" x-show="active === 2"
@@ -592,6 +605,7 @@
     </div>
 </div>
 <div class="hidden opacity-25 fixed inset-0 z-40 bg-black" id="personal-modal-backdrop"></div>
+
 
 
 
@@ -930,6 +944,7 @@
 
 
 
+
 {{-- Files Edit Modal --}}
 {{--  
 @foreach($files ?? '' as $key => $file)
@@ -1004,36 +1019,40 @@
 
 
 
+
+
 <script>
-updateList = function() {
-    var input = document.getElementById('file');
-    var output = document.getElementById('fileList');
-    var svg = document.getElementById('svg-image' );
+    updateList = function() {
+        var input = document.getElementById('file');
+        var output = document.getElementById('fileList');
+        var svg = document.getElementById('svg-image' );
 
-    output.innerHTML = "<div class='space-y-1 text-center'><svg xmlns='http://www.w3.org/2000/svg' class='mx-auto h-12 w-12 text-gray-400' fill='none' viewBox='0 0 24 24' stroke='currentColor'><path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z'></svg>";
-    for (var i = 0; i < input.files.length; ++i) {
-        output.innerHTML += '<div>' + input.files.item(i).name + '</div>';
+        output.innerHTML = "<div class='space-y-1 text-center'><svg xmlns='http://www.w3.org/2000/svg' class='mx-auto h-12 w-12 text-gray-400' fill='none' viewBox='0 0 24 24' stroke='currentColor'><path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z'></svg>";
+        for (var i = 0; i < input.files.length; ++i) {
+            output.innerHTML += '<div>' + input.files.item(i).name + '</div>';
+        }
+        output.innerHTML += '</div>';
+
+        svg.classList.add("hidden");
     }
-    output.innerHTML += '</div>';
-
-    svg.classList.add("hidden");
-}
 </script>
 
 
 
+
+
 <script>
-updateList2 = function() {
-    var input = document.getElementById('fileEdit');
-    var output = document.getElementById('fileListEdit');
-    var svg = document.getElementById('svg-imageEdit' );
+    updateList2 = function() {
+        var input = document.getElementById('fileEdit');
+        var output = document.getElementById('fileListEdit');
+        var svg = document.getElementById('svg-imageEdit' );
 
-    output.innerHTML = "<div class='space-y-1 text-center'><svg xmlns='http://www.w3.org/2000/svg' class='mx-auto h-12 w-12 text-gray-400' fill='none' viewBox='0 0 24 24' stroke='currentColor'><path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z'></svg>";
-    for (var i = 0; i < input.files.length; ++i) {
-        output.innerHTML += '<div>' + input.files.item(i).name + '</div>';
+        output.innerHTML = "<div class='space-y-1 text-center'><svg xmlns='http://www.w3.org/2000/svg' class='mx-auto h-12 w-12 text-gray-400' fill='none' viewBox='0 0 24 24' stroke='currentColor'><path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z'></svg>";
+        for (var i = 0; i < input.files.length; ++i) {
+            output.innerHTML += '<div>' + input.files.item(i).name + '</div>';
+        }
+        output.innerHTML += '</div>';
+
+        svg.classList.add("hidden");
     }
-    output.innerHTML += '</div>';
-
-    svg.classList.add("hidden");
-}
 </script>
