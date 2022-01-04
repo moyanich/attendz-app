@@ -10,6 +10,7 @@ use App\Models\EmployeeEducations;
 use App\Models\Employees;
 use App\Models\Files;
 use App\Models\Genders;
+use App\Models\Jobs;
 use App\Models\Parishes;
 use App\Models\Role;
 use App\Models\User;
