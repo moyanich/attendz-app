@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateEmploymentHistorysTable extends Migration
+class CreateEmployeeJobHistoriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,23 @@ class CreateEmploymentHistorysTable extends Migration
      */
     public function up()
     {
-        Schema::create('employment_historys', function (Blueprint $table) {
+        Schema::create('employee_job_histories', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('employee_id');
+            $table->unsignedBigInteger('job_id');
+            $table->unsignedBigInteger('department_id');
+            $table->tinyInteger('notification_period')->nullable()->default(null);
+            $table->date('start_date');
+            $table->date('end_date')->nullable();
+            $table->integer('status_id')->unsigned()->nullable();
+            $table->foreign('employee_id')->references('id')->on('employees');
+            $table->foreign('job_id')->references('id')->on('jobs');
+            $table->foreign('department_id')->references('id')->on('departments');
             $table->timestamps();
+            $table->index('employee_id');
         });
-    }
 
-
-     /*$table->unsignedBigInteger('department_id')->nullable()->default(null);
+        /*$table->unsignedBigInteger('department_id')->nullable()->default(null);
             $table->foreign('department_id')->references('id')->on('departments');
             $table->date('start');
             $table->date('end')->nullable();
@@ -41,7 +50,8 @@ class CreateEmploymentHistorysTable extends Migration
             $table->index('contract_id');
             $table->index('department_id'); */
 
-            
+    }
+
     /**
      * Reverse the migrations.
      *
@@ -49,6 +59,6 @@ class CreateEmploymentHistorysTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('employment_historys');
+        Schema::dropIfExists('employee_job_histories');
     }
 }

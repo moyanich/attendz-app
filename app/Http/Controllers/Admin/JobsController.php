@@ -59,9 +59,9 @@ class JobsController extends Controller
      * @param  \App\Models\Jobs  $jobs
      * @return \Illuminate\Http\Response
      */
-    public function show(Jobs $jobs)
+    public function show(Jobs $job)
     {
-        //
+       return view('admin.jobs.show', ['job' => $job]); 
     }
 
     /**

@@ -26,7 +26,9 @@ class DatabaseSeeder extends Seeder
             RoleUserSeeder::class,
             RoleUserSeeder::class,
             EducationTypesSeeder::class,
+            StatusCodesSeeder::class,
             JobsSeeder::class,
+        
             
           /* 
             //CreateAdminUserSeeder::class,

@@ -4,15 +4,19 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreEmployeeEducationsRequest;
+use App\Http\Requests\StoreEmployeeJobHistoryRequest;
+use App\Models\Departments;
 use Illuminate\Http\Request;
 use App\Models\EducationTypes;
 use App\Models\EmployeeEducations;
 use App\Models\Employees;
+use App\Models\EmployeeJobHistory;
 use App\Models\Files;
 use App\Models\Genders;
 use App\Models\Jobs;
 use App\Models\Parishes;
 use App\Models\Role;
+use App\Models\StatusCodes;
 use App\Models\User;
 use Carbon\Carbon;
 use DataTables;
@@ -383,6 +387,68 @@ class EmployeesController extends Controller
         return redirect()->route('admin.employees.show', $empEducation->employee_id)->with('success', 'Course ' . $empEducation->course . ' removed sucessfully');
        
     }
+
+    /**
+     * Create the employee job information.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function job_create($id)
+    {
+        $employee = Employees::findOrFail($id);
+        $jobs  = Jobs::pluck('name', 'id')->prepend('Please select', ''); // Get Education Type Table
+        $departments  = Departments::pluck('name', 'id')->prepend('Please select', ''); // Get Education Type Table
+        return view('admin.employees.job', compact('employee', 'jobs', 'departments'));
+    }
+
+    /**
+     * Store a newly created job resource in storage.
+     *
+     * @param  \App\Http\Requests\StoreEmployeeJobHistoryRequest  $request
+     * @return \Illuminate\Http\Response
+     * 
+     */
+    public function job_store(StoreEmployeeJobHistoryRequest $request, $id)
+    {
+        $job = new EmployeeJobHistory();
+        $job->employee_id = $id;
+        $job->job_id = $request->input('job');
+        $job->department_id = $request->input('department');
+        $job->notification_period = $request->input('notiifcation');
+        $job->start_date = $request->input('start');
+        $job->end_date = $request->input('end');
+
+        $today_date = Carbon::now()->format('Y-m-d');
+        if($job->end_date < $today_date) {
+            $job->status_id = StatusCodes::inactive_status();
+        } else {
+            $job->status_id = StatusCodes::active_status();
+        }
+
+        $job->save(); 
+
+
+        //dd(format_date('03-21-2002'));
+
+        return redirect()->route('admin.employees.show', $id)->with('success', 'Job profile saved'); // Redirect to employee profile
+
+        /* 
+         $table->unsignedBigInteger('employee_id')->nullable()->default(null);
+            $table->unsignedBigInteger('job_id')->nullable()->default(null);
+            $table->unsignedBigInteger('department_id')->nullable()->default(null);
+            $table->tinyInteger('notification_period');
+            $table->date('start_date');
+            $table->date('end_date')->nullable();
+            $table->integer('status_id')->unsigned()->nullable();
+            */
+
+
+    }
+
+
+
+
 
 }
 

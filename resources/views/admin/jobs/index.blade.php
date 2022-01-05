@@ -83,8 +83,4 @@
     </div>
     {{-- End Content --}}
 
-
-
-
-
 </x-app-layout>

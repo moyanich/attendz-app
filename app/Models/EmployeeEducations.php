@@ -32,20 +32,4 @@ class EmployeeEducations extends Model
         'endYear',
     ];
 
-    /**
-     * Get the parish associated with the employee.
-     */
-    /*public function educationTypes()
-    {
-        return $this->hasMany(EducationTypes::class, 'id', 'education_types_id');
-    }*/
-
-
-     /**
-     * Get the parish associated with the employee.
-     */
-   /* public function educationTypes()
-    {
-        return $this->hasOne(EducationTypes::class, 'education_types_id');
-    } */
 }

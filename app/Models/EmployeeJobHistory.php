@@ -5,12 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Jobs extends Model
+class EmployeeJobHistory extends Model
 {
     use HasFactory;
 
     // Table Name
-    protected $table = 'jobs';
+    protected $table = 'employee_job_histories';
 
     // Primary Key
     public $primaryKey = 'id';
@@ -18,14 +18,13 @@ class Jobs extends Model
     // Timestamps
     public $timestamps = true;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var string[]
-     */
     protected $fillable = [
-        'name',
-        'description'
+        'employee_id',
+        'job_id',
+        'department_id',
+        'notification_period',
+        'start_date',
+        'end_date',
+        'status_id'
     ];
-    
 }

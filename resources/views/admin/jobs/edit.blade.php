@@ -1,12 +1,12 @@
-@section('title', 'Job Profile')
+@section('title', 'Department Profile')
 <x-app-layout>
     <x-slot name="header">
         <div class="flex flex-col">
             <div class="text-xs uppercase font-light text-gray-500">
-                {{ __('View') }}
+                {{ __('Edit') }}
             </div>
             <div class="text-xl font-bold">
-                {{ __('Job Information') }}
+                {{ __('Department') }}
             </div>
             <div class="breadcrumb">
                 <x-breadcrumbs></x-breadcrumbs> 
@@ -17,39 +17,65 @@
     {{-- Messages --}}
     <x-messages />
     {{-- End Messages --}}
-
-    {{-- Content --}}
-    <div class="relative flex flex-col min-w-0 break-words bg-white w-full mx-auto px-6 py-10 mb-6 card shadow">
-        <div class="flex justify-end mb-3">
-            <button class="flex items-center bg-red-500 text-white active:bg-red-600 font-bold uppercase text-xs px-2 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button" onclick="toggleModal('department-modal')">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                </svg>
-            </button>
-        </div>
-        
-        <div class="block w-full overflow-x-auto">
-            <dl>
-                <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                    <dt class="text-sm font-medium text-gray-500">
-                        {{ __('Job Title: ') }}
-                    </dt>
-                    <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                        <h6 class="font-bold underline">{{ $job->name }}</h6>
-                    </dd>
-                </div>
-                <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                    <dt class="text-sm font-medium text-gray-500">
-                        {{ __('Job Description') }}
-                    </dt>
-                    <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2 pt-5">
-                        {!! $job->description !!}
-                    </dd>
-                </div>
-            </dl>
-        </div>
+ {{-- Content --}}
+ <div class="relative flex flex-col min-w-0 break-words bg-white w-full mx-auto px-6 py-10 mb-6 card shadow">
+    <div class="flex justify-end mb-3">
+        <button class="flex items-center bg-red-500 text-white active:bg-red-600 font-bold uppercase text-xs px-2 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button" onclick="toggleModal('department-modal')">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+            </svg>
+        </button>
     </div>
-    {{-- End Content --}}
+    
+    <div class="block w-full overflow-x-auto px-6">
+
+       {{-- {!! Form::open(['action' => ['App\Http\Controllers\Admin\JobsController@update', $jobs->id], 'method' => 'POST']) !!} --}}
+
+            <div class="flex flex-wrap">
+                <div class="w-full px-4">
+                    <div class="relative w-full mb-3">
+                        {{ Form::label('name', 'Department Name', ['class' => 'block text-sm font-bold capitalize text-blueGray-600 mb-2']) }}
+
+                        {{ Form::text('name', $jobs->name, ['class' => 'border-0 px-3 py-3 placeholder-blueGray-400 text-gray-600 bg-gray-100 rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150']) }}
+                       
+                        @error('name')
+                            <p class="text-xs text-red-600">{{ $message }}</p>
+                        @enderror
+                    </div>
+                </div>
+            </div>
+
+           
+            <div class="flex flex-wrap">
+                <div class="w-full px-4">
+                    <div class="relative w-full mb-3">
+                        {{ Form::label('description', 'Description', ['class' => 'block text-sm font-bold capitalize text-blueGray-600 mb-2']) }}
+
+                        {{ Form::textarea('description', $jobs->description, ['class' => 'border-0 px-3 py-3 placeholder-blueGray-400 text-gray-600 bg-gray-100 rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150', 'rows' => '4']) }}
+
+                        @error('description')
+                            <p class="text-xs text-red-600">{{ $message }}</p>
+                        @enderror
+                    </div>
+                </div>
+            </div>
+
+            <div class="w-full flex justify-end">
+                <div class="px-4 py-5">
+                    <a href="{{ route('admin.jobs.index') }}" class="btn btn-outline">
+                        {{ __('Cancel') }}
+                    </a>
+
+                    {{ Form::submit('Save', ['class' => 'btn btn-secondary']) }}
+                </div>
+            </div>
+
+            {{Form::hidden('_method', 'PUT') }}
+       {{-- {!! Form::close() !!} --}}
+
+    </div>
+</div>
+{{-- End Content --}}
 
 </x-app-layout>
 
@@ -79,7 +105,7 @@
                         </h3>
                         <div class="mt-2">
                             <p class="text-sm text-gray-500">
-                                Are you sure you want to delete the record for <strong>{{ $job->name }}</strong>? All of your data will be permanently removed. This action cannot be undone.
+                                Are you sure you want to delete the record for <strong>{{ $jobs->name }}</strong>? All of your data will be permanently removed. This action cannot be undone.
                             </p>
                         </div>
                     </div>

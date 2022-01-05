@@ -5,10 +5,9 @@ use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\DepartmentsController;
 use App\Http\Controllers\Admin\EmployeesController;
-use App\Http\Controllers\Admin\EducationTypesController;
 use App\Http\Controllers\Admin\JobsController;
-
 use App\Http\Controllers\Admin\CKEditorController;
+
 
 //use App\Http\Controllers\HR\HrEmployeesController;
 
@@ -67,7 +66,16 @@ Route::prefix('admin')->middleware('auth')->name('admin.')->group(function () {
     Route::post('/employees/{employee}/update-education', [EmployeesController::class, 'education_update'])->name('employees.education_update'); 
     Route::delete('/employees/{employee}/destroy-education/', [EmployeesController::class, 'education_destroy'])->name('employees.education_destroy'); 
 
+    // JOBS HISTORY ROUTES
+    Route::get('/employees/{employee}/job', [EmployeesController::class, 'job_create'])->name('employees.job'); 
+    Route::post('/employees/{employee}/job', [EmployeesController::class, 'job_store'])->name('employees.job_store'); 
     
+    
+    //EmployeeJobHistory
+    
+
+
+
     // FILES ROUTE
     Route::resource('/files', FilesController::class)->except(['index', 'create']);
    
