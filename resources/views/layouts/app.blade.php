@@ -58,6 +58,9 @@
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
         <script type="text/javascript" src="https://cdn.datatables.net/v/dt/jszip-2.5.0/dt-1.11.0/b-2.0.0/b-colvis-2.0.0/b-html5-2.0.0/b-print-2.0.0/r-2.2.9/sc-2.0.5/sl-1.3.3/datatables.min.js"></script>
 
+        // CKeditor
+        <script src="//cdn.ckeditor.com/4.17.1/standard/ckeditor.js"></script>
+
 
 
         {{-- Modal Scripts --}}
@@ -87,6 +90,19 @@
                 $('.js-department-select').select2({
                     //minimumResultsForSearch: 20 // at least 20 results must be displayed
                 });
+            });
+        </script>
+
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $('.ckeditor').ckeditor();
+            });
+        </script>
+
+        <script type="text/javascript">
+            CKEDITOR.replace('wysiwyg-editor', {
+                filebrowserUploadUrl: "{{route('admin.ckeditor.image-upload', ['_token' => csrf_token() ])}}",
+                filebrowserUploadMethod: 'form'
             });
         </script>
 

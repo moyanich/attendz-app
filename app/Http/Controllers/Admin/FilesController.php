@@ -39,7 +39,6 @@ class FilesController extends Controller
      */
     public function store(StoreFilesRequest $request)
     {
-
         $this->validate($request, [
             'employee_id' => 'required',
             'description' => 'required',

@@ -28,7 +28,6 @@ class JobsController extends Controller
      */
     public function create()
     {
-        //
         return view('admin.jobs.create');
     }
 
@@ -40,7 +39,18 @@ class JobsController extends Controller
      */
     public function store(StoreJobsRequest $request)
     {
-        //
+        $this->validate($request, 
+            [
+                'name' => 'required|unique:jobs'
+            ]
+        );
+
+        $job = new Jobs;
+        $job->name = $request->input('name');
+        $job->description = $request->input('description');
+        $job->save();
+        
+        return redirect()->route('admin.jobs.index')->with('success', 'New Job - ' . $job->name . ' created successfully');
     }
 
     /**

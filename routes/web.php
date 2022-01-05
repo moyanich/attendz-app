@@ -7,6 +7,9 @@ use App\Http\Controllers\Admin\DepartmentsController;
 use App\Http\Controllers\Admin\EmployeesController;
 use App\Http\Controllers\Admin\EducationTypesController;
 use App\Http\Controllers\Admin\JobsController;
+
+use App\Http\Controllers\Admin\CKEditorController;
+
 //use App\Http\Controllers\HR\HrEmployeesController;
 
 use Illuminate\Support\Facades\Auth;
@@ -67,7 +70,8 @@ Route::prefix('admin')->middleware('auth')->name('admin.')->group(function () {
     
     // FILES ROUTE
     Route::resource('/files', FilesController::class)->except(['index', 'create']);
-    
+   
+    Route::post('ckeditor/upload', [CKEditorController::class, 'upload'])->name('ckeditor.image-upload');
 
 });
 

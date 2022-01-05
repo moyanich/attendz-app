@@ -56,7 +56,7 @@
                                 {{ $job->name }}
                             </td>
                             <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm whitespace-wrap p-4">
-                                {{ $job->description }}
+                                {!! $job->description !!}
                             </td>
                             <td class="flex flex-wrap items-center p-4">
                                 <a href="{{ route('admin.jobs.show', $job->id) }}" class="flex items-center btn btn-info btn-sm mr-1 mb-1" type="button">
