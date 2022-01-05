@@ -8,8 +8,8 @@ use App\Http\Requests\StoreEmployeeJobHistoryRequest;
 use App\Models\Departments;
 use Illuminate\Http\Request;
 use App\Models\EducationTypes;
-use App\Models\EmployeeEducations;
 use App\Models\Employees;
+use App\Models\EmployeeEducations;
 use App\Models\EmployeeJobHistory;
 use App\Models\Files;
 use App\Models\Genders;
@@ -175,6 +175,17 @@ class EmployeesController extends Controller
 
         //dd($education );
 
+        $jobs = EmployeeJobHistory::where('employee_id','=', $id)
+            ->join('jobs', 'employee_job_histories.job_id', '=', 'jobs.id')
+            ->join('departments', 'employee_job_histories.department_id', '=', 'departments.id')
+            ->leftJoin('status_codes', 'employee_job_histories.status_id', '=', 'status_codes.id')
+            ->selectRaw('jobs.name AS job_name, department_id, start_date, end_date, departments.name AS department_name')
+            ->orderBy('start_date', 'asc')
+            ->paginate(10);
+           // ->get();
+
+
+
         return view('admin.employees.show')
             ->with('employee', $employee)
             ->with('genders', $genders)
@@ -182,7 +193,8 @@ class EmployeesController extends Controller
             ->with('parish', $parish)
             ->with('parishes', $parishes)
             ->with('education', $education)
-            ->with('files', $files);
+            ->with('files', $files)
+            ->with('jobs', $jobs);
     }
 
     /**
@@ -428,23 +440,17 @@ class EmployeesController extends Controller
 
         $job->save(); 
 
-
         //dd(format_date('03-21-2002'));
 
-        return redirect()->route('admin.employees.show', $id)->with('success', 'Job profile saved'); // Redirect to employee profile
-
-        /* 
-         $table->unsignedBigInteger('employee_id')->nullable()->default(null);
-            $table->unsignedBigInteger('job_id')->nullable()->default(null);
-            $table->unsignedBigInteger('department_id')->nullable()->default(null);
-            $table->tinyInteger('notification_period');
-            $table->date('start_date');
-            $table->date('end_date')->nullable();
-            $table->integer('status_id')->unsigned()->nullable();
-            */
-
-
+        // Redirect to employee profile
+        return redirect()->route('admin.employees.show', $id)->with('success', 'Job profile saved'); 
     }
+
+
+    /**
+     * 
+     * 
+     */
 
 
 

@@ -259,7 +259,6 @@
                                     <a href="{{ route('admin.employees.education', $employee->id) }}" class="flex items-center btn btn-info btn-sm text-white" type="button"> 
                                         {{ __('Add Education') }}
                                     </a>
-
                                 </div>
 
                                 <div class="inner-tab border-b border-r border-gray-200 mb-8">
@@ -298,7 +297,6 @@
                                     </div>
                                 </div>
                             </section>
-
 
                             {{-- ----- Documents and Notes ----- --}}
                             <div class="flex justify-between space-x-4">
@@ -404,14 +402,13 @@
                         </div>
 
 
-
                         {{-- JOB HISTORY - TAB 2 --}}
                         <div class="p-4 space-y-2" x-show="active === 1"
                         x-transition:enter="transition ease-out duration-300"
                         x-transition:enter-start="opacity-0 transform scale-90"
                         x-transition:enter-end="opacity-100 transform scale-100">
 
-                            {{-- ----- EDUCATION INFORMATION ----- --}}
+                            {{-- ----- JOB INFORMATION ----- --}}
                             <section class="education">
                                 <div class="w-full flex justify-between border-t border-r border-l border- border-gray-200 p-2">
                                     <div class="flex items-center">
@@ -420,13 +417,11 @@
                                             <path d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" />
                                           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222" />
                                         </svg>
-                                        <h2 class="font-bold ml-2">{{ __('Education Details') }}</h2>
+                                        <h2 class="font-bold ml-2">{{ __('Job History') }}</h2>
                                     </div>
-
                                     <a href="{{ route('admin.employees.job', $employee->id) }}" class="flex items-center btn btn-info btn-sm text-white" type="button"> 
                                         {{ __('Add New Job') }}
                                     </a>
-
                                 </div>
 
                                 <div class="inner-tab border-b border-r border-gray-200 mb-8">
@@ -434,16 +429,32 @@
                                         <table class="table w-full table-compact">
                                             <thead>
                                                 <tr>
-                                                    <th class="border border-gray-200">Qualification</th>
-                                                    <th class="border border-gray-200">Institution</th>
-                                                    <th class="border border-gray-200">Course</th>
+                                                    <th class="border border-gray-200">#</th>
+                                                    <th class="border border-gray-200">Job Title</th>
+                                                    <th class="border border-gray-200">Department</th>
                                                     <th class="border border-gray-200">Start</th>
                                                     <th class="border border-gray-200">End</th>
+                                                    <th class="border border-gray-200">Status</th>
                                                     <th class="border border-gray-200">Actions</th>
                                                 </tr>
                                             </thead>
                                             <tbody class="border border-gray-200">
-                                                
+                                                @foreach ($jobs as $job)
+                                                    <tr>
+                                                        <td>{{ $loop->iteration }}</td>
+                                                        <td>{{ $job->job_name }}</td>
+                                                        <td>{{ $job->department_name  }}</td>
+                                                        <td>{{ $job->start_date }}</td>
+                                                        <td>{{ $job->end_date }}</td>
+                                                        <td></td>
+                                                        <td class="flex flex-wrap justify-center p-4">
+                                                            {{-- //TODO:   --}}
+                                                           
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
+
+
                                             </tbody>
                                         </table>
                                     </div>
