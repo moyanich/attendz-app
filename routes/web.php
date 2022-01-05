@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\DepartmentsController;
 use App\Http\Controllers\Admin\EmployeesController;
 use App\Http\Controllers\Admin\EducationTypesController;
+use App\Http\Controllers\Admin\JobsController;
 //use App\Http\Controllers\HR\HrEmployeesController;
 
 use Illuminate\Support\Facades\Auth;
@@ -40,7 +41,6 @@ Route::get('/dashboard', function () {
 
 /**
  * Admin Routes
- * 
  */
 //Route::prefix('admin')->middleware(['auth', 'auth.admin'])->name('admin.')->group(function () {
 Route::prefix('admin')->middleware('auth')->name('admin.')->group(function () {
@@ -48,11 +48,14 @@ Route::prefix('admin')->middleware('auth')->name('admin.')->group(function () {
     Route::resource('/users', UserController::class)->middleware('auth.admin'); 
     Route::resource('/departments', DepartmentsController::class)->middleware('auth.admin')->except(['edit']); 
     Route::resource('/roles', RoleController::class)->middleware('auth.admin'); 
+    Route::resource('/jobs', JobsController::class)->middleware('auth.admin'); 
+    
 
     // EMPLOYEE ROUTES
     Route::resource('/employees', EmployeesController::class)->except(['edit']);
     Route::put('/employees/{employee}/contact', [EmployeesController::class, 'updatecontact'])->name('employees.updatecontact');
     Route::put('/employees/{employee}/savenote', [EmployeesController::class, 'savenote'])->name('employees.savenote');
+
 
     // EDUCATION ROUTES
     Route::get('/employees/{employee}/education', [EmployeesController::class, 'education'])->name('employees.education'); 
@@ -62,12 +65,10 @@ Route::prefix('admin')->middleware('auth')->name('admin.')->group(function () {
     Route::delete('/employees/{employee}/destroy-education/', [EmployeesController::class, 'education_destroy'])->name('employees.education_destroy'); 
 
     
-
-    
-    
     // FILES ROUTE
     Route::resource('/files', FilesController::class)->except(['index', 'create']);
     
+
 });
 
 /*

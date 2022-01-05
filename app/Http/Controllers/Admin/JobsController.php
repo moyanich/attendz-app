@@ -17,7 +17,7 @@ class JobsController extends Controller
      */
     public function index(Request $request)
     {
-        $jobs = Jobs::select(['id', 'name', 'description'])->orderBy('id', 'asc')->paginate(10);
+        $jobs = Jobs::select(['id', 'name', 'description'])->orderBy('id', 'asc')->paginate(20);
         return view('admin.jobs.index', compact('jobs'));
     }
 
@@ -29,6 +29,7 @@ class JobsController extends Controller
     public function create()
     {
         //
+        return view('admin.jobs.create');
     }
 
     /**
