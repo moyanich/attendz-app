@@ -1,6 +1,18 @@
-# Attendz
+## About Attendz
 
 Attendz is a web application used for the management of HRM of employees with robust authentication and access manangement system made in lastest Laravel 8.0 Framework and MySQL.
+
+## Usage
+
+### Functions
+
+**Admin** has:
+- Employee module
+	- Add employee
+	<p align="center">Employee Profile</p>
+
+	- View employees
+	<p align="center">Employee Profile</p>
 
 
 ### Configuration
@@ -28,4 +40,5 @@ php artisan db:seed
 
 ## Themes, plugins, packages used for developement
 Following are the assets used for this project
+-	[DaisyUI](https://daisyui.com/) Tailwind CSS Components
 -	[DataTables](https://datatables.net/) for responsive table
