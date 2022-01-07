@@ -7,6 +7,7 @@ use App\Http\Requests\StoreEmployeeEducationsRequest;
 use App\Http\Requests\StoreEmployeeJobHistoryRequest;
 use App\Models\Departments;
 use Illuminate\Http\Request;
+use App\Models\ContractTypes;
 use App\Models\EducationTypes;
 use App\Models\Employees;
 use App\Models\EmployeeEducations;
@@ -165,9 +166,9 @@ class EmployeesController extends Controller
 
         //$education = EmployeeEducations::where('employee_id', $id)->get();
         $education = EmployeeEducations::where('employee_id', $id)
-        ->join('education_types', 'employee_educations.education_types_id', '=', 'education_types.id')
-        ->selectRaw('employee_educations.id, institution, course, startYear, endYear, name')
-        ->get();
+            ->join('education_types', 'employee_educations.education_types_id', '=', 'education_types.id')
+            ->selectRaw('employee_educations.id, institution, course, startYear, endYear, name')
+            ->get();
         /*$education = EmployeeEducations::query()
             ->join('education_types', 'employee_educations.education_types_id', '=', 'education_types.id')
             ->selectRaw('institution, course, startYear, endYear, name')
@@ -178,12 +179,11 @@ class EmployeesController extends Controller
         $jobs = EmployeeJobHistory::where('employee_id','=', $id)
             ->join('jobs', 'employee_job_histories.job_id', '=', 'jobs.id')
             ->join('departments', 'employee_job_histories.department_id', '=', 'departments.id')
+            ->join('contract_types', 'employee_job_histories.contract_id', '=', 'contract_types.id')
             ->leftJoin('status_codes', 'employee_job_histories.status_id', '=', 'status_codes.id')
-            ->selectRaw('jobs.name AS job_name, department_id, start_date, end_date, departments.name AS department_name')
+            ->selectRaw('employee_job_histories.id AS JobID, jobs.name AS job_name, department_id, start_date, end_date, departments.name AS department_name, status_codes.name AS status, contract_types.name AS contract')
             ->orderBy('start_date', 'asc')
             ->paginate(10);
-           // ->get();
-
 
 
         return view('admin.employees.show')
@@ -409,9 +409,10 @@ class EmployeesController extends Controller
     public function job_create($id)
     {
         $employee = Employees::findOrFail($id);
-        $jobs  = Jobs::pluck('name', 'id')->prepend('Please select', ''); // Get Education Type Table
-        $departments  = Departments::pluck('name', 'id')->prepend('Please select', ''); // Get Education Type Table
-        return view('admin.employees.job', compact('employee', 'jobs', 'departments'));
+        $jobs = Jobs::pluck('name', 'id')->prepend('Please select', ''); // Get Education Type Table
+        $departments = Departments::pluck('name', 'id')->prepend('Please select', ''); // Get Education Type Table
+        $contracts = ContractTypes::pluck('name', 'id')->prepend('Please select', ''); // Get Education Type Table
+        return view('admin.employees.job', compact('employee', 'jobs', 'departments', 'contracts'));
     }
 
     /**
@@ -427,6 +428,7 @@ class EmployeesController extends Controller
         $job->employee_id = $id;
         $job->job_id = $request->input('job');
         $job->department_id = $request->input('department');
+        $job->contract_id = $request->input('contract');
         $job->notification_period = $request->input('notiifcation');
         $job->start_date = $request->input('start');
         $job->end_date = $request->input('end');
@@ -446,9 +448,25 @@ class EmployeesController extends Controller
         return redirect()->route('admin.employees.show', $id)->with('success', 'Job profile saved'); 
     }
 
+     /**
+     * Edit the Employee Job information
+     * 
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function job_edit($id)
+    {
+        $job = EmployeeJobHistory::findOrFail($id);
+        $jobs  = Jobs::pluck('name', 'id')->prepend('Please select', ''); // Get Education Type Table
+        $departments  = Departments::pluck('name', 'id')->prepend('Please select', ''); // Get Education Type Table
+        $contracts = ContractTypes::pluck('name', 'id')->prepend('Please select', ''); // Get Education Type Table
+
+        return view('admin.employees.edit-job', compact('job', 'jobs', 'departments', 'contracts'));
+    }
+
 
     /**
-     * 
+     * Update the Employee Job information
      * 
      */
 

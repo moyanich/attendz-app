@@ -432,6 +432,7 @@
                                                     <th class="border border-gray-200">#</th>
                                                     <th class="border border-gray-200">Job Title</th>
                                                     <th class="border border-gray-200">Department</th>
+                                                    <th class="border border-gray-200">Contract Type</th>
                                                     <th class="border border-gray-200">Start</th>
                                                     <th class="border border-gray-200">End</th>
                                                     <th class="border border-gray-200">Status</th>
@@ -443,18 +444,25 @@
                                                     <tr>
                                                         <td>{{ $loop->iteration }}</td>
                                                         <td>{{ $job->job_name }}</td>
-                                                        <td>{{ $job->department_name  }}</td>
+                                                        <td>{{ $job->department_name }}</td>
+                                                        <td>{{ $job->contract }}</td>
                                                         <td>{{ $job->start_date }}</td>
                                                         <td>{{ $job->end_date }}</td>
-                                                        <td></td>
+                                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                                            <x-statuses :message="strtolower($job->status)">
+                                                                {{ $job->status }} 
+                                                            </x-statuses>
+                                                        </td>
                                                         <td class="flex flex-wrap justify-center p-4">
                                                             {{-- //TODO:   --}}
-                                                           
+                                                            <a href="{{ route('admin.employees.edit-job', $job->JobID) }}" class="flex items-center bg-teal-500 text-white active:bg-teal-600 font-bold uppercase text-xs px-2 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button"> 
+                                                                <svg xmlns="http://www.w3.org/2000/svg" class="text-white h-4 w-4 mr-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                                                                </svg>
+                                                            </a>
                                                         </td>
                                                     </tr>
                                                 @endforeach
-
-
                                             </tbody>
                                         </table>
                                     </div>
@@ -475,6 +483,9 @@
                             <h2 class="text-2xl">Panel 3 Using x-transition</h2>
                             <p>Panel 3 content</p>
                         </div>
+
+
+
                     </div>
                 </div>
             </div>

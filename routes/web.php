@@ -70,6 +70,7 @@ Route::prefix('admin')->middleware('auth')->name('admin.')->group(function () {
     Route::get('/employees/{employee}/job', [EmployeesController::class, 'job_create'])->name('employees.job'); 
     Route::post('/employees/{employee}/job', [EmployeesController::class, 'job_store'])->name('employees.job_store'); 
     
+    Route::get('/employees/{job}/edit-job', [EmployeesController::class, 'job_edit'])->name('employees.edit-job');
     
     //EmployeeJobHistory
     
