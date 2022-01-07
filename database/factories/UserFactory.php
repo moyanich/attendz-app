@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\User;
+use App\Models\Employees;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
@@ -22,11 +23,18 @@ class UserFactory extends Factory
      */
     public function definition()
     {
+        // TODO properly seed employees in User table
         return [
-            'name' => $this->faker->name(),
+           // 'name' => $this->faker->name(),
+            'employee_id' => Employees::all()->pluck('id')->random(), 
+            'firstname' => Employees::all()->pluck('firstname')->random(), 
+            'lastname' => Employees::all()->pluck('lastname')->random(), 
+            'username' => $this->faker->userName(),
             'email' => $this->faker->unique()->safeEmail(),
             'email_verified_at' => now(),
-            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+           // 'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+
+            'password' => 'password',
             'remember_token' => Str::random(10),
         ];
     }

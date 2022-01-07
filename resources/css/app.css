@@ -1,0 +1,126 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900&display=swap');@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+
+::-webkit-scrollbar-track{
+  background: #2D3748;
+}
+
+::-webkit-scrollbar-thumb{
+  background: #CBD5E0;
+}
+
+::-webkit-scrollbar-thumb:hover{
+  background: #718096;
+}
+
+/*
+* Headings
+*/
+
+@layer base {
+  h1 {
+    @apply text-2xl;
+  }
+  h2 {
+    @apply text-xl;
+  }
+}
+
+
+
+/*
+* Buttons
+*/
+
+
+.btn {
+  @apply rounded;
+}
+
+/*
+* Tables
+*/
+.td {
+  @apply text-sm;
+}
+
+/*
+* Forms
+*/
+.select2-container--default .select2-selection--single {
+  border: 0 !important;
+  border-radius: 0.25rem;
+  padding: 0.75rem 0.75rem;
+  font-size: .875rem !important;
+  height: 40px !important;
+  background-color: rgba(244, 244, 245, var(--tw-bg-opacity)) !important;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+  line-height: 1 !important;
+}
+
+.select2-results__option--selectable {
+  font-size: .875rem !important;
+}
+
+
+/*
+* DataTables
+*/
+.dataTables_length,
+.dataTables_filter,
+.dataTables_info,
+.dataTables_paginate {
+  @apply p-4;
+  @apply text-sm;
+}
+
+.dataTables_info,
+.dataTables_paginate {
+  @apply pt-7;
+}
+
+.dataTables_wrapper select {
+  background-size: 1em;
+  background-position-x: 20px;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+  @apply border-gray-300 text-gray-500 px-4 py-2 border text-sm font-medium !important;
+  background: rgba(255, 255, 255, var(--tw-bg-opacity)) !important;
+}
+
+.pagination span[aria-current='page'] > span,
+.dataTables_wrapper .dataTables_paginate .paginate_button.current {
+  @apply border-blue-200 text-white px-4 py-2 border text-sm font-medium !important;
+  background: rgba(17, 24, 39, var(--tw-bg-opacity)) !important;
+}
+
+.pagination span > a:hover,
+.dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+  @apply text-white !important;
+  background: rgba(17, 24, 39, var(--tw-bg-opacity)) !important;
+}
+
+/*
+* Profile Page
+*/
+.emp-profile a {
+  @apply text-blue-400 hover:text-blue-700;
+}
+
+.profile-info .info-heading {
+  @apply bg-gray-100;
+  @apply font-medium;
+}
+.profile-info > div {
+  @apply border-b-0 border-r-0 border border-gray-200 p-4;
+}
