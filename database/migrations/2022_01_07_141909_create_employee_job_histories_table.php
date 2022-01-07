@@ -23,7 +23,7 @@ class CreateEmployeeJobHistoriesTable extends Migration
             $table->date('start_date');
             $table->date('end_date')->nullable();
             $table->integer('status_id')->unsigned()->nullable();
-            $table->foreign('employee_id')->references('id')->on('employees');
+            $table->foreign('employee_id')->references('id')->on('employees')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('job_id')->references('id')->on('jobs');
             $table->foreign('department_id')->references('id')->on('departments');
             $table->foreign('contract_id')->references('id')->on('contract_types');
