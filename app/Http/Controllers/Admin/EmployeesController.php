@@ -424,6 +424,7 @@ class EmployeesController extends Controller
      */
     public function job_store(StoreEmployeeJobHistoryRequest $request, $id)
     {
+        $today_date = Carbon::now()->format('Y-m-d');
         $job = new EmployeeJobHistory();
         $job->employee_id = $id;
         $job->job_id = $request->input('job');
@@ -433,22 +434,14 @@ class EmployeesController extends Controller
         $job->start_date = $request->input('start');
         $job->end_date = $request->input('end');
 
-        $today_date = Carbon::now()->format('Y-m-d');
-        if($job->end_date < $today_date) {
-            $job->status_id = StatusCodes::inactive_status();
-        } else {
-            $job->status_id = StatusCodes::active_status();
-        }
-
+        $job->status_id = ($job->end_date < $today_date) ? StatusCodes::inactive_status() : StatusCodes::active_status();
         $job->save(); 
-
-        //dd(format_date('03-21-2002'));
 
         // Redirect to employee profile
         return redirect()->route('admin.employees.show', $id)->with('success', 'Job profile saved'); 
     }
 
-     /**
+    /**
      * Edit the Employee Job information
      * 
      * @param  int  $id
@@ -464,13 +457,42 @@ class EmployeesController extends Controller
         return view('admin.employees.edit-job', compact('job', 'jobs', 'departments', 'contracts'));
     }
 
-
     /**
      * Update the Employee Job information
      * 
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
      */
+    public function job_update(Request $request, $id)
+    {
+        $today_date = Carbon::now()->format('Y-m-d');
+        $job = EmployeeJobHistory::findOrFail($id);
+        $job->job_id = $request->input('job');
+        $job->department_id = $request->input('department');
+        $job->contract_id = $request->input('contract');
+        $job->notification_period = $request->input('notiifcation');
+        $job->start_date = $request->input('start');
+        $job->end_date = $request->input('end');
+        
+        $job->status_id = ($job->end_date < $today_date) ? StatusCodes::inactive_status() : StatusCodes::active_status();
+        $job->save();
 
+        return redirect()->route('admin.employees.show', $job->employee_id)->with('success', 'Job History updated');
+    }
 
+    /**
+     * 
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function job_destroy($id)
+    {
+        $job = EmployeeJobHistory::findOrFail($id);
+        $job->delete();
+
+        return redirect()->route('admin.employees.show', $job->employee_id)->with('success', 'Job History removed sucessfully');
+    }
 
 
 

@@ -69,8 +69,9 @@ Route::prefix('admin')->middleware('auth')->name('admin.')->group(function () {
     // JOBS HISTORY ROUTES
     Route::get('/employees/{employee}/job', [EmployeesController::class, 'job_create'])->name('employees.job'); 
     Route::post('/employees/{employee}/job', [EmployeesController::class, 'job_store'])->name('employees.job_store'); 
-    
     Route::get('/employees/{job}/edit-job', [EmployeesController::class, 'job_edit'])->name('employees.edit-job');
+    Route::post('/employees/{job}/update-job', [EmployeesController::class, 'job_update'])->name('employees.job_update'); 
+    Route::delete('/employees/{job}/destroy-job/', [EmployeesController::class, 'job_destroy'])->name('employees.job_destroy'); 
     
     //EmployeeJobHistory
     
