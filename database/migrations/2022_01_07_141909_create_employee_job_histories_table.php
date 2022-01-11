@@ -31,6 +31,7 @@ class CreateEmployeeJobHistoriesTable extends Migration
             $table->index('employee_id');
             $table->index('contract_id');
             $table->index('department_id');
+            $table->index(['employee_id', 'start_date']);
         });
 
     }

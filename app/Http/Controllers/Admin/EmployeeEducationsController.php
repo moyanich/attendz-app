@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreEmployeeEducationsRequest;
 use App\Http\Requests\UpdateEmployeeEducationsRequest;
 use App\Models\EmployeeEducations;
+use App\Models\Employees;
+use App\Models\EducationTypes;
+
 
 class EmployeeEducationsController extends Controller
 {
@@ -23,9 +26,13 @@ class EmployeeEducationsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($employee_id)
     {
-        //
+        $employee = Employees::findOrFail($employee_id);
+        $educationTypes = EducationTypes::pluck('name', 'id')->prepend('Please select', ''); // Get Education Type Table
+        return view('admin.employees.education', compact('employee', 'educationTypes'));
+
+        //return view('admin.employees.job.edit', compact('job', 'jobs', 'departments', 'contracts'));
     }
 
     /**
@@ -34,9 +41,17 @@ class EmployeeEducationsController extends Controller
      * @param  \App\Http\Requests\StoreEmployeeEducationsRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreEmployeeEducationsRequest $request)
+    public function store($employee_id, StoreEmployeeEducationsRequest $request)
     {
-        //
+        $education = new EmployeeEducations();
+        $education->employee_id = $id;
+        $education->institution = $request->input('school');
+        $education->education_types_id = $request->input('education');
+        $education->course = $request->input('course');
+        $education->startYear = $request->input('start');
+        $education->endYear = $request->input('end');
+        $education->save(); 
+        return redirect()->route('admin.employees.show', $id)->with('success', 'Education saved'); // Redirect to employee profile
     }
 
     /**

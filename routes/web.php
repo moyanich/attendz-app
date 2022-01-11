@@ -1,12 +1,14 @@
 <?php
 
+use App\Http\Controllers\Admin\CKEditorController;
 use App\Http\Controllers\Admin\FilesController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\DepartmentsController;
 use App\Http\Controllers\Admin\EmployeesController;
 use App\Http\Controllers\Admin\JobsController;
-use App\Http\Controllers\Admin\CKEditorController;
+use App\Http\Controllers\Admin\EmployeeEducationsController;
+use App\Http\Controllers\Admin\EmployeeJobHistoryController;
 
 
 //use App\Http\Controllers\HR\HrEmployeesController;
@@ -59,34 +61,39 @@ Route::prefix('admin')->middleware('auth')->name('admin.')->group(function () {
     Route::put('/employees/{employee}/savenote', [EmployeesController::class, 'savenote'])->name('employees.savenote');
 
 
+    // TODO: EmployeeEducationsController
+    Route::resource('employees.education', EmployeeEducationsController::class)->except(['index', 'show']);
+
+
     // EDUCATION ROUTES
-    Route::get('/employees/{employee}/education', [EmployeesController::class, 'education'])->name('employees.education'); 
-    Route::post('/employees/{employee}/education', [EmployeesController::class, 'education_store'])->name('employees.education_store'); 
-    Route::get('/employees/{education}/edit-education', [EmployeesController::class, 'education_edit'])->name('employees.edit-education');
-    Route::post('/employees/{employee}/update-education', [EmployeesController::class, 'education_update'])->name('employees.education_update'); 
-    Route::delete('/employees/{employee}/destroy-education/', [EmployeesController::class, 'education_destroy'])->name('employees.education_destroy'); 
+    //Route::get('/employees/{employee}/education', [EmployeesController::class, 'education'])->name('employees.education'); 
+   // Route::post('/employees/{employee}/education', [EmployeesController::class, 'education_store'])->name('employees.education_store'); 
+   // Route::get('/employees/{education}/edit-education', [EmployeesController::class, 'education_edit'])->name('employees.edit-education');
+   // Route::post('/employees/{employee}/update-education', [EmployeesController::class, 'education_update'])->name('employees.education_update'); 
+   // Route::delete('/employees/{employee}/destroy-education/', [EmployeesController::class, 'education_destroy'])->name('employees.education_destroy'); 
+
+    
 
     // JOBS HISTORY ROUTES
-    Route::get('/employees/{employee}/job', [EmployeesController::class, 'job_create'])->name('employees.job'); 
-    Route::post('/employees/{employee}/job', [EmployeesController::class, 'job_store'])->name('employees.job_store'); 
-    Route::get('/employees/{job}/edit-job', [EmployeesController::class, 'job_edit'])->name('employees.edit-job');
-    Route::post('/employees/{job}/update-job', [EmployeesController::class, 'job_update'])->name('employees.job_update'); 
-    Route::delete('/employees/{job}/destroy-job/', [EmployeesController::class, 'job_destroy'])->name('employees.job_destroy'); 
-    
-    //EmployeeJobHistory
-    
-
-
+    Route::resource('employees.job', EmployeeJobHistoryController::class)->except(['index', 'show']);
 
     // FILES ROUTE
     Route::resource('/files', FilesController::class)->except(['index', 'create']);
    
+    // EDITOR ROUTE
     Route::post('ckeditor/upload', [CKEditorController::class, 'upload'])->name('ckeditor.image-upload');
 
 });
 
 /*
 
+
+    // JOBS HISTORY ROUTES
+   // Route::get('/employees/{employee}/job', [EmployeesController::class, 'job_create'])->name('employees.job'); 
+   // Route::post('/employees/{employee}/job', [EmployeesController::class, 'job_store'])->name('employees.job_store'); 
+   // Route::get('/employees/{job}/edit-job', [EmployeesController::class, 'job_edit'])->name('employees.edit-job');
+   // Route::post('/employees/{job}/update-job', [EmployeesController::class, 'job_update'])->name('employees.job_update'); 
+   // Route::delete('/employees/{job}/destroy-job/', [EmployeesController::class, 'job_destroy'])->name('employees.job_destroy'); 
 // START: Employment Routes
         Route::get('/employees/{employee}/employment', [EmployeesController::class, 'create_employment'])->name('employees.employment');
         Route::post('/employees/{employee}/employment', [EmployeesController::class, 'store_employment'])->name('employees.employment_store'); 

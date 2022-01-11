@@ -181,9 +181,18 @@ class EmployeesController extends Controller
             ->join('departments', 'employee_job_histories.department_id', '=', 'departments.id')
             ->join('contract_types', 'employee_job_histories.contract_id', '=', 'contract_types.id')
             ->leftJoin('status_codes', 'employee_job_histories.status_id', '=', 'status_codes.id')
-            ->selectRaw('employee_job_histories.id AS JobID, jobs.name AS job_name, department_id, start_date, end_date, departments.name AS department_name, status_codes.name AS status, contract_types.name AS contract')
+            ->selectRaw('employee_job_histories.employee_id, employee_job_histories.id AS JobID, jobs.name AS job_name, department_id, start_date, end_date, departments.name AS department_name, status_codes.name AS status, contract_types.name AS contract')
             ->orderBy('start_date', 'asc')
             ->paginate(10);
+
+
+        $status = EmployeeJobHistory::where('employee_id', '=', $id)
+            ->leftJoin('status_codes', 'employee_job_histories.status_id', '=', 'status_codes.id')
+            ->leftJoin('jobs', 'employee_job_histories.job_id', '=', 'jobs.id')
+            ->leftJoin('contract_types', 'employee_job_histories.contract_id', '=', 'contract_types.id')
+            ->orderBy('start_date', 'desc')
+            ->limit(1)
+            ->first(['contract_types.name AS contract', 'jobs.name AS job_name', 'status_codes.name as recentstatus']);
 
 
         return view('admin.employees.show')
@@ -194,7 +203,9 @@ class EmployeesController extends Controller
             ->with('parishes', $parishes)
             ->with('education', $education)
             ->with('files', $files)
-            ->with('jobs', $jobs);
+            ->with('jobs', $jobs)
+            ->with('status', $status)
+            ;
     }
 
     /**
@@ -398,100 +409,6 @@ class EmployeesController extends Controller
 
         return redirect()->route('admin.employees.show', $empEducation->employee_id)->with('success', 'Course ' . $empEducation->course . ' removed sucessfully');
        
-    }
-
-    /**
-     * Create the employee job information.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function job_create($id)
-    {
-        $employee = Employees::findOrFail($id);
-        $jobs = Jobs::pluck('name', 'id')->prepend('Please select', ''); // Get Education Type Table
-        $departments = Departments::pluck('name', 'id')->prepend('Please select', ''); // Get Education Type Table
-        $contracts = ContractTypes::pluck('name', 'id')->prepend('Please select', ''); // Get Education Type Table
-        return view('admin.employees.job', compact('employee', 'jobs', 'departments', 'contracts'));
-    }
-
-    /**
-     * Store a newly created job resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreEmployeeJobHistoryRequest  $request
-     * @return \Illuminate\Http\Response
-     * 
-     */
-    public function job_store(StoreEmployeeJobHistoryRequest $request, $id)
-    {
-        $today_date = Carbon::now()->format('Y-m-d');
-        $job = new EmployeeJobHistory();
-        $job->employee_id = $id;
-        $job->job_id = $request->input('job');
-        $job->department_id = $request->input('department');
-        $job->contract_id = $request->input('contract');
-        $job->notification_period = $request->input('notiifcation');
-        $job->start_date = $request->input('start');
-        $job->end_date = $request->input('end');
-
-        $job->status_id = ($job->end_date < $today_date) ? StatusCodes::inactive_status() : StatusCodes::active_status();
-        $job->save(); 
-
-        // Redirect to employee profile
-        return redirect()->route('admin.employees.show', $id)->with('success', 'Job profile saved'); 
-    }
-
-    /**
-     * Edit the Employee Job information
-     * 
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function job_edit($id)
-    {
-        $job = EmployeeJobHistory::findOrFail($id);
-        $jobs  = Jobs::pluck('name', 'id')->prepend('Please select', ''); // Get Education Type Table
-        $departments  = Departments::pluck('name', 'id')->prepend('Please select', ''); // Get Education Type Table
-        $contracts = ContractTypes::pluck('name', 'id')->prepend('Please select', ''); // Get Education Type Table
-
-        return view('admin.employees.edit-job', compact('job', 'jobs', 'departments', 'contracts'));
-    }
-
-    /**
-     * Update the Employee Job information
-     * 
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function job_update(Request $request, $id)
-    {
-        $today_date = Carbon::now()->format('Y-m-d');
-        $job = EmployeeJobHistory::findOrFail($id);
-        $job->job_id = $request->input('job');
-        $job->department_id = $request->input('department');
-        $job->contract_id = $request->input('contract');
-        $job->notification_period = $request->input('notiifcation');
-        $job->start_date = $request->input('start');
-        $job->end_date = $request->input('end');
-        
-        $job->status_id = ($job->end_date < $today_date) ? StatusCodes::inactive_status() : StatusCodes::active_status();
-        $job->save();
-
-        return redirect()->route('admin.employees.show', $job->employee_id)->with('success', 'Job History updated');
-    }
-
-    /**
-     * 
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function job_destroy($id)
-    {
-        $job = EmployeeJobHistory::findOrFail($id);
-        $job->delete();
-
-        return redirect()->route('admin.employees.show', $job->employee_id)->with('success', 'Job History removed sucessfully');
     }
 
 

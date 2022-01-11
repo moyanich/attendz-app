@@ -21,7 +21,8 @@
     {{-- Content --}}
     <div class="relative flex flex-col min-w-0 break-words bg-white w-full mx-auto px-6 py-10 mb-6 card shadow">
         <div class="block w-full overflow-x-auto px-6">
-            {!! Form::open(['action' => ['App\Http\Controllers\Admin\EmployeesController@job_store', $employee->id], 'method' => 'POST']) !!}
+            {!! Form::open(['action' => ['App\Http\Controllers\Admin\EmployeeJobHistoryController@store', $employee->id], 'method' => 'POST']) !!}
+                {{ Form::hidden('employee_id', $employee->id) }}
                 <div class="flex flex-wrap">
                     <div class="w-full lg:w-6/12 px-4">
                         <div class="relative w-full mb-3">
