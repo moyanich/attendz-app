@@ -22,6 +22,7 @@ class EmployeeJobHistory extends Model
         'employee_id',
         'job_id',
         'department_id',
+        'contract_id',
         'notification_period',
         'start_date',
         'end_date',

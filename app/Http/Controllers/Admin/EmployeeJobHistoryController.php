@@ -47,8 +47,8 @@ class EmployeeJobHistoryController extends Controller
         $job->notification_period = $request->input('notiifcation');
         $job->start_date = $request->input('start');
         $job->end_date = $request->input('end');
-
         $job->status_id = ($job->end_date >= $today_date || is_null($job->end_date) ) ? StatusCodes::active_status() : StatusCodes::inactive_status();
+
         $job->save(); 
 
         // Redirect to employee profile

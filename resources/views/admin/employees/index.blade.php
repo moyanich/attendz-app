@@ -84,10 +84,10 @@
                             {{ __('Name') }}
                         </th>
                         <th scope="col" class="px-6 bg-blueGray-50 text-black align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
-                            {{ __('Department') }}
+                            {{ __('Position') }}
                         </th>
                         <th scope="col" class="px-6 bg-blueGray-50 text-black align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
-                            {{ __('Type') }}
+                            {{ __('Department') }}
                         </th>
                         <th scope="col" class="px-6 bg-blueGray-50 text-black align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
                             {{ __('Status') }}
@@ -132,18 +132,15 @@
                                 </div>
                             </td>
                             <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4">
-                                position
-                            </td>
-            
-                            <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4">
-                        
-                                type
-                                    {{-- $employee->current_address.','.$employee->city --}}
-                                
+                                {{ $employee->job }}
                             </td>
                             <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4">
-            
-                            
+                                {{ $employee->department }}
+                            </td>
+                            <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4">
+                                <x-statuses :message="strtolower($employee->status ?? '')">
+                                    {{ $employee->status ?? '' }} 
+                                </x-statuses>
                             </td>
                             <td class="flex flex-wrap items-center p-4">
                                 <a href="{{ route('admin.employees.show', $employee->id) }}" class="flex items-center btn btn-info btn-sm mr-1 mb-1" type="button">

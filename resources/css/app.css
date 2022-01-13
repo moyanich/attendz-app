@@ -113,9 +113,11 @@
 /*
 * Profile Page
 */
+/*
 .emp-profile a {
   @apply text-blue-400 hover:text-blue-700;
 }
+*/
 
 .profile-info .info-heading {
   @apply bg-gray-100;

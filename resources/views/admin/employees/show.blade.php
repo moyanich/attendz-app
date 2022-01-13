@@ -53,6 +53,13 @@
                             </p>
                         </div>
 
+                        <div class="department mb-2">
+                            <small class="text-xs text-gray-500 uppercase mb-1">{{ __('Department')  }}</small>
+                            <p class="text-sm text-gray-500 uppercase mb-1">
+                                <span class="font-bold text-gray-800">{{ $status->department_name ?? '' }}</span>
+                            </p>
+                        </div>
+
                         <div class="employment mb-2">
                             <small class="text-gray-500 uppercase mb-1">{{  __('Employment Type ')   }}</small>
                             <p class="text-sm text-gray-500 uppercase mb-1">
@@ -323,106 +330,106 @@
                             </section>
 
                             {{-- ----- Documents and Notes ----- --}}
-                            <div class="flex justify-between space-x-4">
-                               <div class="w-full md:w-1/2 border-t border-r border-l border-b border-gray-200">
-                                    <div class="w-full flex justify-between border-b border-gray-200 p-2">
-                                        <div class="flex items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
-                                            </svg>
-                                            <h2 class="font-bold ml-2">{{ __('Files/Documents') }}</h2>
-                                        </div>
-
-                                        <button class="flex items-center btn btn-info btn-sm" type="button" onclick="toggleModal('files-modal')">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 13h6m-3-3v6m5 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                                            </svg>
-                                            {{ __('Add File') }}
-                                        </button>
-                                    </div>
-                                    <div class="p-2 pt-4">
-                                        <table class="table-striped items-center w-full bg-transparent border-collapse">
-                                            <thead class="bg-gray-200">
-                                                <tr>
-                                                    <th scope="col" class="px-6 bg-blueGray-50 text-gray-900 align-middle border border-solid border-blueGray-100 py-3 text-sm uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
-                                                        {{ __('#') }}
-                                                    </th>
-                                                    <th scope="col" class="px-6 bg-blueGray-50 text-gray-900 align-middle border border-solid border-blueGray-100 py-3 text-sm uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
-                                                        {{ __('File Name') }}
-                                                    </th>
-                                                    <th scope="col" class="px-6 bg-blueGray-50 text-gray-900 align-middle border border-solid border-blueGray-100 py-3 text-sm uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-center">
-                                                        {{ __('Actions') }}
-                                                    </th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                @foreach($files ?? '' as $file)
-                                                    <tr>
-                                                        <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 whitespace-nowrap p-4">
-                                                            {{ $loop->iteration }}
-                                                        </td>
-                                                        <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 whitespace-nowrap p-4">
-                                                            {{ $file->description }}
-                                                        </td>
-                                                        <td class="flex flex-wrap justify-center p-4">
-                                                            <a href="{{  asset('/storage/files/'. $file->name ) }}" class="flex items-center bg-teal-500 text-white active:bg-teal-600 font-bold uppercase text-xs px-2 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button" target="_blank">
-                                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-0.5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                                                                </svg>
-                                                            </a>
-
-                                                            <button class="flex items-center bg-teal-500 text-white active:bg-teal-600 font-bold uppercase text-xs px-2 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button" onclick="toggleModal('file-edit-{{ $file->id }}')">
-                                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
-                                                                </svg>
-                                                            </button> 
-
-                                                            <button class="flex items-center bg-red-500 text-white active:bg-red-600 font-bold uppercase text-xs px-2 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button" onclick="toggleModal('file-delete-{{ $file->id }}')">
-                                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                                                                </svg>
-                                                            </button>
-                                                        </td>
-                                                    </tr>
-                                                @endforeach
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-
-                                <div class="w-full md:w-1/2 border-t border-r border-l border-b border-gray-200">
-                                    <div class="w-full flex justify-between border-b border-gray-200 p-2">
+                            <section class="notes">
+                                <div class="flex justify-between space-x-4">
+                                    <div class="w-full md:w-1/2 border-t border-r border-l border-b border-gray-200">
+                                        <div class="w-full flex justify-between border-b border-gray-200 p-2">
                                             <div class="flex items-center">
                                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
-                                                </svg> 
-                                                <h2 class="font-bold ml-2">{{ __('Notes') }}</h2>
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                                                </svg>
+                                                <h2 class="font-bold ml-2">{{ __('Files/Documents') }}</h2>
                                             </div>
-                                           
-                                            {!! Form::open(['action' => ['App\Http\Controllers\Admin\EmployeesController@savenote', $employee->id], 'method' => 'POST']) !!}
-                                            @csrf
-                                   
-                                            {{ Form::submit('Save Note', ['class' => 'flex items-center btn btn-info btn-sm']) }}
-                        
 
-                                            {{--<button class="flex items-center text-white px-4 py-2 font-bold uppercase text-xs bg-lightBlue-500 hover:bg-lightBlue-300 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button" onclick="toggleModal('contact-modal')">
-                                                {{ __('Save') }}
-                                            </button>--}}
+                                            <button class="flex items-center btn btn-info btn-sm" type="button" onclick="toggleModal('files-modal')">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 13h6m-3-3v6m5 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                                                </svg>
+                                                {{ __('Add File') }}
+                                            </button>
                                         </div>
-                                        <div class="p-2">
-                                            {{ Form::textarea('notes', $employee->notes, ['class' => 'border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-gray-100 rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150', 'rows' => '8']) }}
-                        
-                                            @error('address')
-                                                <p class="text-xs text-red-600">{{ $message }}</p>
-                                            @enderror
+                                        <div class="p-2 pt-4">
+                                            <table class="table-striped items-center w-full bg-transparent border-collapse">
+                                                <thead class="bg-gray-200">
+                                                    <tr>
+                                                        <th scope="col" class="px-6 bg-blueGray-50 text-gray-900 align-middle border border-solid border-blueGray-100 py-3 text-sm uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                                                            {{ __('#') }}
+                                                        </th>
+                                                        <th scope="col" class="px-6 bg-blueGray-50 text-gray-900 align-middle border border-solid border-blueGray-100 py-3 text-sm uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                                                            {{ __('File Name') }}
+                                                        </th>
+                                                        <th scope="col" class="px-6 bg-blueGray-50 text-gray-900 align-middle border border-solid border-blueGray-100 py-3 text-sm uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-center">
+                                                            {{ __('Actions') }}
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @foreach($files ?? '' as $file)
+                                                        <tr>
+                                                            <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 whitespace-nowrap p-4">
+                                                                {{ $loop->iteration }}
+                                                            </td>
+                                                            <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 whitespace-nowrap p-4">
+                                                                {{ $file->description }}
+                                                            </td>
+                                                            <td class="flex flex-wrap justify-center p-4">
+                                                                <a href="{{  asset('/storage/files/'. $file->name ) }}" class="flex items-center bg-teal-500 text-white active:bg-teal-600 font-bold uppercase text-xs px-2 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button" target="_blank">
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-0.5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                                                                    </svg>
+                                                                </a>
+
+                                                                <button class="flex items-center bg-teal-500 text-white active:bg-teal-600 font-bold uppercase text-xs px-2 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button" onclick="toggleModal('file-edit-{{ $file->id }}')">
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                                                                    </svg>
+                                                                </button> 
+
+                                                                <button class="flex items-center bg-red-500 text-white active:bg-red-600 font-bold uppercase text-xs px-2 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button" onclick="toggleModal('file-delete-{{ $file->id }}')">
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                                                    </svg>
+                                                                </button>
+                                                            </td>
+                                                        </tr>
+                                                    @endforeach
+                                                </tbody>
+                                            </table>
                                         </div>
-                                   
                                     </div>
-                                
-        
-                            {{Form::hidden('_method', 'PUT') }}
-                            {!! Form::close() !!}
-                            </div>
+
+                                        <div class="w-full md:w-1/2 border-t border-r border-l border-b border-gray-200">
+                                            <div class="w-full flex justify-between border-b border-gray-200 p-2">
+                                                <div class="flex items-center">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+                                                    </svg> 
+                                                    <h2 class="font-bold ml-2">{{ __('Notes') }}</h2>
+                                                </div>
+                                            
+                                                {!! Form::open(['action' => ['App\Http\Controllers\Admin\EmployeesController@savenote', $employee->id], 'method' => 'POST']) !!}
+                                                @csrf
+                                    
+                                                {{ Form::submit('Save Note', ['class' => 'flex items-center btn btn-info btn-sm']) }}
+                            
+
+                                                {{--<button class="flex items-center text-white px-4 py-2 font-bold uppercase text-xs bg-lightBlue-500 hover:bg-lightBlue-300 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button" onclick="toggleModal('contact-modal')">
+                                                    {{ __('Save') }}
+                                                </button>--}}
+                                            </div>
+                                            <div class="p-2">
+                                                {{ Form::textarea('notes', $employee->notes, ['class' => 'border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-gray-100 rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150', 'rows' => '8']) }}
+                            
+                                                @error('address')
+                                                    <p class="text-xs text-red-600">{{ $message }}</p>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                        
+                                    {{Form::hidden('_method', 'PUT') }}
+                                    {!! Form::close() !!}
+                                </div>
+                            </section>
                         </div>
 
 
