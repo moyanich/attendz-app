@@ -21,7 +21,7 @@
         "tailwindcss": "^2.0.2"
     },
     "dependencies": {
-        "daisyui": "^1.17.1",
+        "daisyui": "^1.19.0",
         "jquery": "^3.6.0"
     }
 }
