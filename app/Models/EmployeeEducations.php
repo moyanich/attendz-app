@@ -24,10 +24,10 @@ class EmployeeEducations extends Model
      * @var string[]
      */
     protected $fillable = [
-        'education',
+        'employee_id',
         'institution',
-        'education_types_id',
         'course',
+        'education_types_id',
         'startYear',
         'endYear',
     ];

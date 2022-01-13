@@ -29,10 +29,8 @@
             </button>
         </div>
         
-
         <div class="block w-full overflow-x-auto px-6">
-
-            {!! Form::open(['action' => ['App\Http\Controllers\Admin\EmployeesController@education_update', $empEducation->id], 'method' => 'POST']) !!}
+            {!! Form::open(['action' => ['App\Http\Controllers\Admin\EmployeeEducationsController@update', $empEducation->employee_id, $empEducation->id], 'method' => 'POST']) !!}
             
                 <div class="flex flex-wrap">
                     <div class="w-full lg:w-4/12 px-4">
@@ -107,7 +105,8 @@
 
                     {{ Form::submit('Save', ['class' => 'btn btn-secondary mt-3 w-full inline-flex justify-center sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm cursor-pointer']) }}
                 </div>
-                
+
+                {{ Form::hidden('_method', 'PUT') }}
             {!! Form::close() !!}
 
         </div>
@@ -151,8 +150,7 @@
             </div>
             <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
                 {{-- FORM --}} 
-                {!! Form::open(['action' => ['App\Http\Controllers\Admin\EmployeesController@education_destroy', $empEducation->id], 'method' => 'POST']) !!}
-
+                {!! Form::open(['action' => ['App\Http\Controllers\Admin\EmployeeEducationsController@destroy', $empEducation->employee_id, $empEducation->id], 'method' => 'POST']) !!}
                     @csrf
 
                     {{ Form::submit('Delete', ['class' => 'w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm']) }}

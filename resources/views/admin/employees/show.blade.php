@@ -280,7 +280,7 @@
                                         <h2 class="font-bold ml-2">{{ __('Education Details') }}</h2>
                                     </div>
 
-                                    <a href="{{ route('admin.employees.education', $employee->id) }}" class="flex items-center btn btn-info btn-sm text-white" type="button"> 
+                                    <a href="{{ route('admin.employees.education.create', $employee->id) }}" class="flex items-center btn btn-info btn-sm text-white" type="button"> 
                                         {{ __('Add Education') }}
                                     </a>
                                 </div>
@@ -308,7 +308,7 @@
                                                         <td>{{ $empEducation->endYear }}</td>
                                                         <td class="flex flex-wrap justify-center p-4">
                                                             {{-- //TODO:   --}}
-                                                            <a href="{{ route('admin.employees.edit-education', $empEducation->id) }}" class="flex items-center bg-teal-500 text-white active:bg-teal-600 font-bold uppercase text-xs px-2 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button"> 
+                                                            <a href="{{ route('admin.employees.education.edit', [$empEducation->employee_id, $empEducation->id]) }}" class="flex items-center bg-teal-500 text-white active:bg-teal-600 font-bold uppercase text-xs px-2 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button"> 
                                                                 <svg xmlns="http://www.w3.org/2000/svg" class="text-white h-4 w-4 mr-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
                                                                 </svg>
@@ -433,7 +433,7 @@
                         x-transition:enter-end="opacity-100 transform scale-100">
 
                             {{-- ----- JOB INFORMATION ----- --}}
-                            <section class="education">
+                            <section class="job-history">
                                 <div class="w-full flex justify-between border-t border-r border-l border- border-gray-200 p-2">
                                     <div class="flex items-center">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -484,8 +484,7 @@
                                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
                                                                 </svg>
                                                             </a>
-                                                            
---}}    
+                                                            --}}    
                                                             <a href="{{ route('admin.employees.job.edit', [$job->employee_id, $job->JobID]) }}" class="flex items-center bg-teal-500 text-white active:bg-teal-600 font-bold uppercase text-xs px-2 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button"> 
                                                                 <svg xmlns="http://www.w3.org/2000/svg" class="text-white h-4 w-4 mr-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />

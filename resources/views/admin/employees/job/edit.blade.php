@@ -116,7 +116,7 @@
                     {{ Form::submit('Save', ['class' => 'btn btn-secondary mt-3 w-full inline-flex justify-center sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm cursor-pointer']) }}
                 </div>
 
-                {{Form::hidden('_method', 'PUT') }}
+                {{ Form::hidden('_method', 'PUT') }}
 
             {!! Form::close() !!}
         </div>
