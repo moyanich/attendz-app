@@ -29,6 +29,7 @@ class DatabaseSeeder extends Seeder
             StatusCodesSeeder::class,
             JobsSeeder::class,
             ContractTypesSeeder::class,
+            LeaveManagementSeeder::class,
         
             
           /* 

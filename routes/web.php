@@ -9,7 +9,7 @@ use App\Http\Controllers\Admin\EmployeesController;
 use App\Http\Controllers\Admin\JobsController;
 use App\Http\Controllers\Admin\EmployeeEducationsController;
 use App\Http\Controllers\Admin\EmployeeJobHistoryController;
-
+use App\Http\Controllers\Admin\LeaveManagementController;
 
 //use App\Http\Controllers\HR\HrEmployeesController;
 
@@ -60,6 +60,7 @@ Route::prefix('admin')->middleware('auth')->name('admin.')->group(function () {
     Route::resource('/employees', EmployeesController::class)->except(['edit']);
     Route::put('/employees/{employee}/contact', [EmployeesController::class, 'updatecontact'])->name('employees.updatecontact');
     Route::put('/employees/{employee}/savenote', [EmployeesController::class, 'savenote'])->name('employees.savenote');
+    Route::resource('/leavemanagement', LeaveManagementController::class);
 
     /**
      * TODO: EmployeeEducationsController
@@ -82,6 +83,7 @@ Route::prefix('admin')->middleware('auth')->name('admin.')->group(function () {
     Route::post('ckeditor/upload', [CKEditorController::class, 'upload'])->name('ckeditor.image-upload');
 
 
+   
 
     // EDUCATION ROUTES
     /*

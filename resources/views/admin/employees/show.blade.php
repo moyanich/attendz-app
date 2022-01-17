@@ -30,7 +30,7 @@
         
         <div class="block w-full overflow-x-auto">
 
-            <div class="grid grid-cols-4 gap-4 border border-black py-8 px-6">
+            <div class="grid md:grid-cols-2 md:gap-4 lg:grid-cols-4 lg:gap-4 border border-black py-8 px-6">
                 <div class="flex items-start space-x-6 mb-4">
                     @if($employee->photo)
                         <img class="h-28 w-28 mask mask-circle" src="{{ asset('/storage/images/'.$employee->photo) }}" alt="{{ $employee->completename ?? '' }} photo">
@@ -99,6 +99,7 @@
                     </div>
                 </div>
             </div>
+
 
             <div class="w-full">
                 {{-- TABS --}}
@@ -496,10 +497,7 @@
                                     </div>
                                 </div>
                             </section>
-
                         </div>
-
-
 
 
                         {{-- TAB 3 --}}
