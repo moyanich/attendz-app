@@ -1,5 +1,5 @@
 @php
-    $classes = 'px-2 flex text-sm leading-5 font-semibold bg-transparent rounded-full items-center';
+    $classes = 'flex text-sm leading-5 font-semibold bg-transparent rounded-full items-center';
 @endphp
 
 {{--  Refactored to use switch --}}

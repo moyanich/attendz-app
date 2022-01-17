@@ -29,84 +29,74 @@
         </div>
         
         <div class="block w-full overflow-x-auto">
-            <div class="grid grid-cols-1 md:grid-cols-2 md:gap-5 border border-black divide-y divide-gray-200 py-8 px-6">              
+
+            <div class="grid grid-cols-4 gap-4 border border-black py-8 px-6">
                 <div class="flex items-start space-x-6 mb-4">
-                    
                     @if($employee->photo)
                         <img class="h-28 w-28 mask mask-circle" src="{{ asset('/storage/images/'.$employee->photo) }}" alt="{{ $employee->completename ?? '' }} photo">
                     @endif
-
-                    <div>
+                    <div class="">
+                        <x-statuses :message="strtolower( $status->recentstatus ?? '' )">
+                            {{  $status->recentstatus ?? ''}} 
+                        </x-statuses>
                         <h2 class="text-xl text-gray-800 font-bold mb-1 flex content-center">
                             {{ $employee->completename ?? '' }}
-                            <div class="">
-                                <x-statuses :message="strtolower( $status->recentstatus ?? '' )">
-                                    {{  $status->recentstatus ?? ''}} 
-                                </x-statuses>
-                            </div>
                         </h2>
-
-                        <div class="job mb-2">
-                            <small class="text-xs text-gray-500 uppercase mb-1">{{ __('Job Title')  }}</small>
-                            <p class="text-sm text-gray-500 uppercase mb-1">
-                                <span class="font-bold text-gray-800">{{ $status->job_name ?? '' }}</span>
-                            </p>
-                        </div>
-
-                        <div class="department mb-2">
-                            <small class="text-xs text-gray-500 uppercase mb-1">{{ __('Department')  }}</small>
-                            <p class="text-sm text-gray-500 uppercase mb-1">
-                                <span class="font-bold text-gray-800">{{ $status->department_name ?? '' }}</span>
-                            </p>
-                        </div>
-
-                        <div class="employment mb-2">
-                            <small class="text-gray-500 uppercase mb-1">{{  __('Employment Type ')   }}</small>
-                            <p class="text-sm text-gray-500 uppercase mb-1">
-                                <span class="font-bold text-gray-800">{{  $status->contract ?? '' }}</span>
-                            </p>
-                        </div>
-                        
-                        <div class="employment mb-2">
-                            <small class="text-gray-500 uppercase mb-1">{{ __('Contact Information') }}</small>
-                            <p class="flex text-sm text-gray-500 uppercase mb-1">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-blue-500" viewBox="0 0 20 20" fill="currentColor">
-                                    <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
-                                </svg>
-                                <span class="font-bold text-gray-800">{{ $employee->phone_number ?? '' }}</span>
-                            </p>
-                        </div>
-
-                        <div class="employment mb-4">
-                            <small class="text-gray-500 uppercase mb-1">{{ __('Email Address')  }}</small>
-                            <p class="flex text-sm text-gray-500  mb-1">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-blue-500" viewBox="0 0 20 20" fill="currentColor">
-                                    <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
-                                    <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
-                                </svg>
-                                <a class="" href="mailto:{{ $employee->email ?? '' }}">{{ $employee->email ?? '' }}</a>
-                            </p>
-                        </div>
-                       
                     </div>
-                </div>                
-                <div class="overflow-x-auto">
-                    <table class="w-full table-compact border-collapse border border-gray-200">
-                        <tbody>
-                            <tr>
-                                <td class="px-6 py-4 whitespace-nowrap bg-gray-100 border border-gray-200">
-                                    {{ __('Employee Number') }}
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap border border-gray-200">{{ $employee->id }}</td>
-                            </tr>
-                            <tr>
-                                <td class="px-6 py-4 whitespace-nowrap bg-gray-100 border border-gray-200">
-                                    {{ __('ID Number') }}
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap border border-gray-200">NUMBER HERE</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                </div>
+                <div>
+                    <div class="job mb-2">
+                        <small class="text-xs text-gray-500 uppercase mb-1">{{ __('Job Title')  }}</small>
+                        <p class="text-sm text-gray-500 uppercase mb-1">
+                            <span class="font-bold text-gray-800">{{ $status->job_name ?? '' }}</span>
+                        </p>
+                    </div>
+
+                    <div class="department mb-2">
+                        <small class="text-xs text-gray-500 uppercase mb-1">{{ __('Department')  }}</small>
+                        <p class="text-sm text-gray-500 uppercase mb-1">
+                            <span class="font-bold text-gray-800">{{ $status->department_name ?? '' }}</span>
+                        </p>
+                    </div>
+                </div>
+                
+                <div>
+                    <div class="employment mb-2">
+                        <small class="text-gray-500 uppercase mb-1">{{  __('Employee Number ')   }}</small>
+                        <p class="text-sm text-gray-500 uppercase mb-1">
+                            <span class="font-bold text-gray-800">{{ $employee->id }}</span>
+                        </p>
+                    </div>
+                    
+                    <div class="employment mb-2">
+                        <small class="text-gray-500 uppercase mb-1">{{  __('Employment Type ')   }}</small>
+                        <p class="text-sm text-gray-500 uppercase mb-1">
+                            <span class="font-bold text-gray-800">{{  $status->contract ?? '' }}</span>
+                        </p>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="employment mb-2">
+                        <small class="text-gray-500 uppercase mb-1">{{ __('Contact Information') }}</small>
+                        <p class="flex text-sm text-gray-500 uppercase mb-1">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-blue-500" viewBox="0 0 20 20" fill="currentColor">
+                                <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
+                            </svg>
+                            <span class="font-bold text-gray-800">{{ $employee->phone_number ?? '' }}</span>
+                        </p>
+                    </div>
+
+                    <div class="employment mb-4">
+                        <small class="text-gray-500 uppercase mb-1">{{ __('Email Address')  }}</small>
+                        <p class="flex text-sm text-gray-500  mb-1">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-blue-500" viewBox="0 0 20 20" fill="currentColor">
+                                <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
+                                <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
+                            </svg>
+                            <a class="" href="mailto:{{ $employee->email ?? '' }}">{{ $employee->email ?? '' }}</a>
+                        </p>
+                    </div>
                 </div>
             </div>
 
