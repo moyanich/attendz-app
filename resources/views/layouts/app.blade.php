@@ -17,7 +17,8 @@
         <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
         <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css" rel="stylesheet">
         <script src="{{ asset('js/app.js') }}" defer></script>
-    
+
+        
     </head>
     <body class="bg-white">
         <div x-data="{ sidebarOpen: false }" class="flex h-screen font-roboto">
@@ -105,6 +106,13 @@
                 filebrowserUploadMethod: 'form'
             });
         </script>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
+        <script>
+            const myChart = new Chart(ctx, {...});
+        </script>
+
+
 
 
     </body>
