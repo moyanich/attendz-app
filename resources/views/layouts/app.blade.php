@@ -46,23 +46,19 @@
         </div>
 
 
-
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}"></script>
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-       
 
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
         <script type="text/javascript" src="https://cdn.datatables.net/v/dt/jszip-2.5.0/dt-1.11.0/b-2.0.0/b-colvis-2.0.0/b-html5-2.0.0/b-print-2.0.0/r-2.2.9/sc-2.0.5/sl-1.3.3/datatables.min.js"></script>
 
-        // CKeditor
+        //CKeditor
         <script src="//cdn.ckeditor.com/4.17.1/standard/ckeditor.js"></script>
-
-
 
         {{-- Modal Scripts --}}
         <script>
@@ -108,12 +104,10 @@
         </script>
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
+
         <script>
             const myChart = new Chart(ctx, {...});
         </script>
-
-
-
 
     </body>
 </html>
